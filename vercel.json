@@ -4,7 +4,6 @@
   "redirects": [
     { "source": "/about-2/", "destination": "/about/", "statusCode": 301 },
     { "source": "/product/", "destination": "/products/", "statusCode": 301 },
-    { "source": "/contact/", "destination": "/contact/", "statusCode": 301 },
     { "source": "/en/en-about/", "destination": "/en/about/", "statusCode": 301 },
     { "source": "/en/product-en/", "destination": "/en/products/", "statusCode": 301 },
     { "source": "/en/inquiry/", "destination": "/en/contact/", "statusCode": 301 }
