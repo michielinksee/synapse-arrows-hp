@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Synapse Arrows | AEO・AIエージェント開発・海外進出支援 | Singapore</title>
+    <meta name="description" content="Synapse Arrows Pte. Ltd. — AI Engine Optimization (AEO)、AIエージェント開発、海外進出支援を提供するシンガポール発テクノロジーカンパニー。KanseiLINK、ScaNavi、Linksee Memory、Bantou、CardWize等7つのAIプロダクトを展開。">
+    <link rel="canonical" href="https://synapsearrows.com/">
+    <link rel="alternate" hreflang="ja" href="https://synapsearrows.com/">
+    <link rel="alternate" hreflang="en" href="https://synapsearrows.com/en/">
+    <link rel="alternate" hreflang="x-default" href="https://synapsearrows.com/">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Synapse Arrows">
+    <meta property="og:title" content="Synapse Arrows | AEO・AIエージェント・海外進出支援">
+    <meta property="og:description" content="AI Engine Optimization、AIエージェント開発、海外進出支援を提供するシンガポール発テクノロジーカンパニー。">
+    <meta property="og:url" content="https://synapsearrows.com/">
+    <meta property="og:image" content="https://synapsearrows.com/og-image.png">
+    <meta property="og:locale" content="ja_JP">
+    <meta property="og:locale:alternate" content="en_SG">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@ELLECraftsinga1">
+    <meta name="twitter:title" content="Synapse Arrows | AEO・AIエージェント・海外進出支援">
+    <meta name="twitter:description" content="AI Engine Optimization、AIエージェント開発、海外進出支援を提供するシンガポール発テクノロジーカンパニー。">
+    <meta name="twitter:image" content="https://synapsearrows.com/og-image.png">
+
+    <!-- JSON-LD: Organization + Person (E-E-A-T) + WebSite + FAQPage -->
+    <script type="application/ld+json">
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://synapsearrows.com/#organization",
+        "name": "Synapse Arrows Pte. Ltd.",
+        "alternateName": ["Synapse Arrows", "シナプスアローズ"],
+        "url": "https://synapsearrows.com",
+        "logo": "https://synapsearrows.com/logo.png",
+        "description": "AI Engine Optimization (AEO)、AIエージェント開発、海外進出支援を提供するシンガポール発テクノロジーカンパニー。KanseiLINK、ScaNavi、Linksee Memory、Bantou、CardWize、ScaNavi-PC、ScaNavi-Kadenの7プロダクトを展開。",
+        "foundingDate": "2023-03-08",
+        "foundingLocation": {
+          "@type": "Place",
+          "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "SG",
+            "addressLocality": "Singapore"
+          }
+        },
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "160 Robinson Road, #14-04 SBF Center",
+          "addressLocality": "Singapore",
+          "postalCode": "068914",
+          "addressCountry": "SG"
+        },
+        "contactPoint": [
+          {
+            "@type": "ContactPoint",
+            "email": "contact@synapse-arrows.com",
+            "contactType": "general"
+          }
+        ],
+        "sameAs": [
+          "https://x.com/ELLECraftsinga1",
+          "https://zenn.dev/kanseilink",
+          "https://github.com/michielinksee"
+        ],
+        "knowsAbout": [
+          "AI Engine Optimization",
+          "AEO",
+          "Model Context Protocol",
+          "MCP",
+          "AI Agent Development",
+          "SaaS Integration",
+          "Japanese Sake Export",
+          "Southeast Asia Market Entry",
+          "Cross-border Business Consulting"
+        ],
+        "founder": { "@id": "https://synapsearrows.com/#founder" },
+        "numberOfEmployees": {
+          "@type": "QuantitativeValue",
+          "value": "1-10"
+        },
+        "areaServed": ["SG", "JP", "Global"]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "@id": "https://synapsearrows.com/#founder",
+        "name": "Michie Yamaguchi",
+        "alternateName": "山口道生",
+        "jobTitle": "Founder & CEO",
+        "worksFor": { "@id": "https://synapsearrows.com/#organization" },
+        "description": "経済産業省（規制政策・条約交渉）、MUFG系シンクタンク（ヘルスケア海外展開・スマートシティPPP）を経て、シンガポールにてSynapse Arrows創業。AEO・AIエージェント・MCP領域の専門家。",
+        "knowsAbout": [
+          "AI Engine Optimization",
+          "International Trade Policy",
+          "Healthcare Overseas Expansion",
+          "Smart City PPP",
+          "Southeast Asia Business",
+          "Japanese Sake Industry"
+        ],
+        "sameAs": [
+          "https://x.com/ELLECraftsinga1",
+          "https://zenn.dev/kanseilink"
+        ],
+        "nationality": { "@type": "Country", "name": "Japan" },
+        "homeLocation": { "@type": "City", "name": "Singapore" }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://synapsearrows.com/#website",
+        "name": "Synapse Arrows",
+        "url": "https://synapsearrows.com",
+        "publisher": { "@id": "https://synapsearrows.com/#organization" },
+        "inLanguage": ["ja", "en"]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "AEO（AI Engine Optimization）とは何ですか？",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "AEOはAI Engine Optimizationの略で、ChatGPT・Perplexity・Gemini等のAI検索エンジンにおいてブランドや製品が正確に引用・推薦されるよう最適化する手法です。従来のSEO（検索エンジン最適化）がGoogleのWebクローラー向けだったのに対し、AEOはAIモデルの知識グラフ・引用ロジックに対応します。具体的には構造化データ（JSON-LD）の実装、エンティティの明確化、ナレッジパネルの最適化、AI可読なコンテンツ設計等を行います。"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "KanseiLINKのAEOスコアはどのように算出されますか？",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "KanseiLINKのAEOスコアは、MCP対応度、API品質、ドキュメント充実度、認証ガイドの明確さ、実際のAIエージェント成功率データを組み合わせて算出します。11,000以上のサービスを定量的に評価し、AAA（最高）からCCC（最低）までの9段階で格付けしています。四半期ごとにスコアを更新し、最新の対応状況を反映します。"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Synapse Arrowsの海外進出支援とは何ですか？",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "シンガポールを拠点に、日本企業の東南アジア進出および東南アジア企業の日本市場参入を支援するコンサルティングサービスです。代表の山口は経済産業省での規制政策・条約交渉、MUFGグループでのヘルスケア海外展開・スマートシティPPPの経験を持ち、官民両サイドの知見に基づくアドバイザリーを提供しています。マーケットリサーチ、イベント支援、リードジェネレーションまで一貫して対応します。"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "SakeNavi（ScaNavi）とは何ですか？",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "SakeNaviは日本酒のラベルをスマートフォンでスキャンするだけで、銘柄情報・味わいプロフィール・フードペアリングをAIソムリエが解説するアプリです。iOS・Android・Webで利用可能。海外の日本酒バイヤーやレストラン向けに、輸出動向・関税・市場分析の英語記事も配信しており、B2Bリード獲得の装置としても機能しています。"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Linksee Memoryとは何ですか？",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Linksee MemoryはAIエージェントのためのローカルファースト記憶MCPサーバーです。SQLiteベースで完全にローカルで動作し、アカウント登録やAPIキーは不要。Claude Code、Cursor、ChatGPT、Geminiなど複数のLLMが1つの記憶ファイルを共有でき、セッション間の文脈喪失を解消します。MITライセンスのオープンソースで、GitHubとnpmで公開しています。"
+            }
+          }
+        ]
+      }
+    ]
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="/favicon.png" type="image/png">
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container nav-inner">
+            <a href="/" class="nav-logo">
+                <img src="/logo.png" alt="Synapse Arrows" width="32" height="32">
+                Synapse Arrows
+            </a>
+            <ul class="nav-links">
+                <li><a href="/about/">About</a></li>
+                <li><a href="/products/">Products</a></li>
+                <li><a href="/services/">Services</a></li>
+                <li><a href="/insights/">Insights</a></li>
+                <li><a href="/contact/" class="nav-cta">Contact</a></li>
+            </ul>
+            <div class="lang-switch">
+                <a href="#" class="active">JP</a>
+                <span>|</span>
+                <a href="/en/">EN</a>
+            </div>
+            <button class="mobile-menu-btn" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container hero-content">
+            <div class="hero-badge fade-in">
+                <span>&#9670;</span> Singapore &middot; Tokyo
+            </div>
+            <h1 class="fade-in fade-in-delay-1">AI時代の判断力を<br>デザインする。</h1>
+            <p class="hero-subtitle fade-in fade-in-delay-2">
+                AEO（AI Engine Optimization）、AIエージェント開発、海外進出支援。<br>
+                AI検索時代に「選ばれる」ための仕組みを、プロダクトとコンサルティングの両面で提供します。
+            </p>
+            <p class="hero-subtitle fade-in fade-in-delay-2" style="color:var(--text-muted); font-size: 0.92rem;">
+                Building AI platforms and advisory services that help businesses thrive in the age of AI-powered search and decision-making.
+            </p>
+            <div class="hero-actions fade-in fade-in-delay-3">
+                <a href="/products/" class="btn-primary">
+                    プロダクトを見る
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                </a>
+                <a href="/services/" class="btn-secondary">サービス一覧</a>
+                <a href="/contact/" class="btn-secondary">お問い合わせ</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Preview -->
+    <section class="section" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div>
+                    <div class="section-label">About</div>
+                    <h2 class="section-title">「情報を届ける」から<br>「判断を進化させる」へ</h2>
+                    <p class="section-desc">
+                        Synapse Arrowsは、シンガポールを拠点にAIプロダクトの自社開発と、企業のAI時代への適応を支援するテクノロジーカンパニーです。
+                    </p>
+                    <p style="font-size:0.92rem; color:var(--text-secondary); line-height:1.85; margin-bottom: 24px;">
+                        AI検索が急速に普及する中、企業は「Googleで上位表示される」だけでなく「AIに正しく引用される」必要が出てきました。私たちはAEO（AI Engine Optimization）の専門知見と、自社プロダクト開発で培った実践経験を組み合わせ、この新しい課題に取り組んでいます。
+                    </p>
+                    <a href="/about/" class="section-cta">会社概要を見る &rarr;</a>
+                </div>
+                <div>
+                    <div class="about-visual-card">
+                        <h3 style="position:relative;">数字で見るSynapse Arrows</h3>
+                        <p style="position:relative;">自社プロダクト開発とAEOコンサルティングの実績</p>
+                        <div class="about-stats">
+                            <div class="about-stat">
+                                <span class="about-stat-num">7</span>
+                                <span class="about-stat-label">Products</span>
+                            </div>
+                            <div class="about-stat">
+                                <span class="about-stat-num">11K+</span>
+                                <span class="about-stat-label">AEO Rated</span>
+                            </div>
+                            <div class="about-stat">
+                                <span class="about-stat-num">30+</span>
+                                <span class="about-stat-label">Articles</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Preview -->
+    <section class="section section-alt" id="products">
+        <div class="container">
+            <div class="section-label">Products</div>
+            <h2 class="section-title">7つのAIプロダクト</h2>
+            <p class="section-desc">
+                AEOレーティングから日本酒AI、AI経理、カード管理まで — 「AIが正しく判断する」ための基盤を構築しています。
+            </p>
+            <div class="products-grid">
+
+                <div class="product-card" data-color="green">
+                    <div class="product-icon" style="background:rgba(16,185,129,0.1); color:var(--green);">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                    </div>
+                    <h3>KanseiLINK</h3>
+                    <span class="product-tag">AEO Ratings Platform</span>
+                    <p>11,000以上のSaaS/APIサービスのAIエージェント対応力を定量評価するレーティングプラットフォーム。</p>
+                    <div style="display:flex; align-items:center; justify-content:space-between;">
+                        <a href="https://kansei-link.com" target="_blank" rel="noopener" class="product-link">
+                            kansei-link.com
+                            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                        </a>
+                        <div class="product-status">
+                            <span class="status-dot status-active"></span>
+                            <span style="color:var(--green);">Live</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-color="amber">
+                    <div class="product-icon" style="background:rgba(245,158,11,0.1); color:var(--amber);">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 110 8h-1"/><path d="M3 8h14v9a4 4 0 01-4 4H7a4 4 0 01-4-4V8z"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/><line x1="14" y1="2" x2="14" y2="4"/></svg>
+                    </div>
+                    <h3>SakeNavi (ScaNavi)</h3>
+                    <span class="product-tag">Japanese Alcohol Intelligence</span>
+                    <p>日本酒ラベルをスキャンするだけで銘柄情報・味わい・ペアリングをAIソムリエが解説。B2Bリード獲得装置。</p>
+                    <div style="display:flex; align-items:center; justify-content:space-between;">
+                        <a href="https://scanavi.app" target="_blank" rel="noopener" class="product-link">
+                            scanavi.app
+                            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                        </a>
+                        <div class="product-status">
+                            <span class="status-dot status-active"></span>
+                            <span style="color:var(--green);">Live</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-color="blue">
+                    <div class="product-icon" style="background:rgba(26,63,214,0.1); color:var(--primary);">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                    </div>
+                    <h3>Linksee Memory</h3>
+                    <span class="product-tag">Agent Memory MCP Server</span>
+                    <p>ローカルファーストのAIエージェント記憶MCPサーバー。複数LLMが共通の記憶を参照可能。MIT License OSS。</p>
+                    <div style="display:flex; align-items:center; justify-content:space-between;">
+                        <a href="https://github.com/michielinksee/linksee-memory" target="_blank" rel="noopener" class="product-link">
+                            GitHub
+                            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                        </a>
+                        <div class="product-status">
+                            <span class="status-dot status-active"></span>
+                            <span style="color:var(--green);">Live (OSS)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-color="red">
+                    <div class="product-icon" style="background:rgba(239,68,68,0.1); color:var(--red);">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="8" y2="10.01"/><line x1="12" y1="10" x2="12" y2="10.01"/><line x1="16" y1="10" x2="16" y2="10.01"/></svg>
+                    </div>
+                    <h3>Bantou（番頭）</h3>
+                    <span class="product-tag">AI Automated Bookkeeping</span>
+                    <p>freee等の会計SaaSとAPI連携し、取引の自動仕訳分類・重複検知・月次レポート生成を行うAI経理エージェント。</p>
+                    <div style="display:flex; align-items:center; justify-content:space-between;">
+                        <span class="product-link" style="cursor:default;">MCP Agent</span>
+                        <div class="product-status">
+                            <span class="status-dot" style="background:var(--amber);"></span>
+                            <span style="color:var(--amber);">Beta</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-color="purple">
+                    <div class="product-icon" style="background:rgba(139,92,246,0.1); color:var(--purple);">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+                    </div>
+                    <h3>CardWize</h3>
+                    <span class="product-tag">AI Card Management</span>
+                    <p>AIを活用したカード管理プラットフォーム。クレジットカード・ポイントカードの最適化と利用分析。</p>
+                    <div style="display:flex; align-items:center; justify-content:space-between;">
+                        <span class="product-link" style="cursor:default;">Coming Soon</span>
+                        <div class="product-status">
+                            <span class="status-dot" style="background:var(--purple);"></span>
+                            <span style="color:var(--purple);">Dev</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-color="teal">
+                    <div class="product-icon" style="background:rgba(20,184,166,0.1); color:var(--teal);">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                    </div>
+                    <h3>ScaNavi-PC</h3>
+                    <span class="product-tag">PC Intelligence</span>
+                    <p>PC・電子機器のスペック比較・レビュー・購入判断をAIが支援するインテリジェンスサービス。</p>
+                    <div style="display:flex; align-items:center; justify-content:space-between;">
+                        <span class="product-link" style="cursor:default;">Planning</span>
+                        <div class="product-status">
+                            <span class="status-dot" style="background:var(--text-muted);"></span>
+                            <span style="color:var(--text-muted);">Planning</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-color="amber">
+                    <div class="product-icon" style="background:rgba(245,158,11,0.1); color:var(--amber);">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                    </div>
+                    <h3>ScaNavi-Kaden</h3>
+                    <span class="product-tag">Home Electronics Intelligence</span>
+                    <p>家電製品のスペック比較・レビュー・購入判断をAIが支援するインテリジェンスサービス。</p>
+                    <div style="display:flex; align-items:center; justify-content:space-between;">
+                        <span class="product-link" style="cursor:default;">Planning</span>
+                        <div class="product-status">
+                            <span class="status-dot" style="background:var(--text-muted);"></span>
+                            <span style="color:var(--text-muted);">Planning</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div style="text-align:center; margin-top:40px;">
+                <a href="/products/" class="section-cta">全プロダクトの詳細を見る &rarr;</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Preview -->
+    <section class="section" id="services">
+        <div class="container">
+            <div class="section-label">Services</div>
+            <h2 class="section-title">コンサルティング・サービス</h2>
+            <p class="section-desc">
+                自社プロダクト開発で培った実践知に基づくアドバイザリー。AI時代の事業構築と海外展開を支援します。
+            </p>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-num">01 — AEO</div>
+                    <h3>AEOコンサルティング</h3>
+                    <p>AI検索エンジンで「正しく引用される」ための最適化を支援。KanseiLINKのデータと知見に基づく実践的なアドバイザリー。</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-num">02 — GLOBAL</div>
+                    <h3>海外進出支援</h3>
+                    <p>シンガポール拠点の地の利と、官民ネットワークを活かした東南アジア市場参入支援。</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-num">03 — AI AGENT</div>
+                    <h3>AIエージェント開発支援</h3>
+                    <p>MCP対応、エージェント設計、LLM選定から運用まで。自社プロダクトで実証済みのアーキテクチャに基づくコンサルティング。</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-num">04 — RESEARCH</div>
+                    <h3>マーケットリサーチ</h3>
+                    <p>東南アジア市場を中心としたデータドリブンな市場調査。SakeNaviの実績に基づく定量的アプローチ。</p>
+                </div>
+            </div>
+            <div style="text-align:center; margin-top:40px;">
+                <a href="/services/" class="section-cta">サービス詳細を見る &rarr;</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section section-alt" id="faq">
+        <div class="container">
+            <div class="section-label">FAQ</div>
+            <h2 class="section-title">よくある質問</h2>
+            <p class="section-desc">
+                AEOやサービスに関するよくあるご質問にお答えします。
+            </p>
+            <div class="faq-list">
+                <details class="faq-item">
+                    <summary>AEO（AI Engine Optimization）とは何ですか？</summary>
+                    <div class="faq-answer">
+                        AEOはAI Engine Optimizationの略で、ChatGPT・Perplexity・Gemini等のAI検索エンジンにおいてブランドや製品が正確に引用・推薦されるよう最適化する手法です。従来のSEO（検索エンジン最適化）がGoogleのWebクローラー向けだったのに対し、AEOはAIモデルの知識グラフ・引用ロジックに対応します。具体的には構造化データ（JSON-LD）の実装、エンティティの明確化、ナレッジパネルの最適化、AI可読なコンテンツ設計等を行います。
+                    </div>
+                </details>
+                <details class="faq-item">
+                    <summary>KanseiLINKのAEOスコアはどのように算出されますか？</summary>
+                    <div class="faq-answer">
+                        KanseiLINKのAEOスコアは、MCP対応度、API品質、ドキュメント充実度、認証ガイドの明確さ、実際のAIエージェント成功率データを組み合わせて算出します。11,000以上のサービスを定量的に評価し、AAA（最高）からCCC（最低）までの9段階で格付けしています。四半期ごとにスコアを更新し、最新の対応状況を反映します。
+                    </div>
+                </details>
+                <details class="faq-item">
+                    <summary>海外進出支援のカバー範囲は？</summary>
+                    <div class="faq-answer">
+                        シンガポールを拠点に、日本企業の東南アジア進出および東南アジア企業の日本市場参入を支援しています。マーケットリサーチ、現地パートナー開拓、イベント支援、B2Bリードジェネレーションまで一貫して対応します。特に日本食品・酒類の海外展開については、SakeNaviの市場分析データに基づいた実践的な支援が可能です。
+                    </div>
+                </details>
+                <details class="faq-item">
+                    <summary>SakeNavi（ScaNavi）とは何ですか？</summary>
+                    <div class="faq-answer">
+                        SakeNaviは日本酒のラベルをスマートフォンでスキャンするだけで、銘柄情報・味わいプロフィール・フードペアリングをAIソムリエが解説するアプリです。iOS・Android・Webで利用可能。海外の日本酒バイヤーやレストラン向けに、輸出動向・関税・市場分析の英語記事も配信しており、B2Bリード獲得の装置としても機能しています。
+                    </div>
+                </details>
+                <details class="faq-item">
+                    <summary>Linksee Memoryとは何ですか？</summary>
+                    <div class="faq-answer">
+                        Linksee MemoryはAIエージェントのためのローカルファースト記憶MCPサーバーです。SQLiteベースで完全にローカルで動作し、アカウント登録やAPIキーは不要。Claude Code、Cursor、ChatGPT、Geminiなど複数のLLMが1つの記憶ファイルを共有でき、セッション間の文脈喪失を解消します。MITライセンスのオープンソースで公開しています。
+                    </div>
+                </details>
+                <details class="faq-item">
+                    <summary>受託開発は行っていますか？</summary>
+                    <div class="faq-answer">
+                        受託開発は行っておりません。自社プロダクトの開発・運営を軸に、AEOコンサルティング、海外進出支援、AIエージェント開発支援、マーケットリサーチのアドバイザリーを提供しています。特定の技術課題については、スポットでのコンサルティングも可能ですのでお気軽にご相談ください。
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact CTA -->
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <div class="section-label">Contact</div>
+            <h2 class="section-title">お問い合わせ</h2>
+            <p class="section-desc">
+                AEO診断、海外進出のご相談、プロダクトに関するお問い合わせはこちらから。
+            </p>
+            <a href="mailto:contact@synapse-arrows.com" class="btn-primary" style="font-size:1rem;">
+                contact@synapse-arrows.com
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-inner">
+            <div class="footer-logo">Synapse Arrows Pte. Ltd</div>
+            <ul class="footer-links">
+                <li><a href="https://kansei-link.com" target="_blank" rel="noopener">KanseiLINK</a></li>
+                <li><a href="https://scanavi.app" target="_blank" rel="noopener">SakeNavi</a></li>
+                <li><a href="https://github.com/michielinksee/linksee-memory" target="_blank" rel="noopener">Linksee Memory</a></li>
+                <li><a href="https://zenn.dev/kanseilink" target="_blank" rel="noopener">Zenn</a></li>
+                <li><a href="https://x.com/ELLECraftsinga1" target="_blank" rel="noopener">X</a></li>
+                <li><a href="/policy/">Privacy</a></li>
+                <li><a href="/terms/">Terms</a></li>
+            </ul>
+            <div class="footer-copy">&copy; 2026 Synapse Arrows Pte. Ltd. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <script>
+    document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+        const nav = document.querySelector('.nav-links');
+        nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+        nav.style.flexDirection = 'column';
+        nav.style.position = 'absolute';
+        nav.style.top = '72px';
+        nav.style.left = '0';
+        nav.style.right = '0';
+        nav.style.background = '#fff';
+        nav.style.padding = '20px';
+        nav.style.boxShadow = '0 8px 24px rgba(0,0,0,0.1)';
+    });
+    </script>
+
+</body>
+</html>

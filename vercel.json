@@ -1,0 +1,22 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": true,
+  "redirects": [
+    { "source": "/about-2/", "destination": "/about/", "statusCode": 301 },
+    { "source": "/product/", "destination": "/products/", "statusCode": 301 },
+    { "source": "/contact/", "destination": "/contact/", "statusCode": 301 },
+    { "source": "/en/en-about/", "destination": "/en/about/", "statusCode": 301 },
+    { "source": "/en/product-en/", "destination": "/en/products/", "statusCode": 301 },
+    { "source": "/en/inquiry/", "destination": "/en/contact/", "statusCode": 301 }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "DENY" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
+      ]
+    }
+  ]
+}

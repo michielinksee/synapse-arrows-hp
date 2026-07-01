@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | Synapse Arrows</title>
+    <meta name="description" content="About Synapse Arrows Pte. Ltd. A Singapore-based technology company specializing in AEO, AI agent development, and cross-border consulting. Our vision, business principles, and company information.">
+    <link rel="canonical" href="https://synapsearrows.com/en/about/">
+    <link rel="alternate" hreflang="ja" href="https://synapsearrows.com/about/">
+    <link rel="alternate" hreflang="en" href="https://synapsearrows.com/en/about/">
+    <link rel="alternate" hreflang="x-default" href="https://synapsearrows.com/about/">
+    <!-- OG tags for this page -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Synapse Arrows">
+    <meta property="og:title" content="About | Synapse Arrows">
+    <meta property="og:description" content="A Singapore-based technology company specializing in AEO, AI agent development, and cross-border consulting.">
+    <meta property="og:url" content="https://synapsearrows.com/en/about/">
+    <meta property="og:image" content="https://synapsearrows.com/og-image.png">
+    <meta property="og:locale" content="en_SG">
+    <meta property="og:locale:alternate" content="ja_JP">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@ELLECraftsinga1">
+    <meta name="twitter:title" content="About | Synapse Arrows">
+    <meta name="twitter:description" content="A Singapore-based technology company specializing in AEO, AI agent development, and cross-border consulting.">
+    <!-- Fonts + CSS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="/favicon.png" type="image/png">
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        /* Flywheel */
+        .flywheel {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0;
+            margin-bottom: 40px;
+            padding: 48px 32px;
+            background: var(--bg-white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+        }
+        .flywheel-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 20px 16px;
+            max-width: 160px;
+        }
+        .flywheel-step-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--accent);
+            border: 2px solid var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+        .flywheel-step-label {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            line-height: 1.5;
+        }
+        .flywheel-arrow {
+            font-size: 1.4rem;
+            color: var(--primary);
+            opacity: 0.5;
+            flex-shrink: 0;
+            margin: 0 4px;
+        }
+        .flywheel-note {
+            font-size: 0.92rem;
+            color: var(--text-secondary);
+            line-height: 1.85;
+            max-width: 720px;
+        }
+
+        /* Company info */
+        .company-info {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0;
+            background: var(--bg-white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+        }
+        .company-info-row {
+            display: grid;
+            grid-template-columns: 160px 1fr;
+            border-bottom: 1px solid var(--border);
+        }
+        .company-info-row:last-child {
+            border-bottom: none;
+        }
+        .company-info-label {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            padding: 20px 24px;
+            background: var(--bg-light);
+            display: flex;
+            align-items: flex-start;
+        }
+        .company-info-value {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            padding: 20px 24px;
+            line-height: 1.7;
+        }
+
+        @media (max-width: 900px) {
+            .flywheel {
+                flex-direction: column;
+                padding: 32px 20px;
+            }
+            .flywheel-arrow {
+                transform: rotate(90deg);
+                margin: 4px 0;
+            }
+            .flywheel-step {
+                max-width: 240px;
+            }
+            .company-info-row {
+                grid-template-columns: 1fr;
+            }
+            .company-info-label {
+                padding: 16px 20px 4px;
+                background: transparent;
+            }
+            .company-info-value {
+                padding: 4px 20px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container nav-inner">
+            <a href="/en/" class="nav-logo">
+                <img src="/logo.png" alt="Synapse Arrows" width="32" height="32">
+                Synapse Arrows
+            </a>
+            <ul class="nav-links">
+                <li><a href="/en/about/" class="active">About</a></li>
+                <li><a href="/en/products/">Products</a></li>
+                <li><a href="/en/services/">Services</a></li>
+                <li><a href="/en/insights/">Insights</a></li>
+                <li><a href="/en/contact/" class="nav-cta">Contact</a></li>
+            </ul>
+            <div class="lang-switch">
+                <a href="/about/">JP</a>
+                <span>|</span>
+                <a href="/en/about/" class="active">EN</a>
+            </div>
+            <button class="mobile-menu-btn" aria-label="Menu"><span></span><span></span><span></span></button>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="page-header page-header-about">
+        <div class="container">
+            <div class="section-label">About</div>
+            <h1 class="page-title">About Synapse Arrows</h1>
+            <p class="page-desc">Designing decision intelligence for the AI era &mdash; a Singapore-based technology company</p>
+        </div>
+    </div>
+
+    <!-- Mission -->
+    <section class="section">
+        <div class="container">
+            <div class="section-label">Mission</div>
+            <h2 class="section-title">From Delivering Information to Evolving Decision-Making</h2>
+            <p class="section-desc" style="margin-bottom: 24px;">
+                As AI search rapidly proliferates, businesses need more than just ranking high on Google — they need to be accurately cited by AI. Synapse Arrows combines deep expertise in AEO (AI Engine Optimization) with hands-on experience from building our own products to tackle this new challenge.
+            </p>
+            <p style="font-size:0.95rem; color:var(--text-secondary); line-height:1.85; max-width:640px;">
+                Based in Singapore, we occupy a unique position bridging Southeast Asia and Japan. We operate through two pillars: proprietary AI product development and consulting. We offer 7 AI products and 4 consulting services.
+            </p>
+        </div>
+    </section>
+
+    <!-- Vision -->
+    <section class="section section-alt">
+        <div class="container">
+            <div class="section-label">Vision</div>
+            <h2 class="section-title">Three Phases of Evolution</h2>
+            <div class="vision-grid">
+                <div class="vision-card">
+                    <div class="vision-phase">Phase 1</div>
+                    <h3>Human-guided AI</h3>
+                    <p>Humans lead, AI assists. Label scan to AI explanation, manual bookkeeping to AI classification. Most of our current products are at this phase.</p>
+                </div>
+                <div class="vision-card">
+                    <div class="vision-phase">Phase 2</div>
+                    <h3>Agent-augmented</h3>
+                    <p>AI agents autonomously execute tasks while humans supervise. Bantou's automated bookkeeping and KanseiLINK's auto-rating updates are transitioning to this phase.</p>
+                </div>
+                <div class="vision-card">
+                    <div class="vision-phase">Phase 3</div>
+                    <h3>Agent-autonomous</h3>
+                    <p>Multiple AI agents collaborate while humans focus solely on decision-making. Linksee Memory's cross-agent memory sharing lays the foundation for this phase.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Flywheel -->
+    <section class="section">
+        <div class="container">
+            <div class="section-label">Flywheel</div>
+            <h2 class="section-title">Self-Reinforcing Loop</h2>
+            <div class="flywheel">
+                <div class="flywheel-step">
+                    <div class="flywheel-step-icon">1</div>
+                    <span class="flywheel-step-label">Proprietary<br>Product Dev</span>
+                </div>
+                <div class="flywheel-arrow">&rarr;</div>
+                <div class="flywheel-step">
+                    <div class="flywheel-step-icon">2</div>
+                    <span class="flywheel-step-label">Hands-on<br>Knowledge</span>
+                </div>
+                <div class="flywheel-arrow">&rarr;</div>
+                <div class="flywheel-step">
+                    <div class="flywheel-step-icon">3</div>
+                    <span class="flywheel-step-label">Consulting<br>Quality Boost</span>
+                </div>
+                <div class="flywheel-arrow">&rarr;</div>
+                <div class="flywheel-step">
+                    <div class="flywheel-step-icon">4</div>
+                    <span class="flywheel-step-label">Client<br>Feedback</span>
+                </div>
+                <div class="flywheel-arrow">&rarr;</div>
+                <div class="flywheel-step">
+                    <div class="flywheel-step-icon">5</div>
+                    <span class="flywheel-step-label">Product<br>Improvement</span>
+                </div>
+                <div class="flywheel-arrow">&circlearrowleft;</div>
+            </div>
+            <p class="flywheel-note">
+                Because we develop and operate 7 AI products ourselves, we can offer clients practical advisory grounded in real-world experience — not theoretical advice.
+            </p>
+        </div>
+    </section>
+
+    <!-- Design Principles -->
+    <section class="section section-alt">
+        <div class="container">
+            <div class="section-label">Principles</div>
+            <h2 class="section-title">6 Design Principles</h2>
+            <div class="principles-grid">
+                <div class="principle-card">
+                    <div class="principle-num">01</div>
+                    <div>
+                        <h4>AEO First</h4>
+                        <p>Design starts with being accurately cited by AI search engines</p>
+                    </div>
+                </div>
+                <div class="principle-card">
+                    <div class="principle-num">02</div>
+                    <div>
+                        <h4>Build to Learn</h4>
+                        <p>Prove it in our own products before proposing it to clients</p>
+                    </div>
+                </div>
+                <div class="principle-card">
+                    <div class="principle-num">03</div>
+                    <div>
+                        <h4>Local-first</h4>
+                        <p>Keep data in the user's hands and minimize cloud dependency</p>
+                    </div>
+                </div>
+                <div class="principle-card">
+                    <div class="principle-num">04</div>
+                    <div>
+                        <h4>Cross-border Native</h4>
+                        <p>A Singapore-Japan dual perspective as the default lens</p>
+                    </div>
+                </div>
+                <div class="principle-card">
+                    <div class="principle-num">05</div>
+                    <div>
+                        <h4>Agent-ready</h4>
+                        <p>Design every product to be MCP-compatible</p>
+                    </div>
+                </div>
+                <div class="principle-card">
+                    <div class="principle-num">06</div>
+                    <div>
+                        <h4>Open by Default</h4>
+                        <p>Publish as open source wherever possible, except core IP</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Company Info -->
+    <section class="section">
+        <div class="container">
+            <div class="section-label">Company</div>
+            <h2 class="section-title">Company Information</h2>
+            <div class="company-info">
+                <div class="company-info-row">
+                    <div class="company-info-label">Company Name</div>
+                    <div class="company-info-value">Synapse Arrows Pte. Ltd.</div>
+                </div>
+                <div class="company-info-row">
+                    <div class="company-info-label">Founder &amp; CEO</div>
+                    <div class="company-info-value">Michie Yamaguchi</div>
+                </div>
+                <div class="company-info-row">
+                    <div class="company-info-label">Address</div>
+                    <div class="company-info-value">160 Robinson Road, #14-04 SBF Center, S068914</div>
+                </div>
+                <div class="company-info-row">
+                    <div class="company-info-label">Founded</div>
+                    <div class="company-info-value">March 8, 2023</div>
+                </div>
+                <div class="company-info-row">
+                    <div class="company-info-label">Business Areas</div>
+                    <div class="company-info-value">AI Product Development, AEO Consulting, Cross-border Consulting, Market Research</div>
+                </div>
+                <div class="company-info-row">
+                    <div class="company-info-label">Service Regions</div>
+                    <div class="company-info-value">Singapore, Japan, Global</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="contact-section">
+        <div class="container">
+            <div class="section-label">Explore</div>
+            <h2 class="section-title">Next Steps</h2>
+            <p class="section-desc">
+                Explore our products and services in detail, or feel free to get in touch.
+            </p>
+            <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
+                <a href="/en/products/" class="btn-primary" style="font-size:1rem;">
+                    View Products & Services
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                </a>
+                <a href="/en/contact/" class="btn-secondary" style="font-size:1rem; color:#fff; border-color:rgba(255,255,255,0.3);">
+                    Contact Us
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-inner">
+            <div class="footer-logo">Synapse Arrows Pte. Ltd</div>
+            <ul class="footer-links">
+                <li><a href="https://kansei-link.com" target="_blank" rel="noopener">KanseiLINK</a></li>
+                <li><a href="https://scanavi.app" target="_blank" rel="noopener">SakeNavi</a></li>
+                <li><a href="https://github.com/michielinksee/linksee-memory" target="_blank" rel="noopener">Linksee Memory</a></li>
+                <li><a href="https://zenn.dev/kanseilink" target="_blank" rel="noopener">Zenn</a></li>
+                <li><a href="https://x.com/ELLECraftsinga1" target="_blank" rel="noopener">X</a></li>
+                <li><a href="/policy/">Privacy</a></li>
+                <li><a href="/terms/">Terms</a></li>
+            </ul>
+            <div class="footer-copy">&copy; 2026 Synapse Arrows Pte. Ltd. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <script>
+    document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+        const nav = document.querySelector('.nav-links');
+        nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+        nav.style.flexDirection = 'column';
+        nav.style.position = 'absolute';
+        nav.style.top = '72px';
+        nav.style.left = '0';
+        nav.style.right = '0';
+        nav.style.background = '#fff';
+        nav.style.padding = '20px';
+        nav.style.boxShadow = '0 8px 24px rgba(0,0,0,0.1)';
+    });
+    </script>
+
+</body>
+</html>
