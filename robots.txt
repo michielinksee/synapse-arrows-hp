@@ -4,6 +4,8 @@ Sitemap: https://synapsearrows.com/sitemap.xml
 
 # LLM-readable site summary: https://synapsearrows.com/llms.txt
 
+# --- Training crawlers ---
+
 User-agent: GPTBot
 Allow: /
 
@@ -16,5 +18,22 @@ Allow: /
 User-agent: ClaudeBot
 Allow: /
 
+# --- Retrieval / AI-search crawlers (power citations in AI answers) ---
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
 User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
 Allow: /
