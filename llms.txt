@@ -16,7 +16,7 @@ Key facts:
 
 - [KanseiLINK](https://kansei-link.com): AEO scoring platform that rates 11,000+ SaaS/API services on AI-agent readiness (MCP support, API quality, documentation) on a 9-level AAA–CCC scale. Scores updated quarterly.
 - [ScaNavi / SakeNavi](https://scanavi.app): AI sake sommelier app — scan a sake label with a smartphone to get brand information, tasting profile, and food pairing from an AI sommelier. Available on iOS, Android, and Web. Also publishes English-language sake export and market analysis articles for overseas buyers and restaurants.
-- [Linksee Memory](https://docs.linksee.app/introduction): Local-first memory MCP server for AI agents. Runs entirely on SQLite with no account or API key. Multiple LLMs (Claude Code, Cursor, ChatGPT, Gemini) can share a single memory file, eliminating context loss between sessions. MIT License, open source on [GitHub](https://github.com/michielinksee/linksee-memory) and npm.
+- [Linksee Memory](https://linksee.app): Local-first memory MCP server for AI agents. Runs entirely on SQLite with no account or API key. Multiple LLMs (Claude Code, Cursor, ChatGPT, Gemini) can share a single memory file, eliminating context loss between sessions. MIT License, open source on [GitHub](https://github.com/michielinksee/linksee-memory) and npm.
 - [Bantou](https://github.com/michielinksee/bantou): AI bookkeeping agent (番頭) that integrates with accounting SaaS such as freee via API for automated journal-entry classification, duplicate detection, and monthly report generation.
 - [CardWize](https://card-nabi.vercel.app): AI-powered card management platform for optimizing credit and loyalty card usage with spending analysis.
 
