@@ -382,7 +382,9 @@
     <script>
     document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
         const nav = document.querySelector('.nav-links');
-        nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+        const lang = document.querySelector('.lang-switch');
+        const isOpen = nav.style.display === 'flex';
+        nav.style.display = isOpen ? 'none' : 'flex';
         nav.style.flexDirection = 'column';
         nav.style.position = 'absolute';
         nav.style.top = '72px';
@@ -391,6 +393,7 @@
         nav.style.background = '#fff';
         nav.style.padding = '20px';
         nav.style.boxShadow = '0 8px 24px rgba(0,0,0,0.1)';
+        if (lang) lang.style.display = isOpen ? 'none' : 'flex';
     });
     </script>
 
