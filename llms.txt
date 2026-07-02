@@ -1,0 +1,38 @@
+# Synapse Arrows
+
+> Synapse Arrows Pte. Ltd. is a Singapore-based technology company offering AI Engine Optimization (AEO) consulting, AI agent development, and cross-border (Japan–Southeast Asia) consulting. It operates seven AI products including KanseiLINK, ScaNavi (SakeNavi), Linksee Memory, Bantou, and CardWize.
+
+Key facts:
+
+- Company: Synapse Arrows Pte. Ltd. (シナプスアローズ)
+- Founded: 2023-03-08 in Singapore
+- Founder & CEO: Michie Yamaguchi (山口道生) — ex-METI (Japan's Ministry of Economy, Trade and Industry; regulatory policy and treaty negotiations), ex-MUFG-affiliated think tank (healthcare overseas expansion, smart city PPP)
+- Office: 160 Robinson Road, #14-04 SBF Center, Singapore 068914
+- Contact: contact@synapse-arrows.com
+- Languages: Japanese (https://synapsearrows.com/) and English (https://synapsearrows.com/en/)
+- Expertise: AI Engine Optimization (AEO), Model Context Protocol (MCP), AI agent development, SaaS integration, Japanese sake export, Southeast Asia market entry
+
+## Products
+
+- [KanseiLINK](https://kansei-link.com): AEO scoring platform that rates 11,000+ SaaS/API services on AI-agent readiness (MCP support, API quality, documentation) on a 9-level AAA–CCC scale. Scores updated quarterly.
+- [ScaNavi / SakeNavi](https://scanavi.app): AI sake sommelier app — scan a sake label with a smartphone to get brand information, tasting profile, and food pairing from an AI sommelier. Available on iOS, Android, and Web. Also publishes English-language sake export and market analysis articles for overseas buyers and restaurants.
+- [Linksee Memory](https://docs.linksee.app/introduction): Local-first memory MCP server for AI agents. Runs entirely on SQLite with no account or API key. Multiple LLMs (Claude Code, Cursor, ChatGPT, Gemini) can share a single memory file, eliminating context loss between sessions. MIT License, open source on [GitHub](https://github.com/michielinksee/linksee-memory) and npm.
+- [Bantou](https://github.com/michielinksee/bantou): AI bookkeeping agent (番頭) that integrates with accounting SaaS such as freee via API for automated journal-entry classification, duplicate detection, and monthly report generation.
+- [CardWize](https://card-nabi.vercel.app): AI-powered card management platform for optimizing credit and loyalty card usage with spending analysis.
+
+## Services
+
+- [Services](https://synapsearrows.com/services/): Four consulting services — (1) AEO consulting: diagnostics, structured-data (JSON-LD) design, entity optimization, AI-crawler content strategy; (2) Cross-border consulting: Southeast Asia market entry for Japanese companies and Japan market entry for SEA companies, market research, partner development, regulatory advisory, B2B lead generation; (3) AI agent development: MCP server design and implementation, multi-agent architecture, LLM selection and cost optimization; (4) Market research: data-driven Southeast Asia consumer trends, F&B export opportunity analysis, competitive benchmarking.
+
+## Pages
+
+- [About](https://synapsearrows.com/about/): Company overview, vision, and founder profile
+- [Products](https://synapsearrows.com/products/): All seven products with details
+- [Insights](https://synapsearrows.com/insights/): Articles and technical publications
+- [Contact](https://synapsearrows.com/contact/): Inquiries for AEO assessments, consulting, and products
+- [English site](https://synapsearrows.com/en/): Full English version of this site
+
+## Insights
+
+- [Zenn (technical articles, Japanese)](https://zenn.dev/kanseilink): Articles on AEO rankings, MCP/API readiness of Japanese SaaS, Linksee Memory architecture
+- [SakeNavi articles (English)](https://scanavi.app/articles): Sake export playbooks, Singapore market analysis, cross-tabulation studies

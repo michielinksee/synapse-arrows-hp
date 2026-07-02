@@ -2,6 +2,8 @@ User-agent: *
 Allow: /
 Sitemap: https://synapsearrows.com/sitemap.xml
 
+# LLM-readable site summary: https://synapsearrows.com/llms.txt
+
 User-agent: GPTBot
 Allow: /
 
