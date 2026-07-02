@@ -1,0 +1,21 @@
+{
+  "name": "Synapse Arrows",
+  "short_name": "Synapse Arrows",
+  "description": "AEO, AI Agent Development, Cross-border Consulting",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#ffffff",
+  "theme_color": "#1a3fd6",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}
