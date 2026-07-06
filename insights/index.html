@@ -28,6 +28,40 @@
     <link rel="icon" href="/favicon.png" type="image/png">
     <link rel="manifest" href="/site.webmanifest">
     <link rel="stylesheet" href="/styles.css">
+    <!-- JSON-LD: entity definitions so @id refs (#organization / #founder) resolve on this page -->
+    <script type="application/ld+json">
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://synapsearrows.com/#organization",
+        "name": "Synapse Arrows Pte. Ltd.",
+        "url": "https://synapsearrows.com",
+        "logo": "https://synapsearrows.com/logo.png",
+        "sameAs": [
+          "https://x.com/michielinksee",
+          "https://zenn.dev/kanseilink",
+          "https://github.com/michielinksee",
+          "https://www.linkedin.com/company/133395062",
+          "https://www.wikidata.org/wiki/Q140399505"
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "@id": "https://synapsearrows.com/#founder",
+        "name": "Michie Yamaguchi",
+        "alternateName": "山口路恵",
+        "jobTitle": "Founder & CEO",
+        "worksFor": { "@id": "https://synapsearrows.com/#organization" },
+        "sameAs": [
+          "https://x.com/michielinksee",
+          "https://zenn.dev/kanseilink",
+          "https://www.wikidata.org/wiki/Q140401431"
+        ]
+      }
+    ]
+    </script>
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -216,6 +250,7 @@
                 <li><a href="/policy/">Privacy</a></li>
                 <li><a href="/terms/">Terms</a></li>
             </ul>
+            <address class="footer-copy" style="font-style:normal; margin-bottom:6px;">160 Robinson Road, #14-04 SBF Center, Singapore 068914 &middot; <a href="mailto:contact@synapse-arrows.com" style="color:inherit;">contact@synapse-arrows.com</a></address>
             <div class="footer-copy">&copy; 2026 Synapse Arrows Pte. Ltd. All rights reserved.</div>
         </div>
     </footer>

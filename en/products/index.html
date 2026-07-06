@@ -24,6 +24,40 @@
     <meta name="twitter:description" content="7 AI products by Synapse Arrows: AEO ratings, sake intelligence, agent memory, AI bookkeeping, card management, PC and home electronics intelligence.">
 
     <!-- JSON-LD: SoftwareApplication x7 -->
+    <!-- JSON-LD: entity definitions so @id refs (#organization / #founder) resolve on this page -->
+    <script type="application/ld+json">
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://synapsearrows.com/#organization",
+        "name": "Synapse Arrows Pte. Ltd.",
+        "url": "https://synapsearrows.com",
+        "logo": "https://synapsearrows.com/logo.png",
+        "sameAs": [
+          "https://x.com/michielinksee",
+          "https://zenn.dev/kanseilink",
+          "https://github.com/michielinksee",
+          "https://www.linkedin.com/company/133395062",
+          "https://www.wikidata.org/wiki/Q140399505"
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "@id": "https://synapsearrows.com/#founder",
+        "name": "Michie Yamaguchi",
+        "alternateName": "山口路恵",
+        "jobTitle": "Founder & CEO",
+        "worksFor": { "@id": "https://synapsearrows.com/#organization" },
+        "sameAs": [
+          "https://x.com/michielinksee",
+          "https://zenn.dev/kanseilink",
+          "https://www.wikidata.org/wiki/Q140401431"
+        ]
+      }
+    ]
+    </script>
     <script type="application/ld+json">
     [
       {
@@ -179,7 +213,7 @@
                 <!-- KanseiLINK -->
                 <div class="product-card" data-color="green">
                     <div class="product-icon" style="background:rgba(16,185,129,0.06);">
-                        <img src="/logo-kanseilink.png" alt="KanseiLINK" width="48" height="48" style="object-fit:contain;">
+                        <img src="/logo-kanseilink.png" alt="KanseiLINK" width="48" height="48" loading="lazy" style="object-fit:contain;">
                     </div>
                     <h3>KanseiLINK</h3>
                     <span class="product-tag">AEO Ratings Platform</span>
@@ -205,7 +239,7 @@
                 <!-- SakeNavi -->
                 <div class="product-card" data-color="amber">
                     <div class="product-icon" style="background:transparent;">
-                        <img src="/logo-scanavi-icon.png" alt="ScaNavi" width="56" height="56" style="object-fit:contain; border-radius:12px;">
+                        <img src="/logo-scanavi-icon.png" alt="ScaNavi" width="56" height="56" loading="lazy" style="object-fit:contain; border-radius:12px;">
                     </div>
                     <h3>SakeNavi (ScaNavi)</h3>
                     <span class="product-tag">Japanese Alcohol Intelligence</span>
@@ -231,7 +265,7 @@
                 <!-- Linksee Memory -->
                 <div class="product-card" data-color="blue">
                     <div class="product-icon" style="background:rgba(26,63,214,0.06);">
-                        <img src="/logo-linksee.png" alt="Linksee Memory" width="48" height="48" style="object-fit:contain;">
+                        <img src="/logo-linksee.png" alt="Linksee Memory" width="48" height="48" loading="lazy" style="object-fit:contain;">
                     </div>
                     <h3>Linksee Memory</h3>
                     <span class="product-tag">Agent Memory MCP Server</span>
@@ -257,7 +291,7 @@
                 <!-- Bantou -->
                 <div class="product-card" data-color="red">
                     <div class="product-icon" style="background:transparent;">
-                        <img src="/logo-bantou.png" alt="Bantou" width="48" height="48" style="object-fit:contain;">
+                        <img src="/logo-bantou.png" alt="Bantou" width="48" height="48" loading="lazy" style="object-fit:contain;">
                     </div>
                     <h3>Bantou</h3>
                     <span class="product-tag">AI Automated Bookkeeping</span>
@@ -283,7 +317,7 @@
                 <!-- CardWize -->
                 <div class="product-card" data-color="purple">
                     <div class="product-icon" style="background:transparent;">
-                        <img src="/logo-cardwize.png" alt="CardWize" width="56" height="56" style="object-fit:contain; border-radius:12px;">
+                        <img src="/logo-cardwize.png" alt="CardWize" width="56" height="56" loading="lazy" style="object-fit:contain; border-radius:12px;">
                     </div>
                     <h3>CardWize</h3>
                     <span class="product-tag">AI Card Management</span>
@@ -386,6 +420,7 @@
                 <li><a href="/policy/">Privacy</a></li>
                 <li><a href="/terms/">Terms</a></li>
             </ul>
+            <address class="footer-copy" style="font-style:normal; margin-bottom:6px;">160 Robinson Road, #14-04 SBF Center, Singapore 068914 &middot; <a href="mailto:contact@synapse-arrows.com" style="color:inherit;">contact@synapse-arrows.com</a></address>
             <div class="footer-copy">&copy; 2026 Synapse Arrows Pte. Ltd. All rights reserved.</div>
         </div>
     </footer>
