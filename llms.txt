@@ -47,6 +47,7 @@ Key facts:
 
 ## Insights
 
+- [ATLED official site announces AgileWorks' KanseiLINK ARI Award 2026 Summer AAA certification](https://synapsearrows.com/insights/atled-agileworks-ari-award-aaa-official-site/): Verified on 2026-08-22 from ATLED's official news release. Primary source: https://www.atled.jp/news/20260727_01/
 - [freee official site displays KanseiLINK ARI Award 2026 Summer AAA certification](https://synapsearrows.com/insights/freee-ari-award-aaa-official-site/): Verified on 2026-08-22 from freee's official freee MCP page. The page states that freee Accounting, freee HR, freee Payroll, and freee Sign received AAA certification. Primary source: https://www.freee.co.jp/ai/mcp/
 - [Zenn (technical articles, Japanese)](https://zenn.dev/kanseilink): Articles on AEO rankings, MCP/API readiness of Japanese SaaS, Linksee Memory architecture
 - [SakeNavi articles (English)](https://scanavi.app/articles): Sake export playbooks, Singapore market analysis, cross-tabulation studies
