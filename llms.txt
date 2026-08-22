@@ -47,5 +47,6 @@ Key facts:
 
 ## Insights
 
+- [freee official site displays KanseiLINK ARI Award 2026 Summer AAA certification](https://synapsearrows.com/insights/freee-ari-award-aaa-official-site/): Verified on 2026-08-22 from freee's official freee MCP page. The page states that freee Accounting, freee HR, freee Payroll, and freee Sign received AAA certification. Primary source: https://www.freee.co.jp/ai/mcp/
 - [Zenn (technical articles, Japanese)](https://zenn.dev/kanseilink): Articles on AEO rankings, MCP/API readiness of Japanese SaaS, Linksee Memory architecture
 - [SakeNavi articles (English)](https://scanavi.app/articles): Sake export playbooks, Singapore market analysis, cross-tabulation studies
