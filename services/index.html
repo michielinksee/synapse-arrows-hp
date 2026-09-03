@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>サービス一覧 | Synapse Arrows</title>
-    <meta name="description" content="Synapse Arrowsのコンサルティング・サービス。AEOコンサルティング、海外進出支援、AIエージェント開発支援、マーケットリサーチ。">
+    <meta name="description" content="Synapse Arrowsのコンサルティング・サービス。企業向けAI研修、AI認知診断、AEO・LLMO支援、AI導入・AIエージェント開発、海外進出支援。">
     <link rel="canonical" href="https://synapsearrows.com/services/">
     <link rel="alternate" hreflang="ja" href="https://synapsearrows.com/services/">
     <link rel="alternate" hreflang="en" href="https://synapsearrows.com/en/services/">
@@ -67,8 +67,17 @@
       {
         "@context": "https://schema.org",
         "@type": "Service",
+        "name": "企業向けAI研修・AI導入支援",
+        "description": "経営層・管理職・実務担当向けの生成AI研修、部門別ユースケース、実践演習、情報管理と社内ルール、AI導入ロードマップ。",
+        "provider": {"@id": "https://synapsearrows.com/#organization"},
+        "serviceType": "Corporate AI Training and Adoption Advisory",
+        "areaServed": ["JP", "SG", "Global"]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "Service",
         "name": "AEOコンサルティング",
-        "description": "ChatGPT・Perplexity・Gemini等のAI検索エンジンで正しく引用されるための最適化支援。AEO診断、構造化データ設計、エンティティ最適化、AIクローラー対応コンテンツ戦略。",
+        "description": "ChatGPT・Perplexity・Gemini等が自社をどう理解・推薦するかを診断し、競合推薦率、引用元、誤認、構造化データ、エンティティ、AI可読コンテンツを改善。",
         "provider": {"@id": "https://synapsearrows.com/#organization"},
         "serviceType": "AI Engine Optimization Consulting",
         "areaServed": ["JP", "SG", "Global"]
@@ -146,7 +155,7 @@
     <section class="page-header page-header-services">
         <div class="container">
             <h1 class="page-title">コンサルティング・サービス</h1>
-            <p class="page-desc">自社プロダクト開発で培った実践知に基づくアドバイザリー。AI時代の事業構築と海外展開を支援します。</p>
+            <p class="page-desc">AIを理解する研修から、AIに理解・推薦されるためのAEO支援、AIを業務で使う導入設計、その先の高度なAgent Readiness評価までつなぎます。</p>
         </div>
     </section>
 
@@ -155,23 +164,39 @@
         <div class="container">
             <div class="services-grid">
 
+                <!-- AI Training -->
+                <div class="service-card">
+                    <div class="service-num">01 — AI TRAINING</div>
+                    <h3>企業向けAI研修・導入支援</h3>
+                    <p>AIの専門用語を知らない段階から、経営・管理職・実務担当が安全にAIを理解し、業務へ活用できる状態をつくります。</p>
+                    <ul class="service-details">
+                        <li>生成AI・AIエージェントの基礎研修</li>
+                        <li>部門別ユースケースと実践演習</li>
+                        <li>情報管理・リスク・社内ルール</li>
+                        <li>AI活用テーマと導入ロードマップ</li>
+                    </ul>
+                    <a href="/services/ai-aeo/" class="section-cta">AI研修・AEO支援の詳細 &rarr;</a>
+                </div>
+
                 <!-- AEO Consulting -->
                 <div class="service-card">
-                    <div class="service-num">01 — AEO</div>
-                    <h3>AEOコンサルティング</h3>
-                    <p>ChatGPT・Perplexity・Gemini等のAI検索エンジンで「正しく引用される」ための最適化を支援。KanseiLINKのデータと知見に基づく実践的なアドバイザリー。</p>
+                    <div class="service-num">02 — AEO</div>
+                    <h3>AI認知診断・AEO支援</h3>
+                    <p>AIが自社をどう理解・説明し、顧客の質問でどれだけ推薦するかを競合と比較。診断結果から実行可能な改善へつなげます。</p>
                     <ul class="service-details">
-                        <li>AEO診断レポート（現状分析）</li>
+                        <li>AI認知・誤認・引用元の診断</li>
+                        <li>競合との推薦率・Share of Voice比較</li>
                         <li>構造化データ（JSON-LD）設計・実装支援</li>
                         <li>エンティティ最適化（ナレッジパネル・Wikidata）</li>
                         <li>AIクローラー対応コンテンツ戦略</li>
-                        <li>SaaS・APIサービスのAEOスコア改善</li>
+                        <li>KanseiLINKによる発展評価への接続</li>
                     </ul>
+                    <a href="/services/ai-aeo/" class="section-cta">AI認知診断の詳細 &rarr;</a>
                 </div>
 
                 <!-- Global Expansion -->
                 <div class="service-card">
-                    <div class="service-num">02 — GLOBAL</div>
+                    <div class="service-num">03 — GLOBAL</div>
                     <h3>海外進出支援</h3>
                     <p>シンガポール拠点の地の利と、経産省・MUFG時代の官民ネットワークを活かした東南アジア市場参入・日本市場参入支援。</p>
                     <ul class="service-details">
@@ -185,7 +210,7 @@
 
                 <!-- AI Agent Development -->
                 <div class="service-card">
-                    <div class="service-num">03 — AI AGENT</div>
+                    <div class="service-num">04 — AI AGENT</div>
                     <h3>AIエージェント開発支援</h3>
                     <p>MCP対応、エージェント設計、LLM選定から運用まで。自社プロダクト（KanseiLINK・Linksee Memory）で実証済みのアーキテクチャに基づくコンサルティング。</p>
                     <ul class="service-details">
@@ -198,7 +223,7 @@
 
                 <!-- Market Research -->
                 <div class="service-card">
-                    <div class="service-num">04 — RESEARCH</div>
+                    <div class="service-num">05 — RESEARCH</div>
                     <h3>マーケットリサーチ</h3>
                     <p>東南アジア市場を中心としたデータドリブンな市場調査。SakeNaviの日本酒市場分析実績に基づく定量的アプローチ。</p>
                     <ul class="service-details">
@@ -217,7 +242,7 @@
     <section class="section section-alt">
         <div class="container" style="text-align:center;">
             <h2 class="section-title">ご相談・お問い合わせ</h2>
-            <p class="section-desc">AEO診断、海外進出のご相談、AIエージェント開発、マーケットリサーチについてはお気軽にお問い合わせください。</p>
+            <p class="section-desc">AI研修、AI認知・AEO診断、AI導入、海外進出、AIエージェント開発について、まだ課題が整理されていない段階からご相談いただけます。</p>
             <a href="/contact/" class="btn-primary" style="font-size:1rem;">
                 Contact Us
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>

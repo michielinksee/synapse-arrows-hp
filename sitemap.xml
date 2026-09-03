@@ -57,6 +57,12 @@
 
   <!-- Services -->
   <url>
+    <loc>https://synapsearrows.com/services/ai-aeo/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <priority>0.9</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
     <loc>https://synapsearrows.com/services/</loc>
     <xhtml:link rel="alternate" hreflang="ja" href="https://synapsearrows.com/services/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://synapsearrows.com/en/services/"/>
