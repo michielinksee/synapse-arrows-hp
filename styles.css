@@ -945,3 +945,35 @@
             .principles-grid { grid-template-columns: 1fr; }
             .page-header { padding: 120px 0 48px; }
         }
+
+        /* URL probe — 呼び水: URLひとつでAIからの見え方が分かる入口。
+           送信先は KanseiLINK の無料診断（?url= で自動スキャン）。 */
+        .url-probe {
+            margin-top: 36px;
+            max-width: 620px;
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.18);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            backdrop-filter: blur(6px);
+        }
+        .url-probe .up-title { font-weight: 700; font-size: 1.05rem; color: #fff; margin-bottom: 6px; }
+        .url-probe .up-sub { font-size: 0.88rem; color: rgba(255,255,255,0.72); margin-bottom: 16px; line-height: 1.7; }
+        .url-probe form { display: flex; gap: 10px; flex-wrap: wrap; }
+        .url-probe input {
+            flex: 1 1 260px; min-width: 0;
+            padding: 13px 16px; font-size: 0.95rem;
+            color: var(--text-primary); background: #fff;
+            border: 1px solid rgba(255,255,255,0.25); border-radius: 50px;
+            font-family: inherit;
+        }
+        .url-probe input::placeholder { color: var(--text-muted); }
+        .url-probe .up-note { font-size: 0.78rem; color: rgba(255,255,255,0.55); margin-top: 12px; }
+        .url-probe .up-note a { color: rgba(255,255,255,0.8); text-decoration: underline; }
+        /* 明るい背景のページ（/services/ 等）に置いた場合 */
+        .url-probe.on-light { background: var(--bg-light); border-color: var(--border); backdrop-filter: none; }
+        .url-probe.on-light .up-title { color: var(--text-primary); }
+        .url-probe.on-light .up-sub { color: var(--text-secondary); }
+        .url-probe.on-light input { border-color: var(--border); }
+        .url-probe.on-light .up-note { color: var(--text-muted); }
+        .url-probe.on-light .up-note a { color: var(--primary); }
