@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>この仕事、運賃いくら足りない？｜標準的な運賃と比べる無料ツール | Synapse Arrows</title>
+  <meta name="description" content="トラック運送の運賃を、国土交通省の「標準的な運賃」（令和6年3月告示）と比べて、1回あたり・1年でいくら足りないかを計算する無料ツール。全国10地域、荷待ち料・積込料取卸料・燃料サーチャージに対応。">
+  <link rel="canonical" href="https://synapsearrows.com/tools/unchin/">
+  <meta name="robots" content="index, follow">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Synapse Arrows">
+  <meta property="og:title" content="この仕事、運賃いくら足りない？｜標準的な運賃と比べる無料ツール">
+  <meta property="og:description" content="トラックの大きさ・距離・荷待ち・積み降ろしを入れるだけ。国の標準的な運賃と比べて、いくら足りないかが分かります。">
+  <meta property="og:url" content="https://synapsearrows.com/tools/unchin/">
+  <meta property="og:image" content="https://synapsearrows.com/og-image.png">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="icon" href="/favicon.png" type="image/png">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebApplication","name":"この仕事、運賃いくら足りない？","url":"https://synapsearrows.com/tools/unchin/","applicationCategory":"BusinessApplication","operatingSystem":"Web","inLanguage":"ja","isAccessibleForFree":true,"description":"トラック運送の運賃を、国土交通省の標準的な運賃（令和6年3月告示）と比べて不足額を計算するツール。","provider":{"@type":"Organization","@id":"https://synapsearrows.com/#organization","name":"Synapse Arrows Pte. Ltd.","url":"https://synapsearrows.com/"}}
+  </script>
+  <style>
+    .tool-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:8px}
+    @media(max-width:860px){.tool-grid{grid-template-columns:1fr}}
+    .tool-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px}
+    .tool-card h2{font-size:1.15rem;margin:0 0 10px}
+    .tool-card label{display:block;margin:12px 0 4px;font-weight:700;font-size:.95rem}
+    .tool-card .hint{font-weight:400;color:var(--text-secondary);font-size:.82rem}
+    .tool-card input,.tool-card select{width:100%;font:inherit;font-size:1rem;padding:10px 12px;border:1px solid var(--border);border-radius:10px;background:#fff}
+    .two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .gap-big{font-size:3.1rem;font-weight:900;line-height:1.1;color:#d93838;margin:6px 0;white-space:nowrap}
+    .gap-big small{font-size:1.3rem;margin-left:8px}
+    .gap-big.ok{color:#139a8c}
+    .ratio{height:24px;border-radius:12px;background:#e9eef2;overflow:hidden;margin:10px 0 4px;position:relative}
+    .ratio>div{height:100%;background:#139a8c}
+    .ratio span{position:absolute;right:10px;top:1px;font-size:.8rem;font-weight:700}
+    .yearly{font-size:1.2rem;font-weight:900}
+    .bd{width:100%;border-collapse:collapse;margin-top:10px;font-size:.95rem}
+    .bd td{padding:7px 4px;border-bottom:1px solid var(--border)}
+    .bd td:last-child{text-align:right;font-variant-numeric:tabular-nums;font-weight:700}
+    .bd tr.total td{border-top:2px solid #0f172a}
+    .say{background:#fff4c2;border-radius:12px;padding:12px 14px;margin-top:14px;font-weight:700}
+    .mail{margin-top:18px;border-top:1px dashed var(--border);padding-top:14px}
+    .mail .row{display:flex;gap:8px}
+    .mail button{white-space:nowrap;border:0;cursor:pointer}
+    .mail .agree{display:flex;gap:8px;align-items:flex-start;font-weight:400;font-size:.85rem;color:var(--text-secondary);margin-top:8px}
+    .mail .agree input{width:auto;margin-top:4px}
+    .fine{color:var(--text-secondary);font-size:.82rem;line-height:1.8;margin-top:22px}
+    #mailMsg{font-size:.9rem;margin-top:6px}
+  </style>
+</head>
+<body>
+<header><nav class="nav"><div class="container nav-inner"><a href="/" class="nav-logo"><img src="/logo.png" alt="Synapse Arrows" width="32" height="32">Synapse Arrows</a><ul class="nav-links"><li><a href="/about/">About</a></li><li><a href="/products/">Products</a></li><li><a href="/services/">Services</a></li><li><a href="/tools/" class="active">Tools</a></li><li><a href="/insights/">Insights</a></li><li><a href="/contact/" class="nav-cta">Contact</a></li></ul></div></nav></header>
+<main>
+  <section class="page-header page-header-services"><div class="container"><h1 class="page-title">この仕事、運賃いくら足りない？</h1><p class="page-desc">国が示した「標準的な運賃」（令和6年3月告示）と、いまもらっている運賃を比べます。数字を入れるだけで、1回あたり・1年でいくら足りないかが分かります。</p></div></section>
+
+  <section class="section"><div class="container">
+    <div class="tool-grid">
+      <section class="tool-card">
+        <h2>① 仕事の中身を入れる</h2>
+        <label for="region">地域（運輸局）</label>
+        <select id="region">
+          <option value="hokkaido">北海道</option>
+          <option value="tohoku">東北（青森・岩手・宮城・秋田・山形・福島）</option>
+          <option value="kanto" selected>関東（東京・神奈川・埼玉・千葉・茨城・栃木・群馬・山梨）</option>
+          <option value="hokurikushinetsu">北陸信越（新潟・長野・富山・石川）</option>
+          <option value="chubu">中部（愛知・静岡・岐阜・三重・福井）</option>
+          <option value="kinki">近畿（大阪・京都・兵庫・奈良・滋賀・和歌山）</option>
+          <option value="chugoku">中国（鳥取・島根・岡山・広島・山口）</option>
+          <option value="shikoku">四国（徳島・香川・愛媛・高知）</option>
+          <option value="kyushu">九州（福岡・佐賀・長崎・熊本・大分・宮崎・鹿児島）</option>
+          <option value="okinawa">沖縄</option>
+        </select>
+        <label for="car">トラックの大きさ</label>
+        <select id="car"><option value="0">小型車（2tクラス）</option><option value="1" selected>中型車（4tクラス）</option><option value="2">大型車（10tクラス）</option><option value="3">トレーラー（20tクラス）</option></select>
+        <div class="two">
+          <div><label for="km">運ぶ距離（km）<span class="hint"> 片道</span></label><input id="km" type="number" min="1" inputmode="numeric" value="80"></div>
+          <div><label for="paid">いまもらっている運賃（円）</label><input id="paid" type="number" min="0" inputmode="numeric" value="28000"></div>
+        </div>
+        <div class="two">
+          <div><label for="wait">荷待ち（分）</label><input id="wait" type="number" min="0" inputmode="numeric" value="90"></div>
+          <div><label for="load">積み降ろし（分）</label><input id="load" type="number" min="0" inputmode="numeric" value="60"></div>
+        </div>
+        <label for="loadType">積み降ろしのやり方</label>
+        <select id="loadType"><option value="hand">手積み・手降ろし</option><option value="fork">フォークリフト・クレーン</option></select>
+        <details style="margin-top:12px"><summary style="cursor:pointer;font-weight:700">もっと細かく（燃料・下請け）</summary>
+          <div class="two">
+            <div><label for="diesel">いまの軽油の値段（円/L）</label><input id="diesel" type="number" min="0" value="0"></div>
+            <div><label for="kmpl">トラックの燃費（km/L）</label><input id="kmpl" type="number" min="0" step="0.1" value="5"></div>
+          </div>
+          <label for="runKm">走った距離（km）<span class="hint"> 帰りも含む。燃料の計算に使う</span></label><input id="runKm" type="number" min="0" value="160">
+          <label for="cut">元請けに引かれている手数料（%）<span class="hint"> 下請けの場合</span></label><input id="cut" type="number" min="0" max="100" value="0">
+        </details>
+        <label for="times">この仕事、月に何回ある？</label><input id="times" type="number" min="0" inputmode="numeric" value="20">
+      </section>
+
+      <section class="tool-card" aria-live="polite">
+        <h2>② 結果</h2>
+        <div>1回あたり</div>
+        <div class="gap-big" id="gap">—</div>
+        <div id="ratioText"></div>
+        <div class="ratio"><div id="ratioBar" style="width:0"></div><span id="ratioPct"></span></div>
+        <div class="yearly" id="yearly"></div><div id="yearlyNote" style="color:var(--text-secondary);font-size:.85rem"></div>
+        <table class="bd" id="breakdown"></table>
+        <div class="say" id="say"></div>
+        <div class="mail">
+          <label for="email">結果をメールで受け取る<span class="hint">（任意・荷主と話すときのメモに）</span></label>
+          <div class="row"><input id="email" type="email" placeholder="you@example.com" autocomplete="email"><button class="btn-primary" id="send" type="button">送る</button></div>
+          <label class="agree"><input id="agree" type="checkbox"> <span>入力したメールアドレスに結果を送ること、今後Synapse Arrowsから運送業・AI活用に関するご案内を送る場合があることに同意します（<a href="/policy/">プライバシーポリシー</a>）。</span></label>
+          <div id="mailMsg"></div>
+        </div>
+      </section>
+    </div>
+
+    <p class="fine">
+      ・「標準的な運賃」は、ドライバーの働き方を守りながら事業を続けるために必要な運賃として、国土交通省が示した<b>目安</b>です。守らないと罰がある決まりではありませんが、荷主と価格の話をするときの<b>根拠</b>として使えます（内閣官房・公正取引委員会「労務費の適切な転嫁のための価格交渉に関する指針」でも根拠資料として示されています）。<br>
+      ・この計算は、各運輸局の<b>距離制運賃表（バン型・貸切）</b>、待機時間料、積込料・取卸料、燃料サーチャージ表をもとにした<b>おおよその額</b>です。高速道路料金・フェリー代などの実費、深夜・休日などの割増、各社の「運賃料金適用方」は含みません。時間制運賃には対応していません。<br>
+      ・荷待ちは30分を超えた分から30分ごと、荷待ちと積み降ろしが合わせて2時間を超えた分は割増の単価で計算しています（荷待ち→積み降ろしの順に時間を数えた場合の目安）。<br>
+      ・下請けに出す場合、標準的な運賃では手数料（運賃の10%）は<b>運賃とは別に</b>受け取る形です。実際に運ぶ会社の運賃から差し引かれている場合は、その分を「足りない」に含めています。<br>
+      ・ツールの改善と業界の傾向を知るため、<b>入力した条件と計算結果を匿名で記録</b>します（会社名や個人を特定する情報は含みません。メールアドレスは、上の欄に入力して同意した場合のみ記録します）。<br>
+      出典：国土交通省告示第209号（令和6年3月22日）、全日本トラック協会「標準的運賃」公開資料。運賃表の数字は告示の表を転記したもので、正式な値は告示本文をご確認ください。<br>
+      このツールは YouTube「SYNAPSE」の運送業編で、AI社員 Ren が作った試作版です。ご意見・「こんな計算もほしい」は <a href="mailto:contact@synapse-arrows.com?subject=%E9%81%8B%E8%B3%83%E3%83%84%E3%83%BC%E3%83%AB%E3%81%B8%E3%81%AE%E3%81%94%E6%84%8F%E8%A6%8B">contact@synapse-arrows.com</a> まで。
+    </p>
+  </div></section>
+</main>
+<footer class="footer"><div class="container footer-inner"><div class="footer-logo">Synapse Arrows Pte. Ltd</div><ul class="footer-links"><li><a href="https://kansei-link.com" target="_blank" rel="noopener">KanseiLINK</a></li><li><a href="/services/">Services</a></li><li><a href="/tools/">Tools</a></li><li><a href="/policy/">Privacy</a></li><li><a href="/terms/">Terms</a></li></ul><div class="footer-copy">&copy; 2026 Synapse Arrows Pte. Ltd. All rights reserved.</div></div></footer>
+
+<script>
+// Google Apps Script のウェブアプリURL（スプレッドシートへの記録・結果メール）。空のあいだは何も送らない
+const LOG_URL = 'https://script.google.com/macros/s/AKfycbw8mCmd2AJEM0O3I1a7pzmdD8HsCFxmvC6FIVEtpL_4SYzYS1HLNwyxWpp19iTZrNBW/exec';
+// 標準的な運賃（令和6年3月告示）距離制運賃表 [小型2t, 中型4t, 大型10t, トレーラー20t]
+const FARES = {"regions":{"kanto":{"rows":[[15790,18190,23060,29070],[17710,20430,26110,33160],[19630,22660,29160,37240],[21550,24890,32200,41320],[23480,27130,35250,45400],[25400,29360,38300,49480],[27320,31590,41340,53570],[29240,33830,44390,57650],[31160,36060,47440,61730],[33080,38290,50480,65810],[35010,40500,53450,69770],[36930,42710,56410,73720],[38850,44920,59370,77680],[40770,47120,62330,81640],[42690,49330,65300,85590],[44620,51540,68260,89550],[46540,53740,71220,93500],[48460,55950,74190,97460],[50380,58160,77150,101420],[52300,60360,80110,105370]],"add20":[3830,4380,5850,7800],"add50":[9580,10950,14620,19490]},"hokkaido":{"rows":[[13220,15340,20190,25740],[14930,17340,23000,29550],[16640,19340,25810,33350],[18340,21340,28620,37160],[20050,23330,31430,40960],[21760,25330,34240,44770],[23470,27330,37040,48570],[25180,29330,39850,52380],[26890,31330,42660,56180],[28600,33330,45470,59990],[30290,35280,48170,63640],[31980,37230,50870,67290],[33670,39180,53580,70940],[35360,41140,56280,74590],[37050,43090,58980,78240],[38730,45040,61680,81890],[40420,47000,64380,85540],[42110,48950,67080,89190],[43800,50900,69790,92840],[45490,52850,72490,96490]],"add20":[3350,3860,5310,7170],"add50":[8380,9650,13270,17920]},"tohoku":{"rows":[[13180,15360,19930,25570],[14890,17360,22720,29350],[16590,19360,25500,33130],[18290,21350,28280,36920],[19990,23350,31060,40700],[21700,25340,33840,44480],[23400,27340,36630,48260],[25100,29340,39410,52040],[26800,31330,42190,55820],[28510,33330,44970,59600],[30190,35280,47650,63230],[31870,37230,50330,66860],[33550,39180,53010,70490],[35230,41120,55690,74120],[36910,43070,58360,77740],[38600,45020,61040,81370],[40280,46970,63720,85000],[41960,48920,66400,88630],[43640,50870,69080,92260],[45320,52820,71760,95890]],"add20":[3340,3850,5260,7120],"add50":[8340,9630,13160,17810]},"hokurikushinetsu":{"rows":[[13800,15900,20690,26240],[15550,17940,23530,30070],[17310,19980,26380,33910],[19060,22020,29220,37740],[20810,24060,32060,41580],[22560,26100,34900,45410],[24310,28140,37750,49240],[26070,30180,40590,53080],[27820,32220,43430,56910],[29570,34260,46270,60740],[31310,36260,49020,64430],[33040,38260,51760,68120],[34780,40250,54500,71810],[36510,42250,57240,75500],[38250,44250,59990,79190],[39980,46250,62730,82880],[41720,48250,65470,86570],[43460,50250,68220,90260],[45190,52250,70960,93940],[46930,54250,73700,97630]],"add20":[3450,3950,5400,7250],"add50":[8620,9890,13490,18130]},"chubu":{"rows":[[14550,16770,21550,27550],[16360,18880,24460,31480],[18170,20990,27370,35420],[19980,23100,30280,39360],[21790,25210,33200,43300],[23600,27320,36110,47240],[25420,29430,39020,51170],[27230,31540,41930,55110],[29040,33650,44840,59050],[30850,35760,47750,62990],[32660,37830,50580,66790],[34460,39910,53400,70590],[36270,41990,56220,74390],[38080,44070,59040,78190],[39880,46150,61870,81990],[41690,48220,64690,85790],[43490,50300,67510,89600],[45300,52380,70330,93400],[47100,54460,73160,97200],[48910,56530,75980,101000]],"add20":[3600,4120,5560,7480],"add50":[8990,10300,13910,18700]},"kinki":{"rows":[[15060,17060,22070,27890],[16920,19190,25020,31870],[18780,21330,27980,35840],[20630,23460,30940,39810],[22490,25600,33900,43780],[24350,27730,36850,47760],[26200,29870,39810,51730],[28060,32000,42770,55700],[29920,34140,45730,59670],[31770,36280,48680,63650],[33620,38380,51550,67490],[35470,40490,54420,71330],[37320,42600,57290,75170],[39170,44700,60160,79010],[41020,46810,63030,82850],[42870,48920,65890,86690],[44720,51030,68760,90530],[46570,53130,71630,94370],[48420,55240,74500,98210],[50270,57350,77370,102050]],"add20":[3680,4180,5650,7560],"add50":[9210,10450,14130,18900]},"chugoku":{"rows":[[13850,16160,21030,26410],[15610,18220,23900,30260],[17360,20280,26770,34110],[19120,22330,29640,37950],[20870,24390,32510,41800],[22630,26450,35380,45650],[24380,28510,38250,49500],[26140,30570,41120,53340],[27900,32630,43990,57190],[29650,34690,46860,61040],[31400,36710,49630,64740],[33140,38730,52390,68450],[34880,40750,55160,72160],[36630,42770,57930,75860],[38370,44790,60700,79570],[40110,46810,63470,83270],[41860,48830,66240,86980],[43600,50850,69010,90690],[45340,52870,71780,94390],[47090,54890,74550,98100]],"add20":[3470,4000,5450,7290],"add50":[8670,9990,13620,18220]},"shikoku":{"rows":[[13180,15690,20470,26010],[14880,17710,23290,29820],[16580,19730,26120,33640],[18280,21750,28940,37450],[19980,23770,31760,41270],[21680,25790,34590,45080],[23380,27810,37410,48890],[25080,29830,40240,52710],[26780,31850,43060,56520],[28480,33870,45880,60330],[30170,35850,48600,64000],[31860,37830,51320,67660],[33550,39800,54040,71320],[35230,41780,56760,74990],[36920,43760,59480,78650],[38610,45730,62200,82310],[40300,47710,64920,85980],[41990,49690,67640,89640],[43670,51660,70360,93300],[45360,53640,73080,96970]],"add20":[3360,3910,5350,7190],"add50":[8390,9770,13360,17990]},"kyushu":{"rows":[[13450,15730,20470,26120],[15170,17750,23290,29940],[16890,19780,26110,33750],[18610,21800,28930,37570],[20330,23820,31750,41390],[22050,25840,34580,45210],[23770,27870,37400,49020],[25490,29890,40220,52840],[27210,31910,43040,56660],[28930,33930,45860,60470],[30630,35910,48580,64140],[32340,37900,51300,67810],[34050,39880,54020,71480],[35750,41860,56740,75150],[37460,43840,59460,78820],[39170,45820,62180,82490],[40870,47800,64900,86160],[42580,49780,67620,89830],[44290,51760,70340,93500],[45990,53740,73060,97170]],"add20":[3390,3920,5350,7210],"add50":[8480,9800,13380,18020]}},"okinawa":{"r5":[11600,13430,17670,22870],"rows":[[12410,14380,19020,24720],[14050,16300,21720,28430],[15680,18210,24430,32140],[17320,20130,27140,35840],[18960,22040,29840,39550],[20600,23960,32550,43260],[22240,25870,35250,46970],[23870,27790,37960,50680],[25510,29710,40670,54390],[27150,31620,43370,58100],[28770,33490,45970,61650],[30380,35360,48570,65200],[32000,37230,51170,68750],[33610,39090,53770,72300],[35230,40960,56370,75850],[36840,42830,58970,79400],[38460,44700,61570,82950],[40070,46570,64170,86500],[41690,48430,66770,90050],[43300,50300,69370,93600]],"add10":[1600,1850,2560,3480]}};
+const WAIT = {base:[1680,1760,1890,2220], over2h:[2010,2110,2270,2670]};
+const LOAD = {fork:{base:[2080,2180,2340,2750], over2h:[2490,2610,2810,3300]}, hand:{base:[2000,2100,2260,2650], over2h:[2400,2520,2710,3180]}};
+const STEPS = [10,20,30,40,50,60,70,80,90,100,110,120,130,140,150,160,170,180,190,200];
+
+const yen = n => Math.round(n).toLocaleString('ja-JP') + '円';
+const $ = id => document.getElementById(id);
+const num = id => Math.max(0, Number($(id).value) || 0);
+
+function distanceFare(region, km, car){
+  if (region === 'okinawa'){
+    const t = FARES.okinawa;
+    if (km <= 5) return t.r5[car];
+    if (km <= 200) return t.rows[STEPS.findIndex(d => km <= d)][car];
+    return t.rows[19][car] + Math.ceil((km - 200) / 10) * t.add10[car];
+  }
+  const t = FARES.regions[region];
+  if (km <= 200) return t.rows[STEPS.findIndex(d => km <= d)][car];
+  let fare = t.rows[19][car] + Math.ceil((Math.min(km, 500) - 200) / 20) * t.add20[car];
+  if (km > 500) fare += Math.ceil((km - 500) / 50) * t.add50[car];
+  return fare;
+}
+// 荷待ち→積み降ろしの順に30分の区切りで数え、合わせて2時間を超えた区切りは割増の単価
+function timeFees(waitMin, loadMin, car, loadType){
+  let waitFee = 0, loadFee = 0;
+  for (let s = 30; s < waitMin; s += 30) waitFee += (s >= 120 ? WAIT.over2h : WAIT.base)[car];
+  for (let s = 0; s < loadMin; s += 30) loadFee += (waitMin + s >= 120 ? LOAD[loadType].over2h : LOAD[loadType].base)[car];
+  return {waitFee, loadFee};
+}
+// 燃料サーチャージ：走行距離 ÷ 燃費 × （刻みの中間の価格 − 基準価格120円）
+function fuelSurcharge(diesel, runKm, kmpl){
+  if (!diesel || diesel <= 120 || !kmpl || !runKm) return 0;
+  const band = Math.ceil((diesel - 120) / 5);
+  return runKm / kmpl * (band * 5 - 2.5);
+}
+
+let last = null;
+function calc(){
+  const region = $('region').value, car = Number($('car').value), km = Math.max(1, num('km')), paid = num('paid');
+  const {waitFee, loadFee} = timeFees(num('wait'), num('load'), car, $('loadType').value);
+  const fare = distanceFare(region, km, car);
+  const fuel = fuelSurcharge(num('diesel'), num('runKm'), num('kmpl'));
+  const cutPct = Math.min(100, num('cut'));
+  const standard = fare + waitFee + loadFee + fuel;
+  const received = paid * (1 - cutPct / 100);
+  const gap = standard - received;
+  const ratio = standard > 0 ? received / standard : 0;
+  const times = num('times');
+  const pct = Math.round(ratio * 100);
+
+  $('gap').innerHTML = gap > 0 ? yen(gap) + '<small>足りない</small>' : yen(-gap) + '<small>多い</small>';
+  $('gap').className = 'gap-big' + (gap > 0 ? '' : ' ok');
+  $('ratioText').textContent = `標準どおりなら ${yen(standard)}。いま手元に残る運賃は ${yen(received)}。`;
+  $('ratioBar').style.width = Math.min(100, pct) + '%';
+  $('ratioPct').textContent = `標準の ${pct}%`;
+  $('yearly').textContent = times > 0 && gap > 0 ? `月${times}回なら、1年で ${yen(gap * times * 12)}` : '';
+  $('yearlyNote').textContent = times > 0 && gap > 0 ? '（標準的な運賃と比べて、1年で足りない額）' : '';
+
+  const rows = [['運ぶ運賃（' + km + 'km・距離制）', fare], ['荷待ち料（30分を超えた分）', waitFee], ['積み降ろし料', loadFee]];
+  if (fuel > 0) rows.push(['燃料サーチャージ', fuel]);
+  let html = rows.map(([k, v]) => `<tr><td>${k}</td><td>${yen(v)}</td></tr>`).join('');
+  html += `<tr class="total"><td>標準的な運賃どおりの合計</td><td>${yen(standard)}</td></tr><tr><td>いまもらっている運賃</td><td>${yen(paid)}</td></tr>`;
+  if (cutPct > 0) html += `<tr><td>元請けに引かれている分（${cutPct}%）</td><td>−${yen(paid * cutPct / 100)}</td></tr>`;
+  $('breakdown').innerHTML = html;
+
+  let say;
+  if (gap <= 0) say = 'この仕事は、標準的な運賃に届いています。';
+  else if (waitFee + loadFee > gap * 0.5) say = '足りない分の多くは「荷待ち」と「積み降ろし」です。この時間の分を、運賃とは別にお願いするのが第一歩です。';
+  else say = `運ぶ運賃そのものが、標準の ${pct}% しかありません。10回運ぶと、${Math.max(1, Math.round((1 - ratio) * 10))}回分はタダ働きに近い計算です。`;
+  if (cutPct > 0) say += ' また、手数料を運賃から引かれているなら、標準の考え方（手数料は運賃とは別に受け取る）と違います。';
+  $('say').textContent = say;
+
+  last = {region, car, km, paid, wait: num('wait'), load: num('load'), loadType: $('loadType').value, diesel: num('diesel'), cut: cutPct, times,
+          fare, waitFee, loadFee, fuel: Math.round(fuel), standard: Math.round(standard), gap: Math.round(gap), ratioPct: pct, say};
+  scheduleLog();
+}
+
+// 匿名の記録：入力が止まって4秒たったら1回だけ送る（同じ条件は送らない）
+let logTimer = null, lastSent = '';
+const params = new URLSearchParams(location.search);
+const source = () => params.get('utm_source') || document.referrer || '';
+function post(payload){
+  if (!LOG_URL) return Promise.resolve();
+  return fetch(LOG_URL, {method: 'POST', mode: 'no-cors', headers: {'Content-Type': 'text/plain;charset=utf-8'}, body: JSON.stringify(payload)});
+}
+function scheduleLog(){
+  clearTimeout(logTimer);
+  logTimer = setTimeout(() => {
+    const key = JSON.stringify(last);
+    if (key === lastSent) return;
+    lastSent = key;
+    post({type: 'calc', ...last, src: source(), ts: new Date().toISOString()}).catch(() => {});
+  }, 4000);
+}
+$('send').addEventListener('click', () => {
+  const email = $('email').value.trim();
+  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { $('mailMsg').textContent = 'メールアドレスを確認してください。'; return; }
+  if (!$('agree').checked) { $('mailMsg').textContent = '送る前に、同意のチェックを入れてください。'; return; }
+  if (!LOG_URL) { $('mailMsg').textContent = '準備中です。少し時間をおいてお試しください。'; return; }
+  $('send').disabled = true;
+  post({type: 'mail', email, consent: true, ...last, src: source(), ts: new Date().toISOString()})
+    .then(() => { $('mailMsg').textContent = '送りました。数分たっても届かない場合は、迷惑メールフォルダもご確認ください。'; })
+    .catch(() => { $('mailMsg').textContent = '送れませんでした。時間をおいてお試しください。'; $('send').disabled = false; });
+});
+document.querySelectorAll('.tool-card input:not(#email):not(#agree), .tool-card select').forEach(el => el.addEventListener('input', calc));
+calc();
+</script>
+</body>
+</html>
