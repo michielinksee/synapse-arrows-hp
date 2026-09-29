@@ -28,7 +28,6 @@
     <link rel="icon" href="/favicon.png" type="image/png">
     <link rel="manifest" href="/site.webmanifest">
     <link rel="stylesheet" href="/styles.css">
-    <style>.contact-route-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:920px;margin:0 auto 32px;text-align:left}@media(max-width:760px){.contact-route-grid{grid-template-columns:1fr}}</style>
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -66,6 +65,39 @@
       ]
     }
     </script>
+    <style>
+.ct-wrap{background:var(--bg-light);padding:88px 0}
+.ct-head{max-width:720px;margin-bottom:36px}
+.ct-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.ct-card{position:relative;display:flex;flex-direction:column;gap:6px;background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);padding:26px;color:var(--text-primary);text-decoration:none;transition:var(--transition)}
+.ct-card:hover{border-color:var(--primary-light);box-shadow:var(--shadow-md);transform:translateY(-2px)}
+.ct-card.is-selected{border:2px solid var(--primary);box-shadow:var(--shadow-md)}
+.ct-card .ct-badge{display:none;position:absolute;top:18px;right:18px;background:var(--primary);color:#fff;font-size:.7rem;font-weight:700;padding:3px 10px;border-radius:999px}
+.ct-card.is-selected .ct-badge{display:inline-block}
+.ct-icon-wrap{width:48px;height:48px;border-radius:12px;background:var(--accent);color:var(--primary);display:flex;align-items:center;justify-content:center;margin-bottom:10px}
+.ct-kicker{font-size:.72rem;font-weight:700;letter-spacing:.08em;color:var(--primary);text-transform:uppercase}
+.ct-card h3{font-size:1.08rem;font-weight:700;margin:0;color:var(--text-primary)}
+.ct-card p{font-size:.88rem;color:var(--text-secondary);line-height:1.7;margin:0}
+.ct-price{margin-top:auto;padding-top:14px;font-size:.85rem;font-weight:700;color:var(--text-primary);border-top:1px solid var(--border)}
+.ct-lower{display:grid;grid-template-columns:1.3fr 1fr;gap:24px;margin-top:40px}
+.ct-panel{background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);padding:30px}
+.ct-panel h3{font-size:1.1rem;margin:0 0 18px}
+.ct-steps{list-style:none;margin:0;padding:0;counter-reset:s}
+.ct-steps li{counter-increment:s;display:grid;grid-template-columns:36px 1fr;gap:14px;padding:12px 0;border-top:1px solid var(--border)}
+.ct-steps li:first-child{border-top:0}
+.ct-steps li::before{content:counter(s);width:32px;height:32px;border-radius:50%;background:var(--primary);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center}
+.ct-steps strong{display:block;margin-bottom:2px}
+.ct-steps span{color:var(--text-secondary);font-size:.9rem}
+.ct-dark{background:linear-gradient(135deg,var(--bg-dark) 0%,#111936 100%);color:#fff;border:0}
+.ct-dark dl{margin:0 0 22px}
+.ct-dark dt{font-size:.72rem;letter-spacing:.08em;color:rgba(255,255,255,.55);text-transform:uppercase;margin-top:12px}
+.ct-dark dd{margin:2px 0 0;font-weight:600}
+.ct-dark .btn-primary{width:100%;justify-content:center}
+.ct-dark .ct-mail{display:block;margin-top:12px;text-align:center;color:rgba(255,255,255,.75);font-size:.9rem}
+.ct-dark .ct-pricing{display:block;margin-top:10px;text-align:center;color:#fff;font-size:.88rem;text-decoration:underline}
+@media(max-width:900px){.ct-grid{grid-template-columns:1fr 1fr}.ct-lower{grid-template-columns:1fr}}
+@media(max-width:600px){.ct-wrap{padding:56px 0}.ct-grid{grid-template-columns:1fr}.ct-card{padding:22px}}
+</style>
 </head>
 <body>
 
@@ -105,17 +137,20 @@
     </section>
 
     <!-- Contact Section -->
-    <section class="contact-section">
+    <section class="ct-wrap" id="start">
         <div class="container">
-            <div class="contact-route-grid">
-                <div class="service-card"><div class="service-num">LEARN</div><h3>AIを理解・活用したい</h3><p>AI研修、社内ルール、部門別ユースケース、導入ロードマップ</p></div>
-                <div class="service-card"><div class="service-num">BE FOUND</div><h3>AIにどう見られるか知りたい</h3><p>AI認知、競合推薦率、引用元、AEO・LLMO改善</p></div>
-                <div class="service-card"><div class="service-num">BE READY</div><h3>より高度に評価したい</h3><p>KanseiLINK、Agent Readiness、MCP/API評価、ARI</p></div>
+            <div class="ct-head"><div class="section-label">Start here</div><h2 class="section-title">ご相談の内容を選んでください</h2><p class="section-desc" style="margin:0">選ぶとメールの件名と記入欄が入った状態で開きます。課題がまだ整理されていなくても構いません。</p></div>
+            <div class="ct-grid">
+                <a class="ct-card" id="topic-ai-training" href="mailto:contact@synapse-arrows.com?subject=%E3%80%90%E3%81%94%E7%9B%B8%E8%AB%87%E3%80%91AI%E7%A0%94%E4%BF%AE%E3%83%BB%E7%A4%BE%E5%86%85%E6%B4%BB%E7%94%A8&body=%E4%BC%9A%E7%A4%BE%E5%90%8D%EF%BC%9A%0A%E3%81%8A%E5%90%8D%E5%89%8D%EF%BC%9A%0AWeb%E3%82%B5%E3%82%A4%E3%83%88%EF%BC%9A%0A%E3%81%94%E7%9B%B8%E8%AB%87%E3%81%AE%E5%86%85%E5%AE%B9%EF%BC%88%E4%B8%80%E8%A8%80%E3%81%A7%E6%A7%8B%E3%81%84%E3%81%BE%E3%81%9B%E3%82%93%EF%BC%89%EF%BC%9A%0A"><span class="ct-badge">選択中</span><span class="ct-icon-wrap"><svg class="ct-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6.5 12 3l8 3.5-8 3.5-8-3.5Z"/><path d="M7 8.3V13c0 1.7 2.2 3 5 3s5-1.3 5-3V8.3"/><path d="M20 6.5V12"/></svg></span><span class="ct-kicker">AIを社内で使えるようにしたい</span><h3>AI研修・社内活用</h3><p>経営層・管理職・実務担当向けの研修、社内ルール、部門別の使い方</p><span class="ct-price">個別見積もり</span></a><a class="ct-card" id="topic-aeo-audit" href="mailto:contact@synapse-arrows.com?subject=%E3%80%90%E3%81%94%E7%9B%B8%E8%AB%87%E3%80%91AI%E6%8E%A8%E8%96%A6%E8%A8%BA%E6%96%AD%E3%83%AC%E3%83%9D%E3%83%BC%E3%83%88&body=%E4%BC%9A%E7%A4%BE%E5%90%8D%EF%BC%9A%0A%E3%81%8A%E5%90%8D%E5%89%8D%EF%BC%9A%0AWeb%E3%82%B5%E3%82%A4%E3%83%88%EF%BC%9A%0A%E3%81%94%E7%9B%B8%E8%AB%87%E3%81%AE%E5%86%85%E5%AE%B9%EF%BC%88%E4%B8%80%E8%A8%80%E3%81%A7%E6%A7%8B%E3%81%84%E3%81%BE%E3%81%9B%E3%82%93%EF%BC%89%EF%BC%9A%0A"><span class="ct-badge">選択中</span><span class="ct-icon-wrap"><svg class="ct-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/><path d="M8.5 11h5M11 8.5v5"/></svg></span><span class="ct-kicker">AIにどう推薦されているか知りたい</span><h3>AI推薦診断レポート</h3><p>4つのAIで、自社と競合の推薦状況と推薦の根拠を調べます</p><span class="ct-price">198,000円・単発</span></a><a class="ct-card" id="topic-aeo-retainer" href="mailto:contact@synapse-arrows.com?subject=%E3%80%90%E3%81%94%E7%9B%B8%E8%AB%87%E3%80%91AI%E6%8E%A8%E8%96%A6%E3%81%AE%E6%94%B9%E5%96%84%E4%BC%B4%E8%B5%B0&body=%E4%BC%9A%E7%A4%BE%E5%90%8D%EF%BC%9A%0A%E3%81%8A%E5%90%8D%E5%89%8D%EF%BC%9A%0AWeb%E3%82%B5%E3%82%A4%E3%83%88%EF%BC%9A%0A%E3%81%94%E7%9B%B8%E8%AB%87%E3%81%AE%E5%86%85%E5%AE%B9%EF%BC%88%E4%B8%80%E8%A8%80%E3%81%A7%E6%A7%8B%E3%81%84%E3%81%BE%E3%81%9B%E3%82%93%EF%BC%89%EF%BC%9A%0A"><span class="ct-badge">選択中</span><span class="ct-icon-wrap"><svg class="ct-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 18V11M10 18V7M16 18v-5M22 18H2"/><path d="m4 8 6-4 6 5 5-3"/></svg></span><span class="ct-kicker">AIに推薦されるよう改善したい</span><h3>AI推薦の改善伴走</h3><p>掲載先・ページ・構造化データの改善と、毎月の再計測</p><span class="ct-price">月250,000円・3ヶ月から</span></a><a class="ct-card" id="topic-ai-adoption" href="mailto:contact@synapse-arrows.com?subject=%E3%80%90%E3%81%94%E7%9B%B8%E8%AB%87%E3%80%91AI%E5%B0%8E%E5%85%A5%E3%83%BB%E3%82%A8%E3%83%BC%E3%82%B8%E3%82%A7%E3%83%B3%E3%83%88%E9%96%8B%E7%99%BA&body=%E4%BC%9A%E7%A4%BE%E5%90%8D%EF%BC%9A%0A%E3%81%8A%E5%90%8D%E5%89%8D%EF%BC%9A%0AWeb%E3%82%B5%E3%82%A4%E3%83%88%EF%BC%9A%0A%E3%81%94%E7%9B%B8%E8%AB%87%E3%81%AE%E5%86%85%E5%AE%B9%EF%BC%88%E4%B8%80%E8%A8%80%E3%81%A7%E6%A7%8B%E3%81%84%E3%81%BE%E3%81%9B%E3%82%93%EF%BC%89%EF%BC%9A%0A"><span class="ct-badge">選択中</span><span class="ct-icon-wrap"><svg class="ct-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/><path d="m9 8-2 2 2 2M15 8l2 2-2 2"/></svg></span><span class="ct-kicker">AIを業務に組み込みたい</span><h3>AI導入・エージェント開発</h3><p>業務設計、ツール選定、AIエージェント・MCPの開発</p><span class="ct-price">個別見積もり</span></a><a class="ct-card" id="topic-global" href="mailto:contact@synapse-arrows.com?subject=%E3%80%90%E3%81%94%E7%9B%B8%E8%AB%87%E3%80%91%E6%B5%B7%E5%A4%96%E9%80%B2%E5%87%BA%E6%94%AF%E6%8F%B4&body=%E4%BC%9A%E7%A4%BE%E5%90%8D%EF%BC%9A%0A%E3%81%8A%E5%90%8D%E5%89%8D%EF%BC%9A%0AWeb%E3%82%B5%E3%82%A4%E3%83%88%EF%BC%9A%0A%E3%81%94%E7%9B%B8%E8%AB%87%E3%81%AE%E5%86%85%E5%AE%B9%EF%BC%88%E4%B8%80%E8%A8%80%E3%81%A7%E6%A7%8B%E3%81%84%E3%81%BE%E3%81%9B%E3%82%93%EF%BC%89%EF%BC%9A%0A"><span class="ct-badge">選択中</span><span class="ct-icon-wrap"><svg class="ct-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9S14.5 18.4 12 21c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3Z"/></svg></span><span class="ct-kicker">シンガポール・東南アジアに出たい</span><h3>海外進出支援</h3><p>市場調査、パートナー開拓、現地での事業立ち上げの相談</p><span class="ct-price">個別見積もり</span></a><a class="ct-card" id="topic-kanseilink" href="https://kansei-link.com/when-to-use-kanseilink.html" target="_blank" rel="noopener"><span class="ct-badge">選択中</span><span class="ct-icon-wrap"><svg class="ct-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 6v6c0 4.4 3.4 8 8 9 4.6-1 8-4.6 8-9V6l-8-3Z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg></span><span class="ct-kicker">SaaSのAIエージェント対応度を知りたい</span><h3>KanseiLINKの評価</h3><p>Agent Readiness・MCP/APIの評価、ARI Award</p><span class="ct-price">kansei-link.com</span></a>
             </div>
-            <a href="mailto:contact@synapse-arrows.com" class="btn-primary" style="font-size:1rem;">
-                contact@synapse-arrows.com
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-            </a>
+            <div class="ct-lower">
+                <div class="ct-panel"><h3>ご相談の流れ</h3><ol class="ct-steps"><li><div><strong>メールを送る</strong><span>上のカードを選ぶか、下のアドレスへ。一言で構いません。</span></div></li><li><div><strong>オンラインで伺う</strong><span>状況と目的を伺い、必要な範囲を一緒に切り分けます。</span></div></li><li><div><strong>お見積もり・ご提案</strong><span>料金表のある商品はその金額で。それ以外は内容に合わせて。</span></div></li></ol></div>
+                <div class="ct-panel ct-dark"><dl><dt>拠点</dt><dd>シンガポール（160 Robinson Road）</dd><dt>対応言語</dt><dd>日本語・英語</dd><dt>対応地域</dt><dd>日本・シンガポール・東南アジア</dd></dl>
+                    <a href="mailto:contact@synapse-arrows.com?body=%E4%BC%9A%E7%A4%BE%E5%90%8D%EF%BC%9A%0A%E3%81%8A%E5%90%8D%E5%89%8D%EF%BC%9A%0AWeb%E3%82%B5%E3%82%A4%E3%83%88%EF%BC%9A%0A%E3%81%94%E7%9B%B8%E8%AB%87%E3%81%AE%E5%86%85%E5%AE%B9%EF%BC%88%E4%B8%80%E8%A8%80%E3%81%A7%E6%A7%8B%E3%81%84%E3%81%BE%E3%81%9B%E3%82%93%EF%BC%89%EF%BC%9A%0A" class="btn-primary">メールで相談する</a>
+                    <a class="ct-mail" href="mailto:contact@synapse-arrows.com">contact@synapse-arrows.com</a>
+                    <a class="ct-pricing" href="/services/ai-aeo/#pricing">料金を見る &rarr;</a>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -185,5 +220,8 @@
     });
     </script>
 
+<script>
+(function(){var t=new URLSearchParams(location.search).get('topic');if(!t)return;var map={aeo:'aeo-audit'};t=map[t]||t;var el=document.getElementById('topic-'+t);if(!el)return;el.classList.add('is-selected');el.setAttribute('aria-current','true');})();
+</script>
 </body>
 </html>

@@ -65,6 +65,39 @@
       ]
     }
     </script>
+    <style>
+.ct-wrap{background:var(--bg-light);padding:88px 0}
+.ct-head{max-width:720px;margin-bottom:36px}
+.ct-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.ct-card{position:relative;display:flex;flex-direction:column;gap:6px;background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);padding:26px;color:var(--text-primary);text-decoration:none;transition:var(--transition)}
+.ct-card:hover{border-color:var(--primary-light);box-shadow:var(--shadow-md);transform:translateY(-2px)}
+.ct-card.is-selected{border:2px solid var(--primary);box-shadow:var(--shadow-md)}
+.ct-card .ct-badge{display:none;position:absolute;top:18px;right:18px;background:var(--primary);color:#fff;font-size:.7rem;font-weight:700;padding:3px 10px;border-radius:999px}
+.ct-card.is-selected .ct-badge{display:inline-block}
+.ct-icon-wrap{width:48px;height:48px;border-radius:12px;background:var(--accent);color:var(--primary);display:flex;align-items:center;justify-content:center;margin-bottom:10px}
+.ct-kicker{font-size:.72rem;font-weight:700;letter-spacing:.08em;color:var(--primary);text-transform:uppercase}
+.ct-card h3{font-size:1.08rem;font-weight:700;margin:0;color:var(--text-primary)}
+.ct-card p{font-size:.88rem;color:var(--text-secondary);line-height:1.7;margin:0}
+.ct-price{margin-top:auto;padding-top:14px;font-size:.85rem;font-weight:700;color:var(--text-primary);border-top:1px solid var(--border)}
+.ct-lower{display:grid;grid-template-columns:1.3fr 1fr;gap:24px;margin-top:40px}
+.ct-panel{background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);padding:30px}
+.ct-panel h3{font-size:1.1rem;margin:0 0 18px}
+.ct-steps{list-style:none;margin:0;padding:0;counter-reset:s}
+.ct-steps li{counter-increment:s;display:grid;grid-template-columns:36px 1fr;gap:14px;padding:12px 0;border-top:1px solid var(--border)}
+.ct-steps li:first-child{border-top:0}
+.ct-steps li::before{content:counter(s);width:32px;height:32px;border-radius:50%;background:var(--primary);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center}
+.ct-steps strong{display:block;margin-bottom:2px}
+.ct-steps span{color:var(--text-secondary);font-size:.9rem}
+.ct-dark{background:linear-gradient(135deg,var(--bg-dark) 0%,#111936 100%);color:#fff;border:0}
+.ct-dark dl{margin:0 0 22px}
+.ct-dark dt{font-size:.72rem;letter-spacing:.08em;color:rgba(255,255,255,.55);text-transform:uppercase;margin-top:12px}
+.ct-dark dd{margin:2px 0 0;font-weight:600}
+.ct-dark .btn-primary{width:100%;justify-content:center}
+.ct-dark .ct-mail{display:block;margin-top:12px;text-align:center;color:rgba(255,255,255,.75);font-size:.9rem}
+.ct-dark .ct-pricing{display:block;margin-top:10px;text-align:center;color:#fff;font-size:.88rem;text-decoration:underline}
+@media(max-width:900px){.ct-grid{grid-template-columns:1fr 1fr}.ct-lower{grid-template-columns:1fr}}
+@media(max-width:600px){.ct-wrap{padding:56px 0}.ct-grid{grid-template-columns:1fr}.ct-card{padding:22px}}
+</style>
 </head>
 <body>
 
@@ -104,12 +137,20 @@
     </section>
 
     <!-- Contact Section -->
-    <section class="contact-section">
+    <section class="ct-wrap" id="start">
         <div class="container">
-            <a href="mailto:contact@synapse-arrows.com" class="btn-primary" style="font-size:1rem;">
-                contact@synapse-arrows.com
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-            </a>
+            <div class="ct-head"><div class="section-label">Start here</div><h2 class="section-title">What would you like to talk about?</h2><p class="section-desc" style="margin:0">Pick a topic and your email opens with the subject and a short template filled in. It is fine if the problem is not fully defined yet.</p></div>
+            <div class="ct-grid">
+                <a class="ct-card" id="topic-ai-training" href="mailto:contact@synapse-arrows.com?subject=Enquiry%3A%20AI%20training&body=Company%3A%0AName%3A%0AWebsite%3A%0AWhat%20you%20would%20like%20to%20discuss%20%28one%20line%20is%20fine%29%3A%0A"><span class="ct-badge">Selected</span><span class="ct-icon-wrap"><svg class="ct-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6.5 12 3l8 3.5-8 3.5-8-3.5Z"/><path d="M7 8.3V13c0 1.7 2.2 3 5 3s5-1.3 5-3V8.3"/><path d="M20 6.5V12"/></svg></span><span class="ct-kicker">Help our team use AI</span><h3>AI training</h3><p>Training for executives, managers and staff, internal rules, use cases by department</p><span class="ct-price">Quoted per project</span></a><a class="ct-card" id="topic-aeo-audit" href="mailto:contact@synapse-arrows.com?subject=Enquiry%3A%20AI%20Recommendation%20Audit&body=Company%3A%0AName%3A%0AWebsite%3A%0AWhat%20you%20would%20like%20to%20discuss%20%28one%20line%20is%20fine%29%3A%0A"><span class="ct-badge">Selected</span><span class="ct-icon-wrap"><svg class="ct-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/><path d="M8.5 11h5M11 8.5v5"/></svg></span><span class="ct-kicker">See how AI recommends us</span><h3>AI Recommendation Audit</h3><p>Four AI assistants, you vs competitors, and the sources they rely on</p><span class="ct-price">S$2,500 one-off</span></a><a class="ct-card" id="topic-aeo-retainer" href="mailto:contact@synapse-arrows.com?subject=Enquiry%3A%20Improvement%20retainer&body=Company%3A%0AName%3A%0AWebsite%3A%0AWhat%20you%20would%20like%20to%20discuss%20%28one%20line%20is%20fine%29%3A%0A"><span class="ct-badge">Selected</span><span class="ct-icon-wrap"><svg class="ct-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 18V11M10 18V7M16 18v-5M22 18H2"/><path d="m4 8 6-4 6 5 5-3"/></svg></span><span class="ct-kicker">Get recommended by AI</span><h3>Improvement retainer</h3><p>Listings, pages and structured data improved, re-measured monthly</p><span class="ct-price">S$3,500/month, 3-month min.</span></a><a class="ct-card" id="topic-ai-adoption" href="mailto:contact@synapse-arrows.com?subject=Enquiry%3A%20AI%20adoption%20%26%20agents&body=Company%3A%0AName%3A%0AWebsite%3A%0AWhat%20you%20would%20like%20to%20discuss%20%28one%20line%20is%20fine%29%3A%0A"><span class="ct-badge">Selected</span><span class="ct-icon-wrap"><svg class="ct-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/><path d="m9 8-2 2 2 2M15 8l2 2-2 2"/></svg></span><span class="ct-kicker">Put AI to work</span><h3>AI adoption & agents</h3><p>Workflow design, tool selection, AI agent and MCP development</p><span class="ct-price">Quoted per project</span></a><a class="ct-card" id="topic-global" href="mailto:contact@synapse-arrows.com?subject=Enquiry%3A%20Market%20entry&body=Company%3A%0AName%3A%0AWebsite%3A%0AWhat%20you%20would%20like%20to%20discuss%20%28one%20line%20is%20fine%29%3A%0A"><span class="ct-badge">Selected</span><span class="ct-icon-wrap"><svg class="ct-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9S14.5 18.4 12 21c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3Z"/></svg></span><span class="ct-kicker">Expand in Southeast Asia</span><h3>Market entry</h3><p>Market research, partners, and setting up in Singapore; Japan-Singapore both ways</p><span class="ct-price">Quoted per project</span></a><a class="ct-card" id="topic-kanseilink" href="https://kansei-link.com/when-to-use-kanseilink.html" target="_blank" rel="noopener"><span class="ct-badge">Selected</span><span class="ct-icon-wrap"><svg class="ct-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 6v6c0 4.4 3.4 8 8 9 4.6-1 8-4.6 8-9V6l-8-3Z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg></span><span class="ct-kicker">Rate a SaaS for AI agents</span><h3>KanseiLINK rating</h3><p>Agent Readiness, MCP/API assessment, ARI Award</p><span class="ct-price">kansei-link.com</span></a>
+            </div>
+            <div class="ct-lower">
+                <div class="ct-panel"><h3>How it works</h3><ol class="ct-steps"><li><div><strong>Send an email</strong><span>Pick a card above or write to the address below. One line is enough.</span></div></li><li><div><strong>Talk online</strong><span>We learn your situation and goals and scope only what you need.</span></div></li><li><div><strong>Quote and proposal</strong><span>Listed prices for listed services; everything else is quoted to fit.</span></div></li></ol></div>
+                <div class="ct-panel ct-dark"><dl><dt>Based in</dt><dd>Singapore (160 Robinson Road)</dd><dt>Languages</dt><dd>English, Japanese</dd><dt>Markets</dt><dd>Japan, Singapore, Southeast Asia</dd></dl>
+                    <a href="mailto:contact@synapse-arrows.com?body=Company%3A%0AName%3A%0AWebsite%3A%0AWhat%20you%20would%20like%20to%20discuss%20%28one%20line%20is%20fine%29%3A%0A" class="btn-primary">Email us</a>
+                    <a class="ct-mail" href="mailto:contact@synapse-arrows.com">contact@synapse-arrows.com</a>
+                    <a class="ct-pricing" href="/en/services/ai-aeo/#pricing">See pricing &rarr;</a>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -179,5 +220,8 @@
     });
     </script>
 
+<script>
+(function(){var t=new URLSearchParams(location.search).get('topic');if(!t)return;var map={aeo:'aeo-audit'};t=map[t]||t;var el=document.getElementById('topic-'+t);if(!el)return;el.classList.add('is-selected');el.setAttribute('aria-current','true');})();
+</script>
 </body>
 </html>
