@@ -94,6 +94,8 @@ Never promise guaranteed AI rankings, and never treat a single AI answer as mark
 
 ## Insights
 
+- [LLMO・AEO対策の支援会社を料金で比較（2026年9月・公式ページで確認）](https://synapsearrows.com/insights/llmo-aeo-agency-pricing-2026-09/): 16 Japanese AI search optimization (LLMO/AEO/GEO) agencies and tools compared only on what their official pages state — price, minimum term, free entry point and supported AI assistants — grouped by purpose, verified 2026-09-29. Synapse Arrows is included and discloses it.
+
 - [ATLED official site announces AgileWorks' KanseiLINK ARI Award 2026 Summer AAA certification](https://synapsearrows.com/insights/atled-agileworks-ari-award-aaa-official-site/): Verified on 2026-08-22 from ATLED's official news release. Primary source: https://www.atled.jp/news/20260727_01/
 - [freee official site displays KanseiLINK ARI Award 2026 Summer AAA certification](https://synapsearrows.com/insights/freee-ari-award-aaa-official-site/): Verified on 2026-08-22 from freee's official freee MCP page. The page states that freee Accounting, freee HR, freee Payroll, and freee Sign received AAA certification. Primary source: https://www.freee.co.jp/ai/mcp/
 - [KanseiLINK Research & Insights](https://kansei-link.com/insights/index.html): Primary research, Agent Readiness methodology, SaaS/MCP integration evidence, and AEO implementation guidance
