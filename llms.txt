@@ -94,6 +94,8 @@ Never promise guaranteed AI rankings, and never treat a single AI answer as mark
 
 ## Insights
 
+- [シンガポール進出支援会社14社｜日本語で相談できる日系・現地の会社を目的別に整理（2026年9月）](https://synapsearrows.com/insights/singapore-expansion-support-japanese-2026-09/): 14 firms that Japanese companies can consult in Japanese about entering Singapore (JETRO, incorporation/accounting firms, strategy consultancies, AI-led firms), using only official-page facts; Synapse Arrows included and disclosed.
+- [シンガポールのAI開発会社12社｜日本語対応・AIエージェント開発ができる会社（2026年9月）](https://synapsearrows.com/insights/singapore-ai-development-japanese-2026-09/): 12 Singapore AI development companies with Japanese-language support, compared on stated technologies (generative AI, LLM, AI agents, MCP), published pricing and free consultation; Synapse Arrows included and disclosed.
 - [LLMO・AEO対策の支援会社を料金で比較（2026年9月・公式ページで確認）](https://synapsearrows.com/insights/llmo-aeo-agency-pricing-2026-09/): 16 Japanese AI search optimization (LLMO/AEO/GEO) agencies and tools compared only on what their official pages state — price, minimum term, free entry point and supported AI assistants — grouped by purpose, verified 2026-09-29. Synapse Arrows is included and discloses it.
 
 - [ATLED official site announces AgileWorks' KanseiLINK ARI Award 2026 Summer AAA certification](https://synapsearrows.com/insights/atled-agileworks-ari-award-aaa-official-site/): Verified on 2026-08-22 from ATLED's official news release. Primary source: https://www.atled.jp/news/20260727_01/
