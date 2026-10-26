@@ -1,0 +1,120 @@
+{
+  "_readme": "AI 映え診断 段 2 の申し込みアンケート（founder-ops/research/AiBae_2026-10/DESIGN-ai-bae-step2-survey-v0.md）。サーバーの検査（src/ai-bae-apply.ts）と申し込み画面（public/ai-bae/apply.html が public/ai-bae/survey.json を読む）の両方の正本。public 側は同じ内容の写しで、scripts/test-ai-bae-apply.mjs が一致を確かめる。選択肢の id は保存される値なので、言い回しを変えても id は変えない。tools の一覧は業種のグループごとに足し引きできる。",
+  "version": 1,
+  "intro": "できるだけ正確にご記入・ご選択いただくと、今の状況に合った詳しいレポートをお作りできます。",
+  "unclear_text_message": "具体的にお願いします（例: {example}）",
+  "questions": {
+    "q1": {
+      "label": "お店・事業の種類",
+      "type": "single",
+      "required": true,
+      "other_example": "整体院、写真スタジオ",
+      "options": [
+        { "id": "restaurant", "label": "飲食", "tools": "restaurant" },
+        { "id": "medical", "label": "医療・歯科・クリニック", "tools": "medical" },
+        { "id": "beauty", "label": "美容・サロン", "tools": "default" },
+        { "id": "lodging", "label": "宿泊", "tools": "default" },
+        { "id": "retail", "label": "小売", "tools": "default" },
+        { "id": "school", "label": "教室・スクール", "tools": "default" },
+        { "id": "professional", "label": "士業・事務所", "tools": "default" },
+        { "id": "saas_web", "label": "SaaS・Web サービス", "tools": "saas_web" },
+        { "id": "manufacturing_btob", "label": "製造・メーカー（BtoB）", "tools": "default" },
+        { "id": "other", "label": "その他", "other": true, "tools": "default" }
+      ]
+    },
+    "q2": {
+      "label": "地域",
+      "type": "region",
+      "required": true,
+      "city_label": "市区町村（任意）",
+      "prefectures": ["北海道", "青森県", "岩手県", "宮城県", "秋田県", "山形県", "福島県", "茨城県", "栃木県", "群馬県", "埼玉県", "千葉県", "東京都", "神奈川県", "新潟県", "富山県", "石川県", "福井県", "山梨県", "長野県", "岐阜県", "静岡県", "愛知県", "三重県", "滋賀県", "京都府", "大阪府", "兵庫県", "奈良県", "和歌山県", "鳥取県", "島根県", "岡山県", "広島県", "山口県", "徳島県", "香川県", "愛媛県", "高知県", "福岡県", "佐賀県", "長崎県", "熊本県", "大分県", "宮崎県", "鹿児島県", "沖縄県", "日本国外"]
+    },
+    "q3": {
+      "label": "規模",
+      "type": "scale",
+      "required": true,
+      "sites": { "label": "拠点（お店・事務所）の数", "options": [ { "id": "1", "label": "1" }, { "id": "2-4", "label": "2〜4" }, { "id": "5-19", "label": "5〜19" }, { "id": "20+", "label": "20 以上" } ] },
+      "staff": { "label": "働く人の数", "options": [ { "id": "1-4", "label": "1〜4 人" }, { "id": "5-19", "label": "5〜19 人" }, { "id": "20-99", "label": "20〜99 人" }, { "id": "100+", "label": "100 人以上" } ] }
+    },
+    "q4": {
+      "label": "いま困っていること（3 つまで）",
+      "type": "multi",
+      "required": true,
+      "max": 3,
+      "other_example": "求人の応募が減った",
+      "options": [
+        { "id": "new_customers_down", "label": "新しいお客さんが減った" },
+        { "id": "bookings_down", "label": "予約・問い合わせが減った" },
+        { "id": "ai_wrong", "label": "AI（ChatGPT など）で間違って紹介された" },
+        { "id": "ai_not_found", "label": "AI で見つからない・名前が出ない" },
+        { "id": "reviews", "label": "口コミ・評価" },
+        { "id": "cant_keep_up", "label": "情報を直すのが追いつかない" },
+        { "id": "losing_local", "label": "近くの競合に負けている" },
+        { "id": "curious", "label": "特に困ってはいないが気になる" },
+        { "id": "other", "label": "その他", "other": true }
+      ]
+    },
+    "q5": {
+      "label": "ホームページ・Google マップ・食べログなどのお店の情報を、直す権限があるのは誰ですか（複数可）",
+      "type": "multi",
+      "required": true,
+      "other_example": "フランチャイズの本部とお店の両方",
+      "options": [
+        { "id": "self", "label": "自分" },
+        { "id": "family_staff", "label": "家族・社内の担当者" },
+        { "id": "hq", "label": "本部" },
+        { "id": "vendor", "label": "外部の業者（制作会社など）" },
+        { "id": "unknown", "label": "分からない" },
+        { "id": "other", "label": "その他", "other": true }
+      ]
+    },
+    "q6": {
+      "label": "自分で ChatGPT などに、自分のお店のことを聞いたことはありますか",
+      "type": "single",
+      "required": true,
+      "options": [ { "id": "yes", "label": "ある" }, { "id": "no", "label": "ない" } ]
+    },
+    "q7": {
+      "label": "使っている道具（任意・当てはまる物を選んでください）",
+      "type": "tools",
+      "required": false,
+      "other_label": "その他の道具（一覧に無い物を名前で・任意）",
+      "other_example": "Square、Canva",
+      "groups": {
+        "restaurant": [
+          { "section": "集客・予約", "options": [ { "id": "gbp", "label": "Google ビジネスプロフィール" }, { "id": "tabelog", "label": "食べログ" }, { "id": "hotpepper_gourmet", "label": "ホットペッパーグルメ" }, { "id": "retty", "label": "Retty" }, { "id": "ikyu", "label": "一休" }, { "id": "instagram", "label": "Instagram" }, { "id": "line_official", "label": "LINE 公式アカウント" }, { "id": "own_booking", "label": "自社の予約ページ" } ] },
+          { "section": "店の運営", "options": [ { "id": "booking_ledger", "label": "予約台帳（トレタなど）" }, { "id": "pos", "label": "レジ・POS（Airレジ・スマレジなど）" }, { "id": "table_order", "label": "テーブル注文（タブレット・QR）" }, { "id": "inventory", "label": "発注・在庫の管理" }, { "id": "accounting", "label": "会計（freee・マネーフォワード・弥生など）" }, { "id": "shift", "label": "シフト・勤怠" } ] },
+          { "section": "広告", "options": [ { "id": "google_ads", "label": "Google 広告" }, { "id": "meta_ads", "label": "Instagram・Facebook 広告" }, { "id": "flyer", "label": "チラシ・フリーペーパー" } ] },
+          { "section": "AI 検索の対策（AEO・LLMO）", "options": [ { "id": "aeo_tool", "label": "ツールを使っている" }, { "id": "aeo_vendor", "label": "業者に頼んでいる" }, { "id": "aeo_considering", "label": "検討中" }, { "id": "aeo_none", "label": "していない" } ] }
+        ],
+        "medical": [
+          { "section": "集客・予約", "options": [ { "id": "gbp", "label": "Google ビジネスプロフィール" }, { "id": "epark", "label": "EPARK" }, { "id": "doctors_file", "label": "Doctors File" }, { "id": "byoin_navi", "label": "病院なび" }, { "id": "own_booking", "label": "自院の予約システム" }, { "id": "instagram", "label": "Instagram" }, { "id": "line_official", "label": "LINE 公式アカウント" } ] },
+          { "section": "院の運営", "options": [ { "id": "emr", "label": "電子カルテ" }, { "id": "receipt", "label": "レセコン" }, { "id": "booking_intake", "label": "予約・問診のシステム" }, { "id": "accounting", "label": "会計（freee・マネーフォワード・弥生など）" }, { "id": "shift", "label": "シフト・勤怠" } ] },
+          { "section": "広告", "options": [ { "id": "google_ads", "label": "Google 広告" }, { "id": "meta_ads", "label": "Instagram・Facebook 広告" }, { "id": "flyer", "label": "チラシ・フリーペーパー" } ] },
+          { "section": "AI 検索の対策（AEO・LLMO）", "options": [ { "id": "aeo_tool", "label": "ツールを使っている" }, { "id": "aeo_vendor", "label": "業者に頼んでいる" }, { "id": "aeo_considering", "label": "検討中" }, { "id": "aeo_none", "label": "していない" } ] }
+        ],
+        "saas_web": [
+          { "section": "集客", "options": [ { "id": "own_site", "label": "自社サイト" }, { "id": "compare_sites", "label": "比較サイト（ITreview・BOXIL など）" }, { "id": "product_hunt", "label": "Product Hunt" }, { "id": "google_ads", "label": "Google 広告" }, { "id": "meta_ads", "label": "SNS 広告" } ] },
+          { "section": "運営", "options": [ { "id": "crm", "label": "CRM（Salesforce・HubSpot など）" }, { "id": "ma", "label": "MA" }, { "id": "support", "label": "サポート（Zendesk など）" }, { "id": "payments", "label": "決済（Stripe など）" }, { "id": "analytics", "label": "分析（GA4 など）" } ] },
+          { "section": "AI 対応", "options": [ { "id": "mcp_server", "label": "MCP サーバーを公開している" }, { "id": "public_api", "label": "API を公開している" }, { "id": "llms_txt", "label": "llms.txt を置いている" }, { "id": "aeo_tool", "label": "AI 検索の対策ツールを使っている" }, { "id": "aeo_none", "label": "まだしていない" } ] }
+        ],
+        "default": [
+          { "section": "集客・予約", "options": [ { "id": "gbp", "label": "Google ビジネスプロフィール" }, { "id": "portal", "label": "業種のポータル・予約サイト" }, { "id": "instagram", "label": "Instagram" }, { "id": "line_official", "label": "LINE 公式アカウント" }, { "id": "own_booking", "label": "自社の予約・問い合わせページ" } ] },
+          { "section": "運営", "options": [ { "id": "pos", "label": "レジ・POS" }, { "id": "accounting", "label": "会計（freee・マネーフォワード・弥生など）" }, { "id": "shift", "label": "シフト・勤怠" } ] },
+          { "section": "広告", "options": [ { "id": "google_ads", "label": "Google 広告" }, { "id": "meta_ads", "label": "Instagram・Facebook 広告" }, { "id": "flyer", "label": "チラシ・フリーペーパー" } ] },
+          { "section": "AI 検索の対策（AEO・LLMO）", "options": [ { "id": "aeo_tool", "label": "ツールを使っている" }, { "id": "aeo_vendor", "label": "業者に頼んでいる" }, { "id": "aeo_considering", "label": "検討中" }, { "id": "aeo_none", "label": "していない" } ] }
+        ]
+      }
+    },
+    "q8": {
+      "label": "結果のあと、どうしたいですか",
+      "type": "single",
+      "required": true,
+      "options": [ { "id": "result_only", "label": "結果だけ見たい" }, { "id": "consult", "label": "直し方を相談したい" }, { "id": "undecided", "label": "まだ分からない" } ]
+    }
+  },
+  "consents": {
+    "diagnosis": { "label": "入力した URL・回答・メールアドレスを、詳しい診断とその連絡のために使うことに同意します（メールアドレスは診断の連絡にだけ使います）", "required": true },
+    "aggregate": { "label": "回答を、個人やお店が分からない形の集計（調査レポート）に使うことに同意します（外しても診断は受けられます）", "required": false }
+  }
+}

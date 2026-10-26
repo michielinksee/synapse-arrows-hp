@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>お申し込みの確定｜AI映え診断 | Synapse Arrows</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="referrer" content="no-referrer">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="icon" href="/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    main.aib { padding-top: 72px; }
+    :root { --g1:#f58529; --g2:#dd2a7b; --g3:#8134af; --grad:linear-gradient(45deg,var(--g1),var(--g2) 55%,var(--g3)); --ink:#111827; --sub:#6b7280; --line:#e5e7eb; --bg:#fafafa; --bad:#dc2626; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:"Noto Sans JP","Inter",system-ui,sans-serif; line-height:1.8; }
+    .wrap { max-width:560px; margin:0 auto; padding:24px 16px 60px; }
+    .top a { color:var(--sub); text-decoration:none; font-size:13px; }
+    .card { background:#fff; border:1px solid var(--line); border-radius:14px; padding:20px; margin-top:18px; text-align:center; }
+    .aib h1 { font-size:22px; margin:6px 0 10px; }
+    .aib button { width:100%; padding:14px; border:0; border-radius:12px; background:var(--grad); color:#fff; font-size:17px; font-weight:800; cursor:pointer; font-family:inherit; }
+    .aib button:disabled { opacity:.6; cursor:wait; }
+    .msg { margin-top:14px; display:none; }
+    .msg.show { display:block; }
+    .bad { color:var(--bad); }
+    .fine { color:var(--sub); font-size:13px; }
+    .big { font-size:28px; font-weight:900; background:var(--grad); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  </style>
+</head>
+<body>
+<header><nav class="nav"><div class="container nav-inner"><a href="/" class="nav-logo"><img src="/logo.png" alt="Synapse Arrows" width="32" height="32">Synapse Arrows</a><ul class="nav-links"><li><a href="/about/">About</a></li><li><a href="/products/">Products</a></li><li><a href="/services/">Services</a></li><li><a href="/tools/" class="active">Tools</a></li><li><a href="/insights/">Insights</a></li><li><a href="/contact/" class="nav-cta">Contact</a></li></ul></div></nav></header>
+<main class="aib">
+<div class="wrap">
+  <div class="top"><a href="/ai-bae-shindan/">← AI映え診断</a></div>
+  <div class="card" id="box">
+    <h1>お申し込みの確定</h1>
+    <p id="ask">下のボタンを押すと、詳しい診断のお申し込みが確定します。</p>
+    <button id="go">申し込みを確定する</button>
+    <div class="msg" id="msg"></div>
+  </div>
+</div>
+</main>
+<footer class="footer"><div class="container footer-inner"><div class="footer-logo">Synapse Arrows Pte. Ltd</div><ul class="footer-links"><li><a href="https://kansei-link.com" target="_blank" rel="noopener">KanseiLINK</a></li><li><a href="/services/">Services</a></li><li><a href="/tools/">Tools</a></li><li><a href="/policy/">Privacy</a></li><li><a href="/terms/">Terms</a></li></ul><div class="footer-copy">&copy; 2026 Synapse Arrows Pte. Ltd. All rights reserved.</div></div></footer>
+<script>
+// The link from the email opens this page; nothing is written until the button is pressed (POST).
+const API_BASE = (location.hostname === 'localhost' || location.hostname === '127.0.0.1') ? 'http://localhost:3000' : 'https://mcp.kansei-link.com';
+const token = new URLSearchParams(location.search).get('t') || '';
+const $ = (id) => document.getElementById(id);
+const show = (html) => { $('msg').innerHTML = html; $('msg').classList.add('show'); };
+if (!/^[A-Za-z0-9_-]{40,60}$/.test(token)) { $('go').style.display = 'none'; $('ask').style.display = 'none'; show('<p class="bad">リンクが正しくありません。メールのリンクをもう一度開いてください。</p>'); }
+$('go').addEventListener('click', async () => {
+  $('go').disabled = true;
+  try {
+    const r = await fetch(API_BASE + '/api/ai-bae/confirm', { method: 'POST', mode: 'cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ token }) });
+    const j = await r.json().catch(() => ({}));
+    history.replaceState(null, '', location.pathname); // drop the token from the address bar
+    $('go').style.display = 'none'; $('ask').style.display = 'none';
+    if (j.status === 'queued') {
+      show(`<p>受付が完了しました。</p><p>いまの順番は <span class="big">${Number(j.position)}</span> 番目です。</p><p class="fine">詳しい診断は 1 日 ${Number(j.daily_limit)} 件ずつ順番に行います（目安: ${Number(j.estimated_days)} 日以内）。結果はメールでお送りします。</p>`);
+    } else if (j.status === 'reused') {
+      show('<p>受付が完了しました。</p><p class="fine">同じお店（ホームページ）の詳しい診断が、30 日以内に受け付け済みです。その結果を、このメールアドレスにもお送りします。</p>');
+    } else if (j.error === 'email_limit') {
+      show(`<p class="bad">このメールアドレスでは、30 日以内に別のお店の詳しい診断をお申し込みいただいています。</p><p class="fine">1 つのメールアドレスにつき 30 日に 1 店までです。${j.next_after ? String(j.next_after).replace(/[^0-9-]/g, '') + ' 以降に' : 'しばらくしてから'}、あらためてお申し込みください。</p>`);
+    } else if (j.error === 'rate_limited') {
+      $('go').style.display = ''; $('go').disabled = false; show('<p class="bad">少し時間をおいてから、もう一度押してください。</p>');
+    } else {
+      show('<p class="bad">このリンクは使えません（期限切れ、または確定済みです）。</p><p class="fine">お手数ですが、<a href="/ai-bae-shindan/apply/">お申し込みのページ</a>からもう一度お申し込みください。</p>');
+    }
+  } catch { $('go').disabled = false; show('<p class="bad">サーバーに接続できませんでした。時間をおいて、もう一度押してください。</p>'); }
+});
+</script>
+</body>
+</html>
