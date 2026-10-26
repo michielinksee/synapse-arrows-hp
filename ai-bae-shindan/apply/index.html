@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>詳しい診断のお申し込み｜AI映え診断 | Synapse Arrows</title>
+  <meta name="description" content="AI映え診断の詳しい診断（4 つの AI に実際に聞いて、お店の紹介に間違いがないかを確かめます）のお申し込みフォームです。">
+  <meta name="robots" content="noindex, follow">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="icon" href="/favicon.png" type="image/png">
+  <link rel="canonical" href="https://synapsearrows.com/ai-bae-shindan/apply/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    main.aib { padding-top: 72px; }
+    :root { --g1:#f58529; --g2:#dd2a7b; --g3:#8134af; --grad:linear-gradient(45deg,var(--g1),var(--g2) 55%,var(--g3));
+      --ink:#111827; --sub:#6b7280; --line:#e5e7eb; --bg:#fafafa; --card:#fff; --tile:#f6f6f7; --bad:#dc2626; --ok:#16a34a; }
+    * { box-sizing: border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:"Noto Sans JP","Inter",system-ui,sans-serif; line-height:1.75; }
+    .wrap { max-width:720px; margin:0 auto; padding:20px 16px 60px; }
+    .top { display:flex; justify-content:space-between; align-items:center; font-size:13px; }
+    .top a { color:var(--sub); text-decoration:none; }
+    .aib h1 { font-size:clamp(22px,4vw,28px); margin:18px 0 6px; }
+    .aib h1 b { background:var(--grad); -webkit-background-clip:text; background-clip:text; color:transparent; }
+    .lead { color:var(--sub); font-size:14px; margin:0 0 14px; }
+    .intro { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:12px 16px; font-size:14px; margin-bottom:16px; }
+    .card { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:16px; margin:12px 0; }
+    .q { font-weight:700; font-size:15px; margin:0 0 8px; }
+    .q .req { color:var(--bad); font-size:12px; margin-left:6px; font-weight:500; }
+    .q .opt { color:var(--sub); font-size:12px; margin-left:6px; font-weight:500; }
+    .hint { color:var(--sub); font-size:12px; margin:-4px 0 8px; }
+    .chips { display:flex; flex-wrap:wrap; gap:8px; }
+    .chip { position:relative; }
+    .chip input { position:absolute; opacity:0; inset:0; margin:0; cursor:pointer; }
+    .chip span { display:inline-block; padding:7px 12px; border:1px solid var(--line); border-radius:999px; font-size:14px; background:var(--tile); }
+    .chip input:checked + span { background:#fff; border-color:var(--g2); box-shadow:0 0 0 2px rgba(221,42,123,.15); font-weight:700; }
+    .chip input:focus-visible + span { outline:2px solid var(--g3); outline-offset:2px; }
+    .sec { font-size:12px; color:var(--sub); margin:10px 0 6px; font-weight:700; }
+    input[type=text], input[type=email], input[type=url], select { width:100%; padding:11px 12px; border:1px solid var(--line); border-radius:10px; font-size:16px; background:#fff; font-family:inherit; }
+    .row2 { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    @media (max-width:520px) { .row2 { grid-template-columns:1fr; } }
+    .other { margin-top:8px; display:none; }
+    .other.show { display:block; }
+    .err { color:var(--bad); font-size:13px; margin-top:6px; display:none; }
+    .err.show { display:block; }
+    .consent { display:flex; gap:10px; align-items:flex-start; font-size:14px; margin:8px 0; }
+    .consent input { margin-top:5px; width:18px; height:18px; flex:none; }
+    button.go { width:100%; padding:14px; border:0; border-radius:12px; background:var(--grad); color:#fff; font-size:17px; font-weight:800; cursor:pointer; font-family:inherit; }
+    button.go:disabled { opacity:.6; cursor:wait; }
+    .done { display:none; text-align:center; }
+    .done.show { display:block; }
+    .done h2 { font-size:20px; }
+    .fine { color:var(--sub); font-size:12px; }
+    .formerr { color:var(--bad); font-size:14px; margin:10px 0; display:none; }
+    .formerr.show { display:block; }
+  </style>
+</head>
+<body>
+<header><nav class="nav"><div class="container nav-inner"><a href="/" class="nav-logo"><img src="/logo.png" alt="Synapse Arrows" width="32" height="32">Synapse Arrows</a><ul class="nav-links"><li><a href="/about/">About</a></li><li><a href="/products/">Products</a></li><li><a href="/services/">Services</a></li><li><a href="/tools/" class="active">Tools</a></li><li><a href="/insights/">Insights</a></li><li><a href="/contact/" class="nav-cta">Contact</a></li></ul></div></nav></header>
+<main class="aib">
+<div class="wrap">
+  <div class="top"><a href="/ai-bae-shindan/">← AI映え診断に戻る</a><a href="/tools/">ツール一覧</a></div>
+  <h1><b>詳しい診断</b>のお申し込み（無料）</h1>
+  <p class="lead">ChatGPT・Claude・Gemini・Perplexity の 4 つの AI に、あなたのお店のことを実際に聞きます。紹介に間違いや抜けがないかを確かめ、結果をメールでお送りします。</p>
+
+  <form id="apply" novalidate>
+    <div class="intro" id="intro"></div>
+
+    <div class="card">
+      <p class="q">お店・会社のホームページの URL<span class="req">必須</span></p>
+      <input type="url" id="url" inputmode="url" maxlength="500" placeholder="https://example.jp" autocomplete="url">
+      <div class="err" id="err-url"></div>
+    </div>
+    <div class="card">
+      <p class="q">メールアドレス<span class="req">必須</span></p>
+      <p class="hint">結果と確認のメールをお送りします（Gmail・携帯のメールも使えます）。</p>
+      <input type="email" id="email" maxlength="254" placeholder="you@example.jp" autocomplete="email">
+      <div class="err" id="err-email"></div>
+    </div>
+
+    <div id="questions"></div>
+
+    <div class="card" id="consents"></div>
+
+    <div id="ts-box"></div>
+    <div class="formerr" id="formerr"></div>
+    <button type="submit" class="go" id="go">申し込む（確認のメールが届きます）</button>
+    <p class="fine">確認のメールのリンクを開いて「申し込みを確定する」を押すと受付が完了します。1 つのメールアドレスにつき 30 日に 1 店までです。詳しい診断は 1 日に決まった件数ずつ順番に行います。</p>
+  </form>
+
+  <div class="done card" id="done">
+    <h2>確認のメールをお送りしました</h2>
+    <p>メールのリンクを開いて「申し込みを確定する」を押すと、受付が完了します（<span id="hours">48</span> 時間以内）。</p>
+    <p class="fine">メールが届かない時は、迷惑メールのフォルダもご確認ください。</p>
+  </div>
+</div>
+</main>
+<footer class="footer"><div class="container footer-inner"><div class="footer-logo">Synapse Arrows Pte. Ltd</div><ul class="footer-links"><li><a href="https://kansei-link.com" target="_blank" rel="noopener">KanseiLINK</a></li><li><a href="/services/">Services</a></li><li><a href="/tools/">Tools</a></li><li><a href="/policy/">Privacy</a></li><li><a href="/terms/">Terms</a></li></ul><div class="footer-copy">&copy; 2026 Synapse Arrows Pte. Ltd. All rights reserved.</div></div></footer>
+<script src="/ai-bae-shindan/turnstile-guard.js"></script>
+<script>
+const API_BASE = (location.hostname === 'localhost' || location.hostname === '127.0.0.1') ? 'http://localhost:3000' : 'https://mcp.kansei-link.com';
+KLTurnstile.init(API_BASE, document.getElementById('ts-box'));
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+let S = null;
+
+// Same rules as the server (src/ai-bae-apply.ts isUnclearText); the server has the final say.
+function unclear(raw) {
+  const s = String(raw || '').replace(/\s+/g, ''); const chars = Array.from(s);
+  if (chars.length < 2) return true;
+  if (!/\p{L}/u.test(s)) return true;
+  if (new Set(chars).size === 1) return true;
+  if (chars.length >= 4) { const m = new Map(); for (const c of chars) m.set(c, (m.get(c) || 0) + 1); if (Math.max(...m.values()) / chars.length >= 0.6) return true; }
+  if (/^[a-z]{6,}$/i.test(s) && !/[aeiouy]/i.test(s)) return true;
+  return false;
+}
+const unclearMsg = (ex) => S.unclear_text_message.replace('{example}', ex);
+
+function chips(name, opts, type) {
+  return '<div class="chips">' + opts.map((o) => `<label class="chip"><input type="${type}" name="${name}" value="${esc(o.id)}"${o.other ? ' data-other="1"' : ''}><span>${esc(o.label)}</span></label>`).join('') + '</div>';
+}
+function otherBox(q, ex) {
+  return `<div class="other" id="other-${q}"><input type="text" id="other-${q}-text" maxlength="80" placeholder="具体的に（例: ${esc(ex)}）"></div>`;
+}
+function card(q, label, required, body, hint) {
+  return `<div class="card" id="card-${q}"><p class="q">${esc(label)}${required ? '<span class="req">必須</span>' : '<span class="opt">任意</span>'}</p>${hint ? `<p class="hint">${esc(hint)}</p>` : ''}${body}<div class="err" id="err-${q}"></div></div>`;
+}
+
+function render() {
+  const Q = S.questions;
+  $('intro').textContent = S.intro;
+  let h = '';
+  h += card('q1', Q.q1.label, true, chips('q1', Q.q1.options, 'radio') + otherBox('q1', Q.q1.other_example));
+  h += card('q2', Q.q2.label, true, `<div class="row2"><select id="q2-pref"><option value="">都道府県を選ぶ</option>${Q.q2.prefectures.map((p) => `<option>${esc(p)}</option>`).join('')}</select><input type="text" id="q2-city" maxlength="40" placeholder="${esc(Q.q2.city_label)}"></div>`);
+  h += card('q3', Q.q3.label, true, `<div class="sec">${esc(Q.q3.sites.label)}</div>${chips('q3s', Q.q3.sites.options, 'radio')}<div class="sec">${esc(Q.q3.staff.label)}</div>${chips('q3t', Q.q3.staff.options, 'radio')}`);
+  h += card('q4', Q.q4.label, true, chips('q4', Q.q4.options, 'checkbox') + otherBox('q4', Q.q4.other_example));
+  h += card('q5', Q.q5.label, true, chips('q5', Q.q5.options, 'checkbox') + otherBox('q5', Q.q5.other_example));
+  h += card('q6', Q.q6.label, true, chips('q6', Q.q6.options, 'radio'));
+  h += `<div id="q7-holder"></div>`;
+  h += card('q8', Q.q8.label, true, chips('q8', Q.q8.options, 'radio'));
+  $('questions').innerHTML = h;
+  $('consents').innerHTML = `<p class="q">同意</p>` + Object.entries(S.consents).map(([k, c]) =>
+    `<label class="consent"><input type="checkbox" id="consent-${k}"><span>${esc(c.label)}${c.required ? '<span class="req" style="color:var(--bad);font-size:12px;margin-left:6px">必須</span>' : ''}</span></label>`).join('') + '<p style="font-size:13px;color:var(--sub);margin:6px 0 0">集める物・保存期間・預け先は<a href="/policy/#ai-bae" target="_blank" rel="noopener">プライバシーポリシー（AI映え診断）</a>に書いています。</p><div class="err" id="err-consents"></div>';
+  renderTools();
+  document.querySelectorAll('input[data-other]').forEach((el) => el.closest('.card').addEventListener('change', syncOther));
+  document.querySelectorAll('input[name=q1]').forEach((el) => el.addEventListener('change', renderTools));
+  document.querySelectorAll('input[name=q4]').forEach((el) => el.addEventListener('change', () => {
+    const on = document.querySelectorAll('input[name=q4]:checked');
+    document.querySelectorAll('input[name=q4]').forEach((x) => { x.disabled = !x.checked && on.length >= Q.q4.max; });
+  }));
+}
+function syncOther() {
+  for (const q of ['q1', 'q4', 'q5']) {
+    const on = !!document.querySelector(`input[name=${q}][data-other]:checked`);
+    const box = $('other-' + q); if (box) box.classList.toggle('show', on);
+  }
+}
+function toolGroup() {
+  const v = document.querySelector('input[name=q1]:checked')?.value;
+  const o = S.questions.q1.options.find((x) => x.id === v);
+  return o && S.questions.q7.groups[o.tools] ? o.tools : 'default';
+}
+function renderTools() {
+  const Q7 = S.questions.q7; const g = Q7.groups[toolGroup()];
+  const keep = new Set([...document.querySelectorAll('input[name=q7]:checked')].map((x) => x.value));
+  const keepText = $('q7-other')?.value || '';
+  const body = g.map((sec) => `<div class="sec">${esc(sec.section)}</div>` + chips('q7', sec.options, 'checkbox')).join('') +
+    `<div class="sec">${esc(Q7.other_label)}</div><input type="text" id="q7-other" maxlength="80" placeholder="例: ${esc(Q7.other_example)}">`;
+  $('q7-holder').innerHTML = card('q7', Q7.label, false, body, '業種に合わせた一覧です。当てはまる物があれば選んでください。');
+  document.querySelectorAll('input[name=q7]').forEach((x) => { if (keep.has(x.value)) x.checked = true; });
+  $('q7-other').value = keepText;
+}
+
+const val = (n) => document.querySelector(`input[name=${n}]:checked`)?.value;
+const vals = (n) => [...document.querySelectorAll(`input[name=${n}]:checked`)].map((x) => x.value);
+function showErr(id, msg) { const e = $('err-' + id); if (e) { e.textContent = msg; e.classList.add('show'); } }
+function clearErrs() { document.querySelectorAll('.err').forEach((e) => { e.classList.remove('show'); e.textContent = ''; }); $('formerr').classList.remove('show'); }
+
+function collect() {
+  const Q = S.questions; const errs = []; const a = {};
+  const need = (q, msg) => errs.push([q, msg || 'お選びください。']);
+  const withOther = (q, ex) => {
+    const t = $(`other-${q}-text`).value.trim();
+    if (!t) { need(q, `「その他」の内容をご記入ください（例: ${ex}）。`); return undefined; }
+    if (unclear(t)) { need(q, unclearMsg(ex)); return undefined; }
+    return t;
+  };
+  const v1 = val('q1'); if (!v1) need('q1'); else { a.q1 = { choice: v1 }; if (v1 === 'other') { const t = withOther('q1', Q.q1.other_example); if (t) a.q1.other_text = t; } }
+  const pref = $('q2-pref').value; const city = $('q2-city').value.trim();
+  if (!pref) need('q2', '都道府県をお選びください。'); else { a.q2 = { prefecture: pref }; if (city) { if (unclear(city)) need('q2', unclearMsg('札幌市中央区')); else a.q2.city = city; } }
+  const s3 = val('q3s'), t3 = val('q3t'); if (!s3 || !t3) need('q3', '拠点の数と働く人の数をお選びください。'); else a.q3 = { sites: s3, staff: t3 };
+  for (const q of ['q4', 'q5']) {
+    const c = vals(q); if (!c.length) { need(q); continue; }
+    a[q] = { choices: c }; if (c.includes('other')) { const t = withOther(q, Q[q].other_example); if (t) a[q].other_text = t; }
+  }
+  const v6 = val('q6'); if (!v6) need('q6'); else a.q6 = { choice: v6 };
+  const c7 = vals('q7'); const o7 = $('q7-other').value.trim();
+  if (o7 && unclear(o7)) need('q7', unclearMsg(Q.q7.other_example));
+  if (c7.length || o7) { a.q7 = {}; if (c7.length) a.q7.choices = c7; if (o7) a.q7.other_text = o7; }
+  const v8 = val('q8'); if (!v8) need('q8'); else a.q8 = { choice: v8 };
+  return { a, errs };
+}
+
+const ERR = {
+  invalid_url: ['url', 'ホームページの URL をご確認ください（https:// から）。'],
+  invalid_email: ['email', 'メールアドレスをご確認ください。'],
+  disposable_email: ['email', '使い捨てのメールアドレスはお使いいただけません。普段お使いのメールアドレス（Gmail・携帯のメールも可）でお申し込みください。'],
+  consent_required: ['consents', '1 つ目の同意に印をつけてください。'],
+  turnstile_required: [null, '人による操作の確認が終わりませんでした。ページを読み込み直して、もう一度お試しください。'],
+  turnstile_failed: [null, '人による操作の確認に失敗しました。ページを読み込み直して、もう一度お試しください。'],
+  turnstile_unavailable: [null, '人による操作の確認ができませんでした。数分おいてから、もう一度お試しください。'],
+  turnstile_unconfigured: [null, 'ただいまお申し込みを受け付けていません。時間をおいてお試しください。'],
+  applications_paused: [null, 'ただいまお申し込みを一時停止しています。時間をおいてお試しください。'],
+  mail_unavailable: [null, '確認のメールを送れませんでした。時間をおいて、もう一度お試しください。'],
+  rate_limited: [null, '短い時間にお申し込みが続いたため、受け付けを止めています。1 時間ほどおいてお試しください。'],
+  capacity: [null, '本日のお申し込みの受付数に達しました。明日またお試しください。'],
+};
+
+$('apply').addEventListener('submit', async (e) => {
+  e.preventDefault(); clearErrs();
+  const url = $('url').value.trim(); const email = $('email').value.trim();
+  const { a, errs } = collect();
+  if (!url) errs.unshift(['url', 'ホームページの URL をご記入ください。']);
+  if (!email) errs.unshift(['email', 'メールアドレスをご記入ください。']);
+  if (!$('consent-diagnosis').checked) errs.push(['consents', '1 つ目の同意に印をつけてください。']);
+  if (errs.length) { errs.forEach(([q, m]) => showErr(q, m)); $('card-' + errs[0][0])?.scrollIntoView({ behavior: 'smooth', block: 'center' }) || $(errs[0][0])?.scrollIntoView({ behavior: 'smooth', block: 'center' }); return; }
+  $('go').disabled = true;
+  try {
+    const turnstile_token = await KLTurnstile.token();
+    const body = { url, email, answers: a, consents: { diagnosis: true, aggregate: $('consent-aggregate').checked }, ...(turnstile_token ? { turnstile_token } : {}) };
+    const r = await fetch(API_BASE + '/api/ai-bae/apply', { method: 'POST', mode: 'cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+    const j = await r.json().catch(() => ({}));
+    if (r.status === 202) { $('apply').style.display = 'none'; if (j.confirm_within_hours) $('hours').textContent = j.confirm_within_hours; $('done').classList.add('show'); window.scrollTo({ top: 0, behavior: 'smooth' }); return; }
+    if (j.error === 'unclear_text' || j.error === 'other_text_required') { showErr(j.field, unclearMsg(j.example || '…')); return; }
+    if (j.field && /^q\d$/.test(j.field)) { showErr(j.field, 'お選び・ご記入の内容をご確認ください。'); return; }
+    const m = ERR[j.error];
+    if (m && m[0]) showErr(m[0], m[1]); else { $('formerr').textContent = m ? m[1] : 'お申し込みに失敗しました。時間をおいてお試しください。'; $('formerr').classList.add('show'); }
+  } catch { $('formerr').textContent = 'サーバーに接続できませんでした。時間をおいてお試しください。'; $('formerr').classList.add('show'); }
+  finally { $('go').disabled = false; }
+});
+
+(async () => {
+  S = await (await fetch('/ai-bae-shindan/survey.json')).json();
+  render();
+  const p = new URLSearchParams(location.search);
+  if (p.get('url')) $('url').value = p.get('url');
+  const id = p.get('id');
+  if (id && /^[0-9a-f]{12}$/.test(id)) {
+    try { const r = await fetch(API_BASE + '/api/site-check/' + id, { mode: 'cors' }); if (r.ok) { const j = await r.json(); if (j.url && !$('url').value) $('url').value = j.url; } } catch {}
+  }
+})();
+</script>
+</body>
+</html>
