@@ -21,5 +21,8 @@ jobs:
             [ -f "$f" ] || { echo "missing: $f"; missing=1; }
           done
           exit $missing
+      # 生成物は型から作り直して差分 0（HTML を手で直していないこと）
+      - run: python3 scripts/build-site.py --check
+      - run: node scripts/build-ai-bae-pages.mjs --check
       # JSON-LD・メニュー・解析のタグ
       - run: node scripts/check-site.mjs

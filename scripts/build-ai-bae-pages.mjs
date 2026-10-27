@@ -29,6 +29,14 @@ function picker(page) {
   return `<fieldset class="inds" id="inds"><legend>1. 業種を選ぶ<small>業種ごとに AI が頼る先が違います</small></legend><div class="chips">${chips}</div><div class="ind-msg" id="ind-msg" role="status"></div></fieldset>`;
 }
 
+// 業種別ページへの入口（共通の入口には全部、業種のページにはほかの業種）。pages.json に足せば自動で並ぶ
+const navLabel = (p) => p.nav_label || ((INDUSTRIES.find((i) => i.id === p.industry) || {}).label || p.industry) + "向け";
+function industryPages(page) {
+  const others = pages.filter((p) => p.industry && p !== page);
+  if (!others.length) return "";
+  return `<p class="ind-pages">業種別の診断: ${others.map((p) => `<a href="${new URL(p.url).pathname}">${escHtml(navLabel(p))} →</a>`).join("・")}</p>`;
+}
+
 function build(page) {
   if (page.industry && !INDUSTRIES.some((i) => i.id === page.industry)) throw new Error(`unknown industry ${page.industry} (not in survey q1)`);
   const ld = {
@@ -60,6 +68,7 @@ function build(page) {
     INDUSTRY_PICKER: picker(page),
     FIXED_INDUSTRY: page.industry ? JSON.stringify(page.industry) : "null",
     INDUSTRIES_JSON: jsonInScript(INDUSTRIES),
+    INDUSTRY_PAGES: industryPages(page),
   };
   const html = template.replace(/\{\{([A-Z0-9_]+)\}\}/g, (m, k) => {
     if (!(k in vals)) throw new Error(`template placeholder ${k} has no value`);

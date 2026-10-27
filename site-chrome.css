@@ -1,5 +1,5 @@
 /* Codex の試作の共通部分（ヘッダー・フッター・ボタン・AI映え診断のナビと見出し）だけ。
-   自前の CSS を持つページ（AI映え診断の本物の入力画面）用。全部入りは /site.css */
+   自前の CSS を持つページ（AI映え診断の本物の入力画面）用。全部入りは /site.css。scripts/build-site.py が site.css から作る（手で直さない） */
 :root{--blue:#0649ef;--navy:#102745;--rule:#bdcde5;--light:#edf7fd;--container:1230px}
 .site-header,.footer,.diagnosis-nav,.diagnosis-page-hero,.mobile-nav{font-family:'Noto Sans JP','Inter',-apple-system,BlinkMacSystemFont,sans-serif;color:#081b3b}
 .diagnosis-page-hero h1{font-size:52px;line-height:1.38;letter-spacing:-.04em;font-weight:820;margin:0}.diagnosis-page-hero h1>span{color:var(--blue)}
@@ -73,8 +73,8 @@ img{max-width:100%;display:block}
 .diagnosis-page-hero p:not(.eyebrow){font-size:18px;margin-top:23px}
 .diagnosis-page-hero .text-link{margin-top:13px}
 .diagnosis-brand-art{padding-top:18px}
-.diagnosis-brand-art img:first-child{width:85%;margin:0 auto 22px}
-.diagnosis-brand-art img:last-child{width:100%}
+.diagnosis-brand-art img:first-child{width:85%;height:auto;margin:0 auto 22px}
+.diagnosis-brand-art img:last-child{width:100%;height:auto}
 @media(max-width:1200px){.inner-page .button{font-size:14px;padding:12px 18px}.inner-page .text-link{font-size:14px}.diagnosis-page-hero h1{font-size:43px}.diagnosis-nav>.container{gap:25px}.diagnosis-nav a{font-size:13px}.diagnosis-page-hero p:not(.eyebrow){font-size:16px}}
 @media(max-width:900px){.diagnosis-nav>.container{gap:20px;overflow-x:auto}.diagnosis-nav .diagnosis-nav-brand{display:none}.diagnosis-nav a{font-size:12px;padding:14px 0}.diagnosis-hero-grid{grid-template-columns:1.2fr .8fr;gap:15px}.diagnosis-page-hero h1{font-size:37px}.diagnosis-page-hero .page-actions{gap:12px}.footer nav a{padding-left:10px}}
 @media(max-width:600px){.inner-page .button{font-size:14px;min-height:50px}.inner-page .text-link{font-size:14px;min-height:44px}.breadcrumb{padding-top:20px;font-size:10px;gap:7px}.page-actions{gap:12px;margin-top:20px}.page-actions>.button{width:100%}.diagnosis-nav>.container{width:100%;padding:0 20px;gap:23px}.diagnosis-nav a{font-size:12px;min-height:48px;flex-shrink:0}.diagnosis-hero-grid{grid-template-columns:1fr;gap:15px}.diagnosis-page-hero{padding:30px 0 22px}.diagnosis-page-hero h1{font-size:33px;line-height:1.45}.diagnosis-page-hero p:not(.eyebrow){font-size:15px;margin-top:17px}.diagnosis-page-hero p br{display:none}.diagnosis-page-hero .text-link{margin-top:8px}.diagnosis-brand-art{max-width:400px;padding-top:8px}.diagnosis-brand-art img:first-child{width:90%;margin-bottom:10px}.footer nav a{padding-left:12px}}
@@ -87,3 +87,4 @@ img{max-width:100%;display:block}
 .breadcrumb svg{width:12px;height:12px}
 .menu-toggle svg{width:26px;height:26px}
 @media(max-width:600px){.page-actions .text-link{min-height:40px}}
+.diagnosis-page-hero p:not(.eyebrow)+p:not(.eyebrow){margin-top:10px}
