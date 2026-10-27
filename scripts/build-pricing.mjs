@@ -7,8 +7,8 @@
  *
  * ページ側の印:  <!--p:KEY-->今の表示<!--/p-->
  *   KEY = <plan>.<form>   例: report.man → 5万円 ／ report.yen → 50,000円 ／ report.man_incl → 5.5万円
- *                          form: man / man_incl / yen / yen_incl / jpy / jpy_incl / raw / raw_incl / min_months / name_ja / name_en / label_ja / label_en
- *   KEY = tax_note_ja / tax_note_en / credit_rule_ja / credit_rule_en / min_term_reason_ja / min_term_reason_en / scope_ja / scope_en / decided_on / decided_on_ja / sgd_note_en
+ *                          form: man（21万円〜）/ man_num（21〜）/ yen / jpy / raw / min_months / term_total_man / name_ja / name_en / label_ja / label_en（税込の *_incl は廃止）
+ *   KEY = tax_note_ja / tax_note_en / dashboard_note_ja / min_term_reason_ja / min_term_reason_en / scope_ja / scope_en / decided_on / decided_on_ja / sgd_note_en
  *   KEY = block:<name>    スクリプトが作る大きめの断片。block:ld_pricing_ja／ld_pricing_en＝料金の JSON-LD の <script> まるごと（印は script の外に置く）・block:llms_pricing＝llms.txt の料金の行
  *
  * 印の外の文字はスクリプトが触らないので、文章は HTML に、数字は JSON に置く。
@@ -28,6 +28,8 @@ const man = (n) => {
   const m = n / 10000;
   return (Number.isInteger(m) ? String(m) : m.toFixed(1).replace(/\.0$/, "")) + "万円";
 };
+const from = (plan, ja = true) => (plan.starting_at ? (ja ? "〜" : "") : "");
+const fromEn = (plan) => (plan.starting_at ? "from " : "");
 const unitJa = (plan) => (plan.billing === "monthly" ? "／月" : "");
 const unitEn = (plan) => (plan.billing === "monthly" ? "/month" : "");
 
@@ -40,25 +42,23 @@ function planValue(id, form) {
     case "name_en": return plan.name_en;
     case "label_ja": return plan.price_label_ja ?? `${man(price)}${unitJa(plan)}`;
     case "label_en": return plan.price_label_en ?? `JPY ${num(price)}${unitEn(plan)}`;
-    case "man": return man(price);
-    case "man_incl": return man(incl(price));
-    case "yen": return `${num(price)}円`;
-    case "yen_incl": return `${num(incl(price))}円`;
-    case "jpy": return `JPY ${num(price)}`;
-    case "jpy_incl": return `JPY ${num(incl(price))}`;
+    case "man": return man(price) + from(plan);
+    case "man_num": return String(price / 10000) + from(plan);
+    case "yen": return `${num(price)}円` + from(plan);
+    case "jpy": return `${fromEn(plan)}JPY ${num(price)}`;
     case "raw": return String(price);
-    case "raw_incl": return String(incl(price));
     case "min_months": return String(plan.min_months ?? "");
+    case "term_total_man": return man(price * (plan.min_months || 1)) + from(plan);
+    case "man_incl": case "yen_incl": case "jpy_incl": case "raw_incl":
+      throw new Error(`税込の表示は出さない決まり（2026-10-27 夜）: ${id}.${form} の印を外す`);
     default: throw new Error(`知らない形 "${form}"（${id}.${form}）`);
   }
 }
 
-const pct = Math.round(TAX * 100);
 const scalars = {
-  tax_note_ja: TAX > 0 ? `表示の値段は税別です。税込は消費税 ${pct}% で計算した参考の額です。` : "表示の値段に消費税はかかりません。",
-  tax_note_en: TAX > 0 ? `Prices exclude tax. Tax-inclusive figures assume ${pct}% Japanese consumption tax.` : "No consumption tax is added to the prices shown.",
-  credit_rule_ja: P.credit_rule_ja,
-  credit_rule_en: P.credit_rule_en,
+  tax_note_ja: P.tax_note_ja,
+  tax_note_en: P.tax_note_en,
+  dashboard_note_ja: P.dashboard_note_ja,
   min_term_reason_ja: P.min_term_reason_ja,
   min_term_reason_en: P.min_term_reason_en,
   scope_ja: P.scope_ja,
@@ -81,7 +81,7 @@ const offer = (id, lang) => {
     priceCurrency: "JPY",
     priceSpecification: {
       "@type": "UnitPriceSpecification",
-      price: String(plan.price_jpy),
+      ...(plan.starting_at ? { minPrice: String(plan.price_jpy) } : { price: String(plan.price_jpy) }),
       priceCurrency: "JPY",
       valueAddedTaxIncluded: false,
       ...(plan.billing === "monthly" ? { unitText: lang === "ja" ? "月" : "month" } : {}),
@@ -115,11 +115,11 @@ const blocks = {
   ld_pricing_ja: ldScript("ja"),
   ld_pricing_en: ldScript("en"),
   llms_pricing:
-    `- Pricing for AI映え診断 (decided ${P.decided_on}; JPY, tax excluded, ${P.scope_en}): Light check free with no sign-up; detailed check (four AIs, three fixed questions, once) free with email confirmation; ` +
+    `- Pricing for AI映え診断 (set ${P.decided_on}; JPY, tax excluded, ${P.scope_en}; how consumption tax applies is confirmed at contract time): Light check free with no sign-up; detailed check (four AIs, three fixed questions, once) free with email confirmation; ` +
     `fact-check report JPY ${num(P.plans.report.price_jpy)} one-off; fact-check report + one re-measurement after a month JPY ${num(P.plans.report_remeasure.price_jpy)} one-off; ` +
-    `monthly monitoring JPY ${num(P.plans.monitor.price_jpy)}/month (${P.plans.monitor.min_months}-month minimum, one 30-minute online meeting a month); ` +
-    `implementation retainer JPY ${num(P.plans.implement.price_jpy)}/month (${P.plans.implement.min_months}-month minimum). ${P.credit_rule_en} Several shops or a whole company: quote on request. ` +
-    `Japanese: 照合レポート ${man(P.plans.report.price_jpy)}（単発）、照合レポート＋測り直し ${man(P.plans.report_remeasure.price_jpy)}（単発）、定点観測 月 ${man(P.plans.monitor.price_jpy)}（最低 ${P.plans.monitor.min_months} か月）、実装・伴走 月 ${man(P.plans.implement.price_jpy)}（最低 ${P.plans.implement.min_months} か月）。税別。`,
+    `monthly monitoring JPY ${num(P.plans.monitor.price_jpy)}/month (${P.plans.monitor.min_months}-month minimum; monthly report only, no meeting and no fixes); ` +
+    `implementation retainer from JPY ${num(P.plans.implement.price_jpy)}/month (${P.plans.implement.min_months}-month minimum; monitoring plus fixes done by us plus a monthly meeting; the price depends on scope). Several shops or a whole company: quote on request. A dashboard is planned, not yet available. ` +
+    `Japanese: 照合レポート ${man(P.plans.report.price_jpy)}（単発）、照合レポート＋測り直し ${man(P.plans.report_remeasure.price_jpy)}（単発）、定点観測 月 ${man(P.plans.monitor.price_jpy)}（最低 ${P.plans.monitor.min_months} か月・レポートのみ）、実装・伴走 月 ${man(P.plans.implement.price_jpy)}〜（最低 ${P.plans.implement.min_months} か月）。税別。`,
 };
 
 function value(key) {

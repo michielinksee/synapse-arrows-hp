@@ -24,6 +24,7 @@
 var SHEET_NAME = 'inquiries';
 var HEADERS = [
   '受付日時(JST)', 'ご用件', '会社名・店名', 'お名前', 'メール', '業種 id', '業種', 'サイトの URL', 'ひとこと',
+  '選んだサービス', 'プラン',
   '言語', 'ページ', '参照元', 'utm_source', 'utm_medium', 'utm_campaign', 'Turnstile', '状態'
 ];
 var PURPOSES = {
@@ -70,6 +71,9 @@ function handle_(e) {
     industry_label: cut_(p.industry_label, MAX_FIELD),
     site_url: cut_(p.site_url, MAX_FIELD),
     purpose: cut_(p.purpose, MAX_FIELD),
+    services: cut_(Array.isArray(p.services) ? p.services.map(function (x) { return str_(x); }).filter(Boolean).join(' ／ ') : p.services, MAX_FIELD),
+    plan: cut_(p.plan, MAX_FIELD),
+    intent: cut_(p.intent, MAX_FIELD),
     message: cut_(p.message, MAX_MESSAGE),
     lang: cut_(p.lang, MAX_FIELD),
     page: cut_(p.page, MAX_FIELD),
@@ -79,7 +83,7 @@ function handle_(e) {
     utm_campaign: cut_(p.utm_campaign, MAX_FIELD),
     turnstile_token: cut_(p.turnstile_token, 4096)
   };
-  if (!f.company || !f.name || !f.email || !f.industry || !f.purpose) return bad_();
+  if (!f.company || !f.name || !f.email || !f.purpose) return bad_();   // 業種は任意（2026-10-27 夜の画面から）
   if (!PURPOSES.hasOwnProperty(f.purpose)) return bad_();
   if (!(p.consent === true || p.consent === 'true' || p.consent === 'on')) return bad_();
   if (f.email.length > 254 || !EMAIL_RE.test(f.email)) return bad_();
@@ -124,6 +128,7 @@ function handle_(e) {
       Utilities.formatDate(new Date(), 'Asia/Tokyo', 'yyyy-MM-dd HH:mm:ss'),
       PURPOSES[f.purpose],
       f.company, f.name, f.email, f.industry, f.industry_label, f.site_url, f.message,
+      f.services, f.plan,
       f.lang, f.page, f.referrer, f.utm_source, f.utm_medium, f.utm_campaign,
       turnstile,
       '' // 状態（Michie が 対応中／済 を書く）
@@ -155,6 +160,8 @@ function notify_(props, ss, f) {
     'メール: ' + f.email,
     '業種: ' + f.industry_label + '（' + f.industry + '）',
     'サイトの URL: ' + f.site_url,
+    '選んだサービス: ' + (f.services || '（なし）'),
+    'プラン: ' + (f.plan || '（なし）'),
     'ひとこと:',
     f.message || '（なし）',
     '',
