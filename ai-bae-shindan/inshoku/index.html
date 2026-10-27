@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<!-- 生成物: scripts/ai-bae/page.template.html と scripts/ai-bae/pages.json から node scripts/build-ai-bae-pages.mjs で作る。直す時は型の方を直す。 -->
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI映え診断 Light｜飲食店 — ChatGPT・Claude・Gemini・Perplexity に選ばれる下地を無料で診断 | Synapse Arrows</title>
+  <meta name="description" content="飲食店向けの無料診断。お店のホームページの URL を入れるだけで、AI がサイトを読めるか、食べログ・Retty・一休・ホットペッパーなど AI が頼る先へつながっているか、メニューと値段・営業時間・予約の方法が文字で伝わるかを調べます。">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://synapsearrows.com/ai-bae-shindan/inshoku/">
+  <script>
+    // 結果ページ（?id=）は索引させない。共有先から来た人には中身を見せる。
+    (function(){ if (new URLSearchParams(location.search).get('id')) { var m=document.createElement('meta'); m.name='robots'; m.content='noindex, follow'; document.head.appendChild(m); } })();
+  </script>
+
+  <!-- OGP -->
+  <meta property="og:title" content="AI映え診断 Light｜飲食店 | Synapse Arrows">
+  <meta property="og:description" content="あなたのお店、AI映えしてますか？飲食店向け。URL を入れるだけで、AI が頼る先とお店の情報の下地を無料で診断します。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://synapsearrows.com/ai-bae-shindan/inshoku/">
+  <meta property="og:site_name" content="Synapse Arrows">
+  <meta property="og:image" content="https://synapsearrows.com/ai-bae-shindan/img/og-ai-bae-inshoku.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="AI映え診断 by Synapse Arrows">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","@id":"https://synapsearrows.com/ai-bae-shindan/inshoku/#webapp","name":"AI映え診断 Light｜飲食店","applicationCategory":"BusinessApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"JPY"},"provider":{"@type":"Organization","@id":"https://synapsearrows.com/#organization","name":"Synapse Arrows Pte. Ltd.","url":"https://synapsearrows.com/"},"url":"https://synapsearrows.com/ai-bae-shindan/inshoku/","inLanguage":"ja","isAccessibleForFree":true,"image":"https://synapsearrows.com/ai-bae-shindan/img/og-ai-bae-inshoku.png","description":"飲食店のホームページの URL を入れるだけで、ChatGPT・Claude・Gemini・Perplexity がサイトを読める設定か、食べログ・Retty・一休.com レストラン・ホットペッパーグルメ・ヒトサラなど AI が頼る先へつながっているか、メニューと値段・営業時間・予約の方法が文字で伝わるかを無料で診断する。AI の回答そのものは測らない下地の診断。"}</script>
+
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="icon" href="/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+  <style>
+    main.aib { padding-top: 72px; }
+    :root {
+      --g1: #f58529; --g2: #dd2a7b; --g3: #8134af;
+      --grad: linear-gradient(45deg, var(--g1), var(--g2) 55%, var(--g3));
+      --ink: #111827; --sub: #6b7280; --line: #e5e7eb; --bg: #fafafa; --card: #ffffff; --tile: #f6f6f7;
+      --ok: #16a34a; --mid: #d97706; --bad: #dc2626;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body { font-family: 'Noto Sans JP', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; color: var(--ink); background: var(--bg); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; }
+    .wrap { max-width: 640px; margin: 0 auto; padding: 0 16px 64px; }
+
+    .topbar { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; font-size: 13px; color: var(--sub); }
+    .topbar a { text-decoration: none; font-weight: 600; }
+    .topbar a:hover { color: var(--g2); }
+
+    header.aib-hero { padding: 20px 0 18px; border-bottom: 1px solid var(--line); }
+    /* ロゴ: 文字の部分は常に、キャラクターは広い画面（900px 以上）の飾りだけ */
+    .hero-row { width: min(960px, calc(100vw - 32px)); position: relative; left: 50%; transform: translateX(-50%); display: flex; align-items: center; justify-content: center; gap: 24px; background: #fdfdfd; border-radius: 16px; padding: 10px 12px; }
+    .aib h1.logo { flex: 1 1 auto; max-width: 520px; margin: 0; line-height: 0; }
+    .aib h1.logo img { width: 100%; height: auto; display: block; }
+    .hero-row .chars { display: none; }
+    @media (min-width: 900px) { .hero-row .chars { display: block; width: 360px; height: auto; flex: 0 0 auto; } .hero-row { justify-content: space-between; padding: 12px 24px; } }
+    .badge { display: inline-block; margin-top: 12px; background: var(--ink); color: #fff; border-radius: 999px; padding: 4px 14px; font-weight: 700; font-size: 14px; letter-spacing: .04em; }
+
+    /* ── 業種 ── */
+    .inds { border: 0; margin: 16px 0 4px; text-align: left; }
+    .inds legend { font-weight: 700; font-size: 15px; margin-bottom: 8px; }
+    .inds legend small { font-weight: 400; color: var(--sub); font-size: 12px; margin-left: 6px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip { border: 1px solid var(--line); background: var(--card); border-radius: 999px; padding: 7px 13px; font: inherit; font-size: 14px; cursor: pointer; color: var(--ink); }
+    .chip[aria-pressed="true"] { border-color: transparent; background: var(--grad); color: #fff; font-weight: 700; }
+    .ind-msg { display: none; margin-top: 10px; padding: 10px 12px; border-radius: 10px; background: #fff7ed; color: #9a3412; font-size: 13.5px; line-height: 1.7; }
+    .ind-msg.show { display: block; }
+    .fixed-ind { margin: 14px 0 0; font-size: 13.5px; color: var(--sub); text-align: left; }
+    .fixed-ind b { color: var(--ink); }
+    .indline { margin: 0 16px 10px; font-size: 13px; color: var(--sub); line-height: 1.7; }
+    .indline b { color: var(--ink); }
+    .srcs .note.warn { color: #9a3412; }
+    .tag { color: var(--sub); font-size: 14px; margin-top: 6px; letter-spacing: .06em; }
+    .def { margin-top: 14px; font-size: 13.5px; line-height: 1.75; background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; }
+    .def b { font-weight: 700; }
+    .def .note { display: block; color: var(--sub); margin-top: 4px; font-size: 12.5px; }
+
+    /* ── 5 つの丸 ── */
+    .stories { display: flex; gap: 10px; justify-content: space-between; padding: 22px 0 18px; border-bottom: 1px solid var(--line); overflow-x: auto; scrollbar-width: none; }
+    .stories::-webkit-scrollbar { display: none; }
+    .story { flex: 1 0 0; min-width: 72px; background: none; border: 0; cursor: pointer; text-align: center; font: inherit; color: var(--ink); display: flex; flex-direction: column; align-items: center; }
+    .story .ring { display: block; width: 72px; height: 72px; border-radius: 50%; margin: 0 auto; padding: 3px; background: var(--grad); transition: transform .15s; }
+    .story .ring .in { width: 100%; height: 100%; border-radius: 50%; background: var(--card); display: flex; align-items: center; justify-content: center; border: 3px solid var(--card); }
+    .story .ball { width: 34px; height: 34px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #fff5 0 12%, transparent 40%), var(--grad); display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 900; font-size: 15px; letter-spacing: 0; }
+    .story .all { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 17px; letter-spacing: .02em; color: var(--ink); }
+    .story .lbl { display: block; font-size: 12px; margin-top: 8px; letter-spacing: .08em; white-space: nowrap; }
+    .story:hover .ring { transform: scale(1.04); }
+    .story.on .ring { box-shadow: 0 0 0 2px var(--card), 0 0 0 4px var(--g2); }
+    .story[aria-pressed="false"] .ring { opacity: .55; }
+    .story[aria-pressed="true"] .ring, .stories.idle .story .ring { opacity: 1; }
+
+    /* ── フォーム ── */
+    .ask { padding: 24px 0 8px; text-align: center; }
+    .ask h2 { font-size: 20px; font-weight: 700; }
+    .ask .sub { color: var(--sub); font-size: 13px; margin-top: 4px; }
+    form.scan { display: flex; gap: 10px; margin-top: 14px; }
+    form.scan input { flex: 1; min-width: 0; height: 56px; border: 1px solid var(--line); border-radius: 14px; padding: 0 16px; font: inherit; font-size: 16px; background: var(--card); }
+    form.scan input:focus { outline: 2px solid var(--g2); outline-offset: 1px; }
+    form.scan button { height: 56px; padding: 0 22px; border: 0; border-radius: 14px; background: var(--grad); color: #fff; font: inherit; font-weight: 700; font-size: 16px; cursor: pointer; white-space: nowrap; }
+    form.scan button:disabled { opacity: .6; cursor: progress; }
+    .fine { color: var(--sub); font-size: 12px; margin-top: 10px; line-height: 1.7; }
+
+    .state { text-align: center; padding: 30px 0; color: var(--sub); display: none; }
+    .state.show { display: block; }
+    .spinner { width: 44px; height: 44px; border-radius: 50%; margin: 0 auto 12px; background: conic-gradient(var(--g1), var(--g2), var(--g3), var(--g1)); -webkit-mask: radial-gradient(farthest-side, transparent 60%, #000 62%); mask: radial-gradient(farthest-side, transparent 60%, #000 62%); animation: spin 1s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .error { display: none; margin: 18px 0; padding: 12px 14px; border-radius: 12px; background: #fef2f2; color: #991b1b; font-size: 14px; }
+    .error.show { display: block; }
+
+    /* ── 結果 ── */
+    #results { display: none; padding-top: 10px; }
+    #results.show { display: block; }
+    .cached { font-size: 13px; color: var(--sub); background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 10px 14px; margin: 12px 0; line-height: 1.7; }
+    .cached b { color: var(--ink); }
+
+    .post { background: var(--card); border: 1px solid var(--line); border-radius: 16px; margin: 16px 0; overflow: hidden; }
+    .post .head { display: flex; align-items: center; gap: 12px; padding: 14px 16px; }
+    .post .avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--grad); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 18px; flex-shrink: 0; }
+    .post .avatar.sum { font-family: 'Inter', sans-serif; font-size: 13px; letter-spacing: .02em; }
+    .post .who { font-weight: 700; font-size: 16px; line-height: 1.3; }
+    .post .meta { color: var(--sub); font-size: 12px; letter-spacing: .04em; margin-top: 2px; }
+    .post .url { color: var(--sub); font-size: 12px; margin-left: auto; max-width: 42%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+    .ring-wrap { display: flex; justify-content: center; padding: 10px 0 18px; }
+    .score-ring { position: relative; width: 176px; height: 176px; }
+    .score-ring svg { transform: rotate(-90deg); }
+    .score-ring .num { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+    .score-ring .n { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 54px; line-height: 1; }
+    .score-ring .u { font-size: 11px; color: var(--sub); letter-spacing: .14em; margin-top: 6px; }
+
+    .tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 0 16px; }
+    .tile { background: var(--tile); border-radius: 12px; padding: 12px 14px; }
+    .tile .k { font-size: 12px; color: var(--sub); }
+    .tile .v { font-weight: 700; font-size: 17px; margin-top: 2px; display: flex; align-items: center; gap: 6px; }
+    .dot { width: 11px; height: 11px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+    .ok .v, .dot.ok { color: var(--ok); background: var(--ok); } .ok .v { background: none; }
+    .mid .v, .dot.mid { color: var(--mid); background: var(--mid); } .mid .v { background: none; }
+    .bad .v, .dot.bad { color: var(--bad); background: var(--bad); } .bad .v { background: none; }
+
+    .facts { margin: 14px 16px 0; background: var(--tile); border-left: 3px solid var(--g2); border-radius: 10px; padding: 12px 14px; font-size: 14px; }
+    .facts .cap { font-size: 12px; color: var(--sub); margin-bottom: 6px; }
+    .facts ul { list-style: none; margin-top: 8px; }
+    .facts li { display: flex; gap: 8px; font-size: 13.5px; padding: 3px 0; }
+    .facts li code { font-family: 'Inter', monospace; font-size: 12.5px; background: #fff; border: 1px solid var(--line); border-radius: 6px; padding: 0 6px; }
+    .facts .fix { margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--line); font-size: 13.5px; }
+    .facts .fix b { color: var(--g2); font-weight: 700; }
+
+    .srcs { margin: 12px 16px 0; background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; font-size: 14px; }
+    .srcs .cap { font-size: 12px; color: var(--sub); margin-bottom: 6px; display: flex; justify-content: space-between; gap: 8px; }
+    .srcs ul { list-style: none; }
+    .srcs li { display: grid; grid-template-columns: 22px 1fr; gap: 4px 8px; padding: 5px 0; border-bottom: 1px dashed var(--line); font-size: 13.5px; }
+    .srcs li:last-child { border-bottom: 0; }
+    .srcs .mk { font-weight: 700; }
+    .srcs .mk.ok { color: var(--ok); } .srcs .mk.bad { color: var(--bad); }
+    .srcs .ev { color: var(--sub); font-size: 11.5px; margin-left: 6px; }
+    .srcs .fx { grid-column: 2; color: var(--sub); font-size: 12.5px; }
+    .srcs .fx b { color: var(--g2); }
+    .srcs .other { margin-top: 8px; color: var(--sub); font-size: 12.5px; }
+    .srcs .note { margin-top: 8px; color: var(--sub); font-size: 11.5px; line-height: 1.5; }
+    .mats { padding: 4px 16px 6px; }
+    .mat { display: grid; grid-template-columns: 22px 1fr auto; gap: 8px 10px; padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
+    .mat:last-child { border-bottom: 0; }
+    .mat .dot { margin-top: 6px; }
+    .mat .t { font-weight: 700; }
+    .mat .f { color: var(--sub); font-size: 13px; grid-column: 2 / 4; margin-top: -4px; }
+    .mat .x { font-size: 13px; grid-column: 2 / 4; }
+    .mat .x b { color: var(--g2); font-weight: 700; }
+    .mat .p { font-family: 'Inter', sans-serif; font-weight: 700; color: var(--sub); font-size: 13px; }
+
+    .post .foot { display: flex; align-items: center; gap: 4px; padding: 10px 10px; border-top: 1px solid var(--line); margin-top: 14px; }
+    .post .foot .tiny { margin-left: auto; color: var(--sub); font-size: 12px; padding-right: 6px; }
+    .ib { background: none; border: 0; cursor: pointer; font: inherit; font-size: 13px; color: var(--ink); padding: 8px 10px; border-radius: 10px; display: inline-flex; align-items: center; gap: 6px; }
+    .ib:hover { background: var(--tile); }
+    .ib svg { width: 20px; height: 20px; }
+
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin: 6px 0 18px; }
+    .btn { border: 1px solid var(--line); background: var(--card); border-radius: 12px; padding: 11px 16px; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; text-decoration: none; color: var(--ink); display: inline-flex; align-items: center; gap: 8px; }
+    .btn:hover { border-color: var(--g2); }
+    .btn svg { width: 18px; height: 18px; }
+
+    .cta { display: block; text-align: center; background: var(--grad); color: #fff; text-decoration: none; border-radius: 14px; padding: 16px 18px; font-weight: 700; font-size: 16px; margin: 10px 0 8px; }
+    .cta small { display: block; font-weight: 400; font-size: 12.5px; opacity: .92; margin-top: 4px; }
+    .toast { position: fixed; left: 50%; bottom: 28px; transform: translateX(-50%) translateY(20px); background: var(--ink); color: #fff; padding: 10px 16px; border-radius: 10px; font-size: 13px; opacity: 0; transition: .2s; pointer-events: none; }
+    .toast.show { opacity: 1; transform: translateX(-50%); }
+
+    .aib footer.site { color: var(--sub); font-size: 12px; line-height: 1.8; padding-top: 28px; border-top: 1px solid var(--line); margin-top: 20px; }
+    .aib footer.site a { text-decoration: none; }
+    .aib footer.site a:hover { color: var(--g2); }
+
+    @media (max-width: 420px) {
+      .stories { gap: 6px; } .story { min-width: 62px; } .story .ring { width: 62px; height: 62px; } .story .ball { width: 30px; height: 30px; font-size: 13px; } .story .all { font-size: 14px; } .story .lbl { font-size: 11px; letter-spacing: 0; white-space: normal; line-height: 1.25; }
+      form.scan { flex-direction: column; } form.scan button { width: 100%; }
+      .post .url { display: none; }
+    }
+  </style>
+</head>
+<body>
+<header><nav class="nav"><div class="container nav-inner"><a href="/" class="nav-logo"><img src="/logo.png" alt="Synapse Arrows" width="32" height="32">Synapse Arrows</a><ul class="nav-links"><li><a href="/about/">About</a></li><li><a href="/products/">Products</a></li><li><a href="/services/">Services</a></li><li><a href="/tools/" class="active">Tools</a></li><li><a href="/insights/">Insights</a></li><li><a href="/contact/" class="nav-cta">Contact</a></li></ul><button class="mobile-menu-btn" aria-label="Menu"><span></span><span></span><span></span></button></div></nav></header>
+<main class="aib">
+<div class="wrap">
+  <div class="topbar">
+    <a href="/tools/">← ツール一覧</a>
+    <a href="/services/ai-aeo/">AEO・LLMO の改善のご相談</a>
+  </div>
+
+  <header class="aib-hero">
+    <div class="hero-row">
+      <h1 class="logo"><img src="/ai-bae-shindan/img/logo-text.webp" alt="AI映え診断 by Synapse Arrows" width="960" height="273"></h1>
+      <img class="chars" src="/ai-bae-shindan/img/logo-chars.webp" alt="" width="640" height="344" loading="lazy">
+    </div>
+    <p class="badge">Light｜飲食店</p>
+    <p class="tag">あなたのお店、AI映えしてますか？</p>
+    <p class="def"><b>AI 映え</b>＝AI に見つけられ、正しく紹介され、選ばれること。この無料版が測るのはその<b>下地</b>（AI がサイトを読めるか・正しく伝わる材料があるか）です。
+      <span class="note">AI が実際に何と答えるかは、無料版では測っていません。AI ごとの「頼る先」は、サイトからそこへ辿れるか（リンクか schema.org の sameAs）だけを見ます。</span></p>
+  </header>
+
+  <nav class="stories idle" id="stories" aria-label="診断するAIを選ぶ">
+    <button class="story on" data-eng="all" aria-pressed="true"><span class="ring"><span class="in"><span class="all">ALL</span></span></span><span class="lbl">まとめて診断</span></button>
+    <button class="story" data-eng="chatgpt" aria-pressed="false"><span class="ring"><span class="in"><span class="ball">Ch</span></span></span><span class="lbl">ChatGPT</span></button>
+    <button class="story" data-eng="claude" aria-pressed="false"><span class="ring"><span class="in"><span class="ball">Cl</span></span></span><span class="lbl">Claude</span></button>
+    <button class="story" data-eng="gemini" aria-pressed="false"><span class="ring"><span class="in"><span class="ball">Ge</span></span></span><span class="lbl">Gemini</span></button>
+    <button class="story" data-eng="perplexity" aria-pressed="false"><span class="ring"><span class="in"><span class="ball">Pe</span></span></span><span class="lbl">Perplexity</span></button>
+  </nav>
+
+  <section class="ask">
+    <p class="fixed-ind">このページは<b>飲食店</b>向けです。AI が頼る先（食べログ・Retty・一休.com レストラン・ホットペッパーグルメ・ヒトサラなど）と、メニューと値段・営業時間・予約の方法が文字で伝わるかを見ます。例: 「食べログのお店のページへのリンクをサイトに置く」。ほかの業種は <a href="/ai-bae-shindan/">共通の入口</a> から。</p>
+    <h2>お店のホームページの URL を入力</h2>
+    <p class="sub">入れるだけ。10 秒ほどで診断書が出ます。</p>
+    <form class="scan" id="scan-form" autocomplete="off">
+      <input type="text" id="url-input" inputmode="url" placeholder="例：https://misoramen-taro.example.jp（架空の URL）" aria-label="ホームページの URL" maxlength="500" required>
+      <button type="submit" id="scan-btn">映え診断</button>
+    </form>
+    <div id="ts-box" class="ts-box"></div>
+    <p class="fine">入力例は架空のお店です。公開ページだけを読み、ログインが必要な場所は見ません。<br>同一ドメインは 1 回分の診断です（最初の結果を 30 日表示。サイトを直したら 30 日後に診断し直せます）。<br>選んだ業種は記録しません（その業種の「頼る先」で数えるためだけに使います）。</p>
+  </section>
+
+  <div class="state" id="loading"><div class="spinner"></div>robots.txt と公開ページを読んでいます…</div>
+  <div class="error" id="error-box" role="alert"></div>
+
+  <section id="results" aria-live="polite">
+    <div class="cached" id="cached-note" style="display:none"></div>
+    <div id="cards"></div>
+    <div class="actions">
+      <button class="btn" id="dl-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>診断書の画像を保存</button>
+      <a class="btn" id="x-btn" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-7.5 8.6L23 22h-6.8l-5.3-6.9L4.8 22H1.7l8-9.2L0 2h7l4.8 6.3L18.9 2Zm-1.2 18h1.9L7.2 3.9H5.2L17.7 20Z"/></svg>X に投稿</a>
+      <button class="btn" id="share-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7M12 3v12m0-12 4 4m-4-4-4 4"/></svg>シェア</button>
+      <button class="btn" id="copy-btn">リンクをコピー</button>
+    </div>
+    <a class="cta" id="cta" href="/ai-bae-shindan/apply/">詳しい診断を申し込む（無料）→ AI が実際に何と答えているか（誤った紹介がないか）を確かめます<small>この診断は下地だけ。詳しい診断では 4 つの AI に実際に聞き、結果をメールでお送りします。</small></a>
+    <p class="fine" style="text-align:center">診断日と URL の入った診断書は「画像を保存」から。結果のリンクは 30 日たっても開けます。</p>
+    <p class="fine" style="text-align:center">直し方のご相談は <a href="/contact/?topic=aeo" style="color:var(--g2);font-weight:700">お問い合わせ</a> から（Synapse Arrows がお受けします）。</p>
+  </section>
+
+  <footer class="site">
+    <p>運営: Synapse Arrows Pte. Ltd.・<a href="/policy/#ai-bae">プライバシー</a>・<a href="/about/">会社概要</a></p>
+    <p>診断の処理は、同じ Synapse Arrows が運営する KanseiLINK の仕組み（mcp.kansei-link.com）で行っています。</p>
+    <p>この診断は robots.txt と公開ページの表記だけを見ます。AI の API は呼びません。偽の名前（ユーザーエージェント）で取りに行くこともしません。</p>
+  </footer>
+</div>
+</main>
+<footer class="footer"><div class="container footer-inner"><div class="footer-logo">Synapse Arrows Pte. Ltd</div><ul class="footer-links"><li><a href="https://kansei-link.com" target="_blank" rel="noopener">KanseiLINK</a></li><li><a href="/services/">Services</a></li><li><a href="/tools/">Tools</a></li><li><a href="/policy/">Privacy</a></li><li><a href="/terms/">Terms</a></li></ul><div class="footer-copy">&copy; 2026 Synapse Arrows Pte. Ltd. All rights reserved.</div></div></footer>
+<canvas id="cv" width="1080" height="1350" style="display:none" aria-hidden="true"></canvas>
+<div class="toast" id="toast"></div>
+
+<script src="/ai-bae-shindan/turnstile-guard.js"></script>
+<script>
+// ─── CONFIG ─────────────────────────────────────────────────────
+const API_BASE = (location.hostname === 'localhost' || location.hostname === '127.0.0.1')
+  ? 'http://localhost:3000' : 'https://mcp.kansei-link.com';
+KLTurnstile.init(API_BASE, document.getElementById('ts-box')); // no-op while the server has Turnstile off
+const SHARE_BASE = 'https://synapsearrows.com/ai-bae-shindan/inshoku/';
+// 業種: 固定のページ（飲食の Light 版など）は FIXED_INDUSTRY。共通の入口は選んでもらう（全業種を混ぜた結果は出さない）。
+const FIXED_INDUSTRY = "restaurant";
+const INDUSTRIES = [{"id":"restaurant","label":"飲食"},{"id":"beauty","label":"美容院"},{"id":"real_estate","label":"不動産"},{"id":"lodging","label":"旅行／宿"},{"id":"saas_web","label":"IT／Web"},{"id":"consulting","label":"コンサル"},{"id":"accounting","label":"税理士／会計士"},{"id":"medical","label":"医療（医科・歯科）"},{"id":"care","label":"介護／整体"},{"id":"aesthetic","label":"美容外科／エステ"},{"id":"retail","label":"小売"},{"id":"school","label":"教室・スクール"},{"id":"professional","label":"士業（弁護士・司法書士など）"},{"id":"manufacturing_btob","label":"製造・メーカー（BtoB）"},{"id":"other","label":"その他"}];
+const KANA = { chatgpt: 'Ch', claude: 'Cl', gemini: 'Ge', perplexity: 'Pe' };
+const LOGO = new Image(); LOGO.src = '/ai-bae-shindan/img/logo-text.webp';
+const CLS = { open: 'ok', partial: 'mid', blocked: 'bad', ok: 'ok', missing: 'bad' };
+
+const $ = (id) => document.getElementById(id);
+const form = $('scan-form'), input = $('url-input'), btn = $('scan-btn');
+let data = null, view = 'all';
+const indOk = (x) => INDUSTRIES.some((i) => i.id === x);
+const indLabel = (x) => (INDUSTRIES.find((i) => i.id === x) || {}).label || '';
+let industry = FIXED_INDUSTRY || (indOk(new URLSearchParams(location.search).get('industry')) ? new URLSearchParams(location.search).get('industry') : null);
+let pending = null; // { id, input }: the server answered "業種を選んでください" for this URL
+
+function esc(s) { return String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
+function host(u) { try { return new URL(u).hostname.replace(/^www\./, ''); } catch { return u; } }
+function ymd(iso) { const d = new Date(/[TZ]/.test(iso) ? iso : iso.replace(' ', 'T') + 'Z'); return isNaN(d) ? '' : `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; }
+function toast(m) { const t = $('toast'); t.textContent = m; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 1800); }
+function ringColor(n) { return n >= 70 ? 'var(--ok)' : n >= 40 ? 'var(--mid)' : 'var(--bad)'; }
+
+// ─── state ──────────────────────────────────────────────────────
+function setState(s, msg) {
+  $('loading').classList.toggle('show', s === 'loading');
+  if (s !== 'idle' && $('ind-msg')) $('ind-msg').classList.remove('show');
+  $('error-box').classList.toggle('show', s === 'error');
+  $('results').classList.toggle('show', s === 'done');
+  btn.disabled = s === 'loading';
+  if (s === 'error') $('error-box').textContent = msg;
+}
+const ERR = {
+  private_host: 'そのアドレスは診断できません（社内・ローカルのアドレスです）。',
+  dns_failed: 'そのドメインが見つかりませんでした。綴りをご確認ください。',
+  bad_url: 'URL の形が読めませんでした。https:// から貼り付けてみてください。',
+  fetch_failed: 'サイトが開けませんでした（サイト側がエラーを返しました）。',
+  daily_limit: '本日の診断回数の上限に達しました。明日またお試しください。',
+  capacity: '本日の無料診断は満席です。明日またお試しください。',
+  scan_failed: 'サイトの読み込みに時間がかかりすぎました。時間をおいてお試しください。',
+  turnstile_required: '人による操作の確認が終わりませんでした。ページを読み込み直して、もう一度お試しください。',
+  turnstile_failed: '人による操作の確認に失敗しました。ページを読み込み直して、もう一度お試しください。',
+  bad_industry: '業種の指定が読めませんでした。ページを読み込み直して、業種を選び直してください。',
+};
+
+// ─── 業種 ───────────────────────────────────────────────────────
+function paintIndustry() {
+  document.querySelectorAll('.chip[data-ind]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.ind === industry)));
+}
+function askIndustry(suggested) {
+  const m = $('ind-msg'); if (!m) return;
+  m.innerHTML = '業種を選んでください。業種ごとに、AI が頼る先（食べログ・ITreview など）が違うためです。' +
+    (suggested && indOk(suggested) ? `<br>サイトの schema.org から「<b>${esc(indLabel(suggested))}</b>」を選んでおきました。合っていれば、そのまま「映え診断」を押してください。` : '');
+  m.classList.add('show');
+  $('inds').scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+if ($('inds')) $('inds').addEventListener('click', (e) => {
+  const b = e.target.closest('.chip[data-ind]'); if (!b) return;
+  industry = b.dataset.ind; paintIndustry(); $('ind-msg').classList.remove('show');
+  if (data && data.id) load(data.id); // 結果を見ている時は、同じ診断をその業種で見直す
+});
+paintIndustry();
+
+form.addEventListener('submit', (e) => {
+  e.preventDefault(); const u = input.value.trim(); if (!u) return;
+  if (industry && pending && pending.input === u) { load(pending.id); return; } // 同じ URL: 業種を付けて見るだけ（診断し直さない）
+  run(u);
+});
+function needsIndustry(j) { return !industry && j && j.ai_bae && j.ai_bae.industry_needed === true; }
+function holdForIndustry(j, inputUrl) {
+  pending = { id: j.id, input: inputUrl };
+  const s = j.ai_bae.suggested_industry;
+  if (s && indOk(s)) { industry = s; paintIndustry(); }
+  setState('idle'); askIndustry(s);
+}
+
+async function run(url) {
+  setState('loading');
+  try {
+    const turnstile_token = await KLTurnstile.token();
+    const body = { url, mode: 'ai-bae' };
+    if (industry) body.industry = industry; // 古いサーバーは無視するだけ
+    if (turnstile_token) body.turnstile_token = turnstile_token;
+    const r = await fetch(API_BASE + '/api/site-check', { method: 'POST', mode: 'cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+    const j = await r.json();
+    if (!r.ok) { setState('error', ERR[j.code] || ERR[j.error] || j.error || '診断に失敗しました。'); return; }
+    if (needsIndustry(j)) { holdForIndustry(j, url); return; }
+    pending = null;
+    show(j);
+  } catch { setState('error', '診断サーバーに接続できませんでした。しばらくしてからもう一度お試しください。'); }
+}
+async function load(id) {
+  setState('loading');
+  try {
+    const r = await fetch(API_BASE + '/api/site-check/' + encodeURIComponent(id) + (industry ? '?industry=' + encodeURIComponent(industry) : ''), { mode: 'cors' });
+    const j = await r.json();
+    if (!r.ok) { setState('error', 'その診断結果は見つかりませんでした。'); return; }
+    if (!j.ai_bae) { setState('error', 'この結果には AI 映えの情報がありません。URL を入れて診断し直してください。'); return; }
+    if (!input.value) input.value = j.url;
+    if (needsIndustry(j)) { holdForIndustry(j, input.value); return; }
+    pending = null; show(j);
+  } catch { setState('error', '診断サーバーに接続できませんでした。'); }
+}
+
+function show(j) {
+  data = j;
+  const u = new URL(location); u.search = '?id=' + j.id + (!FIXED_INDUSTRY && j.ai_bae && j.ai_bae.industry ? '&industry=' + encodeURIComponent(j.ai_bae.industry) : ''); history.replaceState(null, '', u);
+  if (!document.querySelector('meta[name="robots"][content*="noindex"]')) { const m = document.createElement('meta'); m.name = 'robots'; m.content = 'noindex, follow'; document.head.appendChild(m); }
+  const ind = (j.ai_bae && j.ai_bae.industry) || industry;
+  $('cta').href = '/ai-bae-shindan/apply/?id=' + encodeURIComponent(j.id) + (ind ? '&industry=' + encodeURIComponent(ind) : '');
+  $('x-btn').href = xUrl();
+  const note = $('cached-note');
+  if (j.cached) {
+    note.style.display = '';
+    note.innerHTML = `この結果は <b>${esc(ymd(j.created_at))}</b> の診断です（同じドメインは最初の 1 回分を表示しています）。サイトを直したら <b>${esc(ymd(j.next_check_after))}</b> 以降に診断し直せます。`;
+  } else { note.style.display = 'none'; }
+  render();
+  setState('done');
+  $('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// ─── 5 つの丸 ───────────────────────────────────────────────────
+$('stories').addEventListener('click', (e) => {
+  const b = e.target.closest('.story'); if (!b) return;
+  view = b.dataset.eng;
+  $('stories').classList.remove('idle');
+  document.querySelectorAll('.story').forEach((s) => { const on = s.dataset.eng === view; s.classList.toggle('on', on); s.setAttribute('aria-pressed', String(on)); });
+  if (data) render(); else input.focus();
+});
+
+// ─── render ─────────────────────────────────────────────────────
+function ringSvg(n, size, stroke) {
+  const r = (size - stroke) / 2, c = 2 * Math.PI * r, off = c * (1 - Math.max(0, Math.min(100, n)) / 100);
+  return `<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}"><circle cx="${size / 2}" cy="${size / 2}" r="${r}" fill="none" stroke="#e5e7eb" stroke-width="${stroke}"/><circle cx="${size / 2}" cy="${size / 2}" r="${r}" fill="none" stroke="${ringColor(n)}" stroke-width="${stroke}" stroke-linecap="round" stroke-dasharray="${c}" stroke-dashoffset="${off}"/></svg>`;
+}
+function scoreRing(n, unit) {
+  return `<div class="ring-wrap"><div class="score-ring">${ringSvg(n, 176, 12)}<div class="num"><div class="n" style="color:${ringColor(n)}">${n}</div><div class="u">${unit}</div></div></div></div>`;
+}
+function tile(k, status, label) { return `<div class="tile ${CLS[status]}"><div class="k">${esc(k)}</div><div class="v">${esc(label)} <span class="dot ${CLS[status]}"></span></div></div>`; }
+function matBy(id) { return data.ai_bae.materials.find((m) => m.id === id); }
+function matLabel(m) { return m.status === 'ok' ? 'あり' : m.status === 'partial' ? '一部' : 'なし'; }
+function footer(txt) {
+  return `<div class="foot"><button class="ib" data-act="dl" title="画像を保存"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg></button><button class="ib" data-act="share" title="シェア"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></button><span class="tiny">${esc(txt)}</span></div>`;
+}
+
+function sourcesBox(e) {
+  const sc = e.sources;
+  const ev = (k) => k === 'trial' ? '10/25 の試し' : k === 'measured' ? '実測（2026-10）' : '公開の説明';
+  const rows = sc.relied.map((r) => `<li><span class="mk ${r.linked ? 'ok' : 'bad'}">${r.linked ? '◎' : '×'}</span><span>${esc(r.name)}${r.linked ? ` つながりあり${r.via.includes('sameAs') ? '（sameAs）' : ''}` : ' サイトから見当たらない'}<span class="ev">印の根拠: ${ev(r.evidence_kind)}</span></span>${r.fix ? `<span class="fx"><b>直し方:</b> ${esc(r.fix)}</span>` : ''}</li>`).join('');
+  return `<div class="srcs"><div class="cap"><span>この AI がよく頼る先</span><span>${sc.linked_count} / ${sc.relied_count} につながり · ${sc.points} / 5 点</span></div><ul>${rows}</ul>
+    ${sc.other_linked.length ? `<div class="other">そのほかのつながり（この AI での観測はまだ無い）: ${esc(sc.other_linked.join('・'))}</div>` : ''}
+    ${sc.note ? `<div class="note warn">${esc(sc.note)}</div>` : ''}
+    <div class="note">${esc(data.ai_bae.sources_note)} 印の根拠は、2026-10-25 に自社（会社）で 4 つの AI に聞いた試し・各社の公開の説明・業種ごとの実測だけです。${data.ai_bae.industry_note ? ' ' + esc(data.ai_bae.industry_note) : ''}</div></div>`;
+}
+
+function engineCard(e) {
+  const date = ymd(data.created_at);
+  const bots = e.bots.map((b) => b.status === 'allowed'
+    ? `<li><span class="dot ok" style="margin-top:7px"></span><span><code>${esc(b.bot)}</code> 取得を許可</span></li>`
+    : `<li><span class="dot bad" style="margin-top:7px"></span><span><code>${esc(b.bot)}</code> 拒否（robots.txt ${b.line} 行目 <code>${esc(b.rule)}</code>${b.matched_agent === '*' ? '・全体向けの規則' : ''}）</span></li>`).join('');
+  const robotsLine = data.ai_bae.robots_found ? '' : '<li><span class="dot ok" style="margin-top:7px"></span><span>robots.txt がありません＝何も締め出していません</span></li>';
+  const sc = e.sources;
+  const scStatus = sc.points >= 5 ? 'ok' : sc.points > 0 ? 'partial' : 'missing';
+  return `<article class="post" data-eng="${e.id}">
+    <div class="head"><div class="avatar">${KANA[e.id]}</div><div><div class="who">${esc(e.vendor)}</div><div class="meta">下地の診断 · ${esc(date)}</div></div><div class="url">${esc(host(data.url))}</div></div>
+    ${scoreRing(e.score, 'AI映え 下地 SCORE')}
+    <div class="tiles">
+      ${tile(`${e.vendor} が読める`, e.status, e.status_label)}
+      ${tile(`${e.vendor} が頼る先（つながり）`, scStatus, `${sc.linked_count}/${sc.relied_count} か所`)}
+      ${tile('店名・住所の機械可読', matBy('schema').status, matLabel(matBy('schema')))}
+      ${tile('電話・住所・営業時間', matBy('contact').status, matLabel(matBy('contact')))}
+    </div>
+    <div class="facts"><div class="cap">robots.txt の判定（${esc(e.vendor)} のクローラー）</div>${esc(e.fact)}<ul>${robotsLine}${bots}</ul>
+      ${e.fix ? `<div class="fix"><b>直し方:</b> ${esc(e.fix)}</div>` : ''}
+    </div>
+    ${sourcesBox(e)}
+    ${footer('AI の回答そのものは測っていません')}
+  </article>`;
+}
+
+function summaryCard() {
+  const a = data.ai_bae;
+  const rows = a.engines.map((e) => `<div class="mat"><span class="dot ${CLS[e.status]}"></span><span class="t">${esc(e.vendor)}<span style="color:var(--sub);font-weight:400"> · 頼る先 ${e.sources.linked_count}/${e.sources.relied_count}</span></span><span class="p" style="color:${ringColor(e.score)}">${esc(e.status_label)} ${e.score}</span></div>`).join('');
+  return `<article class="post" data-eng="all">
+    <div class="head"><div class="avatar sum">ALL</div><div><div class="who">まとめて診断</div><div class="meta">下地の診断 · ${esc(ymd(data.created_at))}</div></div><div class="url">${esc(host(data.url))}</div></div>
+    ${a.industry_label ? `<div class="indline">業種「<b>${esc(a.industry_label)}</b>」の頼る先と材料で診断しています。${FIXED_INDUSTRY ? 'ほかの業種は <a href="/ai-bae-shindan/">共通の入口</a> から。' : '業種は上で選び直せます。'}</div>` : ''}
+    ${scoreRing(a.score, 'AI映え 下地 SCORE')}
+    <div class="tiles">
+      ${tile('AI が読める（30 点）', a.access_score >= 30 ? 'ok' : a.access_score > 0 ? 'partial' : 'blocked', `${a.access_score} / 30`)}
+      ${tile('AI が頼る先（15 点）', a.sources_score >= 12 ? 'ok' : a.sources_score > 0 ? 'partial' : 'missing', `${a.sources_score} / 15`)}
+      ${tile('正しく伝わる材料（55 点）', a.materials_score >= 40 ? 'ok' : a.materials_score >= 20 ? 'partial' : 'missing', `${a.materials_score} / 55`)}
+      ${tile('サイトからのつながり', a.linked_sources.length ? 'ok' : 'missing', a.linked_sources.length ? `${a.linked_sources.length} か所` : 'なし')}
+    </div>
+    <div class="mats">${rows}</div>
+    ${footer('AI の回答そのものは測っていません')}
+  </article>`;
+}
+
+function materialsCard() {
+  const a = data.ai_bae;
+  const rows = a.materials.map((m) => `<div class="mat"><span class="dot ${CLS[m.status]}"></span><span class="t">${esc(m.label)}</span><span class="p">${m.points} / ${m.max}</span><span class="f">${esc(m.fact)}</span>${m.fix ? `<span class="x"><b>直し方:</b> ${esc(m.fix)}</span>` : ''}</div>`).join('');
+  return `<article class="post">
+    <div class="head"><div class="avatar sum">材料</div><div><div class="who">正しく伝わる材料</div><div class="meta">4 社共通${a.industry_label ? '・' + esc(a.industry_label) + 'の項目' : ''} · ${a.materials_score} / 55 点</div></div></div>
+    <div class="mats">${rows}</div>
+  </article>`;
+}
+
+function render() {
+  const a = data.ai_bae;
+  const parts = view === 'all'
+    ? [summaryCard(), ...a.engines.map(engineCard), materialsCard()]
+    : [engineCard(a.engines.find((e) => e.id === view)), materialsCard()];
+  $('cards').innerHTML = parts.join('');
+}
+$('cards').addEventListener('click', (e) => {
+  const b = e.target.closest('[data-act]'); if (!b) return;
+  if (b.dataset.act === 'dl') download(); else share();
+});
+
+// ─── 診断書の画像（Canvas・外部ライブラリなし） ──────────────────
+async function draw() {
+  const cv = $('cv'), c = cv.getContext('2d'), W = cv.width, H = cv.height, a = data.ai_bae;
+  try { await document.fonts.ready; } catch {}
+  const JP = "'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif", EN = "'Inter', 'Noto Sans JP', sans-serif";
+  const fit = (t, max) => { let u = t; while (c.measureText(u).width > max && u.length > 4) u = u.slice(0, -1); return u === t ? t : u.slice(0, -1) + '…'; };
+  c.fillStyle = '#ffffff'; c.fillRect(0, 0, W, H);
+  const g = c.createLinearGradient(0, 0, W, 0); g.addColorStop(0, '#f58529'); g.addColorStop(.55, '#dd2a7b'); g.addColorStop(1, '#8134af');
+  c.fillStyle = g; c.fillRect(0, 0, W, 18);
+  if (LOGO.complete && LOGO.naturalWidth) c.drawImage(LOGO, 60, 34, 400, 114);
+  else { c.fillStyle = '#111827'; c.font = `900 66px ${JP}`; c.fillText('AI映え診断', 72, 112); }
+  if (a.industry_label) { c.font = `700 30px ${JP}`; const lw = c.measureText(a.industry_label).width; c.fillStyle = '#111827'; roundRect(c, W - 72 - lw - 40, 64, lw + 40, 52, 26); c.fill(); c.fillStyle = '#fff'; c.fillText(a.industry_label, W - 72 - lw - 20, 100); }
+  c.font = `500 27px ${JP}`; c.fillStyle = '#6b7280'; c.fillText(fit('AI 映えの下地の診断です（AI の回答そのものは測っていません）', W - 144), 72, 178);
+  c.fillStyle = '#111827'; c.font = `700 34px ${EN}`; c.fillText(fit(data.url, W - 144), 72, 226);
+  c.font = `500 26px ${JP}`; c.fillStyle = '#6b7280'; c.fillText(`診断日 ${ymd(data.created_at)}　同一ドメインは 1 回分の診断`, 72, 262);
+  // ring
+  const cx = W / 2, cy = 400, R = 108; c.lineWidth = 22; c.lineCap = 'round';
+  c.strokeStyle = '#e5e7eb'; c.beginPath(); c.arc(cx, cy, R, 0, Math.PI * 2); c.stroke();
+  const col = a.score >= 70 ? '#16a34a' : a.score >= 40 ? '#d97706' : '#dc2626';
+  c.strokeStyle = col; c.beginPath(); c.arc(cx, cy, R, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * a.score / 100); c.stroke();
+  c.fillStyle = col; c.font = `800 96px ${EN}`; c.textAlign = 'center'; c.fillText(String(a.score), cx, cy + 34);
+  c.fillStyle = '#6b7280'; c.font = `500 23px ${JP}`; c.fillText(`AI映え 下地 SCORE / 100　読める ${a.access_score}/30 · 頼る先 ${a.sources_score}/15 · 材料 ${a.materials_score}/55`, cx, cy + R + 44); c.textAlign = 'left';
+  // engines: one row each, with the 頼る先 line under it
+  let y = 596; c.font = `700 28px ${JP}`; c.fillStyle = '#111827'; c.fillText('AI ごとの判定と、その AI がよく頼る先', 72, y); y += 14;
+  for (const e of a.engines) {
+    y += 76; const ec = e.status === 'open' ? '#16a34a' : e.status === 'partial' ? '#d97706' : '#dc2626';
+    c.fillStyle = '#f6f6f7'; roundRect(c, 72, y - 40, W - 144, 72, 14); c.fill();
+    c.fillStyle = ec; c.beginPath(); c.arc(104, y - 14, 10, 0, Math.PI * 2); c.fill();
+    c.fillStyle = '#111827'; c.font = `700 27px ${JP}`; c.fillText(e.vendor, 128, y - 4);
+    c.fillStyle = ec; c.textAlign = 'right'; c.fillText(`${e.status_label}　${e.score}`, W - 96, y - 4); c.textAlign = 'left';
+    const srcLine = e.sources.relied.map((r) => `${r.linked ? '◎' : '×'}${r.name.replace(/／.*$/, '').replace(/（.*$/, '')}`).join('　');
+    c.fillStyle = '#6b7280'; c.font = `500 19px ${JP}`; c.fillText(fit(`頼る先: ${srcLine}`, W - 212), 128, y + 24);
+  }
+  y += 82; c.fillStyle = '#111827'; c.font = `700 28px ${JP}`; c.fillText(`正しく伝わる材料（4 社共通）　${a.materials_score} / 55`, 72, y); y += 10;
+  const half = Math.ceil(a.materials.length / 2), col1 = a.materials.slice(0, half), col2 = a.materials.slice(half);
+  [col1, col2].forEach((list, i) => { let yy = y; for (const m of list) { yy += 38; const mc = m.status === 'ok' ? '#16a34a' : m.status === 'partial' ? '#d97706' : '#dc2626'; c.fillStyle = mc; c.beginPath(); c.arc(90 + i * 480, yy - 9, 8, 0, Math.PI * 2); c.fill(); c.fillStyle = '#374151'; c.font = `500 23px ${JP}`; c.fillText(shortLabel(m), 112 + i * 480, yy); c.fillStyle = '#6b7280'; c.font = `600 21px ${EN}`; c.fillText(`${m.points}/${m.max}`, 440 + i * 480, yy); } });
+  // footer
+  c.fillStyle = g; c.fillRect(0, H - 96, W, 96);
+  c.fillStyle = '#fff'; c.font = `700 30px ${EN}`; c.fillText('synapsearrows.com/ai-bae-shindan/', 72, H - 52);
+  c.font = `500 19px ${JP}`; c.fillText('頼る先＝サイトからそこへ辿れるかだけ。載っているか・正しいかは見ていません', 72, H - 22);
+  c.font = `500 24px ${JP}`; c.textAlign = 'right'; c.fillText('無料の AI 映え診断 · Synapse Arrows', W - 72, H - 40); c.textAlign = 'left';
+  return cv;
+}
+function shortLabel(m) { return ({ schema: 'schema.org（店名・住所）', text: '本文の文字', contact: '電話・住所・営業時間', menu: 'メニュー・料金', reservation: '予約の入口', english: '英語の一文', title: 'ページの題名', description: 'サイトの紹介文', sitemap: 'sitemap / llms.txt' })[m.id] || m.label; }
+function roundRect(c, x, y, w, h, r) { c.beginPath(); c.moveTo(x + r, y); c.arcTo(x + w, y, x + w, y + h, r); c.arcTo(x + w, y + h, x, y + h, r); c.arcTo(x, y + h, x, y, r); c.arcTo(x, y, x + w, y, r); c.closePath(); }
+function blobOf(cv) { return new Promise((res) => cv.toBlob(res, 'image/png')); }
+function fileName() { return `ai-bae_${host(data.url).replace(/[^a-z0-9.-]/gi, '_')}_${ymd(data.created_at)}.png`; }
+
+async function download() {
+  if (!data) return;
+  const blob = await blobOf(await draw());
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = fileName(); document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 4000); toast('診断書の画像を保存しました');
+}
+function shareUrl() { const ind = !FIXED_INDUSTRY && data.ai_bae && data.ai_bae.industry; return SHARE_BASE + '?id=' + encodeURIComponent(data.id) + (ind ? '&industry=' + encodeURIComponent(ind) : ''); }
+function shareText() {
+  const a = data.ai_bae; const s = a.engines.map((e) => `${e.vendor} ${e.status_label} ${e.sources.linked_count}/${e.sources.relied_count}`).join('・');
+  return `AI映え診断（下地スコア ${a.score}/100）${s}。AI に見つけてもらえる下地、できてますか？ #AI映え診断`;
+}
+function xUrl() { return 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(shareText()) + '&url=' + encodeURIComponent(shareUrl()); }
+async function share() {
+  if (!data) return;
+  if (navigator.share) {
+    try {
+      const payload = { title: 'AI映え診断', text: shareText(), url: shareUrl() };
+      try { const f = new File([await blobOf(await draw())], fileName(), { type: 'image/png' }); if (navigator.canShare && navigator.canShare({ files: [f] })) payload.files = [f]; } catch {}
+      await navigator.share(payload); return;
+    } catch (e) { if (e && e.name === 'AbortError') return; }
+  }
+  window.open(xUrl(), '_blank', 'noopener');
+}
+$('dl-btn').addEventListener('click', download);
+$('share-btn').addEventListener('click', share);
+$('copy-btn').addEventListener('click', async () => { try { await navigator.clipboard.writeText(shareUrl()); toast('リンクをコピーしました'); } catch { prompt('このリンクをコピーしてください', shareUrl()); } });
+
+// ─── boot: ?id= で共有された結果を開く ───────────────────────────
+(function () { const id = new URLSearchParams(location.search).get('id'); if (id && /^[0-9a-f]{12}$/.test(id)) load(id); })();
+</script>
+<script>document.querySelector('.mobile-menu-btn').addEventListener('click',function(){const n=document.querySelector('.nav-links');n.style.display=n.style.display==='flex'?'none':'flex';n.style.flexDirection='column';n.style.position='absolute';n.style.top='72px';n.style.left='0';n.style.right='0';n.style.background='#fff';n.style.padding='20px';n.style.boxShadow='0 8px 24px rgba(0,0,0,0.1)';n.style.gap='18px';});</script>
+</body>
+</html>

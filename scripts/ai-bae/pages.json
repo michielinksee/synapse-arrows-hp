@@ -1,0 +1,35 @@
+{
+  "_readme": "AI映え診断のページ。共通の入口と業種別の Light 版を、同じ型（page.template.html）から node scripts/build-ai-bae-pages.mjs で作る。業種の id と表示名は ai-bae-shindan/survey.json の q1（kansei-internal の src/data/ai-bae-survey.json の写し）から取る。industry が null のページは最初に業種を選んでもらい、文字列のページはその業種で固定する。業種別の Light 版は、その業種の頼る先を測ってから足す（2026-10-27 は飲食だけ）。",
+  "pages": [
+    {
+      "out": "ai-bae-shindan/index.html",
+      "url": "https://synapsearrows.com/ai-bae-shindan/",
+      "industry": null,
+      "title": "AI映え診断｜お店・会社のホームページ、AIに見つけてもらえる下地はできていますか？（無料） | Synapse Arrows",
+      "description": "業種を選んで、ホームページの URL を入れるだけ。ChatGPT・Claude・Gemini・Perplexity があなたのサイトを読める設定か、その業種で AI が頼る先へつながっているか、正しく伝わる材料があるかを無料で診断します。",
+      "og_title": "AI映え診断 | Synapse Arrows",
+      "og_description": "あなたのお店・会社、AI映えしてますか？業種を選んで URL を入れるだけの無料診断。",
+      "og_image": "/ai-bae-shindan/img/og-ai-bae.png",
+      "tagline": "あなたのサービス、AI映えしてますか？",
+      "ask_h2": "お店・会社のホームページの URL を入力",
+      "ld_name": "AI映え診断",
+      "ld_description": "業種を選び、お店・会社のホームページの URL を入れるだけで、ChatGPT・Claude・Gemini・Perplexity がサイトを読める設定か、その業種で AI が頼る先へつながっているか、正しく伝わる材料があるかを無料で診断する。AI の回答そのものは測らない下地の診断。"
+    },
+    {
+      "out": "ai-bae-shindan/inshoku/index.html",
+      "url": "https://synapsearrows.com/ai-bae-shindan/inshoku/",
+      "industry": "restaurant",
+      "title": "AI映え診断 Light｜飲食店 — ChatGPT・Claude・Gemini・Perplexity に選ばれる下地を無料で診断 | Synapse Arrows",
+      "description": "飲食店向けの無料診断。お店のホームページの URL を入れるだけで、AI がサイトを読めるか、食べログ・Retty・一休・ホットペッパーなど AI が頼る先へつながっているか、メニューと値段・営業時間・予約の方法が文字で伝わるかを調べます。",
+      "og_title": "AI映え診断 Light｜飲食店 | Synapse Arrows",
+      "og_description": "あなたのお店、AI映えしてますか？飲食店向け。URL を入れるだけで、AI が頼る先とお店の情報の下地を無料で診断します。",
+      "og_image": "/ai-bae-shindan/img/og-ai-bae-inshoku.png",
+      "tagline": "あなたのお店、AI映えしてますか？",
+      "badge": "Light｜飲食店",
+      "ask_h2": "お店のホームページの URL を入力",
+      "fixed_note": "このページは<b>飲食店</b>向けです。AI が頼る先（食べログ・Retty・一休.com レストラン・ホットペッパーグルメ・ヒトサラなど）と、メニューと値段・営業時間・予約の方法が文字で伝わるかを見ます。例: 「食べログのお店のページへのリンクをサイトに置く」。ほかの業種は <a href=\"/ai-bae-shindan/\">共通の入口</a> から。",
+      "ld_name": "AI映え診断 Light｜飲食店",
+      "ld_description": "飲食店のホームページの URL を入れるだけで、ChatGPT・Claude・Gemini・Perplexity がサイトを読める設定か、食べログ・Retty・一休.com レストラン・ホットペッパーグルメ・ヒトサラなど AI が頼る先へつながっているか、メニューと値段・営業時間・予約の方法が文字で伝わるかを無料で診断する。AI の回答そのものは測らない下地の診断。"
+    }
+  ]
+}
