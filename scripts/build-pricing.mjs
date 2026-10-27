@@ -135,7 +135,7 @@ function value(key) {
 }
 
 const RE = /<!--p:([a-z_:.]+)-->([\s\S]*?)<!--\/p-->/g;
-const files = execFileSync("git", ["ls-files", "--", "*.html", "llms.txt"], { cwd: ROOT, encoding: "utf-8" }).split(/\r?\n/).filter(Boolean);
+const files = execFileSync("git", ["ls-files", "--cached", "--others", "--exclude-standard", "--", "*.html", "llms.txt"], { cwd: ROOT, encoding: "utf-8" }).split(/\r?\n/).filter(Boolean);
 const check = process.argv.includes("--check");
 let touched = 0, markers = 0, differs = 0;
 for (const f of files) {
