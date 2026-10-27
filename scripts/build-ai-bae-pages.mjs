@@ -13,7 +13,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
-const read = (p) => readFileSync(path.join(ROOT, p), "utf-8");
+const read = (p) => readFileSync(path.join(ROOT, p), "utf-8").replace(/\r\n/g, "\n"); // Windows の autocrlf で型が CRLF になっても同じ物を作る
 const template = read("scripts/ai-bae/page.template.html");
 const { pages } = JSON.parse(read("scripts/ai-bae/pages.json"));
 const survey = JSON.parse(read("ai-bae-shindan/survey.json"));
