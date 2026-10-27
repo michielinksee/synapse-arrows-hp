@@ -7,6 +7,8 @@
  *
  * 型: scripts/ai-bae/page.template.html ／ ページ: scripts/ai-bae/pages.json
  * 業種の id と表示名: ai-bae-shindan/survey.json の q1（kansei-internal の src/data/ai-bae-survey.json の写し）
+ * 値段: pricing.json（repo の根・値段の正本）。結果の下の「料金と相談」の数字はここから入れ、
+ *       <!--p:KEY-->…<!--/p--> の印で包むので、scripts/build-pricing.mjs --check（サイト整理の PR）とも同じ値になる。
  */
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
 import path from "node:path";
@@ -17,6 +19,28 @@ const read = (p) => readFileSync(path.join(ROOT, p), "utf-8");
 const template = read("scripts/ai-bae/page.template.html");
 const { pages } = JSON.parse(read("scripts/ai-bae/pages.json"));
 const survey = JSON.parse(read("ai-bae-shindan/survey.json"));
+const PRICING = JSON.parse(read("pricing.json"));
+// 表示の形は scripts/build-pricing.mjs と同じ（5万円・税別の注記）
+const man = (n) => { const m = n / 10000; return (Number.isInteger(m) ? String(m) : m.toFixed(1).replace(/\.0$/, "")) + "万円"; };
+const TAX = Number(PRICING.tax_rate) || 0;
+const taxNote = TAX > 0 ? `表示の値段は税別です。税込は消費税 ${Math.round(TAX * 100)}% で計算した参考の額です。` : "表示の値段に消費税はかかりません。";
+const p = (key, value) => `<!--p:${key}-->${value}<!--/p-->`;
+const plan = (id) => { const x = PRICING.plans[id]; if (!x) throw new Error(`pricing.json に plan "${id}" が無い`); return x; };
+const PRICE_VALS = {
+  PRICE_SCOPE: p("scope_ja", PRICING.scope_ja),
+  PLAN_REPORT_NAME: p("report.name_ja", plan("report").name_ja),
+  PRICE_REPORT: p("report.man", man(plan("report").price_jpy)),
+  PLAN_REPORT_REMEASURE_NAME: p("report_remeasure.name_ja", plan("report_remeasure").name_ja),
+  PRICE_REPORT_REMEASURE: p("report_remeasure.man", man(plan("report_remeasure").price_jpy)),
+  PLAN_MONITOR_NAME: p("monitor.name_ja", plan("monitor").name_ja),
+  PRICE_MONITOR: p("monitor.man", man(plan("monitor").price_jpy)),
+  MONITOR_MIN_MONTHS: p("monitor.min_months", String(plan("monitor").min_months ?? "")),
+  PLAN_IMPLEMENT_NAME: p("implement.name_ja", plan("implement").name_ja),
+  PRICE_IMPLEMENT: p("implement.man", man(plan("implement").price_jpy)),
+  IMPLEMENT_MIN_MONTHS: p("implement.min_months", String(plan("implement").min_months ?? "")),
+  PRICE_TAX_NOTE: p("tax_note_ja", taxNote),
+  PRICE_CREDIT_RULE: p("credit_rule_ja", PRICING.credit_rule_ja),
+};
 const INDUSTRIES = survey.questions.q1.options.map((o) => ({ id: o.id, label: o.label }));
 
 const escHtml = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
@@ -60,6 +84,7 @@ function build(page) {
     INDUSTRY_PICKER: picker(page),
     FIXED_INDUSTRY: page.industry ? JSON.stringify(page.industry) : "null",
     INDUSTRIES_JSON: jsonInScript(INDUSTRIES),
+    ...PRICE_VALS,
   };
   const html = template.replace(/\{\{([A-Z0-9_]+)\}\}/g, (m, k) => {
     if (!(k in vals)) throw new Error(`template placeholder ${k} has no value`);
@@ -75,7 +100,7 @@ for (const page of pages) {
   const out = path.join(ROOT, page.out);
   if (check) {
     const cur = existsSync(out) ? readFileSync(out, "utf-8").replace(/\r\n/g, "\n") : "";
-    if (cur !== html) { console.error(`differs: ${page.out}`); diff++; }
+    if (cur !== html.replace(/\r\n/g, "\n")) { console.error(`differs: ${page.out}`); diff++; } // the template may be checked out with CRLF
   } else {
     mkdirSync(path.dirname(out), { recursive: true });
     writeFileSync(out, html);
