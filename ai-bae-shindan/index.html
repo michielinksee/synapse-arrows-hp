@@ -259,6 +259,7 @@
       <button class="btn" id="copy-btn">リンクをコピー</button>
     </div>
     <a class="cta" id="cta" href="/ai-bae-shindan/apply/">詳しい診断を申し込む（無料）→ AI が実際に何と答えているか（誤った紹介がないか）を確かめます<small>この診断は下地だけ。詳しい診断では 4 つの AI に実際に聞き、結果をメールでお送りします。</small></a>
+    <p class="fine" style="text-align:center"><a href="/ai-bae-shindan/pricing/" style="color:var(--g2);font-weight:700">料金・パッケージを見る →</a>（直し方まで頼みたい時の内容と値段）</p>
     <p class="fine" style="text-align:center">診断日と URL の入った診断書は「画像を保存」から。結果のリンクは 30 日たっても開けます。</p>
     <p class="fine" style="text-align:center">直し方のご相談は <a href="/contact/?topic=aeo" style="color:var(--g2);font-weight:700">お問い合わせ</a> から（Synapse Arrows がお受けします）。</p>
   </section>
@@ -281,6 +282,18 @@ const API_BASE = (location.hostname === 'localhost' || location.hostname === '12
   ? 'http://localhost:3000' : 'https://mcp.kansei-link.com';
 KLTurnstile.init(API_BASE, document.getElementById('ts-box')); // no-op while the server has Turnstile off
 const SHARE_BASE = 'https://synapsearrows.com/ai-bae-shindan/';
+// 来た元（SEC-2026-10-27-001・批准待ち）: 参照元のドメインだけ・utm_source／utm_campaign・この入口のパス。IP・UA は送らない。
+// 同じタブで前に置いた物（外から来た時の参照元・utm）があり、今の参照元が自社なら、前の物を引き継ぐ。申し込みの段へも sessionStorage で渡す。
+const ORIGIN = (() => {
+  const q = new URLSearchParams(location.search);
+  const own = location.hostname.replace(/^www\./, '');
+  let ref = null; try { ref = document.referrer ? new URL(document.referrer).hostname.replace(/^www\./, '') : null; } catch {}
+  let prev = null; try { prev = JSON.parse(sessionStorage.getItem('ai-bae-origin') || 'null'); } catch {}
+  const o = { ref_domain: ref, utm_source: q.get('utm_source') || null, utm_campaign: q.get('utm_campaign') || null, entry_path: location.pathname };
+  if (prev && (!ref || ref === own)) { o.ref_domain = prev.ref_domain || null; o.utm_source = o.utm_source || prev.utm_source || null; o.utm_campaign = o.utm_campaign || prev.utm_campaign || null; }
+  try { sessionStorage.setItem('ai-bae-origin', JSON.stringify(o)); } catch {}
+  return o;
+})();
 // 業種: 固定のページ（飲食の Light 版など）は FIXED_INDUSTRY。共通の入口は選んでもらう（全業種を混ぜた結果は出さない）。
 const FIXED_INDUSTRY = null;
 const INDUSTRIES = [{"id":"restaurant","label":"飲食"},{"id":"beauty","label":"美容院"},{"id":"real_estate","label":"不動産"},{"id":"lodging","label":"旅行／宿"},{"id":"saas_web","label":"IT／Web"},{"id":"consulting","label":"コンサル"},{"id":"accounting","label":"税理士／会計士"},{"id":"medical","label":"医療（医科・歯科）"},{"id":"care","label":"介護／整体"},{"id":"aesthetic","label":"美容外科／エステ"},{"id":"retail","label":"小売"},{"id":"school","label":"教室・スクール"},{"id":"professional","label":"士業（弁護士・司法書士など）"},{"id":"manufacturing_btob","label":"製造・メーカー（BtoB）"},{"id":"other","label":"その他"}];
@@ -361,6 +374,7 @@ async function run(url) {
     const turnstile_token = await KLTurnstile.token();
     const body = { url, mode: 'ai-bae' };
     if (industry) body.industry = industry; // 古いサーバーは無視するだけ
+    body.origin = ORIGIN; // 来た元（古いサーバーは無視するだけ）
     if (turnstile_token) body.turnstile_token = turnstile_token;
     const r = await fetch(API_BASE + '/api/site-check', { method: 'POST', mode: 'cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
     const j = await r.json();
