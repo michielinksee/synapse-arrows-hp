@@ -73,6 +73,6 @@ $('go').addEventListener('click', async () => {
   } catch { $('go').disabled = false; show('<p class="bad">サーバーに接続できませんでした。時間をおいて、もう一度押してください。</p>'); }
 });
 </script>
-<script>document.querySelector('.mobile-menu-btn').addEventListener('click',function(){const n=document.querySelector('.nav-links');const l=document.querySelector('.lang-switch');const o=n.style.display==='flex';n.style.display=o?'none':'flex';n.style.flexDirection='column';n.style.position='absolute';n.style.top='72px';n.style.left='0';n.style.right='0';n.style.background='#fff';n.style.padding='20px';n.style.boxShadow='0 8px 24px rgba(0,0,0,0.1)';if(l)l.style.display=o?'none':'flex';});</script>
+<script>document.querySelector('.mobile-menu-btn').addEventListener('click',function(){const n=document.querySelector('.nav-links');n.style.display=n.style.display==='flex'?'none':'flex';n.style.flexDirection='column';n.style.position='absolute';n.style.top='72px';n.style.left='0';n.style.right='0';n.style.background='#fff';n.style.padding='20px';n.style.boxShadow='0 8px 24px rgba(0,0,0,0.1)';n.style.gap='18px';});</script>
 </body>
 </html>

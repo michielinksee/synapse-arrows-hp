@@ -11,13 +11,18 @@
       "other_example": "整体院、写真スタジオ",
       "options": [
         { "id": "restaurant", "label": "飲食", "tools": "restaurant" },
-        { "id": "medical", "label": "医療・歯科・クリニック", "tools": "medical" },
-        { "id": "beauty", "label": "美容・サロン", "tools": "default" },
-        { "id": "lodging", "label": "宿泊", "tools": "default" },
+        { "id": "beauty", "label": "美容院", "tools": "default" },
+        { "id": "real_estate", "label": "不動産", "tools": "default" },
+        { "id": "lodging", "label": "旅行／宿", "tools": "default" },
+        { "id": "saas_web", "label": "IT／Web", "tools": "saas_web" },
+        { "id": "consulting", "label": "コンサル", "tools": "default" },
+        { "id": "accounting", "label": "税理士／会計士", "tools": "default" },
+        { "id": "medical", "label": "医療（医科・歯科）", "tools": "medical" },
+        { "id": "care", "label": "介護／整体", "tools": "default" },
+        { "id": "aesthetic", "label": "美容外科／エステ", "tools": "default" },
         { "id": "retail", "label": "小売", "tools": "default" },
         { "id": "school", "label": "教室・スクール", "tools": "default" },
-        { "id": "professional", "label": "士業・事務所", "tools": "default" },
-        { "id": "saas_web", "label": "SaaS・Web サービス", "tools": "saas_web" },
+        { "id": "professional", "label": "士業（弁護士・司法書士など）", "tools": "default" },
         { "id": "manufacturing_btob", "label": "製造・メーカー（BtoB）", "tools": "default" },
         { "id": "other", "label": "その他", "other": true, "tools": "default" }
       ]
@@ -82,8 +87,8 @@
       "other_example": "Square、Canva",
       "groups": {
         "restaurant": [
-          { "section": "集客・予約", "options": [ { "id": "gbp", "label": "Google ビジネスプロフィール" }, { "id": "tabelog", "label": "食べログ" }, { "id": "hotpepper_gourmet", "label": "ホットペッパーグルメ" }, { "id": "retty", "label": "Retty" }, { "id": "ikyu", "label": "一休" }, { "id": "instagram", "label": "Instagram" }, { "id": "line_official", "label": "LINE 公式アカウント" }, { "id": "own_booking", "label": "自社の予約ページ" } ] },
-          { "section": "店の運営", "options": [ { "id": "booking_ledger", "label": "予約台帳（トレタなど）" }, { "id": "pos", "label": "レジ・POS（Airレジ・スマレジなど）" }, { "id": "table_order", "label": "テーブル注文（タブレット・QR）" }, { "id": "inventory", "label": "発注・在庫の管理" }, { "id": "accounting", "label": "会計（freee・マネーフォワード・弥生など）" }, { "id": "shift", "label": "シフト・勤怠" } ] },
+          { "section": "集客・予約", "options": [ { "id": "gbp", "label": "Google ビジネスプロフィール" }, { "id": "tabelog", "label": "食べログ" }, { "id": "hotpepper_gourmet", "label": "ホットペッパーグルメ" }, { "id": "retty", "label": "Retty" }, { "id": "ikyu", "label": "一休.com レストラン" }, { "id": "hitosara", "label": "ヒトサラ" }, { "id": "gnavi", "label": "ぐるなび" }, { "id": "instagram", "label": "Instagram" }, { "id": "line_official", "label": "LINE 公式アカウント" }, { "id": "own_booking", "label": "自社の予約ページ" } ] },
+          { "section": "店の運営", "options": [ { "id": "tablecheck", "label": "TableCheck" }, { "id": "toreta", "label": "トレタ" }, { "id": "restaurant_board", "label": "レストランボード" }, { "id": "booking_ledger", "label": "予約台帳（ほかの物）" }, { "id": "pos", "label": "レジ・POS（Airレジ・スマレジなど）" }, { "id": "table_order", "label": "テーブル注文（タブレット・QR）" }, { "id": "inventory", "label": "発注・在庫の管理" }, { "id": "accounting", "label": "会計（freee・マネーフォワード・弥生など）" }, { "id": "shift", "label": "シフト・勤怠" } ] },
           { "section": "広告", "options": [ { "id": "google_ads", "label": "Google 広告" }, { "id": "meta_ads", "label": "Instagram・Facebook 広告" }, { "id": "flyer", "label": "チラシ・フリーペーパー" } ] },
           { "section": "AI 検索の対策（AEO・LLMO）", "options": [ { "id": "aeo_tool", "label": "ツールを使っている" }, { "id": "aeo_vendor", "label": "業者に頼んでいる" }, { "id": "aeo_considering", "label": "検討中" }, { "id": "aeo_none", "label": "していない" } ] }
         ],

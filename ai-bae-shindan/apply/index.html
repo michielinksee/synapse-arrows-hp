@@ -247,12 +247,19 @@ $('apply').addEventListener('submit', async (e) => {
   render();
   const p = new URLSearchParams(location.search);
   if (p.get('url')) $('url').value = p.get('url');
+  // 業種は診断の入口から引き継ぐ（q1 の初期値。変えてもよい）
+  const ind = p.get('industry');
+  if (ind && S.questions.q1.options.some((o) => o.id === ind)) {
+    const el = document.querySelector('input[name=q1][value="' + ind + '"]');
+    if (el) { el.checked = true; el.dispatchEvent(new Event('change', { bubbles: true })); renderTools(); }
+    if (ind === 'restaurant') { const back = document.querySelector('.top a[href="/ai-bae-shindan/"]'); if (back) back.href = '/ai-bae-shindan/inshoku/'; }
+  }
   const id = p.get('id');
   if (id && /^[0-9a-f]{12}$/.test(id)) {
     try { const r = await fetch(API_BASE + '/api/site-check/' + id, { mode: 'cors' }); if (r.ok) { const j = await r.json(); if (j.url && !$('url').value) $('url').value = j.url; } } catch {}
   }
 })();
 </script>
-<script>document.querySelector('.mobile-menu-btn').addEventListener('click',function(){const n=document.querySelector('.nav-links');const l=document.querySelector('.lang-switch');const o=n.style.display==='flex';n.style.display=o?'none':'flex';n.style.flexDirection='column';n.style.position='absolute';n.style.top='72px';n.style.left='0';n.style.right='0';n.style.background='#fff';n.style.padding='20px';n.style.boxShadow='0 8px 24px rgba(0,0,0,0.1)';if(l)l.style.display=o?'none':'flex';});</script>
+<script>document.querySelector('.mobile-menu-btn').addEventListener('click',function(){const n=document.querySelector('.nav-links');n.style.display=n.style.display==='flex'?'none':'flex';n.style.flexDirection='column';n.style.position='absolute';n.style.top='72px';n.style.left='0';n.style.right='0';n.style.background='#fff';n.style.padding='20px';n.style.boxShadow='0 8px 24px rgba(0,0,0,0.1)';n.style.gap='18px';});</script>
 </body>
 </html>
