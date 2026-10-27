@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>お問い合わせ | Synapse Arrows</title>
-    <meta name="description" content="Synapse Arrowsへのお問い合わせ。AI研修、AI認知・AEO診断、AI導入、海外進出、プロダクトに関するご相談はこちらから。">
+    <meta name="description" content="Synapse Arrows への資料請求・相談はこちらから。資料のご請求、無料相談（20 分・オンライン）、複数店舗・会社としてのお見積もりを受け付け、1 営業日以内にメールでお返事します。">
     <link rel="canonical" href="https://synapsearrows.com/contact/">
     <link rel="alternate" hreflang="ja" href="https://synapsearrows.com/contact/">
     <link rel="alternate" hreflang="en" href="https://synapsearrows.com/en/contact/">
@@ -12,7 +12,7 @@
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Synapse Arrows">
     <meta property="og:title" content="お問い合わせ | Synapse Arrows">
-    <meta property="og:description" content="AI研修、AI認知・AEO診断、AI導入、海外進出のご相談はこちらから。">
+    <meta property="og:description" content="資料請求・無料相談（20 分・オンライン）・お見積もりはこちらから。1 営業日以内にメールでお返事します。">
     <meta property="og:url" content="https://synapsearrows.com/contact/">
     <meta property="og:image" content="https://synapsearrows.com/og-image.png">
     <meta property="og:locale" content="ja_JP">
@@ -21,7 +21,7 @@
     <meta name="twitter:site" content="@michielinksee">
     <meta name="twitter:title" content="お問い合わせ | Synapse Arrows">
     <meta name="twitter:image" content="https://synapsearrows.com/og-image.png">
-    <meta name="twitter:description" content="AI研修、AI認知・AEO診断、AI導入、海外進出のご相談はこちらから。">
+    <meta name="twitter:description" content="資料請求・無料相談（20 分・オンライン）・お見積もりはこちらから。1 営業日以内にメールでお返事します。">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -34,7 +34,7 @@
       "@type": "ContactPage",
       "name": "お問い合わせ | Synapse Arrows",
       "url": "https://synapsearrows.com/contact/",
-      "description": "Synapse Arrowsへのお問い合わせ。AI研修、AI認知・AEO診断、AI導入、海外進出、プロダクトに関するご相談。",
+      "description": "Synapse Arrows への資料請求・相談。資料のご請求、無料相談（20 分・オンライン）、複数店舗・会社としてのお見積もり。",
       "mainEntity": {
         "@type": "Organization",
         "@id": "https://synapsearrows.com/#organization",
@@ -66,38 +66,63 @@
     }
     </script>
     <style>
-.ct-wrap{background:var(--bg-light);padding:88px 0}
-.ct-head{max-width:720px;margin-bottom:36px}
-.ct-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.ct-card{position:relative;display:flex;flex-direction:column;gap:6px;background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);padding:26px;color:var(--text-primary);text-decoration:none;transition:var(--transition)}
-.ct-card:hover{border-color:var(--primary-light);box-shadow:var(--shadow-md);transform:translateY(-2px)}
-.ct-card.is-selected{border:2px solid var(--primary);box-shadow:var(--shadow-md)}
-.ct-card .ct-badge{display:none;position:absolute;top:18px;right:18px;background:var(--primary);color:#fff;font-size:.7rem;font-weight:700;padding:3px 10px;border-radius:999px}
-.ct-card.is-selected .ct-badge{display:inline-block}
-.ct-icon-wrap{width:48px;height:48px;border-radius:12px;background:var(--accent);color:var(--primary);display:flex;align-items:center;justify-content:center;margin-bottom:10px}
-.ct-kicker{font-size:.72rem;font-weight:700;letter-spacing:.08em;color:var(--primary);text-transform:uppercase}
-.ct-card h3{font-size:1.08rem;font-weight:700;margin:0;color:var(--text-primary)}
-.ct-card p{font-size:.88rem;color:var(--text-secondary);line-height:1.7;margin:0}
-.ct-price{margin-top:auto;padding-top:14px;font-size:.85rem;font-weight:700;color:var(--text-primary);border-top:1px solid var(--border)}
-.ct-lower{display:grid;grid-template-columns:1.3fr 1fr;gap:24px;margin-top:40px}
-.ct-panel{background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);padding:30px}
-.ct-panel h3{font-size:1.1rem;margin:0 0 18px}
+[hidden]{display:none!important}
+.ct-wrap{background:var(--bg-light);padding:72px 0 88px}
+.ct-main{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:24px;align-items:start}
+.ct-side{display:grid;gap:24px;min-width:0}
+.ct-panel{background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);padding:32px;min-width:0}
+.ct-panel h3{font-size:1.1rem;margin:0 0 14px}
+.ct-form-panel h2{font-size:1.6rem;line-height:1.35;margin:0 0 10px;color:var(--text-primary);scroll-margin-top:96px}
+.ct-intro{color:var(--text-secondary);font-size:.95rem;line-height:1.8;margin:0 0 24px}
+.ct-field{margin:0 0 18px;border:0;padding:0;min-width:0}
+.ct-field>label,.ct-field>legend{display:block;font-weight:600;font-size:.92rem;margin-bottom:6px;color:var(--text-primary);padding:0}
+.ct-req{display:inline-block;margin-left:6px;font-size:.68rem;font-weight:700;color:#fff;background:var(--primary);border-radius:4px;padding:1px 6px;vertical-align:middle}
+.ct-opt{margin-left:6px;font-size:.75rem;color:var(--text-muted);font-weight:500}
+.ct-input{display:block;width:100%;max-width:100%;font:inherit;font-size:1rem;color:var(--text-primary);background:#fff;border:1.5px solid var(--border);border-radius:var(--radius);padding:12px 14px;transition:var(--transition)}
+.ct-input:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(26,63,214,.12)}
+textarea.ct-input{min-height:120px;resize:vertical;line-height:1.7}
+.ct-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0 16px}
+.ct-choices{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}
+.ct-choice{display:flex;gap:10px;align-items:flex-start;border:1.5px solid var(--border);border-radius:var(--radius);padding:12px 14px;cursor:pointer;font-size:.92rem;line-height:1.5;background:#fff;transition:var(--transition)}
+.ct-choice:hover{border-color:var(--primary-light)}
+.ct-choice:has(input:checked){border-color:var(--primary);background:var(--accent)}
+.ct-choice input,.ct-consent input{margin-top:4px;accent-color:var(--primary);flex:none}
+.ct-consent{display:flex;gap:10px;align-items:flex-start;font-size:.92rem;line-height:1.6;margin:4px 0 22px;cursor:pointer}
+.ct-consent a{color:var(--primary);text-decoration:underline}
+.ct-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.ct-submit{width:100%;justify-content:center;font-size:1rem}
+.ct-submit[disabled]{opacity:.6;cursor:wait;transform:none;box-shadow:none}
+.ct-note{font-size:.82rem;color:var(--text-muted);margin:12px 0 0;line-height:1.7}
+.ct-note a{color:inherit;text-decoration:underline}
+.ct-msg{border-radius:var(--radius);padding:20px 22px;line-height:1.8;font-size:.95rem}
+.ct-msg p{margin:0}
+.ct-msg a{font-weight:600;text-decoration:underline;color:inherit;word-break:break-all}
+.ct-ok{background:#ECFDF5;border:1px solid #A7F3D0;color:#065F46}
+.ct-ok:focus{outline:none}
+.ct-err{background:#FEF2F2;border:1px solid #FECACA;color:#991B1B;margin-top:16px}
+.ct-err p+p{margin-top:8px}
+.ct-fallback{background:var(--accent);border-radius:var(--radius);padding:22px}
+.ct-fallback p{margin:0 0 14px;color:var(--text-secondary);font-size:.95rem;line-height:1.8}
+.ct-fallback .btn-primary{max-width:100%;text-align:center;justify-content:center}
 .ct-steps{list-style:none;margin:0;padding:0;counter-reset:s}
-.ct-steps li{counter-increment:s;display:grid;grid-template-columns:36px 1fr;gap:14px;padding:12px 0;border-top:1px solid var(--border)}
+.ct-steps li{counter-increment:s;display:grid;grid-template-columns:36px minmax(0,1fr);gap:14px;padding:12px 0;border-top:1px solid var(--border)}
 .ct-steps li:first-child{border-top:0}
 .ct-steps li::before{content:counter(s);width:32px;height:32px;border-radius:50%;background:var(--primary);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center}
 .ct-steps strong{display:block;margin-bottom:2px}
-.ct-steps span{color:var(--text-secondary);font-size:.9rem}
+.ct-steps span{color:var(--text-secondary);font-size:.9rem;line-height:1.7}
+.ct-side-note{margin:14px 0 0;font-size:.85rem;color:var(--text-secondary);line-height:1.7}
 .ct-dark{background:linear-gradient(135deg,var(--bg-dark) 0%,#111936 100%);color:#fff;border:0}
-.ct-dark dl{margin:0 0 22px}
+.ct-dark dl{margin:0 0 18px}
 .ct-dark dt{font-size:.72rem;letter-spacing:.08em;color:rgba(255,255,255,.55);text-transform:uppercase;margin-top:12px}
+.ct-dark dt:first-child{margin-top:0}
 .ct-dark dd{margin:2px 0 0;font-weight:600}
-.ct-dark .btn-primary{width:100%;justify-content:center}
-.ct-dark .ct-mail{display:block;margin-top:12px;text-align:center;color:rgba(255,255,255,.75);font-size:.9rem}
-.ct-dark .ct-pricing{display:block;margin-top:10px;text-align:center;color:#fff;font-size:.88rem;text-decoration:underline}
-@media(max-width:900px){.ct-grid{grid-template-columns:1fr 1fr}.ct-lower{grid-template-columns:1fr}}
-@media(max-width:600px){.ct-wrap{padding:56px 0}.ct-grid{grid-template-columns:1fr}.ct-card{padding:22px}}
+.ct-dark .ct-mail{display:block;color:rgba(255,255,255,.8);font-size:.9rem;word-break:break-all}
+.ct-dark .ct-pricing{display:inline-block;margin-top:10px;color:#fff;font-size:.88rem;text-decoration:underline}
+@media(max-width:900px){.ct-main{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:600px){.ct-wrap{padding:48px 0 56px}.ct-panel{padding:24px 16px}.ct-form-panel h2{font-size:1.35rem}.ct-row,.ct-choices{grid-template-columns:minmax(0,1fr)}}
 </style>
+    <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script>
+    <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
 
@@ -110,11 +135,12 @@
                 Synapse Arrows
             </a>
             <ul class="nav-links">
-                <li><a href="/about/">About</a></li>
-                <li><a href="/products/">Products</a></li>
-                <li><a href="/services/">Services</a></li>
-                <li><a href="/insights/">Insights</a></li>
-                <li><a href="/contact/" class="nav-cta active">Contact</a></li>
+                <li><a href="/ai-bae-shindan/" class="nav-cta nav-cta-ai">AI映え診断</a></li>
+                <li><a href="/services/">サービスと料金</a></li>
+                <li><a href="/insights/">調査・記事</a></li>
+                <li><a href="/about/">会社</a></li>
+                <li><a href="/tools/">無料ツール</a></li>
+                <li><a href="/contact/" class="nav-cta active">資料請求・相談</a></li>
             </ul>
             <div class="lang-switch">
                 <a href="#" class="active">JP</a>
@@ -131,25 +157,113 @@
     <!-- Page Header -->
     <section class="page-header page-header-contact">
         <div class="container">
-            <h1 class="page-title">お問い合わせ</h1>
-            <p class="page-desc">AI研修、AI認知・AEO診断、AI導入、海外進出のご相談。課題がまだ整理されていなくても構いません。</p>
+            <h1 class="page-title">資料請求・相談</h1>
+            <p class="page-desc">資料のご請求、無料相談（20 分・オンライン）、複数店舗・会社としてのお見積もりを受け付けています。課題がまだ整理されていなくても構いません。</p>
         </div>
     </section>
 
-    <!-- Contact Section -->
+    <!-- Contact form -->
     <section class="ct-wrap" id="start">
         <div class="container">
-            <div class="ct-head"><div class="section-label">Start here</div><h2 class="section-title">ご相談の内容を選んでください</h2><p class="section-desc" style="margin:0">選ぶとメールの件名と記入欄が入った状態で開きます。課題がまだ整理されていなくても構いません。</p></div>
-            <div class="ct-grid">
-                <a class="ct-card" id="topic-ai-training" href="mailto:contact@synapse-arrows.com?subject=%E3%80%90%E3%81%94%E7%9B%B8%E8%AB%87%E3%80%91AI%E7%A0%94%E4%BF%AE%E3%83%BB%E7%A4%BE%E5%86%85%E6%B4%BB%E7%94%A8&body=%E4%BC%9A%E7%A4%BE%E5%90%8D%EF%BC%9A%0A%E3%81%8A%E5%90%8D%E5%89%8D%EF%BC%9A%0AWeb%E3%82%B5%E3%82%A4%E3%83%88%EF%BC%9A%0A%E3%81%94%E7%9B%B8%E8%AB%87%E3%81%AE%E5%86%85%E5%AE%B9%EF%BC%88%E4%B8%80%E8%A8%80%E3%81%A7%E6%A7%8B%E3%81%84%E3%81%BE%E3%81%9B%E3%82%93%EF%BC%89%EF%BC%9A%0A"><span class="ct-badge">選択中</span><span class="ct-icon-wrap"><svg class="ct-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6.5 12 3l8 3.5-8 3.5-8-3.5Z"/><path d="M7 8.3V13c0 1.7 2.2 3 5 3s5-1.3 5-3V8.3"/><path d="M20 6.5V12"/></svg></span><span class="ct-kicker">AIを社内で使えるようにしたい</span><h3>AI研修・社内活用</h3><p>経営層・管理職・実務担当向けの研修、社内ルール、部門別の使い方</p><span class="ct-price">個別見積もり</span></a><a class="ct-card" id="topic-aeo-audit" href="mailto:contact@synapse-arrows.com?subject=%E3%80%90%E3%81%94%E7%9B%B8%E8%AB%87%E3%80%91AI%E6%8E%A8%E8%96%A6%E8%A8%BA%E6%96%AD%E3%83%AC%E3%83%9D%E3%83%BC%E3%83%88&body=%E4%BC%9A%E7%A4%BE%E5%90%8D%EF%BC%9A%0A%E3%81%8A%E5%90%8D%E5%89%8D%EF%BC%9A%0AWeb%E3%82%B5%E3%82%A4%E3%83%88%EF%BC%9A%0A%E3%81%94%E7%9B%B8%E8%AB%87%E3%81%AE%E5%86%85%E5%AE%B9%EF%BC%88%E4%B8%80%E8%A8%80%E3%81%A7%E6%A7%8B%E3%81%84%E3%81%BE%E3%81%9B%E3%82%93%EF%BC%89%EF%BC%9A%0A"><span class="ct-badge">選択中</span><span class="ct-icon-wrap"><svg class="ct-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/><path d="M8.5 11h5M11 8.5v5"/></svg></span><span class="ct-kicker">AIにどう推薦されているか知りたい</span><h3>AI推薦診断レポート</h3><p>4つのAIで、自社と競合の推薦状況と推薦の根拠を調べます</p><span class="ct-price">198,000円〜・単発</span></a><a class="ct-card" id="topic-aeo-retainer" href="mailto:contact@synapse-arrows.com?subject=%E3%80%90%E3%81%94%E7%9B%B8%E8%AB%87%E3%80%91AI%E6%8E%A8%E8%96%A6%E3%81%AE%E6%94%B9%E5%96%84%E4%BC%B4%E8%B5%B0&body=%E4%BC%9A%E7%A4%BE%E5%90%8D%EF%BC%9A%0A%E3%81%8A%E5%90%8D%E5%89%8D%EF%BC%9A%0AWeb%E3%82%B5%E3%82%A4%E3%83%88%EF%BC%9A%0A%E3%81%94%E7%9B%B8%E8%AB%87%E3%81%AE%E5%86%85%E5%AE%B9%EF%BC%88%E4%B8%80%E8%A8%80%E3%81%A7%E6%A7%8B%E3%81%84%E3%81%BE%E3%81%9B%E3%82%93%EF%BC%89%EF%BC%9A%0A"><span class="ct-badge">選択中</span><span class="ct-icon-wrap"><svg class="ct-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 18V11M10 18V7M16 18v-5M22 18H2"/><path d="m4 8 6-4 6 5 5-3"/></svg></span><span class="ct-kicker">AIに推薦されるよう改善したい</span><h3>AI推薦の改善伴走</h3><p>掲載先・ページ・構造化データの改善と、毎月の再計測</p><span class="ct-price">月250,000円〜・3ヶ月から</span></a><a class="ct-card" id="topic-ai-adoption" href="mailto:contact@synapse-arrows.com?subject=%E3%80%90%E3%81%94%E7%9B%B8%E8%AB%87%E3%80%91AI%E5%B0%8E%E5%85%A5%E3%83%BB%E3%82%A8%E3%83%BC%E3%82%B8%E3%82%A7%E3%83%B3%E3%83%88%E9%96%8B%E7%99%BA&body=%E4%BC%9A%E7%A4%BE%E5%90%8D%EF%BC%9A%0A%E3%81%8A%E5%90%8D%E5%89%8D%EF%BC%9A%0AWeb%E3%82%B5%E3%82%A4%E3%83%88%EF%BC%9A%0A%E3%81%94%E7%9B%B8%E8%AB%87%E3%81%AE%E5%86%85%E5%AE%B9%EF%BC%88%E4%B8%80%E8%A8%80%E3%81%A7%E6%A7%8B%E3%81%84%E3%81%BE%E3%81%9B%E3%82%93%EF%BC%89%EF%BC%9A%0A"><span class="ct-badge">選択中</span><span class="ct-icon-wrap"><svg class="ct-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/><path d="m9 8-2 2 2 2M15 8l2 2-2 2"/></svg></span><span class="ct-kicker">AIを業務に組み込みたい</span><h3>AI導入・エージェント開発</h3><p>業務設計、ツール選定、AIエージェント・MCPの開発</p><span class="ct-price">個別見積もり</span></a><a class="ct-card" id="topic-global" href="mailto:contact@synapse-arrows.com?subject=%E3%80%90%E3%81%94%E7%9B%B8%E8%AB%87%E3%80%91%E6%B5%B7%E5%A4%96%E9%80%B2%E5%87%BA%E6%94%AF%E6%8F%B4&body=%E4%BC%9A%E7%A4%BE%E5%90%8D%EF%BC%9A%0A%E3%81%8A%E5%90%8D%E5%89%8D%EF%BC%9A%0AWeb%E3%82%B5%E3%82%A4%E3%83%88%EF%BC%9A%0A%E3%81%94%E7%9B%B8%E8%AB%87%E3%81%AE%E5%86%85%E5%AE%B9%EF%BC%88%E4%B8%80%E8%A8%80%E3%81%A7%E6%A7%8B%E3%81%84%E3%81%BE%E3%81%9B%E3%82%93%EF%BC%89%EF%BC%9A%0A"><span class="ct-badge">選択中</span><span class="ct-icon-wrap"><svg class="ct-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9S14.5 18.4 12 21c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3Z"/></svg></span><span class="ct-kicker">シンガポール・東南アジアに出たい</span><h3>海外進出支援</h3><p>市場調査、パートナー開拓、現地での事業立ち上げの相談</p><span class="ct-price">個別見積もり</span></a><a class="ct-card" id="topic-kanseilink" href="https://kansei-link.com/when-to-use-kanseilink.html" target="_blank" rel="noopener"><span class="ct-badge">選択中</span><span class="ct-icon-wrap"><svg class="ct-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 6v6c0 4.4 3.4 8 8 9 4.6-1 8-4.6 8-9V6l-8-3Z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg></span><span class="ct-kicker">SaaSのAIエージェント対応度を知りたい</span><h3>KanseiLINKの評価</h3><p>Agent Readiness・MCP/APIの評価、ARI Award</p><span class="ct-price">kansei-link.com</span></a>
-            </div>
-            <div class="ct-lower">
-                <div class="ct-panel"><h3>ご相談の流れ</h3><ol class="ct-steps"><li><div><strong>メールを送る</strong><span>上のカードを選ぶか、下のアドレスへ。一言で構いません。</span></div></li><li><div><strong>オンラインで伺う</strong><span>状況と目的を伺い、必要な範囲を一緒に切り分けます。</span></div></li><li><div><strong>お見積もり・ご提案</strong><span>料金表のある商品はその金額で。それ以外は内容に合わせて。</span></div></li></ol></div>
-                <div class="ct-panel ct-dark"><dl><dt>拠点</dt><dd>シンガポール（160 Robinson Road）</dd><dt>対応言語</dt><dd>日本語・英語</dd><dt>対応地域</dt><dd>日本・シンガポール・東南アジア</dd></dl>
-                    <a href="mailto:contact@synapse-arrows.com?body=%E4%BC%9A%E7%A4%BE%E5%90%8D%EF%BC%9A%0A%E3%81%8A%E5%90%8D%E5%89%8D%EF%BC%9A%0AWeb%E3%82%B5%E3%82%A4%E3%83%88%EF%BC%9A%0A%E3%81%94%E7%9B%B8%E8%AB%87%E3%81%AE%E5%86%85%E5%AE%B9%EF%BC%88%E4%B8%80%E8%A8%80%E3%81%A7%E6%A7%8B%E3%81%84%E3%81%BE%E3%81%9B%E3%82%93%EF%BC%89%EF%BC%9A%0A" class="btn-primary">メールで相談する</a>
-                    <a class="ct-mail" href="mailto:contact@synapse-arrows.com">contact@synapse-arrows.com</a>
-                    <a class="ct-pricing" href="/services/ai-aeo/#pricing">料金を見る &rarr;</a>
+            <div class="ct-main">
+                <div class="ct-panel ct-form-panel">
+                    <div class="section-label">Start here</div>
+                    <h2 id="download">資料請求・ご相談</h2>
+                    <p class="ct-intro">送っていただいた内容は当社の記録に残り、担当から 1 営業日以内にメールでお返事します。</p>
+
+                    <!-- フォームの受け口（ENDPOINT）が空のあいだと、JavaScript が動かないときは、このメールの案内だけが出ます -->
+                    <div id="ct-fallback" class="ct-fallback">
+                        <p>いまはメールで受け付けています。下のボタンを押すと、記入欄の入ったメールが開きます。</p>
+                        <a class="btn-primary" href="mailto:contact@synapse-arrows.com?subject=%E3%80%90%E8%B3%87%E6%96%99%E8%AB%8B%E6%B1%82%E3%83%BB%E7%9B%B8%E8%AB%87%E3%80%91&amp;body=%E4%BC%9A%E7%A4%BE%E5%90%8D%E3%83%BB%E5%BA%97%E5%90%8D%EF%BC%9A%0A%E3%81%8A%E5%90%8D%E5%89%8D%EF%BC%9A%0A%E3%83%A1%E3%83%BC%E3%83%AB%EF%BC%9A%0A%E6%A5%AD%E7%A8%AE%EF%BC%9A%0A%E3%82%B5%E3%82%A4%E3%83%88%E3%81%AE%20URL%EF%BC%9A%0A%E3%81%94%E7%94%A8%E4%BB%B6%EF%BC%88%E8%B3%87%E6%96%99%E8%AB%8B%E6%B1%82%EF%BC%8F%E7%84%A1%E6%96%99%E7%9B%B8%E8%AB%87%EF%BC%8F%E8%A6%8B%E7%A9%8D%E3%82%82%E3%82%8A%EF%BC%8F%E3%81%9D%E3%81%AE%E3%81%BB%E3%81%8B%EF%BC%89%EF%BC%9A%0A%E3%81%B2%E3%81%A8%E3%81%93%E3%81%A8%EF%BC%9A%0A">メールで資料請求・相談する</a>
+                        <p class="ct-note">宛先: contact@synapse-arrows.com</p>
+                    </div>
+
+                    <form id="ct-form" hidden novalidate>
+                        <div class="ct-row">
+                            <div class="ct-field">
+                                <label for="ct-company">会社名・店名<span class="ct-req">必須</span></label>
+                                <input class="ct-input" id="ct-company" name="company" type="text" required maxlength="200" autocomplete="organization">
+                            </div>
+                            <div class="ct-field">
+                                <label for="ct-name">お名前<span class="ct-req">必須</span></label>
+                                <input class="ct-input" id="ct-name" name="name" type="text" required maxlength="200" autocomplete="name">
+                            </div>
+                        </div>
+                        <div class="ct-row">
+                            <div class="ct-field">
+                                <label for="ct-email">メール<span class="ct-req">必須</span></label>
+                                <input class="ct-input" id="ct-email" name="email" type="email" required maxlength="254" autocomplete="email" inputmode="email">
+                            </div>
+                            <div class="ct-field">
+                                <label for="ct-industry">業種<span class="ct-req">必須</span></label>
+                                <!-- 選択肢は /ai-bae-shindan/survey.json の questions.q1.options から作り直します。下はその控え（読み込めないとき用） -->
+                                <select class="ct-input" id="ct-industry" name="industry" required>
+                                    <option value="">選んでください</option>
+                                    <option value="restaurant">飲食</option>
+                                    <option value="medical">医療・歯科・クリニック</option>
+                                    <option value="beauty">美容・サロン</option>
+                                    <option value="lodging">宿泊</option>
+                                    <option value="retail">小売</option>
+                                    <option value="school">教室・スクール</option>
+                                    <option value="professional">士業・事務所</option>
+                                    <option value="saas_web">SaaS・Web サービス</option>
+                                    <option value="manufacturing_btob">製造・メーカー（BtoB）</option>
+                                    <option value="other">その他</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="ct-field">
+                            <label for="ct-site">サイトの URL<span class="ct-opt">任意</span></label>
+                            <input class="ct-input" id="ct-site" name="site_url" type="url" maxlength="500" placeholder="https://" autocomplete="url" inputmode="url">
+                        </div>
+                        <fieldset class="ct-field">
+                            <legend>ご用件<span class="ct-req">必須</span></legend>
+                            <div class="ct-choices">
+                                <label class="ct-choice"><input type="radio" name="purpose" value="download" required><span>資料請求</span></label>
+                                <label class="ct-choice"><input type="radio" name="purpose" value="consult"><span>無料相談（20 分・オンライン）</span></label>
+                                <label class="ct-choice"><input type="radio" name="purpose" value="quote"><span>見積もり（複数店舗・会社として）</span></label>
+                                <label class="ct-choice"><input type="radio" name="purpose" value="other"><span>そのほか</span></label>
+                            </div>
+                        </fieldset>
+                        <div class="ct-field">
+                            <label for="ct-message">ひとこと<span class="ct-opt">任意</span></label>
+                            <textarea class="ct-input" id="ct-message" name="message" maxlength="2000" rows="5" placeholder="お困りごと、知りたいこと、店舗の数など。一言で構いません。"></textarea>
+                        </div>
+                        <div class="ct-hp" aria-hidden="true">
+                            <label for="ct-website-hp">この欄は空のままにしてください</label>
+                            <input id="ct-website-hp" name="website_hp" type="text" tabindex="-1" autocomplete="off">
+                        </div>
+                        <label class="ct-consent"><input type="checkbox" name="consent" required><span><a href="/policy/#contact-form">プライバシーポリシー</a>に同意します</span></label>
+                        <div id="ts-box"></div>
+                        <button type="submit" class="btn-primary ct-submit">送る</button>
+                        <p class="ct-note">送っていただいた内容は、お返事・資料のお送り・お見積もりにだけ使います。メールマガジンには使いません。</p>
+                        <div id="ct-error" class="ct-msg ct-err" role="alert" hidden>
+                            <p id="ct-error-text"></p>
+                            <p><a id="ct-error-mail" href="mailto:contact@synapse-arrows.com">contact@synapse-arrows.com にメールで送る</a></p>
+                        </div>
+                    </form>
+
+                    <div id="ct-ok" class="ct-msg ct-ok" role="status" tabindex="-1" hidden>
+                        <p id="ct-ok-text"></p>
+                    </div>
                 </div>
+
+                <aside class="ct-side">
+                    <div class="ct-panel">
+                        <h3>このあとの流れ</h3>
+                        <ol class="ct-steps">
+                            <li><div><strong>フォームを送る</strong><span>必須の欄だけで構いません。</span></div></li>
+                            <li><div><strong>1 営業日以内にメールでお返事</strong><span>資料請求には資料をお送りします。ご相談・お見積もりは、オンラインで伺う日時を決めます。</span></div></li>
+                            <li><div><strong>オンラインで伺う（20 分）</strong><span>状況と目的を伺い、必要な範囲を一緒に切り分けます。お見積もりはそのあとで。</span></div></li>
+                        </ol>
+                        <p class="ct-side-note">AI 研修・AI 導入・海外進出のご相談は「そのほか」を選んでください。</p>
+                    </div>
+                    <div class="ct-panel ct-dark">
+                        <dl><dt>拠点</dt><dd>シンガポール（160 Robinson Road）</dd><dt>対応言語</dt><dd>日本語・英語</dd><dt>対応地域</dt><dd>日本・シンガポール・東南アジア</dd></dl>
+                        <a class="ct-mail" href="mailto:contact@synapse-arrows.com">contact@synapse-arrows.com</a>
+                        <a class="ct-pricing" href="/services/#pricing">料金を見る &rarr;</a>
+                    </div>
+                </aside>
             </div>
         </div>
     </section>
@@ -220,8 +334,167 @@
     });
     </script>
 
+<script src="/ai-bae-shindan/turnstile-guard.js"></script>
 <script>
-(function(){var t=new URLSearchParams(location.search).get('topic');if(!t)return;var map={aeo:'aeo-audit'};t=map[t]||t;var el=document.getElementById('topic-'+t);if(!el)return;el.classList.add('is-selected');el.setAttribute('aria-current','true');})();
+// Google Apps Script のウェブアプリ URL。Michie がデプロイして貼る。空のあいだはフォームを出さず、メールの案内だけ出す
+// 例: 'https://script.google.com/macros/s/XXXXXXXX/exec'（en/contact/index.html にも同じ URL を貼る）
+// 手順: founder-ops/research/AiBae_2026-10/STEPS-contact-form-gas-michie.md ／ 受け口のコード: scripts/contact-form.gs
+const ENDPOINT = '';
+
+(function () {
+  'use strict';
+  var LANG = 'ja';
+  var T = {
+    purposes: { download: '資料請求', consult: '無料相談（20 分・オンライン）', quote: '見積もり（複数店舗・会社として）', other: 'そのほか' },
+    submit: '送る',
+    sending: '送っています…',
+    okDownload: '受け付けました。担当から 1 営業日以内に、資料をメールでお送りします。',
+    okOther: '受け付けました。1 営業日以内にメールでご連絡します。',
+    errors: {
+      bad_request: '入力の内容を受け付けられませんでした。',
+      rate_limited: '短い時間に何度も送られたため、いったん止めています。1 時間ほどおいてからお試しください。',
+      turnstile_failed: '人による操作の確認に失敗しました。',
+      turnstile_required: '人による操作の確認が終わりませんでした。',
+      fallback: '送れませんでした。'
+    },
+    errTail: 'お手数ですが、下のリンクからメールでお送りください。入力した内容が入った状態で開きます。',
+    mail: { subject: '【資料請求・相談】', company: '会社名・店名：', name: 'お名前：', email: 'メール：', industry: '業種：', site_url: 'サイトの URL：', purpose: 'ご用件：', message: 'ひとこと：' }
+  };
+  function industryLabel(o) { return String(o.label || o.id); }
+
+  var LEGACY = { aeo: 'consult', 'aeo-audit': 'consult', 'aeo-retainer': 'consult', 'ai-training': 'other', 'ai-adoption': 'other', global: 'other' };
+  var MAIL = 'contact@synapse-arrows.com';
+  var form = document.getElementById('ct-form');
+  var fallback = document.getElementById('ct-fallback');
+  var params = new URLSearchParams(location.search);
+  // ?preview を付けると、ENDPOINT が空でもフォームの見た目を確かめられる（送ると「送れませんでした」とメールの案内が出る）
+  if (!form || (!ENDPOINT && !params.has('preview'))) return;
+  form.hidden = false;
+  if (fallback) fallback.hidden = true;
+
+  var API_BASE = (location.hostname === 'localhost' || location.hostname === '127.0.0.1')
+    ? 'http://localhost:3000' : 'https://mcp.kansei-link.com';
+  try { if (window.KLTurnstile) window.KLTurnstile.init(API_BASE, document.getElementById('ts-box')); } catch (e) { /* 確認なしで送る（必要なら GAS が断る） */ }
+
+  // 業種: AI映え診断の質問票（q1）に合わせる。読めないときは HTML の控えのまま
+  var sel = form.elements.industry;
+  fetch('/ai-bae-shindan/survey.json', { cache: 'no-cache' })
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (s) {
+      var opts = s && s.questions && s.questions.q1 && s.questions.q1.options;
+      if (!Array.isArray(opts) || !opts.length) return;
+      var keep = sel.value;
+      while (sel.options.length > 1) sel.remove(1);
+      opts.forEach(function (o) {
+        if (!o || typeof o.id !== 'string' || !o.id) return;
+        var op = document.createElement('option');
+        op.value = o.id;
+        op.textContent = industryLabel(o);
+        sel.appendChild(op);
+      });
+      if (keep) sel.value = keep;
+    })
+    .catch(function () {});
+
+  // ご用件: ?topic= と #download から選んでおく
+  function pick(v) {
+    var r = form.querySelector('input[name="purpose"][value="' + v + '"]');
+    if (r) r.checked = true;
+  }
+  var topic = (params.get('topic') || '').toLowerCase();
+  topic = LEGACY[topic] || topic;
+  if (T.purposes[topic]) pick(topic);
+  if (location.hash === '#download') pick('download');
+  window.addEventListener('hashchange', function () { if (location.hash === '#download') pick('download'); });
+
+  var site = form.elements.site_url;
+  function fixUrl() {
+    var v = site.value.trim();
+    if (v && !/^https?:\/\//i.test(v)) site.value = 'https://' + v;
+  }
+  site.addEventListener('blur', fixUrl);
+
+  function val(n) { return String(form.elements[n].value || '').trim(); }
+  function collect() {
+    var checked = form.querySelector('input[name="purpose"]:checked');
+    return {
+      company: val('company'),
+      name: val('name'),
+      email: val('email'),
+      industry: sel.value,
+      industry_label: sel.value ? sel.options[sel.selectedIndex].text : '',
+      site_url: val('site_url'),
+      purpose: checked ? checked.value : '',
+      message: val('message'),
+      consent: form.elements.consent.checked,
+      website_hp: form.elements.website_hp.value,
+      lang: LANG,
+      page: location.origin + location.pathname,
+      referrer: document.referrer || '',
+      utm_source: params.get('utm_source') || '',
+      utm_medium: params.get('utm_medium') || '',
+      utm_campaign: params.get('utm_campaign') || '',
+      ts: new Date().toISOString()
+    };
+  }
+
+  function mailtoFrom(p) {
+    var L = T.mail;
+    var body = [
+      L.company + p.company, L.name + p.name, L.email + p.email, L.industry + p.industry_label,
+      L.site_url + p.site_url, L.purpose + (T.purposes[p.purpose] || ''), L.message + String(p.message).slice(0, 1500)
+    ].join('\n') + '\n';
+    return 'mailto:' + MAIL + '?subject=' + encodeURIComponent(T.mail.subject + (T.purposes[p.purpose] || '')) + '&body=' + encodeURIComponent(body);
+  }
+
+  var btn = form.querySelector('.ct-submit');
+  var errBox = document.getElementById('ct-error');
+  var okBox = document.getElementById('ct-ok');
+  var busy = false;
+
+  function showError(code, p) {
+    document.getElementById('ct-error-text').textContent = (T.errors[code] || T.errors.fallback) + (LANG === 'ja' ? '' : ' ') + T.errTail;
+    document.getElementById('ct-error-mail').href = mailtoFrom(p);
+    errBox.hidden = false;
+  }
+  function showOk(purpose) {
+    document.getElementById('ct-ok-text').textContent = purpose === 'download' ? T.okDownload : T.okOther;
+    form.hidden = true;
+    okBox.hidden = false;
+    try { okBox.focus({ preventScroll: true }); } catch (e) {}
+    okBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  form.addEventListener('submit', async function (ev) {
+    ev.preventDefault();
+    if (busy) return;
+    errBox.hidden = true;
+    fixUrl();
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+    var p = collect();
+    busy = true;
+    btn.disabled = true;
+    btn.textContent = T.sending;
+    try {
+      if (!ENDPOINT) throw new Error('no_endpoint');
+      var tok = null;
+      try { tok = window.KLTurnstile ? await window.KLTurnstile.token() : null; } catch (e) { tok = null; }
+      if (tok) p.turnstile_token = tok;
+      var r = await fetch(ENDPOINT, { method: 'POST', mode: 'cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(p) });
+      var j = null;
+      try { j = await r.json(); } catch (e) { j = null; }
+      if (!j || j.ok !== true) throw new Error((j && j.error) || 'http_' + r.status);
+      showOk(p.purpose);
+      if (window.va) window.va('event', { name: 'contact_submit', data: { purpose: p.purpose } });
+    } catch (e) {
+      showError(e && e.message, p);
+    } finally {
+      busy = false;
+      btn.disabled = false;
+      btn.textContent = T.submit;
+    }
+  });
+})();
 </script>
 </body>
 </html>

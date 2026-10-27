@@ -3,31 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>サービス一覧 | Synapse Arrows</title>
-    <meta name="description" content="Synapse Arrowsのコンサルティング・サービス。企業向けAI研修、AI認知診断、AEO・LLMO支援、AI導入・AIエージェント開発、海外進出支援。">
+    <title>サービスと料金｜AI映え診断（無料の 2 段と有料の 4 つ）とそのほかのご相談 | Synapse Arrows</title>
+    <meta name="description" content="AI映え診断の進め方と料金。Light と詳しい診断は無料。照合レポート・照合レポート＋測り直し・定点観測プラン・実装・伴走プランの中身と値段（税別・1 店舗・1 社あたり）。AI 研修・AI エージェント開発・海外進出支援・市場調査は個別見積もり。Synapse Arrows Pte. Ltd.">
     <link rel="canonical" href="https://synapsearrows.com/services/">
     <link rel="alternate" hreflang="ja" href="https://synapsearrows.com/services/">
     <link rel="alternate" hreflang="en" href="https://synapsearrows.com/en/services/">
     <link rel="alternate" hreflang="x-default" href="https://synapsearrows.com/services/">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Synapse Arrows">
-    <meta property="og:title" content="サービス一覧 | Synapse Arrows">
-    <meta property="og:description" content="Synapse Arrowsのコンサルティング・サービス。AEOコンサルティング、海外進出支援、AIエージェント開発支援、マーケットリサーチ。">
+    <meta property="og:title" content="サービスと料金｜AI映え診断 | Synapse Arrows">
+    <meta property="og:description" content="AI映え診断の進め方と料金。Light と詳しい診断は無料。照合レポート・照合レポート＋測り直し・定点観測プラン・実装・伴走プランの中身と値段（税別・1 店舗・1 社あたり）。AI 研修・AI エージェント開発・海外進出支援・市場調査は個別見積もり。Synapse Arrows Pte. Ltd.">
     <meta property="og:url" content="https://synapsearrows.com/services/">
     <meta property="og:image" content="https://synapsearrows.com/og-image.png">
     <meta property="og:locale" content="ja_JP">
     <meta property="og:locale:alternate" content="en_SG">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@michielinksee">
-    <meta name="twitter:title" content="サービス一覧 | Synapse Arrows">
+    <meta name="twitter:title" content="サービスと料金｜AI映え診断 | Synapse Arrows">
     <meta name="twitter:image" content="https://synapsearrows.com/og-image.png">
-    <meta name="twitter:description" content="Synapse Arrowsのコンサルティング・サービス。AEOコンサルティング、海外進出支援、AIエージェント開発支援、マーケットリサーチ。">
+    <meta name="twitter:description" content="AI映え診断の進め方と料金。Light と詳しい診断は無料。照合レポート・照合レポート＋測り直し・定点観測プラン・実装・伴走プランの中身と値段（税別・1 店舗・1 社あたり）。AI 研修・AI エージェント開発・海外進出支援・市場調査は個別見積もり。Synapse Arrows Pte. Ltd.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" href="/favicon.png" type="image/png">
     <link rel="manifest" href="/site.webmanifest">
     <link rel="stylesheet" href="/styles.css">
+    <style>
+    /* サービスと料金（2026-10-27）*/
+    .tier-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:32px}
+    .tier{background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);padding:26px;display:flex;flex-direction:column}
+    .tier.paid{border:2px solid var(--primary)}
+    .tier .k{font-size:.75rem;font-weight:800;letter-spacing:.1em;color:var(--primary)}
+    .tier h3{font-size:1.12rem;margin:8px 0 4px}
+    .tier .tag{display:inline-block;font-size:.78rem;font-weight:700;padding:3px 10px;border-radius:999px;background:var(--accent);color:var(--primary);margin-bottom:12px;align-self:flex-start}
+    .tier .tag.free{background:#ECFDF5;color:#047857}
+    .tier p{color:var(--text-secondary);font-size:.92rem;line-height:1.8}
+    .tier ul{margin:10px 0 16px 18px;color:var(--text-secondary);font-size:.9rem;line-height:1.8}
+    .tier .section-cta{margin-top:auto}
+    .pcards{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:32px}
+    .pc{background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;display:flex;flex-direction:column}
+    .pc.featured{border:2px solid var(--primary)}
+    .pc .k{font-size:.72rem;font-weight:800;letter-spacing:.1em;color:var(--primary)}
+    .pc h3{font-size:1.02rem;margin:6px 0 4px;min-height:2.6em}
+    .pc .price{font-size:1.55rem;font-weight:800;margin:2px 0 0}
+    .pc .price small{font-size:.8rem;font-weight:600;color:var(--text-secondary)}
+    .pc .incl{font-size:.8rem;color:var(--text-muted);margin-bottom:12px}
+    .pc ul{margin:0 0 16px 18px;color:var(--text-secondary);font-size:.88rem;line-height:1.75}
+    .pc .section-cta{margin-top:auto}
+    .tbl-wrap{overflow-x:auto;margin-top:36px;border:1px solid var(--border);border-radius:var(--radius-lg);background:#fff}
+    .ptbl{border-collapse:collapse;width:100%;min-width:980px;font-size:.88rem}
+    .ptbl th,.ptbl td{padding:12px 14px;border-bottom:1px solid var(--border);vertical-align:top;text-align:left;line-height:1.7}
+    .ptbl thead th{background:var(--bg-light);font-weight:700;white-space:nowrap}
+    .ptbl tbody th{font-weight:600;color:var(--text-secondary);white-space:nowrap;background:#fff}
+    .ptbl td.paid{background:#FBFBFF}
+    .ptbl .yen{font-weight:800;font-size:1rem;color:var(--text-primary)}
+    .ptbl .incl{display:block;color:var(--text-muted);font-size:.78rem;font-weight:400}
+    .notes{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:28px}
+    .note{border-left:4px solid var(--primary);padding:16px 20px;background:#fff;color:var(--text-secondary);font-size:.9rem;line-height:1.8}
+    .note strong{color:var(--text-primary)}
+    .others{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:28px}
+    .other{background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);padding:22px}
+    .other h3{font-size:1rem;margin:0 0 6px}
+    .other p{color:var(--text-secondary);font-size:.88rem;line-height:1.7}
+    .other .fee{display:block;margin-top:10px;font-size:.82rem;font-weight:700}
+    .cta-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:32px}
+    .faq-list{max-width:800px}
+    @media(max-width:1000px){.pcards,.others{grid-template-columns:1fr 1fr}}
+    @media(max-width:900px){.tier-grid,.notes{grid-template-columns:1fr}}
+    @media(max-width:600px){.pcards,.others{grid-template-columns:1fr}.pc h3{min-height:0}}
+    </style>
+
     <!-- JSON-LD: entity definitions so @id refs (#organization / #founder) resolve on this page -->
     <script type="application/ld+json">
     [
@@ -66,52 +111,83 @@
     </script>
     <script type="application/ld+json">
     [
-      {
-        "@context": "https://schema.org",
-        "@type": "Service",
-        "name": "企業向けAI研修・AI導入支援",
-        "description": "経営層・管理職・実務担当向けの生成AI研修、部門別ユースケース、実践演習、情報管理と社内ルール、AI導入ロードマップ。",
-        "provider": {"@id": "https://synapsearrows.com/#organization"},
-        "serviceType": "Corporate AI Training and Adoption Advisory",
-        "areaServed": ["JP", "SG", "Global"]
-      },
-      {
-        "@context": "https://schema.org",
-        "@type": "Service",
-        "name": "AEOコンサルティング",
-        "description": "ChatGPT・Perplexity・Gemini等が自社をどう理解・推薦するかを診断し、競合推薦率、引用元、誤認、構造化データ、エンティティ、AI可読コンテンツを改善。",
-        "provider": {"@id": "https://synapsearrows.com/#organization"},
-        "serviceType": "AI Engine Optimization Consulting",
-        "areaServed": ["JP", "SG", "Global"]
-      },
-      {
-        "@context": "https://schema.org",
-        "@type": "Service",
-        "name": "海外進出支援",
-        "description": "シンガポール拠点の地の利と官民ネットワークを活かした東南アジア市場参入支援。市場調査、パートナー開拓、規制対応、B2Bリードジェネレーション。",
-        "provider": {"@id": "https://synapsearrows.com/#organization"},
-        "serviceType": "Cross-border Business Consulting",
-        "areaServed": ["JP", "SG", "SEA"]
-      },
-      {
-        "@context": "https://schema.org",
-        "@type": "Service",
-        "name": "AIエージェント開発支援",
-        "description": "MCP対応、エージェント設計、LLM選定から運用まで。KanseiLINK・Linksee Memoryで実証済みのアーキテクチャに基づくコンサルティング。",
-        "provider": {"@id": "https://synapsearrows.com/#organization"},
-        "serviceType": "AI Agent Development Consulting",
-        "areaServed": ["JP", "SG", "Global"]
-      },
-      {
-        "@context": "https://schema.org",
-        "@type": "Service",
-        "name": "マーケットリサーチ",
-        "description": "東南アジア市場を中心としたデータドリブンな市場調査。消費者動向、食品・飲料輸出機会分析、競合ベンチマーキング。",
-        "provider": {"@id": "https://synapsearrows.com/#organization"},
-        "serviceType": "Market Research",
-        "areaServed": ["JP", "SG", "SEA"]
-      }
-    ]
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "企業向けAI研修・AI導入支援",
+    "description": "経営層・管理職・実務担当向けの生成AI研修、部門別ユースケース、実践演習、情報管理と社内ルール、AI導入ロードマップ。",
+    "provider": {
+      "@id": "https://synapsearrows.com/#organization"
+    },
+    "serviceType": "Corporate AI Training and Adoption Advisory",
+    "areaServed": [
+      "JP",
+      "SG",
+      "Global"
+    ],
+    "offers": {
+      "@type": "Offer",
+      "description": "個別見積もり"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "海外進出支援",
+    "description": "シンガポール拠点の地の利と官民ネットワークを活かした東南アジア市場参入支援。市場調査、パートナー開拓、規制対応、B2Bリードジェネレーション。",
+    "provider": {
+      "@id": "https://synapsearrows.com/#organization"
+    },
+    "serviceType": "Cross-border Business Consulting",
+    "areaServed": [
+      "JP",
+      "SG",
+      "SEA"
+    ],
+    "offers": {
+      "@type": "Offer",
+      "description": "個別見積もり"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "AIエージェント開発支援",
+    "description": "MCP対応、エージェント設計、LLM選定から運用まで。KanseiLINK・Linksee Memoryで実証済みのアーキテクチャに基づくコンサルティング。",
+    "provider": {
+      "@id": "https://synapsearrows.com/#organization"
+    },
+    "serviceType": "AI Agent Development Consulting",
+    "areaServed": [
+      "JP",
+      "SG",
+      "Global"
+    ],
+    "offers": {
+      "@type": "Offer",
+      "description": "個別見積もり"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "マーケットリサーチ",
+    "description": "東南アジア市場を中心としたデータドリブンな市場調査。消費者動向、食品・飲料輸出機会分析、競合ベンチマーキング。",
+    "provider": {
+      "@id": "https://synapsearrows.com/#organization"
+    },
+    "serviceType": "Market Research",
+    "areaServed": [
+      "JP",
+      "SG",
+      "SEA"
+    ],
+    "offers": {
+      "@type": "Offer",
+      "description": "個別見積もり"
+    }
+  }
+]
     </script>
     <script type="application/ld+json">
     {
@@ -123,6 +199,49 @@
       ]
     }
     </script>
+    <!--p:block:ld_pricing_ja--><script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","@id":"https://synapsearrows.com/services/#ai-bae","name":"AI映え診断","serviceType":["AI Visibility Audit","Answer Engine Optimization","Generative Engine Optimization"],"provider":{"@type":"Organization","@id":"https://synapsearrows.com/#organization","name":"Synapse Arrows Pte. Ltd.","url":"https://synapsearrows.com/"},"url":"https://synapsearrows.com/ai-bae-shindan/","areaServed":["JP","SG"],"availableLanguage":["ja","en"],"hasOfferCatalog":{"@type":"OfferCatalog","name":"AI映え診断の料金（2026-10-27 改定・税別・1 店舗・1 社あたり）","itemListElement":[{"@type":"Offer","name":"Light","priceCurrency":"JPY","priceSpecification":{"@type":"UnitPriceSpecification","price":"0","priceCurrency":"JPY","valueAddedTaxIncluded":false},"itemOffered":{"@type":"Service","name":"Light","url":"https://synapsearrows.com/ai-bae-shindan/"}},{"@type":"Offer","name":"詳しい診断","priceCurrency":"JPY","priceSpecification":{"@type":"UnitPriceSpecification","price":"0","priceCurrency":"JPY","valueAddedTaxIncluded":false},"itemOffered":{"@type":"Service","name":"詳しい診断","url":"https://synapsearrows.com/ai-bae-shindan/"}},{"@type":"Offer","name":"照合レポート","priceCurrency":"JPY","priceSpecification":{"@type":"UnitPriceSpecification","price":"50000","priceCurrency":"JPY","valueAddedTaxIncluded":false},"itemOffered":{"@type":"Service","name":"照合レポート"}},{"@type":"Offer","name":"照合レポート＋測り直し","priceCurrency":"JPY","priceSpecification":{"@type":"UnitPriceSpecification","price":"80000","priceCurrency":"JPY","valueAddedTaxIncluded":false},"itemOffered":{"@type":"Service","name":"照合レポート＋測り直し"}},{"@type":"Offer","name":"定点観測プラン","priceCurrency":"JPY","priceSpecification":{"@type":"UnitPriceSpecification","price":"30000","priceCurrency":"JPY","valueAddedTaxIncluded":false,"unitText":"月"},"eligibleDuration":{"@type":"QuantitativeValue","minValue":6,"unitCode":"MON"},"itemOffered":{"@type":"Service","name":"定点観測プラン"}},{"@type":"Offer","name":"実装・伴走プラン","priceCurrency":"JPY","priceSpecification":{"@type":"UnitPriceSpecification","price":"120000","priceCurrency":"JPY","valueAddedTaxIncluded":false,"unitText":"月"},"eligibleDuration":{"@type":"QuantitativeValue","minValue":6,"unitCode":"MON"},"itemOffered":{"@type":"Service","name":"実装・伴走プラン"}}]}}</script><!--/p-->
+    <script type="application/ld+json">
+    {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "AI映え診断の料金は 1 店舗ごとですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "はい。表示の料金はすべて 1 店舗・1 社あたりで、税別です。店舗が複数ある場合や、会社として複数のブランドを頼みたい場合はお見積りします。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "無料の診断と有料の違いは何ですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Light は AI に聞かずにホームページの下地を見ます。詳しい診断は 4 つの AI に決まった 3 問を 1 回聞き、名前が出たか・間違いの件数・出典を知らせます。有料の照合レポートは業種と地域に合わせた 20〜30 問を 4 つの AI に 3 回ずつ聞き、間違いの全件を公式の情報と照合して、直す作業の一覧を優先順でお渡しします。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "月額のプランに最低期間があるのはなぜですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "AI が頼る掲載サイトの情報が入れ替わるのに時間がかかり、直した効果を数で見るには数か月かかるためです。単発のレポートの後、1 か月以内に月額のプランに入られた場合は、単発の代金を初月の料金から引きます。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "AI での順位や推薦を保証しますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "保証しません。当社が変えるのは、AI がお店や会社を案内する時の住所・値段・営業時間・メニューの間違いを減らすことです。同じ質問を繰り返し測って、変化を数で報告します。"
+      }
+    }
+  ]
+}
+    </script>
+    <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script>
+    <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
 
@@ -135,11 +254,12 @@
                 Synapse Arrows
             </a>
             <ul class="nav-links">
-                <li><a href="/about/">About</a></li>
-                <li><a href="/products/">Products</a></li>
-                <li><a href="/services/" class="active">Services</a></li>
-                <li><a href="/insights/">Insights</a></li>
-                <li><a href="/contact/" class="nav-cta">Contact</a></li>
+                <li><a href="/ai-bae-shindan/" class="nav-cta nav-cta-ai">AI映え診断</a></li>
+                <li><a href="/services/" class="active">サービスと料金</a></li>
+                <li><a href="/insights/">調査・記事</a></li>
+                <li><a href="/about/">会社</a></li>
+                <li><a href="/tools/">無料ツール</a></li>
+                <li><a href="/contact/" class="nav-cta">資料請求・相談</a></li>
             </ul>
             <div class="lang-switch">
                 <a href="#" class="active">JP</a>
@@ -156,101 +276,130 @@
     <!-- Page Header -->
     <section class="page-header page-header-services">
         <div class="container">
-            <h1 class="page-title">コンサルティング・サービス</h1>
-            <p class="page-desc">AIを理解する研修から、AIに理解・推薦されるためのAEO支援、AIを業務で使う導入設計、その先の高度なAgent Readiness評価までつなぎます。</p>
+            <h1 class="page-title">サービスと料金</h1>
+            <p class="page-desc">売り物は AI映え診断です。無料の 2 段で現状を知り、必要なら有料で照合して、直して、測り直します。AI 研修・AI エージェント開発・海外進出支援・市場調査のご相談は、このページの下に。</p>
         </div>
     </section>
 
-    <!-- Services -->
-    <section class="section">
+    <!-- AI映え診断: 3 段 -->
+    <section class="section" id="ai-bae">
         <div class="container">
-            <div class="services-grid">
+            <div class="section-label">AI映え診断</div>
+            <h2 class="section-title">無料の 2 段から、必要なところまで</h2>
+            <p class="section-desc">お店・会社のホームページと、ChatGPT・Claude・Gemini・Perplexity の答えを調べ、公式の情報との食い違いを見つけて直すサービスです。</p>
 
-                <!-- AI Training -->
-                <div class="service-card">
-                    <div class="service-num">01 — AI TRAINING</div>
-                    <h3>企業向けAI研修・導入支援</h3>
-                    <p>AIの専門用語を知らない段階から、経営・管理職・実務担当が安全にAIを理解し、業務へ活用できる状態をつくります。</p>
-                    <ul class="service-details">
-                        <li>生成AI・AIエージェントの基礎研修</li>
-                        <li>部門別ユースケースと実践演習</li>
-                        <li>情報管理・リスク・社内ルール</li>
-                        <li>AI活用テーマと導入ロードマップ</li>
-                    </ul>
-                    <a href="/services/ai-aeo/" class="section-cta">AI研修・AEO支援の詳細 &rarr;</a>
-                    <a href="/guide/how-to-choose-ai-consultant/" class="section-cta">AI導入支援会社の選び方（ガイド）&rarr;</a>
-                </div>
+            <div class="tier-grid">
+                <article class="tier">
+                    <div class="k">STEP 1</div><h3><!--p:light.name_ja-->Light<!--/p--></h3>
+                    <span class="tag free"><!--p:light.label_ja-->無料・登録不要<!--/p--></span>
+                    <p><strong>何が分かるか:</strong> ホームページの下地。AI がサイトを読める設定か、その業種で AI が頼る掲載サイトへつながっているか、店名・住所・営業時間・メニューが文字で伝わるか。</p>
+                    <ul><li>AI には聞きません</li><li>URL を入れて数十秒</li><li>対象: 1 サイト</li></ul>
+                    <a href="/ai-bae-shindan/" class="section-cta">Light を始める &rarr;</a>
+                </article>
+                <article class="tier">
+                    <div class="k">STEP 2</div><h3><!--p:detailed.name_ja-->詳しい診断<!--/p--></h3>
+                    <span class="tag free"><!--p:detailed.label_ja-->無料（メールの確認が要ります）<!--/p--></span>
+                    <p><strong>何をするか:</strong> ChatGPT・Claude・Gemini・Perplexity に、決まった 3 つの質問を 1 回ずつ聞きます。名前が出たか、間違いの件数、出典をメールでお知らせします。</p>
+                    <ul><li>間違いの中身は 1 件だけお見せします</li><li>対象: 1 店舗・1 社</li><li>Light の結果の画面から申し込めます</li></ul>
+                    <a href="/ai-bae-shindan/" class="section-cta">Light の結果から申し込む &rarr;</a>
+                </article>
+                <article class="tier paid">
+                    <div class="k">STEP 3</div><h3>有料: 照合して、直して、測り直す</h3>
+                    <span class="tag"><!--p:report.man-->5万円<!--/p-->〜・税別</span>
+                    <p><strong>何をするか:</strong> 業種と地域に合わせた 20〜30 問を 4 つの AI に 3 回ずつ聞き、間違いの全件を公式の情報と 1 件ずつ照合。AI ごとの頼る先と、直す作業の一覧をお渡しします。続けて測る・直す作業を当社がやる月額のプランもあります。</p>
+                    <ul><li>照合レポート（単発）</li><li>照合レポート＋1 か月後の測り直し</li><li>定点観測プラン／実装・伴走プラン（月額）</li></ul>
+                    <a href="#pricing" class="section-cta">料金表を見る &rarr;</a>
+                </article>
+            </div>
 
-                <!-- AEO Consulting -->
-                <div class="service-card">
-                    <div class="service-num">02 — AEO</div>
-                    <h3>AI認知診断・AEO支援</h3>
-                    <p>AIが自社をどう理解・説明し、顧客の質問でどれだけ推薦するかを競合と比較。診断結果から実行可能な改善へつなげます。</p>
-                    <ul class="service-details">
-                        <li>AI認知・誤認・引用元の診断</li>
-                        <li>競合との推薦率・Share of Voice比較</li>
-                        <li>構造化データ（JSON-LD）設計・実装支援</li>
-                        <li>エンティティ最適化（ナレッジパネル・Wikidata）</li>
-                        <li>AIクローラー対応コンテンツ戦略</li>
-                        <li>KanseiLINKによる発展評価への接続</li>
-                    </ul>
-                    <a href="/services/ai-aeo/" class="section-cta">AI認知診断の詳細 &rarr;</a>
-                </div>
+        </div>
+    </section>
 
-                <!-- Global Expansion -->
-                <div class="service-card">
-                    <div class="service-num">03 — GLOBAL</div>
-                    <h3>海外進出支援</h3>
-                    <p>シンガポール拠点の地の利と、経産省・MUFG時代の官民ネットワークを活かした東南アジア市場参入・日本市場参入支援。</p>
-                    <ul class="service-details">
-                        <li>東南アジア市場調査・競合分析</li>
-                        <li>現地パートナー開拓・イベント支援</li>
-                        <li>日本食品・酒類の海外展開戦略</li>
-                        <li>規制・ライセンス対応アドバイザリー</li>
-                        <li>B2Bリードジェネレーション</li>
-                    </ul>
-                    <a href="/guide/how-to-choose-singapore-expansion-support/" class="section-cta">シンガポール進出支援会社の選び方（ガイド）&rarr;</a>
-                </div>
+    <!-- 料金 -->
+    <section class="section section-alt" id="pricing">
+        <div class="container">
+            <div class="section-label">Pricing</div>
+            <h2 class="section-title">料金（<!--p:scope_ja-->1 店舗・1 社あたり<!--/p-->・税別）</h2>
+            <p class="section-desc">有料は 4 つ。単発の 2 つと、月額の 2 つです。</p>
 
-                <!-- AI Agent Development -->
-                <div class="service-card">
-                    <div class="service-num">04 — AI AGENT</div>
-                    <h3>AIエージェント開発支援</h3>
-                    <p>MCP対応、エージェント設計、LLM選定から運用まで。自社プロダクト（KanseiLINK・Linksee Memory）で実証済みのアーキテクチャに基づくコンサルティング。</p>
-                    <ul class="service-details">
-                        <li>MCPサーバー設計・実装支援</li>
-                        <li>マルチエージェントアーキテクチャ設計</li>
-                        <li>LLM選定・コスト最適化</li>
-                        <li>SaaS連携エージェント構築</li>
-                    </ul>
-                </div>
+            <div class="pcards">
+                <article class="pc featured"><div class="k">ONE-OFF</div><h3><!--p:report.name_ja-->照合レポート<!--/p--></h3>
+                    <div class="price"><!--p:report.yen-->50,000円<!--/p--><small>・単発</small></div><div class="incl">税込 <!--p:report.yen_incl-->55,000円<!--/p--></div>
+                    <ul><li>業種と地域に合わせた 20〜30 問 × 4 つの AI × 3 回</li><li>間違いの全件を、公式の情報と 1 件ずつ照合</li><li>AI ごとの頼る先（出典のサイト）</li><li>直す作業の一覧: どのサイトのどの欄を何に・優先順</li></ul>
+                    <a href="/contact/?topic=consult" class="section-cta">無料相談から申し込む &rarr;</a></article>
+                <article class="pc"><div class="k">ONE-OFF</div><h3><!--p:report_remeasure.name_ja-->照合レポート＋測り直し<!--/p--></h3>
+                    <div class="price"><!--p:report_remeasure.yen-->80,000円<!--/p--><small>・単発</small></div><div class="incl">税込 <!--p:report_remeasure.yen_incl-->88,000円<!--/p--></div>
+                    <ul><li>照合レポートの全部</li><li>1 か月後に、同じ質問で測り直し 1 回</li><li>変化を数で（間違いの件数・名前が出た回数・出典）</li></ul>
+                    <a href="/contact/?topic=consult" class="section-cta">無料相談から申し込む &rarr;</a></article>
+                <article class="pc"><div class="k">MONTHLY</div><h3><!--p:monitor.name_ja-->定点観測プラン<!--/p--></h3>
+                    <div class="price"><!--p:monitor.yen-->30,000円<!--/p--><small>／月</small></div><div class="incl">税込 <!--p:monitor.yen_incl-->33,000円<!--/p-->／月・最低 <!--p:monitor.min_months-->6<!--/p--> か月</div>
+                    <ul><li>毎月、決まった質問（照合レポートと同じ 20〜30 問）で 4 つの AI を測る</li><li>毎月のレポート 1 通</li><li>月 1 回の面談（30 分・オンライン）</li></ul>
+                    <a href="/contact/?topic=consult" class="section-cta">相談する &rarr;</a></article>
+                <article class="pc"><div class="k">MONTHLY</div><h3><!--p:implement.name_ja-->実装・伴走プラン<!--/p--></h3>
+                    <div class="price"><!--p:implement.yen-->120,000円<!--/p--><small>／月</small></div><div class="incl">税込 <!--p:implement.yen_incl-->132,000円<!--/p-->／月・最低 <!--p:implement.min_months-->6<!--/p--> か月</div>
+                    <ul><li>定点観測の全部</li><li>直す作業を当社がやります: 掲載サイトの情報の直し・サイトの構造化データ・文章の直し（<!--p:implement_fixes_ja-->月の件数はご相談の上で決めます<!--/p-->）</li><li>月 1 回の面談（30 分・オンライン）</li></ul>
+                    <a href="/contact/?topic=consult" class="section-cta">相談する &rarr;</a></article>
+            </div>
 
-                <!-- Market Research -->
-                <div class="service-card">
-                    <div class="service-num">05 — RESEARCH</div>
-                    <h3>マーケットリサーチ</h3>
-                    <p>東南アジア市場を中心としたデータドリブンな市場調査。SakeNaviの日本酒市場分析実績に基づく定量的アプローチ。</p>
-                    <ul class="service-details">
-                        <li>東南アジア消費者動向レポート</li>
-                        <li>飲食・食品業界の輸出機会分析</li>
-                        <li>競合ベンチマーキング</li>
-                        <li>AIツール・SaaS市場動向分析</li>
-                    </ul>
-                </div>
 
+            <div class="tbl-wrap"><table class="ptbl">
+                <thead><tr><th></th><th><!--p:light.name_ja-->Light<!--/p--></th><th><!--p:detailed.name_ja-->詳しい診断<!--/p--></th><th><!--p:report.name_ja-->照合レポート<!--/p--></th><th><!--p:report_remeasure.name_ja-->照合レポート＋測り直し<!--/p--></th><th><!--p:monitor.name_ja-->定点観測プラン<!--/p--></th><th><!--p:implement.name_ja-->実装・伴走プラン<!--/p--></th></tr></thead>
+                <tbody>
+                <tr><th>値段（税別）</th><td><!--p:light.label_ja-->無料・登録不要<!--/p--></td><td><!--p:detailed.label_ja-->無料（メールの確認が要ります）<!--/p--></td>
+                    <td class="paid"><span class="yen"><!--p:report.man-->5万円<!--/p--></span>（単発）<span class="incl">税込 <!--p:report.yen_incl-->55,000円<!--/p--></span></td>
+                    <td class="paid"><span class="yen"><!--p:report_remeasure.man-->8万円<!--/p--></span>（単発）<span class="incl">税込 <!--p:report_remeasure.yen_incl-->88,000円<!--/p--></span></td>
+                    <td class="paid"><span class="yen">月 <!--p:monitor.man-->3万円<!--/p--></span>・最低 <!--p:monitor.min_months-->6<!--/p--> か月<span class="incl">税込 月 <!--p:monitor.yen_incl-->33,000円<!--/p--></span></td>
+                    <td class="paid"><span class="yen">月 <!--p:implement.man-->12万円<!--/p--></span>・最低 <!--p:implement.min_months-->6<!--/p--> か月<span class="incl">税込 月 <!--p:implement.yen_incl-->132,000円<!--/p--></span></td></tr>
+                <tr><th>AI に聞くか</th><td>聞かない</td><td>4 つの AI に決まった 3 問を 1 回</td><td class="paid">業種と地域に合わせた 20〜30 問 × 4 つの AI × 3 回</td><td class="paid">同じ</td><td class="paid">毎月、決まった質問で測る</td><td class="paid">毎月、決まった質問で測る</td></tr>
+                <tr><th>中身</th><td>サイトの下地・頼る先へのつながり</td><td>名前が出たか・間違いの件数・出典（間違いは 1 件だけ中身まで）</td><td class="paid">間違いの全件（公式の情報と 1 件ずつ照合）・AI ごとの頼る先・直す作業の一覧（どのサイトのどの欄を何に・優先順）</td><td class="paid">左に加えて、1 か月後の測り直し 1 回（変化を数で）</td><td class="paid">毎月のレポート 1 通＋月 1 回の面談（30 分・オンライン）</td><td class="paid">定点観測に加えて、直す作業を当社がやる（掲載サイトの情報の直し・サイトの構造化データ・文章の直し。<!--p:implement_fixes_ja-->月の件数はご相談の上で決めます<!--/p-->）＋月 1 回の面談</td></tr>
+                <tr><th>対象</th><td>1 サイト</td><td>1 店舗・1 社</td><td class="paid">1 店舗・1 社</td><td class="paid">1 店舗・1 社</td><td class="paid">1 店舗・1 社</td><td class="paid">1 店舗・1 社</td></tr>
+                <tr><th>期間</th><td>—</td><td>—</td><td class="paid">単発</td><td class="paid">単発（測り直しは 1 か月後）</td><td class="paid">最低 <!--p:monitor.min_months-->6<!--/p--> か月・その後は月単位</td><td class="paid">最低 <!--p:implement.min_months-->6<!--/p--> か月・その後は月単位</td></tr>
+                </tbody>
+            </table></div>
+            <div class="notes">
+                <div class="note"><strong>何が変わるか。</strong>AI がお店や会社を案内する時の、住所・値段・営業時間・メニューの間違いを減らします。順位や推薦の約束（「必ず上位に」など）はしません。効果は測り直しの数でお見せします。</div>
+                <div class="note"><strong>税と範囲。</strong><!--p:tax_note_ja-->表示の値段は税別です。税込は消費税 10% で計算した参考の額です。<!--/p--> 料金はすべて<!--p:scope_ja-->1 店舗・1 社あたり<!--/p-->。店舗が複数ある場合や、会社として複数のブランドを頼みたい場合は<a href="/contact/?topic=quote" style="text-decoration:underline;">お見積り</a>します。</div>
+                <div class="note"><strong>単発から月額へ。</strong><!--p:credit_rule_ja-->単発のレポートの後、1 か月以内に定点観測か実装・伴走に入られた場合は、単発の代金を初月の料金から引きます。<!--/p--></div>
+                <div class="note"><strong>最低 <!--p:monitor.min_months-->6<!--/p--> か月の理由。</strong><!--p:min_term_reason_ja-->AI が頼る掲載サイトの情報が入れ替わるのに時間がかかり、直した効果を数で見るには数か月かかるため、月額のプランは 6 か月からです。<!--/p--></div>
+            </div>
+            <p style="font-size:.82rem;color:var(--text-muted);margin-top:16px;">料金は <!--p:decided_on_ja-->2026年10月27日<!--/p--> 改定。AI の答えは質問の言い方や日によって変わるため、同じ質問を繰り返し測って変化を報告します。KanseiLINK（当社が運営する第三者の計器）の評価は、ご契約の有無で変わりません。</p>
+
+            <div class="cta-row">
+                <a href="/ai-bae-shindan/" class="btn-primary">まず無料で AI映え診断 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></a>
+                <a href="/contact/#download" class="btn-secondary">資料をもらう・相談する</a>
             </div>
         </div>
     </section>
 
-    <!-- CTA -->
-    <section class="section section-alt">
-        <div class="container" style="text-align:center;">
-            <h2 class="section-title">ご相談・お問い合わせ</h2>
-            <p class="section-desc">AI研修、AI認知・AEO診断、AI導入、海外進出、AIエージェント開発について、まだ課題が整理されていない段階からご相談いただけます。</p>
-            <a href="/contact/" class="btn-primary" style="font-size:1rem;">
-                Contact Us
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-            </a>
+    <section class="section" id="others">
+        <div class="container">
+            <div class="section-label">Other requests</div>
+            <h2 class="section-title">そのほかのご相談</h2>
+            <p class="section-desc">AI映え診断のほかに、次のご相談も受けています。いずれも内容に合わせて個別にお見積りします。</p>
+            <div class="others">
+                <article class="other"><h3>AI 研修・社内活用</h3><p>経営・管理職・実務担当が、生成 AI と AI エージェントを安全に業務で使えるようにする研修と、社内ルール・導入の道筋。</p><span class="fee">個別見積もり</span><a href="/guide/how-to-choose-ai-consultant/" class="section-cta" style="display:block;margin-top:8px;font-size:.85rem;">AI 導入支援会社の選び方（ガイド）&rarr;</a></article>
+                <article class="other"><h3>AI エージェント開発</h3><p>MCP 対応、エージェントの設計、LLM の選定から運用まで。自社の KanseiLINK・Linksee Memory で実際に動かしている作りに基づいて支援します。</p><span class="fee">個別見積もり</span></article>
+                <article class="other"><h3>海外進出支援</h3><p>シンガポール拠点から、日本企業の東南アジア進出と、東南アジア企業の日本参入。市場調査・現地パートナー開拓・規制対応・B2B のリード獲得。</p><span class="fee">個別見積もり</span><a href="/guide/how-to-choose-singapore-expansion-support/" class="section-cta" style="display:block;margin-top:8px;font-size:.85rem;">シンガポール進出支援会社の選び方（ガイド）&rarr;</a></article>
+                <article class="other"><h3>市場調査</h3><p>東南アジア市場を中心にした調査。消費者の動向、飲食・食品の輸出機会、競合の比較、AI ツール・SaaS の市場動向。</p><span class="fee">個別見積もり</span></article>
+            </div>
+            <div class="faq-list" style="margin-top:40px;">
+                <details class="faq-item"><summary>AI について何から始めればよいか分からなくても相談できますか？</summary><div class="faq-answer">はい。課題が整理されていない段階から、研修・現状の診断・AI映え診断・業務への導入のどこから始めるべきかを一緒に切り分けます。AI や AEO の専門用語を知っている必要はありません。</div></details>
+                <details class="faq-item"><summary>海外進出支援のカバー範囲は？</summary><div class="faq-answer">シンガポールを拠点に、日本企業の東南アジア進出と、東南アジア企業の日本市場参入を支援しています。市場調査、現地パートナー開拓、イベント支援、B2B のリード獲得まで対応します。日本食品・酒類の海外展開については、自社の市場分析データに基づいた支援ができます。</div></details>
+                <details class="faq-item"><summary>受託開発は行っていますか？</summary><div class="faq-answer">受託開発は行っていません。自社プロダクトの開発・運営を軸に、AI映え診断、AI 研修、AI エージェント開発の助言、海外進出支援、市場調査を提供しています。特定の技術課題については、スポットでのご相談も可能です。</div></details>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="contact-section">
+        <div class="container">
+            <div class="section-label">Contact</div>
+            <h2 class="section-title">資料請求・相談</h2>
+            <p class="section-desc">料金表と進め方をまとめた資料をお送りします。無料相談（20 分・オンライン）、複数店舗・会社としてのお見積りもこちらから。</p>
+            <div class="cta-row" style="margin-top:0;">
+                <a href="/contact/#download" class="btn-primary" style="font-size:1rem;">資料をもらう・相談する <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></a>
+                <a href="/ai-bae-shindan/" class="btn-secondary" style="font-size:1rem;color:#fff;border-color:rgba(255,255,255,0.35);">まず無料で診断する</a>
+            </div>
         </div>
     </section>
 

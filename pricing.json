@@ -1,0 +1,58 @@
+{
+  "_readme": "AI映え診断の値段の正本（2026-10-27 Michie 決定・税別）。ここを直して `node scripts/build-pricing.mjs` を実行すると、<!--p:…--> の印が付いた全ページ（日本語・英語・JSON-LD・llms.txt）が書き換わる。`--check` で、ページがこのファイルと同じかを確かめる。値段は数字（円・税別）で持ち、表示の形（5万円・50,000円・税込 55,000円・JPY 50,000）はスクリプトが作る。tax_rate を 0 にすると税込の表示が消え、消費税の注記が「かかりません」に変わる。",
+  "decided_on": "2026-10-27",
+  "currency": "JPY",
+  "tax_rate": 0.10,
+  "scope_ja": "1 店舗・1 社あたり",
+  "scope_en": "per shop or company",
+  "plans": {
+    "light": {
+      "name_ja": "Light",
+      "name_en": "Light",
+      "price_jpy": 0,
+      "billing": "free",
+      "price_label_ja": "無料・登録不要",
+      "price_label_en": "Free, no sign-up"
+    },
+    "detailed": {
+      "name_ja": "詳しい診断",
+      "name_en": "Detailed check",
+      "price_jpy": 0,
+      "billing": "free",
+      "price_label_ja": "無料（メールの確認が要ります）",
+      "price_label_en": "Free (email confirmation required)"
+    },
+    "report": {
+      "name_ja": "照合レポート",
+      "name_en": "Fact-check report",
+      "price_jpy": 50000,
+      "billing": "one_off"
+    },
+    "report_remeasure": {
+      "name_ja": "照合レポート＋測り直し",
+      "name_en": "Fact-check report + re-measurement",
+      "price_jpy": 80000,
+      "billing": "one_off"
+    },
+    "monitor": {
+      "name_ja": "定点観測プラン",
+      "name_en": "Monthly monitoring",
+      "price_jpy": 30000,
+      "billing": "monthly",
+      "min_months": 6
+    },
+    "implement": {
+      "name_ja": "実装・伴走プラン",
+      "name_en": "Implementation retainer",
+      "price_jpy": 120000,
+      "billing": "monthly",
+      "min_months": 6
+    }
+  },
+  "implement_monthly_fixes": null,
+  "credit_rule_ja": "単発のレポートの後、1 か月以内に定点観測か実装・伴走に入られた場合は、単発の代金を初月の料金から引きます。",
+  "credit_rule_en": "If you start monthly monitoring or the implementation retainer within one month of a one-off report, we deduct the report fee from the first month.",
+  "min_term_reason_ja": "AI が頼る掲載サイトの情報が入れ替わるのに時間がかかり、直した効果を数で見るには数か月かかるため、月額のプランは 6 か月からです。",
+  "min_term_reason_en": "The listings AI relies on take time to refresh, and seeing the effect of a fix in numbers takes months, so monthly plans run for at least six months.",
+  "sgd_note_en": "Prices are in Japanese yen. For clients in Singapore we quote in SGD on request."
+}

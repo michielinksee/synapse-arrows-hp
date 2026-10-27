@@ -1,0 +1,30 @@
+name: site-check
+on:
+  pull_request:
+  push:
+    branches: [main]
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      # 値段は pricing.json が正本。印の付いたページが正本と同じかを見る
+      - run: node scripts/build-pricing.mjs --check
+      # 今ある URL を消していないか（main にある .html が全部残っているか）
+      - run: |
+          git fetch origin main --quiet
+          missing=0
+          for f in $(git ls-tree -r origin/main --name-only | grep '\.html$'); do
+            [ -f "$f" ] || { echo "missing: $f"; missing=1; }
+          done
+          exit $missing
+      # JSON-LD が壊れていないか
+      - run: |
+          node -e '
+          const fs=require("fs"),{execFileSync}=require("child_process");
+          const files=execFileSync("git",["ls-files","--","*.html"],{encoding:"utf8"}).split(/\r?\n/).filter(Boolean);
+          let bad=0;for(const f of files){const s=fs.readFileSync(f,"utf8");const re=/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g;let m;while((m=re.exec(s))){try{JSON.parse(m[1].replace(/<\\//g,"</"))}catch(e){console.error("bad JSON-LD:",f,e.message);bad++}}}
+          process.exit(bad?1:0)'

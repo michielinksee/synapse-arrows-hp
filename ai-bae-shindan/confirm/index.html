@@ -28,9 +28,11 @@
     .fine { color:var(--sub); font-size:13px; }
     .big { font-size:28px; font-weight:900; background:var(--grad); -webkit-background-clip:text; background-clip:text; color:transparent; }
   </style>
+    <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script>
+    <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
-<header><nav class="nav"><div class="container nav-inner"><a href="/" class="nav-logo"><img src="/logo.png" alt="Synapse Arrows" width="32" height="32">Synapse Arrows</a><ul class="nav-links"><li><a href="/about/">About</a></li><li><a href="/products/">Products</a></li><li><a href="/services/">Services</a></li><li><a href="/tools/" class="active">Tools</a></li><li><a href="/insights/">Insights</a></li><li><a href="/contact/" class="nav-cta">Contact</a></li></ul></div></nav></header>
+<header><nav class="nav"><div class="container nav-inner"><a href="/" class="nav-logo"><img src="/logo.png" alt="Synapse Arrows" width="32" height="32">Synapse Arrows</a><ul class="nav-links"><li><a href="/ai-bae-shindan/" class="nav-cta nav-cta-ai active">AI映え診断</a></li><li><a href="/services/">サービスと料金</a></li><li><a href="/insights/">調査・記事</a></li><li><a href="/about/">会社</a></li><li><a href="/tools/">無料ツール</a></li><li><a href="/contact/" class="nav-cta">資料請求・相談</a></li></ul><button class="mobile-menu-btn" aria-label="Menu"><span></span><span></span><span></span></button></div></nav></header>
 <main class="aib">
 <div class="wrap">
   <div class="top"><a href="/ai-bae-shindan/">← AI映え診断</a></div>
@@ -71,5 +73,6 @@ $('go').addEventListener('click', async () => {
   } catch { $('go').disabled = false; show('<p class="bad">サーバーに接続できませんでした。時間をおいて、もう一度押してください。</p>'); }
 });
 </script>
+<script>document.querySelector('.mobile-menu-btn').addEventListener('click',function(){const n=document.querySelector('.nav-links');const l=document.querySelector('.lang-switch');const o=n.style.display==='flex';n.style.display=o?'none':'flex';n.style.flexDirection='column';n.style.position='absolute';n.style.top='72px';n.style.left='0';n.style.right='0';n.style.background='#fff';n.style.padding='20px';n.style.boxShadow='0 8px 24px rgba(0,0,0,0.1)';if(l)l.style.display=o?'none':'flex';});</script>
 </body>
 </html>
