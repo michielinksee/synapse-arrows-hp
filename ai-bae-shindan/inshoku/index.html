@@ -721,7 +721,7 @@ function materialsCard() {
   </article>`;
 }
 
-// HP の担当者へ送る依頼文（サーバーの vendor_request）。古いサーバーは返さない＝出さない
+// HP の担当者向けの一覧（サーバーの vendor_request・箇条書き）。古いサーバーは返さない＝出さない
 async function copyVendorRequest() {
   const ta = $('vreq-text'); if (!ta) return;
   try { await navigator.clipboard.writeText(ta.value); } catch { ta.select(); try { document.execCommand('copy'); } catch {} }
@@ -731,10 +731,10 @@ function vendorCard() {
   const t = data.ai_bae.vendor_request;
   if (typeof t !== 'string' || !t) return '';
   return `<article class="post" data-card="vreq">
-    <div class="head"><div class="avatar sum">依頼</div><div><div class="who">HP の担当者へ送る依頼文</div><div class="meta">「担当者へ」の項目をまとめました</div></div></div>
-    <div class="vreq"><p class="lead">HP を作った会社・担当の方に、この文をそのまま送ってください。</p>
-      <textarea readonly id="vreq-text" aria-label="HP の担当者へ送る依頼文">${esc(t)}</textarea>
-      <div class="row"><button type="button" class="copy" data-act="copy-vreq">文をコピー</button><span class="done" id="vreq-done" hidden>コピーしました</span></div>
+    <div class="head"><div class="avatar sum">一覧</div><div><div class="who">HP の担当者向けの一覧</div><div class="meta">「担当者へ」の項目をまとめました</div></div></div>
+    <div class="vreq"><p class="lead">HP を作った会社・担当の方に、この一覧をコピーして渡してください。</p>
+      <textarea readonly id="vreq-text" aria-label="HP の担当者向けの一覧">${esc(t)}</textarea>
+      <div class="row"><button type="button" class="copy" data-act="copy-vreq">一覧をコピー</button><span class="done" id="vreq-done" hidden>コピーしました</span></div>
       <div class="help">頼める先が無い時は、<a href="/contact/">ご相談ください</a>。</div></div>
   </article>`;
 }
