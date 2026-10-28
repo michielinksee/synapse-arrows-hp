@@ -85,16 +85,20 @@
     /* ── 5 つの丸 ── */
     .stories { display: flex; gap: 10px; justify-content: space-between; padding: 22px 0 18px; border-bottom: 1px solid var(--line); overflow-x: auto; scrollbar-width: none; }
     .stories::-webkit-scrollbar { display: none; }
-    .story { flex: 1 0 0; min-width: 72px; background: none; border: 0; cursor: pointer; text-align: center; font: inherit; color: var(--ink); display: flex; flex-direction: column; align-items: center; }
-    .story .ring { display: block; width: 72px; height: 72px; border-radius: 50%; margin: 0 auto; padding: 3px; background: var(--grad); transition: transform .15s; }
-    .story .ring .in { width: 100%; height: 100%; border-radius: 50%; background: var(--card); display: flex; align-items: center; justify-content: center; border: 3px solid var(--card); }
-    .story .ball { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; display: block; background: #fff; }
-    .story .all { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 17px; letter-spacing: .02em; color: var(--ink); }
-    .story .lbl { display: block; font-size: 12px; margin-top: 8px; letter-spacing: .08em; white-space: nowrap; }
-    .story:hover .ring { transform: scale(1.04); }
-    .story.on .ring { box-shadow: 0 0 0 2px var(--card), 0 0 0 4px var(--g2); }
-    .story[aria-pressed="false"] .ring { opacity: .55; }
-    .story[aria-pressed="true"] .ring, .stories.idle .story .ring { opacity: 1; }
+    /* 4 キャラクターの全身（頭から足まで）と名前。ALL は同じ高さの札。選んだ物は名前の色と下線で分かる */
+    .stories { --fig-h: 168px; }
+    .story { flex: 1 1 0; min-width: 0; background: none; border: 0; cursor: pointer; text-align: center; font: inherit; color: var(--ink); display: flex; flex-direction: column; align-items: center; padding: 0; }
+    .story .fig { display: flex; align-items: flex-end; justify-content: center; width: 100%; height: var(--fig-h); transition: transform .15s, opacity .15s; }
+    .story .fig img.body { display: block; width: auto; height: auto; max-width: 100%; max-height: 100%; }
+    .story .all-card { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; width: min(100%, 132px); height: 100%; border-radius: 16px; background: var(--grad); color: #fff; }
+    .story .all { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 28px; letter-spacing: .04em; line-height: 1; }
+    .story .all-sub { font-size: 14px; line-height: 1.4; opacity: .95; }
+    .story .lbl { display: block; margin-top: 10px; padding-bottom: 6px; font-size: 16px; font-weight: 600; letter-spacing: .02em; white-space: nowrap; border-bottom: 4px solid transparent; }
+    .story:hover .fig { transform: translateY(-3px); }
+    .story[aria-pressed="false"] .fig { opacity: .5; }
+    .story[aria-pressed="true"] .fig, .stories.idle .story .fig { opacity: 1; }
+    .story.on .lbl { color: var(--g2); font-weight: 800; border-image: var(--grad) 1; border-bottom-style: solid; }
+    .story:focus-visible { outline: 2px solid var(--g2); outline-offset: 4px; border-radius: 12px; }
 
     /* ── フォーム ── */
     .ask { padding: 24px 0 8px; text-align: center; }
@@ -217,21 +221,80 @@
     .ind-pages { margin: 12px 0 0; font-size: 13.5px; color: var(--sub); text-align: left; }
     .ind-pages a { color: var(--g2); font-weight: 700; text-decoration: none; }
     .ind-pages a:hover { text-decoration: underline; }
-    /* PC: 上の見出しと同じくらいの幅に広げる（入力欄と業種は横並び）。結果のカードは読みやすい幅のまま中央 */
+    /* ── 診断の部分の文字と枠（2026-10-28: 全体に大きく。本文は PC 17px・スマホ 16px、注意書きも 14px 以上） ── */
+    .wrap { font-size: 16px; }
+    .inds legend { font-size: 18px; margin-bottom: 10px; }
+    .inds legend small { font-size: 14px; }
+    .chips { gap: 10px; }
+    .chip { font-size: 16px; padding: 10px 18px; min-height: 46px; }
+    .ind-msg, .fixed-ind, .ind-pages, .indline, .cached, .def { font-size: 15px; }
+    .def .note { font-size: 14px; }
+    .ask h2 { font-size: 22px; }
+    .ask .sub { font-size: 15px; }
+    form.scan { gap: 12px; margin-top: 16px; }
+    form.scan input { height: 64px; font-size: 18px; padding: 0 18px; }
+    form.scan button { height: 64px; font-size: 18px; padding: 0 28px; }
+    .fine { font-size: 14px; }
+    .error, .notice, .notice .go { font-size: 16px; }
+    .state { font-size: 16px; }
+    .post .head { padding: 16px 20px; gap: 14px; }
+    .post .avatar { width: 52px; height: 52px; }
+    .post .avatar.sum { font-size: 15px; }
+    .post .who { font-size: 19px; }
+    .post .meta, .post .url { font-size: 14px; }
+    .score-ring .u { font-size: 14px; letter-spacing: .04em; }
+    .topbar { font-size: 14px; }
+    .tiles { gap: 12px; padding: 0 20px; }
+    .tile { padding: 14px 16px; }
+    .tile .k { font-size: 14px; }
+    .tile .v { font-size: 20px; }
+    .facts { margin: 16px 20px 0; padding: 14px 18px; font-size: 16px; }
+    .facts .cap, .srcs .cap { font-size: 14px; }
+    .facts li, .facts .fix { font-size: 15.5px; }
+    .facts li code { font-size: 14px; }
+    .srcs { margin: 14px 20px 0; padding: 14px 18px; font-size: 16px; }
+    .srcs li { font-size: 15.5px; padding: 7px 0; }
+    .srcs .ev, .srcs .other, .srcs .note { font-size: 14px; }
+    .srcs .fx { font-size: 14.5px; }
+    .mats { padding: 6px 20px 8px; }
+    .mat { font-size: 16px; padding: 12px 0; }
+    .mat .f, .mat .x, .mat .p { font-size: 15px; }
+    .post .foot .tiny, .ib { font-size: 14px; }
+    .btn { font-size: 15px; padding: 12px 18px; }
+    .cta { font-size: 17px; }
+    .cta small { font-size: 14px; }
+    .plans h3 { font-size: 17px; }
+    .plans .lead, .plans li { font-size: 15px; }
+    .plans li b, .plans li .pr small, .plans .tax { font-size: 14px; }
+    .toast { font-size: 14px; }
+    .aib footer.site { font-size: 14px; }
+    /* PC: 上の見出し（サイトの .container）と同じ幅にする。業種と URL の欄は横並び */
     @media (min-width: 901px) {
-      .wrap { max-width: 1040px; }
-      .aib-hero, .stories, .state, .error, .notice, #results, .aib footer.site { max-width: 720px; margin-left: auto; margin-right: auto; }
-      .ask { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 44px; align-items: start; text-align: left; padding-top: 28px; }
+      .wrap { max-width: var(--container, 1230px); width: calc(100% - 128px); padding: 0 0 64px; font-size: 17px; }
+      .ask { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 56px; align-items: start; text-align: left; padding-top: 32px; }
       .ask .inds, .ask .fixed-ind { margin-top: 0; }
-      .ask .inds legend { font-size: 16px; }
+      .ask .inds legend { font-size: 19px; }
       .ask-url { padding-top: 2px; }
-      .ask-url h2 { font-size: 20px; }
+      .ask-url h2 { font-size: 23px; }
       .ask .fine { text-align: left; }
+      .tiles { grid-template-columns: repeat(4, 1fr); }
+      .mat, .facts, .srcs { font-size: 17px; }
+      .mat .t { font-size: 17px; }
+    }
+    @media (min-width: 901px) and (max-width: 1200px) { .wrap { width: calc(100% - 80px); } }
+    @media (max-width: 600px) {
+      .stories { --fig-h: 104px; gap: 4px; padding: 18px 0 14px; }
+      .story .lbl { font-size: 12.5px; letter-spacing: 0; margin-top: 8px; padding-bottom: 4px; border-bottom-width: 3px; }
+      .story .all-card { border-radius: 12px; gap: 4px; }
+      .story .all { font-size: 20px; }
+      .story .all-sub, .story .lbl-more { display: none; }
     }
     @media (max-width: 420px) {
-      .stories { gap: 6px; } .story { min-width: 62px; } .story .ring { width: 62px; height: 62px; } .story .ball { width: 42px; height: 42px; } .story .all { font-size: 14px; } .story .lbl { font-size: 11px; letter-spacing: 0; white-space: normal; line-height: 1.25; }
       form.scan { flex-direction: column; } form.scan button { width: 100%; }
+      form.scan input { flex: none; width: 100%; } /* 縦並びで flex:1 だと高さ 64px が効かず、欄が 25px ほどに潰れていた */
       .post .url { display: none; }
+      .post .head { padding: 14px 16px; }
+      .tiles { padding: 0 16px; } .facts, .srcs { margin-left: 16px; margin-right: 16px; } .mats { padding: 6px 16px 8px; }
     }
   </style>
     <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script>
@@ -262,11 +325,11 @@
   </header>
 
   <nav class="stories idle" id="stories" aria-label="診断するAIを選ぶ">
-    <button class="story on" data-eng="all" aria-pressed="true"><span class="ring"><span class="in"><span class="all">ALL</span></span></span><span class="lbl">まとめて診断</span></button>
-    <button class="story" data-eng="chatgpt" aria-pressed="false"><span class="ring"><span class="in"><img class="ball" src="/assets/ai-icons/chatgpt.webp" alt="" width="50" height="50"></span></span><span class="lbl">ChatGPT</span></button>
-    <button class="story" data-eng="claude" aria-pressed="false"><span class="ring"><span class="in"><img class="ball" src="/assets/ai-icons/claude.webp" alt="" width="50" height="50"></span></span><span class="lbl">Claude</span></button>
-    <button class="story" data-eng="gemini" aria-pressed="false"><span class="ring"><span class="in"><img class="ball" src="/assets/ai-icons/gemini.webp" alt="" width="50" height="50"></span></span><span class="lbl">Gemini</span></button>
-    <button class="story" data-eng="perplexity" aria-pressed="false"><span class="ring"><span class="in"><img class="ball" src="/assets/ai-icons/perplexity.webp" alt="" width="50" height="50"></span></span><span class="lbl">Perplexity</span></button>
+    <button class="story on" data-eng="all" aria-pressed="true"><span class="fig"><span class="all-card"><span class="all">ALL</span><span class="all-sub">4 つの AI を<br>まとめて</span></span></span><span class="lbl">まとめて<span class="lbl-more">診断</span></span></button>
+    <button class="story" data-eng="chatgpt" aria-pressed="false"><span class="fig"><img class="body" src="/assets/ai-icons/chatgpt-full.webp" alt="" width="211" height="360"></span><span class="lbl">ChatGPT</span></button>
+    <button class="story" data-eng="claude" aria-pressed="false"><span class="fig"><img class="body" src="/assets/ai-icons/claude-full.webp" alt="" width="222" height="360"></span><span class="lbl">Claude</span></button>
+    <button class="story" data-eng="gemini" aria-pressed="false"><span class="fig"><img class="body" src="/assets/ai-icons/gemini-full.webp" alt="" width="215" height="360"></span><span class="lbl">Gemini</span></button>
+    <button class="story" data-eng="perplexity" aria-pressed="false"><span class="fig"><img class="body" src="/assets/ai-icons/perplexity-full.webp" alt="" width="257" height="360"></span><span class="lbl">Perplexity</span></button>
   </nav>
 
   <section class="ask">
