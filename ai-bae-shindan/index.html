@@ -186,6 +186,19 @@
     .cands li:last-child { border-bottom: 0; }
     .cands .mk { font-weight: 700; color: var(--sub); } .cands .mk.ok { color: var(--ok); }
     .cands .fx { grid-column: 2; color: var(--sub); font-size: 12.5px; }
+    /* 直すこと: ① 自分でできること ② HP の担当者・技術の方へ（点数の表の下に 2 つの箇条書き） */
+    .todo { padding: 4px 16px 16px; }
+    .todo h3 { font-size: 15px; margin: 14px 0 6px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .todo ul { margin: 0; padding-left: 1.2em; }
+    .todo li { margin: 4px 0; line-height: 1.6; font-size: 14px; }
+    .todo li .now { display: block; color: var(--sub); font-size: 12.5px; }
+    .todo .copy { margin-left: auto; background: #111827; color: #fff; border: 0; border-radius: 999px; padding: 6px 14px; font-weight: 700; font-size: 12.5px; cursor: pointer; }
+    .todo .done { color: var(--ok); font-size: 12.5px; font-weight: 400; }
+    .todo .help { margin-top: 12px; font-size: 12.5px; color: var(--sub); }
+    .todo .help a { color: inherit; }
+    .howto { margin: 0 16px 16px; font-size: 12.5px; color: var(--sub); line-height: 1.6; }
+    .howto summary { cursor: pointer; font-weight: 700; color: var(--ink, #111827); font-size: 13.5px; padding: 4px 0; }
+    .howto p { margin: 6px 0 0; }
     .mats { padding: 4px 16px 6px; }
     .mat { display: grid; grid-template-columns: 22px 1fr auto; gap: 8px 10px; padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
     .mat:last-child { border-bottom: 0; }
@@ -268,6 +281,7 @@
     .srcs li { font-size: 15.5px; padding: 7px 0; }
     .srcs .ev, .srcs .other, .srcs .note, .srcs .one { font-size: 14px; }
     .cands { margin: 14px 20px 0; padding: 14px 18px; font-size: 15.5px; } .cands .lead, .cands .fx { font-size: 14px; }
+    .todo h3, .howto summary { font-size: 16px; } .todo li { font-size: 15px; } .todo li .now { font-size: 13.5px; } .howto { font-size: 14px; }
     .srcs .fx { font-size: 14.5px; }
     .mats { padding: 6px 20px 8px; }
     .mat { font-size: 16px; padding: 12px 0; }
@@ -611,11 +625,20 @@ function isCompany() { return !!(data && data.ai_bae && data.ai_bae.industry_typ
 function srcUnmeasured() { return !!(data && data.ai_bae && data.ai_bae.sources_measured === false); }
 // 「ほかの AI の平均で仮に出した点」は、平均の元（自前の点を持つ AI）がある時だけ（古いサーバーは元が無くても estimated を立てていた）
 function showEstimated(sc) { return !!sc.estimated && !srcUnmeasured() && data.ai_bae.engines.some((x) => !x.sources.estimated); }
+// 直し方: 新しいサーバー（todo を返す）は、直し方を点数の表の下の 2 つの箇条書きにまとめる＝各項目には出さない。
+// 古いサーバー（todo なし）は今まで通り各項目に「直し方:」
+function hasTodo() { return !!(data && data.ai_bae && data.ai_bae.todo); }
+function fixHtml(x, oldPrefix) {
+  if (!x || !x.fix || hasTodo()) return '';
+  return `${oldPrefix}${esc(x.fix)}`;
+}
 function matLabel(m) { return m.status === 'ok' ? 'あり' : m.status === 'partial' ? '一部' : 'なし'; }
 function footer(txt) {
   return `<div class="foot"><button class="ib" data-act="dl" title="画像を保存"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg></button><button class="ib" data-act="share" title="シェア"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></button><span class="tiny">${esc(txt)}</span></div>`;
 }
 
+// 各 AI の枠に残す説明は 1 行まで（点の埋め方を優先）。長い説明は一番下の「この診断の見方」に 1 回だけ
+function oneNote(sc) { return (sc.points_note && !srcUnmeasured()) ? sc.points_note : (sc.note || ''); }
 function sourcesBox(e) {
   const sc = e.sources;
   // 印の根拠: measured＝2 都市の実測／measured_1city＝1 都市の実測（小さな札で区別し、何回聞いて何回挙げたかを書く）
@@ -623,12 +646,10 @@ function sourcesBox(e) {
   const one = (r) => r.evidence_kind === 'measured_1city' && r.measured_1city
     ? `<span class="one">${esc(r.measured_1city.city)}で ${r.measured_1city.n} 回聞いた時、${esc(e.vendor)} は ${r.measured_1city.hits} 回この場所を出典に挙げました（${esc(r.measured_1city.date)}）</span>`
     : '';
-  const rows = sc.relied.map((r) => `<li><span class="mk ${r.linked ? 'ok' : 'bad'}">${r.linked ? '◎' : '×'}</span><span>${esc(r.name)}${r.linked ? ` つながりあり${r.via.includes('sameAs') ? '（sameAs）' : ''}` : ' サイトから見当たらない'}<span class="ev">印の根拠: ${ev(r.evidence_kind)}</span>${r.evidence_kind === 'measured_1city' ? '<span class="badge1">1 都市の実測</span>' : ''}</span>${one(r)}${r.fix ? `<span class="fx"><b>直し方:</b> ${esc(r.fix)}</span>` : ''}</li>`).join('');
+  const rows = sc.relied.map((r) => `<li><span class="mk ${r.linked ? 'ok' : 'bad'}">${r.linked ? '◎' : '×'}</span><span>${esc(r.name)}${r.linked ? ` つながりあり${r.via.includes('sameAs') ? '（sameAs）' : ''}` : ' サイトから見当たらない'}<span class="ev">印の根拠: ${ev(r.evidence_kind)}</span>${r.evidence_kind === 'measured_1city' ? '<span class="badge1">1 都市の実測</span>' : ''}</span>${one(r)}${r.fix ? `<span class="fx">${fixHtml(r, '<b>直し方:</b> ')}</span>` : ''}</li>`).join('');
   return `<div class="srcs"><div class="cap"><span>この AI がよく頼る先</span><span>${srcUnmeasured() ? 'まだ測っていません（点に入れません）' : `${sc.linked_count} / ${sc.relied_count} につながり · ${sc.points} / 5 点${showEstimated(sc) ? '（ほかの AI の平均で仮に出した点）' : ''}`}</span></div><ul>${rows}</ul>
     ${sc.other_linked.length ? `<div class="other">そのほかのつながり（この AI での観測はまだ無い）: ${esc(sc.other_linked.join('・'))}</div>` : ''}
-    ${sc.note ? `<div class="note warn">${esc(sc.note)}</div>` : ''}
-    ${sc.points_note && !srcUnmeasured() ? `<div class="note warn">${esc(sc.points_note)}</div>` : ''}
-    <div class="note">${esc(data.ai_bae.sources_note)} 印の根拠は、2026-10-25 に自社（会社）で 4 つの AI に聞いた試し・各社の公開の説明・業種ごとの実測（2 都市、または 1 都市）だけです。${data.ai_bae.industry_note ? ' ' + esc(data.ai_bae.industry_note) : ''}</div></div>`;
+    ${oneNote(sc) ? `<div class="note warn">${esc(oneNote(sc))}</div>` : ''}</div>`;
 }
 
 function engineCard(e) {
@@ -651,7 +672,7 @@ function engineCard(e) {
       ${tile(isCompany() ? '会社の所在地・問い合わせ先' : '電話・住所・営業時間', matBy('contact').status, matLabel(matBy('contact')))}
     </div>
     <div class="facts"><div class="cap">robots.txt の判定（${esc(e.vendor)} のクローラー）</div>${esc(e.fact)}<ul>${robotsLine}${bots}</ul>
-      ${e.fix ? `<div class="fix"><b>直し方:</b> ${esc(e.fix)}</div>` : ''}
+      ${e.fix ? `<div class="fix">${fixHtml(e, '<b>直し方:</b> ')}</div>` : ''}
     </div>
     ${sourcesBox(e)}
     ${footer('AI の回答そのものは測っていません')}
@@ -682,17 +703,56 @@ function summaryCard() {
 function candidatesBox(a) {
   const list = Array.isArray(a.unmeasured_candidates) ? a.unmeasured_candidates : [];
   if (!list.length) return '';
-  const rows = list.map((c) => `<li><span class="mk ${c.linked ? 'ok' : ''}">${c.linked ? '◎' : '—'}</span><span>${esc(c.name)}${c.linked ? ' つながりあり' : ''}</span>${c.fix ? `<span class="fx">${esc(c.fix)}</span>` : ''}</li>`).join('');
+  const rows = list.map((c) => `<li><span class="mk ${c.linked ? 'ok' : ''}">${c.linked ? '◎' : '—'}</span><span>${esc(c.name)}${c.linked ? ' つながりあり' : ''}</span>${c.fix ? `<span class="fx">${esc(c.fix_self || c.fix)}</span>` : ''}</li>`).join('');
   return `<div class="cands"><div class="cap">${a.industry_label ? esc(a.industry_label) + 'で' : ''}よく使われる場所（点には入りません）</div><div class="lead">この業種で AI が頼る先は、まだ測っていません。一般によく使われる場所です。</div><ul>${rows}</ul></div>`;
 }
 
 function materialsCard() {
   const a = data.ai_bae;
-  const rows = a.materials.map((m) => `<div class="mat"><span class="dot ${CLS[m.status]}"></span><span class="t">${esc(m.label)}</span><span class="p">${m.points} / ${m.max}</span><span class="f">${esc(m.fact)}</span>${m.fix ? `<span class="x"><b>直し方:</b> ${esc(m.fix)}</span>` : ''}</div>`).join('');
+  const rows = a.materials.map((m) => `<div class="mat"><span class="dot ${CLS[m.status]}"></span><span class="t">${esc(m.label)}</span><span class="p">${m.points} / ${m.max}</span><span class="f">${esc(m.fact)}</span>${m.fix ? `<span class="x">${fixHtml(m, '<b>直し方:</b> ')}</span>` : ''}</div>`).join('');
   return `<article class="post">
     <div class="head"><div class="avatar sum">材料</div><div><div class="who">正しく伝わる材料</div><div class="meta">4 社共通${a.industry_label ? '・' + esc(a.industry_label) + 'の項目' : ''} · ${a.materials_score} / 55 点</div></div></div>
     <div class="mats">${rows}</div>
   </article>`;
+}
+
+// 直すこと（サーバーの todo）: ① 自分でできること ② HP の担当者・技術の方へ。両方ある項目は ① だけ（サーバーで振り分け済み）。
+// ② のコピーは対象の URL と日付＋② の箇条書き（サーバーの vendor_request）。古いサーバーは todo を返さない＝出さない
+async function copyVendorRequest() {
+  const t = data && data.ai_bae && data.ai_bae.vendor_request; if (!t) return;
+  try { await navigator.clipboard.writeText(t); } catch {
+    const ta = document.createElement('textarea'); ta.value = t; ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); } catch {} ta.remove();
+  }
+  const d = $('vreq-done'); if (d) { d.hidden = false; setTimeout(() => { d.hidden = true; }, 2500); }
+}
+function todoCard() {
+  const t = data.ai_bae.todo;
+  if (!t) return '';
+  const self = Array.isArray(t.self) ? t.self : [], vendor = Array.isArray(t.vendor) ? t.vendor : [];
+  if (!self.length && !vendor.length) return '';
+  const canCopy = typeof data.ai_bae.vendor_request === 'string' && data.ai_bae.vendor_request;
+  return `<article class="post" data-card="todo">
+    <div class="head"><div class="avatar sum">直す</div><div><div class="who">直すこと</div><div class="meta">自分でできること・HP の担当者に頼むこと</div></div></div>
+    <div class="todo">
+      ${self.length ? `<h3>自分でできること</h3><ul>${self.map((x) => `<li>${esc(x.text)}</li>`).join('')}</ul>` : ''}
+      ${vendor.length ? `<h3>HP の担当者・技術の方へ${canCopy ? '<button type="button" class="copy" data-act="copy-vreq">一覧をコピー</button><span class="done" id="vreq-done" hidden>コピーしました</span>' : ''}</h3>
+        <ul>${vendor.map((x) => `<li>${esc(x.label)}: ${esc(x.text)}<span class="now">今: ${esc(x.now)}</span></li>`).join('')}</ul>` : ''}
+      <div class="help">頼める先が無い時は、<a href="/contact/">ご相談ください</a>。</div>
+    </div>
+  </article>`;
+}
+
+// この診断の見方（各 AI の枠から外した長い説明。最初は閉じておく）
+function howtoCard() {
+  const a = data.ai_bae;
+  const notes = a.engines.filter((e) => e.sources.note && e.sources.points_note && !srcUnmeasured()).map((e) => `${e.vendor}: ${e.sources.note}`);
+  return `<details class="howto post" style="padding:12px 16px"><summary>この診断の見方</summary>
+    <p>${esc(a.sources_note)}</p>
+    <p>印の根拠は、2026-10-25 に自社（会社）で 4 つの AI に聞いた試し・各社の公開の説明・業種ごとの実測（2 都市、または 1 都市）だけです。${a.industry_note ? ' ' + esc(a.industry_note) : ''}</p>
+    ${notes.map((n) => `<p>${esc(n)}</p>`).join('')}
+    <p>${esc(a.definition)}</p>
+  </details>`;
 }
 
 function render() {
@@ -700,10 +760,12 @@ function render() {
   const parts = view === 'all'
     ? [summaryCard(), ...a.engines.map(engineCard), materialsCard()]
     : [engineCard(a.engines.find((e) => e.id === view)), materialsCard()];
+  parts.push(todoCard(), howtoCard());
   $('cards').innerHTML = parts.join('');
 }
 $('cards').addEventListener('click', (e) => {
   const b = e.target.closest('[data-act]'); if (!b) return;
+  if (b.dataset.act === 'copy-vreq') { copyVendorRequest(); return; }
   if (b.dataset.act === 'dl') download(); else share();
 });
 
