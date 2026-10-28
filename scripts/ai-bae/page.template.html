@@ -153,6 +153,8 @@
     .ok .v, .dot.ok { color: var(--ok); background: var(--ok); } .ok .v { background: none; }
     .mid .v, .dot.mid { color: var(--mid); background: var(--mid); } .mid .v { background: none; }
     .bad .v, .dot.bad { color: var(--bad); background: var(--bad); } .bad .v { background: none; }
+    .na .v, .dot.na { color: #9ca3af; background: #9ca3af; } .na .v { background: none; }
+    .score-note { text-align: center; color: var(--sub); font-size: 12.5px; line-height: 1.5; margin: -4px 12px 12px; }
 
     .facts { margin: 14px 16px 0; background: var(--tile); border-left: 3px solid var(--g2); border-radius: 10px; padding: 12px 14px; font-size: 14px; }
     .facts .cap { font-size: 12px; color: var(--sub); margin-bottom: 6px; }
@@ -427,7 +429,7 @@ const LOGO = new Image(); LOGO.src = '/ai-bae-shindan/img/logo-text.webp';
 const GROUP = new Image(); GROUP.src = '/assets/ai-icons/group.webp';
 const ICON_IMG = Object.fromEntries(Object.entries(ICON).map(([k, src]) => { const im = new Image(); im.src = src; return [k, im]; }));
 const loaded = (im) => (im.complete ? Promise.resolve() : new Promise((r) => { im.onload = r; im.onerror = r; }));
-const CLS = { open: 'ok', partial: 'mid', blocked: 'bad', ok: 'ok', missing: 'bad' };
+const CLS = { open: 'ok', partial: 'mid', blocked: 'bad', ok: 'ok', missing: 'bad', na: 'na' };
 
 const $ = (id) => document.getElementById(id);
 const form = $('scan-form'), input = $('url-input'), btn = $('scan-btn');
@@ -605,6 +607,10 @@ function tile(k, status, label) { return `<div class="tile ${CLS[status]}"><div 
 function matBy(id) { return data.ai_bae.materials.find((m) => m.id === id); }
 // 会社型の業種（IT／Web・コンサル・税理士／会計士・士業・製造 BtoB）は札の言葉を会社向けにする（サーバーの industry_type）
 function isCompany() { return !!(data && data.ai_bae && data.ai_bae.industry_type === 'company'); }
+// 頼る先が未測定（どの AI も印が 2 か所に届かない業種）: サーバーの sources_measured === false。古いサーバーは項目が無い＝測った扱い
+function srcUnmeasured() { return !!(data && data.ai_bae && data.ai_bae.sources_measured === false); }
+// 「ほかの AI の平均で仮に出した点」は、平均の元（自前の点を持つ AI）がある時だけ（古いサーバーは元が無くても estimated を立てていた）
+function showEstimated(sc) { return !!sc.estimated && !srcUnmeasured() && data.ai_bae.engines.some((x) => !x.sources.estimated); }
 function matLabel(m) { return m.status === 'ok' ? 'あり' : m.status === 'partial' ? '一部' : 'なし'; }
 function footer(txt) {
   return `<div class="foot"><button class="ib" data-act="dl" title="画像を保存"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg></button><button class="ib" data-act="share" title="シェア"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></button><span class="tiny">${esc(txt)}</span></div>`;
@@ -618,10 +624,10 @@ function sourcesBox(e) {
     ? `<span class="one">${esc(r.measured_1city.city)}で ${r.measured_1city.n} 回聞いた時、${esc(e.vendor)} は ${r.measured_1city.hits} 回この場所を出典に挙げました（${esc(r.measured_1city.date)}）</span>`
     : '';
   const rows = sc.relied.map((r) => `<li><span class="mk ${r.linked ? 'ok' : 'bad'}">${r.linked ? '◎' : '×'}</span><span>${esc(r.name)}${r.linked ? ` つながりあり${r.via.includes('sameAs') ? '（sameAs）' : ''}` : ' サイトから見当たらない'}<span class="ev">印の根拠: ${ev(r.evidence_kind)}</span>${r.evidence_kind === 'measured_1city' ? '<span class="badge1">1 都市の実測</span>' : ''}</span>${one(r)}${r.fix ? `<span class="fx"><b>直し方:</b> ${esc(r.fix)}</span>` : ''}</li>`).join('');
-  return `<div class="srcs"><div class="cap"><span>この AI がよく頼る先</span><span>${sc.linked_count} / ${sc.relied_count} につながり · ${sc.points} / 5 点${sc.estimated ? '（ほかの AI の平均で仮に出した点）' : ''}</span></div><ul>${rows}</ul>
+  return `<div class="srcs"><div class="cap"><span>この AI がよく頼る先</span><span>${srcUnmeasured() ? 'まだ測っていません（点に入れません）' : `${sc.linked_count} / ${sc.relied_count} につながり · ${sc.points} / 5 点${showEstimated(sc) ? '（ほかの AI の平均で仮に出した点）' : ''}`}</span></div><ul>${rows}</ul>
     ${sc.other_linked.length ? `<div class="other">そのほかのつながり（この AI での観測はまだ無い）: ${esc(sc.other_linked.join('・'))}</div>` : ''}
     ${sc.note ? `<div class="note warn">${esc(sc.note)}</div>` : ''}
-    ${sc.points_note ? `<div class="note warn">${esc(sc.points_note)}</div>` : ''}
+    ${sc.points_note && !srcUnmeasured() ? `<div class="note warn">${esc(sc.points_note)}</div>` : ''}
     <div class="note">${esc(data.ai_bae.sources_note)} 印の根拠は、2026-10-25 に自社（会社）で 4 つの AI に聞いた試し・各社の公開の説明・業種ごとの実測（2 都市、または 1 都市）だけです。${data.ai_bae.industry_note ? ' ' + esc(data.ai_bae.industry_note) : ''}</div></div>`;
 }
 
@@ -632,13 +638,15 @@ function engineCard(e) {
     : `<li><span class="dot bad" style="margin-top:7px"></span><span><code>${esc(b.bot)}</code> 拒否（robots.txt ${b.line} 行目 <code>${esc(b.rule)}</code>${b.matched_agent === '*' ? '・全体向けの規則' : ''}）</span></li>`).join('');
   const robotsLine = data.ai_bae.robots_found ? '' : '<li><span class="dot ok" style="margin-top:7px"></span><span>robots.txt がありません＝何も締め出していません</span></li>';
   const sc = e.sources;
-  const scStatus = sc.points >= 5 ? 'ok' : sc.points > 0 ? 'partial' : 'missing';
+  const unm = srcUnmeasured();
+  const scStatus = unm ? 'na' : sc.points >= 5 ? 'ok' : sc.points > 0 ? 'partial' : 'missing';
   return `<article class="post" data-eng="${e.id}">
     <div class="head"><img class="avatar" src="${ICON[e.id]}" alt="" width="44" height="44"><div><div class="who">${esc(e.vendor)}</div><div class="meta">下地の診断 · ${esc(date)}</div></div><div class="url">${esc(host(data.url))}</div></div>
     ${scoreRing(e.score, 'AI映え 下地 SCORE')}
+    ${data.ai_bae.score_note ? `<div class="score-note">${esc(data.ai_bae.score_note)}</div>` : ''}
     <div class="tiles">
       ${tile(`${e.vendor} が読める`, e.status, e.status_label)}
-      ${tile(`${e.vendor} が頼る先（つながり）`, scStatus, `${sc.linked_count}/${sc.relied_count} か所${sc.estimated ? '・ほかの AI の平均で仮に出した点' : ''}`)}
+      ${tile(`${e.vendor} が頼る先（つながり）`, scStatus, unm ? '未測定' : `${sc.linked_count}/${sc.relied_count} か所${showEstimated(sc) ? '・ほかの AI の平均で仮に出した点' : ''}`)}
       ${tile(isCompany() ? '会社名・所在地の機械可読' : '店名・住所の機械可読', matBy('schema').status, matLabel(matBy('schema')))}
       ${tile(isCompany() ? '会社の所在地・問い合わせ先' : '電話・住所・営業時間', matBy('contact').status, matLabel(matBy('contact')))}
     </div>
@@ -652,14 +660,15 @@ function engineCard(e) {
 
 function summaryCard() {
   const a = data.ai_bae;
-  const rows = a.engines.map((e) => `<div class="mat"><span class="dot ${CLS[e.status]}"></span><span class="t">${esc(e.vendor)}<span style="color:var(--sub);font-weight:400"> · 頼る先 ${e.sources.linked_count}/${e.sources.relied_count}${e.sources.estimated ? '（ほかの AI の平均で仮に出した点）' : ''}</span></span><span class="p" style="color:${ringColor(e.score)}">${esc(e.status_label)} ${e.score}</span></div>`).join('');
+  const rows = a.engines.map((e) => `<div class="mat"><span class="dot ${CLS[e.status]}"></span><span class="t">${esc(e.vendor)}<span style="color:var(--sub);font-weight:400"> · 頼る先 ${srcUnmeasured() ? '未測定' : `${e.sources.linked_count}/${e.sources.relied_count}${showEstimated(e.sources) ? '（ほかの AI の平均で仮に出した点）' : ''}`}</span></span><span class="p" style="color:${ringColor(e.score)}">${esc(e.status_label)} ${e.score}</span></div>`).join('');
   return `<article class="post" data-eng="all">
     <div class="head"><div class="avatar sum">ALL</div><div><div class="who">まとめて診断</div><div class="meta">下地の診断 · ${esc(ymd(data.created_at))}</div></div><div class="url">${esc(host(data.url))}</div></div>
     ${a.industry_label ? `<div class="indline">業種「<b>${esc(a.industry_label)}</b>」の頼る先と材料で診断しています。${FIXED_INDUSTRY ? 'ほかの業種は <a href="/ai-bae-shindan/">共通の入口</a> から。' : '業種は上で選び直せます。'}</div>` : ''}
     ${scoreRing(a.score, 'AI映え 下地 SCORE')}
+    ${a.score_note ? `<div class="score-note">${esc(a.score_note)}</div>` : ''}
     <div class="tiles">
       ${tile('AI が読める（30 点）', a.access_score >= 30 ? 'ok' : a.access_score > 0 ? 'partial' : 'blocked', `${a.access_score} / 30`)}
-      ${tile('AI が頼る先（15 点）', a.sources_score >= 12 ? 'ok' : a.sources_score > 0 ? 'partial' : 'missing', `${a.sources_score} / 15`)}
+      ${srcUnmeasured() ? tile('AI が頼る先（点に入れません）', 'na', '未測定') : tile('AI が頼る先（15 点）', a.sources_score >= 12 ? 'ok' : a.sources_score > 0 ? 'partial' : 'missing', `${a.sources_score} / 15`)}
       ${tile('正しく伝わる材料（55 点）', a.materials_score >= 40 ? 'ok' : a.materials_score >= 20 ? 'partial' : 'missing', `${a.materials_score} / 55`)}
       ${tile('サイトからのつながり', a.linked_sources.length ? 'ok' : 'missing', a.linked_sources.length ? `${a.linked_sources.length} か所` : 'なし')}
     </div>
@@ -722,7 +731,7 @@ async function draw() {
   const col = a.score >= 70 ? '#16a34a' : a.score >= 40 ? '#d97706' : '#dc2626';
   c.strokeStyle = col; c.beginPath(); c.arc(cx, cy, R, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * a.score / 100); c.stroke();
   c.fillStyle = col; c.font = `800 92px ${EN}`; c.textAlign = 'center'; c.fillText(String(a.score), cx, cy + 32);
-  c.fillStyle = '#6b7280'; c.font = `500 23px ${JP}`; c.fillText(`AI映え 下地 SCORE / 100　読める ${a.access_score}/30 · 頼る先 ${a.sources_score}/15 · 材料 ${a.materials_score}/55`, cx, cy + R + 44); c.textAlign = 'left';
+  c.fillStyle = '#6b7280'; c.font = `500 23px ${JP}`; c.fillText(srcUnmeasured() ? `AI映え 下地 SCORE / 100　読める ${a.access_score}/30 · 材料 ${a.materials_score}/55（85 点を 100 点に換算）· 頼る先 未測定` : `AI映え 下地 SCORE / 100　読める ${a.access_score}/30 · 頼る先 ${a.sources_score}/15 · 材料 ${a.materials_score}/55`, cx, cy + R + 44); c.textAlign = 'left';
   // engines: one row each（左にそのAIのキャラクターの顔）, with the 頼る先 line under it
   let y = 584; c.font = `700 28px ${JP}`; c.fillStyle = '#111827'; c.fillText('AI ごとの判定と、その AI がよく頼る先', 72, y); y += 14;
   for (const e of a.engines) {
@@ -733,7 +742,7 @@ async function draw() {
     c.fillStyle = '#111827'; c.font = `700 27px ${JP}`; c.fillText(e.vendor, 174, y - 4);
     c.fillStyle = ec; c.textAlign = 'right'; c.fillText(`${e.status_label}　${e.score}`, W - 96, y - 4); c.textAlign = 'left';
     const srcLine = e.sources.relied.map((r) => `${r.linked ? '◎' : '×'}${r.name.replace(/／.*$/, '').replace(/（.*$/, '')}`).join('　');
-    c.fillStyle = '#6b7280'; c.font = `500 19px ${JP}`; c.fillText(fit(`頼る先: ${srcLine}${e.sources.estimated ? '　※ほかの AI の平均で仮に出した点' : ''}`, W - 262), 174, y + 22);
+    c.fillStyle = '#6b7280'; c.font = `500 19px ${JP}`; c.fillText(fit(srcUnmeasured() ? '頼る先: まだ測っていません（点に入れません）' : `頼る先: ${srcLine}${showEstimated(e.sources) ? '　※ほかの AI の平均で仮に出した点' : ''}`, W - 262), 174, y + 22);
   }
   // materials in 3 columns（下にキャラクターの絵を入れる余白を残す）
   y += 70; c.fillStyle = '#111827'; c.font = `700 28px ${JP}`; c.fillText(`正しく伝わる材料（4 社共通）　${a.materials_score} / 55`, 72, y);
