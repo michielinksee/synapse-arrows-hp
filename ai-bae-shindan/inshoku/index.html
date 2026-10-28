@@ -186,21 +186,16 @@
     .cands li:last-child { border-bottom: 0; }
     .cands .mk { font-weight: 700; color: var(--sub); } .cands .mk.ok { color: var(--ok); }
     .cands .fx { grid-column: 2; color: var(--sub); font-size: 12.5px; }
-    /* 直し方の読み手: 自分で／担当者へ（自分でを先に） */
-    .aud { display: flex; gap: 6px; align-items: baseline; line-height: 1.55; }
-    .aud + .aud { margin-top: 2px; }
-    .aud .tag { flex-shrink: 0; font-size: 11px; font-weight: 700; border-radius: 999px; padding: 1px 8px; white-space: nowrap; }
-    .aud.self .tag { background: #dcfce7; color: #166534; }
-    .aud.vendor .tag { background: #e5e7eb; color: #374151; }
-    .aud.vendor .t { color: var(--sub); }
-    .vreq { margin: 0 16px 16px; }
-    .vreq .lead { font-size: 13.5px; margin: 0 0 8px; line-height: 1.6; }
-    .vreq textarea { width: 100%; min-height: 220px; font: 13px/1.6 'Noto Sans JP', sans-serif; color: var(--ink, #111827); background: var(--tile); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; resize: vertical; }
-    .vreq .row { display: flex; align-items: center; gap: 10px; margin-top: 8px; flex-wrap: wrap; }
-    .vreq .copy { background: #111827; color: #fff; border: 0; border-radius: 999px; padding: 8px 16px; font-weight: 700; font-size: 13px; cursor: pointer; }
-    .vreq .done { color: var(--ok); font-size: 12.5px; }
-    .vreq .help { margin-top: 10px; font-size: 12px; color: var(--sub); }
-    .vreq .help a { color: inherit; }
+    /* 直すこと: ① 自分でできること ② HP の担当者・技術の方へ（点数の表の下に 2 つの箇条書き） */
+    .todo { padding: 4px 16px 16px; }
+    .todo h3 { font-size: 15px; margin: 14px 0 6px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .todo ul { margin: 0; padding-left: 1.2em; }
+    .todo li { margin: 4px 0; line-height: 1.6; font-size: 14px; }
+    .todo li .now { display: block; color: var(--sub); font-size: 12.5px; }
+    .todo .copy { margin-left: auto; background: #111827; color: #fff; border: 0; border-radius: 999px; padding: 6px 14px; font-weight: 700; font-size: 12.5px; cursor: pointer; }
+    .todo .done { color: var(--ok); font-size: 12.5px; font-weight: 400; }
+    .todo .help { margin-top: 12px; font-size: 12.5px; color: var(--sub); }
+    .todo .help a { color: inherit; }
     .howto { margin: 0 16px 16px; font-size: 12.5px; color: var(--sub); line-height: 1.6; }
     .howto summary { cursor: pointer; font-weight: 700; color: var(--ink, #111827); font-size: 13.5px; padding: 4px 0; }
     .howto p { margin: 6px 0 0; }
@@ -286,7 +281,7 @@
     .srcs li { font-size: 15.5px; padding: 7px 0; }
     .srcs .ev, .srcs .other, .srcs .note, .srcs .one { font-size: 14px; }
     .cands { margin: 14px 20px 0; padding: 14px 18px; font-size: 15.5px; } .cands .lead, .cands .fx { font-size: 14px; }
-    .aud .tag { font-size: 12px; } .vreq .lead, .howto summary { font-size: 15px; } .vreq textarea { font-size: 14.5px; } .howto { font-size: 14px; }
+    .todo h3, .howto summary { font-size: 16px; } .todo li { font-size: 15px; } .todo li .now { font-size: 13.5px; } .howto { font-size: 14px; }
     .srcs .fx { font-size: 14.5px; }
     .mats { padding: 6px 20px 8px; }
     .mat { font-size: 16px; padding: 12px 0; }
@@ -630,12 +625,12 @@ function isCompany() { return !!(data && data.ai_bae && data.ai_bae.industry_typ
 function srcUnmeasured() { return !!(data && data.ai_bae && data.ai_bae.sources_measured === false); }
 // 「ほかの AI の平均で仮に出した点」は、平均の元（自前の点を持つ AI）がある時だけ（古いサーバーは元が無くても estimated を立てていた）
 function showEstimated(sc) { return !!sc.estimated && !srcUnmeasured() && data.ai_bae.engines.some((x) => !x.sources.estimated); }
-// 直し方: 新しいサーバーは fix_self（自分で）と fix_vendor（担当者へ）を返す。自分でを先に出す。古いサーバー（項目なし）は今まで通り「直し方:」
+// 直し方: 新しいサーバー（todo を返す）は、直し方を点数の表の下の 2 つの箇条書きにまとめる＝各項目には出さない。
+// 古いサーバー（todo なし）は今まで通り各項目に「直し方:」
+function hasTodo() { return !!(data && data.ai_bae && data.ai_bae.todo); }
 function fixHtml(x, oldPrefix) {
-  if (!x || (!x.fix && !x.fix_self)) return '';
-  if (typeof x.fix_self !== 'string') return x.fix ? `${oldPrefix}${esc(x.fix)}` : '';
-  const vendor = (x.fix_vendor || x.fix) === x.fix_self ? '' : (x.fix_vendor || x.fix); // 同じ文なら「自分で」だけ
-  return `<span class="aud self"><span class="tag">自分で</span><span class="t">${esc(x.fix_self)}</span></span>${vendor ? `<span class="aud vendor"><span class="tag">担当者へ</span><span class="t">${esc(vendor)}</span></span>` : ''}`;
+  if (!x || !x.fix || hasTodo()) return '';
+  return `${oldPrefix}${esc(x.fix)}`;
 }
 function matLabel(m) { return m.status === 'ok' ? 'あり' : m.status === 'partial' ? '一部' : 'なし'; }
 function footer(txt) {
@@ -708,7 +703,7 @@ function summaryCard() {
 function candidatesBox(a) {
   const list = Array.isArray(a.unmeasured_candidates) ? a.unmeasured_candidates : [];
   if (!list.length) return '';
-  const rows = list.map((c) => `<li><span class="mk ${c.linked ? 'ok' : ''}">${c.linked ? '◎' : '—'}</span><span>${esc(c.name)}${c.linked ? ' つながりあり' : ''}</span>${c.fix ? `<span class="fx">${fixHtml(c, '')}</span>` : ''}</li>`).join('');
+  const rows = list.map((c) => `<li><span class="mk ${c.linked ? 'ok' : ''}">${c.linked ? '◎' : '—'}</span><span>${esc(c.name)}${c.linked ? ' つながりあり' : ''}</span>${c.fix ? `<span class="fx">${esc(c.fix_self || c.fix)}</span>` : ''}</li>`).join('');
   return `<div class="cands"><div class="cap">${a.industry_label ? esc(a.industry_label) + 'で' : ''}よく使われる場所（点には入りません）</div><div class="lead">この業種で AI が頼る先は、まだ測っていません。一般によく使われる場所です。</div><ul>${rows}</ul></div>`;
 }
 
@@ -721,21 +716,30 @@ function materialsCard() {
   </article>`;
 }
 
-// HP の担当者向けの一覧（サーバーの vendor_request・箇条書き）。古いサーバーは返さない＝出さない
+// 直すこと（サーバーの todo）: ① 自分でできること ② HP の担当者・技術の方へ。両方ある項目は ① だけ（サーバーで振り分け済み）。
+// ② のコピーは対象の URL と日付＋② の箇条書き（サーバーの vendor_request）。古いサーバーは todo を返さない＝出さない
 async function copyVendorRequest() {
-  const ta = $('vreq-text'); if (!ta) return;
-  try { await navigator.clipboard.writeText(ta.value); } catch { ta.select(); try { document.execCommand('copy'); } catch {} }
+  const t = data && data.ai_bae && data.ai_bae.vendor_request; if (!t) return;
+  try { await navigator.clipboard.writeText(t); } catch {
+    const ta = document.createElement('textarea'); ta.value = t; ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); } catch {} ta.remove();
+  }
   const d = $('vreq-done'); if (d) { d.hidden = false; setTimeout(() => { d.hidden = true; }, 2500); }
 }
-function vendorCard() {
-  const t = data.ai_bae.vendor_request;
-  if (typeof t !== 'string' || !t) return '';
-  return `<article class="post" data-card="vreq">
-    <div class="head"><div class="avatar sum">一覧</div><div><div class="who">HP の担当者向けの一覧</div><div class="meta">「担当者へ」の項目をまとめました</div></div></div>
-    <div class="vreq"><p class="lead">HP を作った会社・担当の方に、この一覧をコピーして渡してください。</p>
-      <textarea readonly id="vreq-text" aria-label="HP の担当者向けの一覧">${esc(t)}</textarea>
-      <div class="row"><button type="button" class="copy" data-act="copy-vreq">一覧をコピー</button><span class="done" id="vreq-done" hidden>コピーしました</span></div>
-      <div class="help">頼める先が無い時は、<a href="/contact/">ご相談ください</a>。</div></div>
+function todoCard() {
+  const t = data.ai_bae.todo;
+  if (!t) return '';
+  const self = Array.isArray(t.self) ? t.self : [], vendor = Array.isArray(t.vendor) ? t.vendor : [];
+  if (!self.length && !vendor.length) return '';
+  const canCopy = typeof data.ai_bae.vendor_request === 'string' && data.ai_bae.vendor_request;
+  return `<article class="post" data-card="todo">
+    <div class="head"><div class="avatar sum">直す</div><div><div class="who">直すこと</div><div class="meta">自分でできること・HP の担当者に頼むこと</div></div></div>
+    <div class="todo">
+      ${self.length ? `<h3>自分でできること</h3><ul>${self.map((x) => `<li>${esc(x.text)}</li>`).join('')}</ul>` : ''}
+      ${vendor.length ? `<h3>HP の担当者・技術の方へ${canCopy ? '<button type="button" class="copy" data-act="copy-vreq">一覧をコピー</button><span class="done" id="vreq-done" hidden>コピーしました</span>' : ''}</h3>
+        <ul>${vendor.map((x) => `<li>${esc(x.label)}: ${esc(x.text)}<span class="now">今: ${esc(x.now)}</span></li>`).join('')}</ul>` : ''}
+      <div class="help">頼める先が無い時は、<a href="/contact/">ご相談ください</a>。</div>
+    </div>
   </article>`;
 }
 
@@ -756,7 +760,7 @@ function render() {
   const parts = view === 'all'
     ? [summaryCard(), ...a.engines.map(engineCard), materialsCard()]
     : [engineCard(a.engines.find((e) => e.id === view)), materialsCard()];
-  parts.push(vendorCard(), howtoCard());
+  parts.push(todoCard(), howtoCard());
   $('cards').innerHTML = parts.join('');
 }
 $('cards').addEventListener('click', (e) => {
