@@ -4,7 +4,9 @@
  * 何をするか:
  *   synapsearrows.com/contact/ と /en/contact/ のフォームから届いた 1 件を、
  *   Google スプレッドシートの「inquiries」シートに 1 行足し、担当にメールで知らせる。
- *   ページ側は ENDPOINT（contact/index.html・en/contact/index.html の先頭の定数）にこのウェブアプリの URL を貼る。
+ *   ページ側の ENDPOINT は scripts/site/contact.json の endpoint 1 か所に書き、python scripts/build-site.py で
+ *   contact/index.html・contact/confirm/index.html・en/contact/index.html の 3 枚に入れる（HTML を手で直さない）。
+ *   試験: node scripts/test-contact-form-gs.mjs（ページが送る形の見本 3 つで、シートの 1 行を確かめる）
  *   このファイルは .vercelignore の scripts/ にあるので、サイトには公開されない。
  *
  * スクリプト プロパティ（プロジェクトの設定 → スクリプト プロパティ）:
@@ -33,6 +35,9 @@ var PURPOSES = {
   quote: '見積もり（複数店舗・会社として）',
   other: 'そのほか'
 };
+// 日本語の /contact/ は「資料請求」「相談・見積もり」の 2 択（intent）を送る。purpose は download／consult に丸めた物なので、
+// ご用件の列には、ページで選ばれた言葉をそのまま入れる（英語のページは intent を送らないので PURPOSES の言葉）
+var INTENTS = ['資料請求', '相談・見積もり'];
 var DEFAULT_NOTIFY_TO = 'contact@synapse-arrows.com';
 var MAX_FIELD = 500;
 var MAX_MESSAGE = 2000;
@@ -87,6 +92,7 @@ function handle_(e) {
   if (!PURPOSES.hasOwnProperty(f.purpose)) return bad_();
   if (!(p.consent === true || p.consent === 'true' || p.consent === 'on')) return bad_();
   if (f.email.length > 254 || !EMAIL_RE.test(f.email)) return bad_();
+  f.purpose_label = INTENTS.indexOf(f.intent) >= 0 ? f.intent : PURPOSES[f.purpose];
 
   var props = PropertiesService.getScriptProperties();
 
@@ -126,7 +132,7 @@ function handle_(e) {
     }
     row = [
       Utilities.formatDate(new Date(), 'Asia/Tokyo', 'yyyy-MM-dd HH:mm:ss'),
-      PURPOSES[f.purpose],
+      f.purpose_label,
       f.company, f.name, f.email, f.industry, f.industry_label, f.site_url, f.message,
       f.services, f.plan,
       f.lang, f.page, f.referrer, f.utm_source, f.utm_medium, f.utm_campaign,
@@ -151,15 +157,15 @@ function handle_(e) {
 
 function notify_(props, ss, f) {
   var to = (props.getProperty('NOTIFY_TO') || '').trim() || DEFAULT_NOTIFY_TO;
-  var purposeLabel = PURPOSES[f.purpose];
+  var purposeLabel = f.purpose_label;
   var subject = oneLine_('【資料請求・相談】' + purposeLabel + '｜' + f.company).slice(0, 200);
   var lines = [
     'ご用件: ' + purposeLabel,
     '会社名・店名: ' + f.company,
     'お名前: ' + f.name,
     'メール: ' + f.email,
-    '業種: ' + f.industry_label + '（' + f.industry + '）',
-    'サイトの URL: ' + f.site_url,
+    '業種: ' + (f.industry ? f.industry_label + '（' + f.industry + '）' : '（なし）'),
+    'サイトの URL: ' + (f.site_url || '（なし）'),
     '選んだサービス: ' + (f.services || '（なし）'),
     'プラン: ' + (f.plan || '（なし）'),
     'ひとこと:',
