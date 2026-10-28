@@ -188,6 +188,20 @@
 
     .cta { display: block; text-align: center; background: var(--grad); color: #fff; text-decoration: none; border-radius: 14px; padding: 16px 18px; font-weight: 700; font-size: 16px; margin: 10px 0 8px; }
     .cta small { display: block; font-weight: 400; font-size: 12.5px; opacity: .92; margin-top: 4px; }
+
+    /* ── 料金と相談（値段は pricing.json から build-ai-bae-pages.mjs が入れる） ── */
+    .plans { margin: 18px 0 6px; background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 16px 16px 14px; }
+    .plans h3 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+    .plans .lead { font-size: 13px; color: var(--sub); line-height: 1.7; margin-bottom: 10px; }
+    .plans ul { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .plans li { background: var(--tile); border-radius: 12px; padding: 10px 12px; font-size: 13.5px; line-height: 1.5; }
+    .plans li b { display: block; font-size: 12px; color: var(--sub); font-weight: 500; }
+    .plans li .pr { font-family: 'Inter', 'Noto Sans JP', sans-serif; font-weight: 800; font-size: 18px; color: var(--ink); }
+    .plans li .pr small { font-size: 12px; font-weight: 500; color: var(--sub); }
+    .plans .tax { font-size: 11.5px; color: var(--sub); margin-top: 8px; line-height: 1.6; }
+    .plans .go { display: block; text-align: center; margin-top: 12px; border: 1px solid var(--line); border-radius: 12px; padding: 12px; font-weight: 700; text-decoration: none; }
+    .plans .go:hover { border-color: var(--g2); color: var(--g2); }
+    @media (max-width: 420px) { .plans ul { grid-template-columns: 1fr; } }
     .toast { position: fixed; left: 50%; bottom: 28px; transform: translateX(-50%) translateY(20px); background: var(--ink); color: #fff; padding: 10px 16px; border-radius: 10px; font-size: 13px; opacity: 0; transition: .2s; pointer-events: none; }
     .toast.show { opacity: 1; transform: translateX(-50%); }
 
@@ -279,7 +293,19 @@
     <a class="cta" id="cta" href="/ai-bae-shindan/apply/">詳しい診断を申し込む（無料）→ AI が実際に何と答えているか（誤った紹介がないか）を確かめます<small>この診断は下地だけ。詳しい診断では 4 つの AI に実際に聞き、結果をメールでお送りします。</small></a>
     <p class="fine" style="text-align:center"><a href="/ai-bae-shindan/pricing/" style="color:var(--g2);font-weight:700">料金・パッケージを見る →</a>（直し方まで頼みたい時の内容と値段）</p>
     <p class="fine" style="text-align:center">診断日と URL の入った診断書は「画像を保存」から。結果のリンクは 30 日たっても開けます。</p>
-    <p class="fine" style="text-align:center">直し方のご相談は <a href="/contact/?topic=aeo" style="color:var(--g2);font-weight:700">お問い合わせ</a> から（Synapse Arrows がお受けします）。</p>
+    <section class="plans" aria-labelledby="plans-h">
+      <h3 id="plans-h">直し方まで頼みたい時の料金（<!--p:scope_ja-->1 店舗・1 社あたり<!--/p-->・税別）</h3>
+      <p class="lead">この無料診断は下地まで。AI が実際に何と答えているかの照合と、掲載先・ページ・構造化データの直しは、Synapse Arrows が有料でお受けします。</p>
+      <ul>
+        <li><b><!--p:report.name_ja-->照合レポート<!--/p--></b><span class="pr"><!--p:report.man-->5万円<!--/p--><small>・単発</small></span></li>
+        <li><b><!--p:report_remeasure.name_ja-->照合レポート＋測り直し<!--/p--></b><span class="pr"><!--p:report_remeasure.man-->8万円<!--/p--><small>・単発</small></span></li>
+        <li><b><!--p:monitor.name_ja-->定点観測<!--/p--></b><span class="pr">月 <!--p:monitor.man-->3万円<!--/p--><small>・最低 <!--p:monitor.min_months-->6<!--/p--> か月</small></span></li>
+        <li><b><!--p:implement.name_ja-->実装・伴走<!--/p--></b><span class="pr">月 <!--p:implement.man-->21万円〜<!--/p--><small>・最低 <!--p:implement.min_months-->6<!--/p--> か月</small></span></li>
+      </ul>
+      <p class="tax"><!--p:tax_note_ja-->料金はすべて税別です。消費税の扱いはご契約の時にご案内します。<!--/p--></p>
+      <a class="go" href="/contact/">相談フォームへ（まず話を聞きたい・見積もりが欲しい）→</a>
+    </section>
+    <p class="fine" style="text-align:center">直し方のご相談は <a href="/contact/" style="color:var(--g2);font-weight:700">相談フォーム</a> から（Synapse Arrows がお受けします）。</p>
   </section>
 
   <footer class="site">
@@ -454,6 +480,8 @@ function scoreRing(n, unit) {
 }
 function tile(k, status, label) { return `<div class="tile ${CLS[status]}"><div class="k">${esc(k)}</div><div class="v">${esc(label)} <span class="dot ${CLS[status]}"></span></div></div>`; }
 function matBy(id) { return data.ai_bae.materials.find((m) => m.id === id); }
+// 会社型の業種（IT／Web・コンサル・税理士／会計士・士業・製造 BtoB）は札の言葉を会社向けにする（サーバーの industry_type）
+function isCompany() { return !!(data && data.ai_bae && data.ai_bae.industry_type === 'company'); }
 function matLabel(m) { return m.status === 'ok' ? 'あり' : m.status === 'partial' ? '一部' : 'なし'; }
 function footer(txt) {
   return `<div class="foot"><button class="ib" data-act="dl" title="画像を保存"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg></button><button class="ib" data-act="share" title="シェア"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></button><span class="tiny">${esc(txt)}</span></div>`;
@@ -463,9 +491,10 @@ function sourcesBox(e) {
   const sc = e.sources;
   const ev = (k) => k === 'trial' ? '10/25 の試し' : k === 'measured' ? '実測（2026-10）' : '公開の説明';
   const rows = sc.relied.map((r) => `<li><span class="mk ${r.linked ? 'ok' : 'bad'}">${r.linked ? '◎' : '×'}</span><span>${esc(r.name)}${r.linked ? ` つながりあり${r.via.includes('sameAs') ? '（sameAs）' : ''}` : ' サイトから見当たらない'}<span class="ev">印の根拠: ${ev(r.evidence_kind)}</span></span>${r.fix ? `<span class="fx"><b>直し方:</b> ${esc(r.fix)}</span>` : ''}</li>`).join('');
-  return `<div class="srcs"><div class="cap"><span>この AI がよく頼る先</span><span>${sc.linked_count} / ${sc.relied_count} につながり · ${sc.points} / 5 点</span></div><ul>${rows}</ul>
+  return `<div class="srcs"><div class="cap"><span>この AI がよく頼る先</span><span>${sc.linked_count} / ${sc.relied_count} につながり · ${sc.points} / 5 点${sc.estimated ? '（ほかの AI の平均で仮に出した点）' : ''}</span></div><ul>${rows}</ul>
     ${sc.other_linked.length ? `<div class="other">そのほかのつながり（この AI での観測はまだ無い）: ${esc(sc.other_linked.join('・'))}</div>` : ''}
     ${sc.note ? `<div class="note warn">${esc(sc.note)}</div>` : ''}
+    ${sc.points_note ? `<div class="note warn">${esc(sc.points_note)}</div>` : ''}
     <div class="note">${esc(data.ai_bae.sources_note)} 印の根拠は、2026-10-25 に自社（会社）で 4 つの AI に聞いた試し・各社の公開の説明・業種ごとの実測だけです。${data.ai_bae.industry_note ? ' ' + esc(data.ai_bae.industry_note) : ''}</div></div>`;
 }
 
@@ -482,9 +511,9 @@ function engineCard(e) {
     ${scoreRing(e.score, 'AI映え 下地 SCORE')}
     <div class="tiles">
       ${tile(`${e.vendor} が読める`, e.status, e.status_label)}
-      ${tile(`${e.vendor} が頼る先（つながり）`, scStatus, `${sc.linked_count}/${sc.relied_count} か所`)}
-      ${tile('店名・住所の機械可読', matBy('schema').status, matLabel(matBy('schema')))}
-      ${tile('電話・住所・営業時間', matBy('contact').status, matLabel(matBy('contact')))}
+      ${tile(`${e.vendor} が頼る先（つながり）`, scStatus, `${sc.linked_count}/${sc.relied_count} か所${sc.estimated ? '・ほかの AI の平均で仮に出した点' : ''}`)}
+      ${tile(isCompany() ? '会社名・所在地の機械可読' : '店名・住所の機械可読', matBy('schema').status, matLabel(matBy('schema')))}
+      ${tile(isCompany() ? '会社の所在地・問い合わせ先' : '電話・住所・営業時間', matBy('contact').status, matLabel(matBy('contact')))}
     </div>
     <div class="facts"><div class="cap">robots.txt の判定（${esc(e.vendor)} のクローラー）</div>${esc(e.fact)}<ul>${robotsLine}${bots}</ul>
       ${e.fix ? `<div class="fix"><b>直し方:</b> ${esc(e.fix)}</div>` : ''}
@@ -496,7 +525,7 @@ function engineCard(e) {
 
 function summaryCard() {
   const a = data.ai_bae;
-  const rows = a.engines.map((e) => `<div class="mat"><span class="dot ${CLS[e.status]}"></span><span class="t">${esc(e.vendor)}<span style="color:var(--sub);font-weight:400"> · 頼る先 ${e.sources.linked_count}/${e.sources.relied_count}</span></span><span class="p" style="color:${ringColor(e.score)}">${esc(e.status_label)} ${e.score}</span></div>`).join('');
+  const rows = a.engines.map((e) => `<div class="mat"><span class="dot ${CLS[e.status]}"></span><span class="t">${esc(e.vendor)}<span style="color:var(--sub);font-weight:400"> · 頼る先 ${e.sources.linked_count}/${e.sources.relied_count}${e.sources.estimated ? '（ほかの AI の平均で仮に出した点）' : ''}</span></span><span class="p" style="color:${ringColor(e.score)}">${esc(e.status_label)} ${e.score}</span></div>`).join('');
   return `<article class="post" data-eng="all">
     <div class="head"><div class="avatar sum">ALL</div><div><div class="who">まとめて診断</div><div class="meta">下地の診断 · ${esc(ymd(data.created_at))}</div></div><div class="url">${esc(host(data.url))}</div></div>
     ${a.industry_label ? `<div class="indline">業種「<b>${esc(a.industry_label)}</b>」の頼る先と材料で診断しています。${FIXED_INDUSTRY ? 'ほかの業種は <a href="/ai-bae-shindan/">共通の入口</a> から。' : '業種は上で選び直せます。'}</div>` : ''}
@@ -568,7 +597,7 @@ async function draw() {
     c.fillStyle = '#111827'; c.font = `700 27px ${JP}`; c.fillText(e.vendor, 174, y - 4);
     c.fillStyle = ec; c.textAlign = 'right'; c.fillText(`${e.status_label}　${e.score}`, W - 96, y - 4); c.textAlign = 'left';
     const srcLine = e.sources.relied.map((r) => `${r.linked ? '◎' : '×'}${r.name.replace(/／.*$/, '').replace(/（.*$/, '')}`).join('　');
-    c.fillStyle = '#6b7280'; c.font = `500 19px ${JP}`; c.fillText(fit(`頼る先: ${srcLine}`, W - 262), 174, y + 22);
+    c.fillStyle = '#6b7280'; c.font = `500 19px ${JP}`; c.fillText(fit(`頼る先: ${srcLine}${e.sources.estimated ? '　※ほかの AI の平均で仮に出した点' : ''}`, W - 262), 174, y + 22);
   }
   // materials in 3 columns（下にキャラクターの絵を入れる余白を残す）
   y += 70; c.fillStyle = '#111827'; c.font = `700 28px ${JP}`; c.fillText(`正しく伝わる材料（4 社共通）　${a.materials_score} / 55`, 72, y);
@@ -592,7 +621,10 @@ async function draw() {
   if (okImg(GROUP) && avail >= 90) { const gh = Math.min(avail, 190), gw = gh * GROUP.naturalWidth / GROUP.naturalHeight; c.drawImage(GROUP, (W - gw) / 2, H - FOOT - 14 - gh, gw, gh); }
   return cv;
 }
-function shortLabel(m) { return ({ schema: 'schema.org（店名・住所）', text: '本文の文字', contact: '電話・住所・営業時間', menu: 'メニュー・料金', reservation: '予約の入口', english: '英語の一文', title: 'ページの題名', description: 'サイトの紹介文', sitemap: 'sitemap / llms.txt' })[m.id] || m.label; }
+function shortLabel(m) {
+  const co = isCompany();
+  return ({ schema: co ? 'schema.org（会社名・所在地）' : 'schema.org（店名・住所）', text: '本文の文字', contact: co ? '所在地・問い合わせ先' : '電話・住所・営業時間', menu: 'メニュー・料金', pricing: '料金・プランのページ', service: '製品・サービスの説明', cases_faq: '導入事例・FAQ', reservation: '予約の入口', english: '英語の一文', title: 'ページの題名', description: 'サイトの紹介文', sitemap: 'sitemap / llms.txt' })[m.id] || m.label;
+}
 function roundRect(c, x, y, w, h, r) { c.beginPath(); c.moveTo(x + r, y); c.arcTo(x + w, y, x + w, y + h, r); c.arcTo(x + w, y + h, x, y + h, r); c.arcTo(x, y + h, x, y, r); c.arcTo(x, y, x + w, y, r); c.closePath(); }
 function blobOf(cv) { return new Promise((res) => cv.toBlob(res, 'image/png')); }
 function fileName() { return `ai-bae_${host(data.url).replace(/[^a-z0-9.-]/gi, '_')}_${ymd(data.created_at)}.png`; }
