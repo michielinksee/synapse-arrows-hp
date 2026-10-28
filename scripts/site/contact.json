@@ -1,0 +1,4 @@
+{
+  "_note": "資料請求・相談フォームの送り先（Google Apps Script のウェブアプリ URL）。ここ 1 か所に書いて python scripts/build-site.py を走らせると、contact/index.html・contact/confirm/index.html・en/contact/index.html の 3 枚に入る。空のあいだは、フォームの代わりにメールで送る案内が出る。形は https://script.google.com/macros/s/……/exec だけ受け付ける（違えば build-site.py が止まる）。手順: KanseiLINK/founder-ops/research/AiBae_2026-10/STEPS-contact-form-gas-michie.md",
+  "endpoint": "https://script.google.com/macros/s/AKfycbyasin6NeftBfw--Yek5_P5St2mWCMiAsSeN0nUPbRpiroj0Sd67tSDijFQr-tod5raOA/exec"
+}

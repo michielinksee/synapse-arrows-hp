@@ -336,11 +336,11 @@ textarea.ct-input{min-height:120px;resize:vertical;line-height:1.7}
 
 <script src="/ai-bae-shindan/turnstile-guard.js"></script>
 <script>
-// Google Apps Script のウェブアプリ URL。Michie がデプロイして貼る。空のあいだはフォームを出さず、メールの案内だけ出す
+// Google Apps Script のウェブアプリ URL。空のあいだはフォームを出さず、メールの案内だけ出す
 // (Google Apps Script web app URL. Empty = the form stays hidden and only the email option shows.)
-// 例: 'https://script.google.com/macros/s/XXXXXXXX/exec'（contact/index.html にも同じ URL を貼る）
+// 正本は scripts/site/contact.json の endpoint。python scripts/build-site.py が下の 1 行を書き換える（日本語の 2 枚と同じ値。手で直さない）
 // 手順: founder-ops/research/AiBae_2026-10/STEPS-contact-form-gas-michie.md ／ 受け口のコード: scripts/contact-form.gs
-const ENDPOINT = '';
+const ENDPOINT = 'https://script.google.com/macros/s/AKfycbyasin6NeftBfw--Yek5_P5St2mWCMiAsSeN0nUPbRpiroj0Sd67tSDijFQr-tod5raOA/exec';
 
 (function () {
   'use strict';
