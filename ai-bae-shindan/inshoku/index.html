@@ -113,6 +113,11 @@
     @keyframes spin { to { transform: rotate(360deg); } }
     .error { display: none; margin: 18px 0; padding: 12px 14px; border-radius: 12px; background: #fef2f2; color: #991b1b; font-size: 14px; }
     .error.show { display: block; }
+    /* 案内の枠（エラーではない時: 掲載サイトのページを入れた時など） */
+    .notice { display: none; margin: 18px 0; padding: 16px 16px 14px; border-radius: 14px; background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--g2); color: var(--ink); font-size: 14.5px; line-height: 1.8; }
+    .notice.show { display: block; }
+    .notice .go { display: inline-block; margin-top: 10px; background: var(--grad); color: #fff; text-decoration: none; border-radius: 12px; padding: 11px 16px; font-weight: 700; font-size: 14.5px; }
+    .fine.no-site a { color: var(--g2); font-weight: 700; }
 
     /* ── 結果 ── */
     #results { display: none; padding-top: 10px; }
@@ -215,7 +220,7 @@
     /* PC: 上の見出しと同じくらいの幅に広げる（入力欄と業種は横並び）。結果のカードは読みやすい幅のまま中央 */
     @media (min-width: 901px) {
       .wrap { max-width: 1040px; }
-      .aib-hero, .stories, .state, .error, #results, .aib footer.site { max-width: 720px; margin-left: auto; margin-right: auto; }
+      .aib-hero, .stories, .state, .error, .notice, #results, .aib footer.site { max-width: 720px; margin-left: auto; margin-right: auto; }
       .ask { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 44px; align-items: start; text-align: left; padding-top: 28px; }
       .ask .inds, .ask .fixed-ind { margin-top: 0; }
       .ask .inds legend { font-size: 16px; }
@@ -274,12 +279,14 @@
       <button type="submit" id="scan-btn">映え診断</button>
     </form>
     <div id="ts-box" class="ts-box"></div>
+    <p class="fine no-site">HP が無いお店は <a href="/ai-bae-shindan/apply/?industry=restaurant" data-va="ai_bae_apply_click" data-va-from="no_site_note">詳しい診断（無料）へ →</a>（食べログ・Instagram などのページは、この無料診断では見られません）</p>
     <p class="fine">入力例は架空のお店です。公開ページだけを読み、ログインが必要な場所は見ません。<br>同一ドメインは 1 回分の診断です（最初の結果を 30 日表示。サイトを直したら 30 日後に診断し直せます）。<br>選んだ業種と、どこから来たか（来た元のサイトのドメインなど）は、利用の数を数えるために記録します（詳しくは<a href="/policy/">プライバシーポリシー</a>）。</p>
     </div>
   </section>
 
   <div class="state" id="loading"><div class="spinner"></div>robots.txt と公開ページを読んでいます…</div>
   <div class="error" id="error-box" role="alert"></div>
+  <div class="notice" id="notice-box" role="status"></div>
 
   <section id="results" aria-live="polite">
     <div class="cached" id="cached-note" style="display:none"></div>
@@ -367,9 +374,17 @@ function setState(s, msg) {
   $('loading').classList.toggle('show', s === 'loading');
   if (s !== 'idle' && $('ind-msg')) $('ind-msg').classList.remove('show');
   $('error-box').classList.toggle('show', s === 'error');
+  $('notice-box').classList.toggle('show', s === 'notice');
   $('results').classList.toggle('show', s === 'done');
   btn.disabled = s === 'loading';
   if (s === 'error') $('error-box').textContent = msg;
+}
+// 掲載サイト（食べログ・ぐるなび・Instagram など）のお店ページを入れた時: サーバーは取りに行かず platform_page を返す。
+// エラーの赤ではなく案内の枠で、詳しい診断（無料）へ。
+function showPlatformNotice(name) {
+  const apply = '/ai-bae-shindan/apply/' + (industry ? '?industry=' + encodeURIComponent(industry) : '');
+  $('notice-box').innerHTML = `これは<b>${esc(name || '掲載サイト')}</b>のお店のページです。この無料診断は、お店が自分で持っているサイトを見るためのものです。<br>HP が無いお店は、詳しい診断（無料）で、ChatGPT などが掲載サイトからお店をどう紹介しているかを調べられます。<br><a class="go" href="${apply}" data-va="ai_bae_apply_click" data-va-from="platform_notice">詳しい診断（無料）を申し込む →</a>`;
+  setState('notice');
 }
 const ERR = {
   private_host: 'そのアドレスは診断できません（社内・ローカルのアドレスです）。',
@@ -426,6 +441,7 @@ async function run(url) {
     if (turnstile_token) body.turnstile_token = turnstile_token;
     const r = await fetch(API_BASE + '/api/site-check', { method: 'POST', mode: 'cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
     const j = await r.json();
+    if (!r.ok && j.code === 'platform_page') { showPlatformNotice(j.platform); return; }
     if (!r.ok) { setState('error', ERR[j.code] || ERR[j.error] || j.error || '診断に失敗しました。'); return; }
     if (needsIndustry(j)) { holdForIndustry(j, url); return; }
     pending = null;
