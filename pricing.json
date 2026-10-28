@@ -1,0 +1,64 @@
+{
+  "_readme": "AI映え診断の値段の正本（2026-10-27 夜 Michie 決定・税別）。ここを直して `node scripts/build-pricing.mjs` を実行すると、<!--p:…--> の印が付いた全ページ（日本語・英語・JSON-LD・llms.txt）が書き換わる。`--check` で、ページがこのファイルと同じかを確かめる。値段は数字（円・税別）で持ち、表示の形（5万円・50,000円・JPY 50,000・21万円〜）はスクリプトが作る。税込の金額は表示しない（tax_rate は参考に残すだけ。消費税の扱いは契約時に案内）。starting_at: true のプランは「〜」が付く（範囲で値段が変わる）。",
+  "decided_on": "2026-10-27",
+  "currency": "JPY",
+  "tax_rate": 0.1,
+  "scope_ja": "1 店舗・1 社あたり",
+  "scope_en": "per shop or company",
+  "plans": {
+    "light": {
+      "name_ja": "Light",
+      "name_en": "Light",
+      "price_jpy": 0,
+      "billing": "free",
+      "price_label_ja": "無料・登録不要",
+      "price_label_en": "Free, no sign-up"
+    },
+    "detailed": {
+      "name_ja": "詳しい診断",
+      "name_en": "Detailed check",
+      "price_jpy": 0,
+      "billing": "free",
+      "price_label_ja": "無料（メールの確認が要ります）",
+      "price_label_en": "Free (email confirmation required)"
+    },
+    "report": {
+      "name_ja": "照合レポート",
+      "name_en": "Fact-check report",
+      "price_jpy": 50000,
+      "billing": "one_off"
+    },
+    "report_remeasure": {
+      "name_ja": "照合レポート＋測り直し",
+      "name_en": "Fact-check report + re-measurement",
+      "price_jpy": 80000,
+      "billing": "one_off"
+    },
+    "monitor": {
+      "name_ja": "定点観測",
+      "name_en": "Monthly monitoring",
+      "price_jpy": 30000,
+      "billing": "monthly",
+      "min_months": 6,
+      "includes_online_meeting": false,
+      "delivery_mode": "report"
+    },
+    "implement": {
+      "name_ja": "実装・伴走",
+      "name_en": "Implementation retainer",
+      "price_jpy": 210000,
+      "billing": "monthly",
+      "min_months": 6,
+      "starting_at": true,
+      "includes_online_meeting": true
+    }
+  },
+  "implement_monthly_fixes": null,
+  "min_term_reason_ja": "AI が頼る掲載サイトの情報が入れ替わるのに時間がかかり、直した効果を数で見るには数か月かかるため、月額のプランは 6 か月からです。",
+  "min_term_reason_en": "The listings AI relies on take time to refresh, and seeing the effect of a fix in numbers takes months, so monthly plans run for at least six months.",
+  "sgd_note_en": "Prices are in Japanese yen. For clients in Singapore we quote in SGD on request.",
+  "tax_note_ja": "料金はすべて税別です。消費税の扱いはご契約の時にご案内します。",
+  "tax_note_en": "All prices exclude tax. How consumption tax applies is confirmed at contract time.",
+  "dashboard_available": false,
+  "dashboard_note_ja": "ダッシュボードでの閲覧・管理機能は今後提供予定です。現在はご利用いただけません。"
+}

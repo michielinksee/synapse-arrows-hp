@@ -1,5 +1,5 @@
 {
-  "_readme": "AI映え診断のページ。共通の入口と業種別の Light 版を、同じ型（page.template.html）から node scripts/build-ai-bae-pages.mjs で作る。業種の id と表示名は ai-bae-shindan/survey.json の q1（kansei-internal の src/data/ai-bae-survey.json の写し）から取る。industry が null のページは最初に業種を選んでもらい、文字列のページはその業種で固定する。業種別の Light 版は、その業種の頼る先を測ってから足す（2026-10-27 は飲食だけ）。",
+  "_readme": "AI映え診断のページ。共通の入口と業種別の Light 版を、同じ型（page.template.html）から node scripts/build-ai-bae-pages.mjs で作る。業種の id と表示名は ai-bae-shindan/survey.json の q1（kansei-internal の src/data/ai-bae-survey.json の写し）から取る。industry が null のページは最初に業種を選んでもらい、文字列のページはその業種で固定する。業種別の Light 版は、その業種の頼る先を測ってから足す（2026-10-27 は飲食だけ）。 nav_label は、ほかのページ（トップ・/services/・/products/・共通の入口）に出す「業種別の診断: …」の文言。無ければ survey の業種名＋「向け」。",
   "pages": [
     {
       "out": "ai-bae-shindan/index.html",
@@ -29,7 +29,8 @@
       "ask_h2": "お店のホームページの URL を入力",
       "fixed_note": "このページは<b>飲食店</b>向けです。AI が頼る先（食べログ・Retty・一休.com レストラン・ホットペッパーグルメ・ヒトサラなど）と、メニューと値段・営業時間・予約の方法が文字で伝わるかを見ます。例: 「食べログのお店のページへのリンクをサイトに置く」。ほかの業種は <a href=\"/ai-bae-shindan/\">共通の入口</a> から。",
       "ld_name": "AI映え診断 Light｜飲食店",
-      "ld_description": "飲食店のホームページの URL を入れるだけで、ChatGPT・Claude・Gemini・Perplexity がサイトを読める設定か、食べログ・Retty・一休.com レストラン・ホットペッパーグルメ・ヒトサラなど AI が頼る先へつながっているか、メニューと値段・営業時間・予約の方法が文字で伝わるかを無料で診断する。AI の回答そのものは測らない下地の診断。"
+      "ld_description": "飲食店のホームページの URL を入れるだけで、ChatGPT・Claude・Gemini・Perplexity がサイトを読める設定か、食べログ・Retty・一休.com レストラン・ホットペッパーグルメ・ヒトサラなど AI が頼る先へつながっているか、メニューと値段・営業時間・予約の方法が文字で伝わるかを無料で診断する。AI の回答そのものは測らない下地の診断。",
+      "nav_label": "飲食店向け"
     }
   ]
 }

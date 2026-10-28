@@ -10,7 +10,7 @@
   <link rel="canonical" href="https://synapsearrows.com/ai-bae-shindan/inshoku/">
   <script>
     // 結果ページ（?id=）は索引させない。共有先から来た人には中身を見せる。
-    (function(){ if (new URLSearchParams(location.search).get('id')) { var m=document.createElement('meta'); m.name='robots'; m.content='noindex, follow'; document.head.appendChild(m); } })();
+    (function(){ if (new URLSearchParams(location.search).get('id')) { var m=document.createElement('meta'); m.name='robots'; m.content='noindex, follow'; document.head.appendChild(m); document.addEventListener('DOMContentLoaded', function(){ document.body.classList.add('has-result'); }); } })();
   </script>
 
   <!-- OGP -->
@@ -27,14 +27,17 @@
 
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","@id":"https://synapsearrows.com/ai-bae-shindan/inshoku/#webapp","name":"AI映え診断 Light｜飲食店","applicationCategory":"BusinessApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"JPY"},"provider":{"@type":"Organization","@id":"https://synapsearrows.com/#organization","name":"Synapse Arrows Pte. Ltd.","url":"https://synapsearrows.com/"},"url":"https://synapsearrows.com/ai-bae-shindan/inshoku/","inLanguage":"ja","isAccessibleForFree":true,"image":"https://synapsearrows.com/ai-bae-shindan/img/og-ai-bae-inshoku.png","description":"飲食店のホームページの URL を入れるだけで、ChatGPT・Claude・Gemini・Perplexity がサイトを読める設定か、食べログ・Retty・一休.com レストラン・ホットペッパーグルメ・ヒトサラなど AI が頼る先へつながっているか、メニューと値段・営業時間・予約の方法が文字で伝わるかを無料で診断する。AI の回答そのものは測らない下地の診断。"}</script>
 
-  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/site-chrome.css">
   <link rel="icon" href="/favicon.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400..900&display=swap" rel="stylesheet">
 
   <style>
-    main.aib { padding-top: 72px; }
+    main.aib { padding-top: 8px; scroll-margin-top: 12px; }
+    /* 上に Codex の見出し（ロゴ入り）があるので、下地チェックの側のロゴは出さない。?id= の結果を開いた時は見出しを畳んで結果を先に */
+    .aib-hero .hero-row { display: none; }
+    body.has-result .diagnosis-page-hero { display: none; }
     :root {
       --g1: #f58529; --g2: #dd2a7b; --g3: #8134af;
       --grad: linear-gradient(45deg, var(--g1), var(--g2) 55%, var(--g3));
@@ -85,7 +88,7 @@
     .story { flex: 1 0 0; min-width: 72px; background: none; border: 0; cursor: pointer; text-align: center; font: inherit; color: var(--ink); display: flex; flex-direction: column; align-items: center; }
     .story .ring { display: block; width: 72px; height: 72px; border-radius: 50%; margin: 0 auto; padding: 3px; background: var(--grad); transition: transform .15s; }
     .story .ring .in { width: 100%; height: 100%; border-radius: 50%; background: var(--card); display: flex; align-items: center; justify-content: center; border: 3px solid var(--card); }
-    .story .ball { width: 34px; height: 34px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #fff5 0 12%, transparent 40%), var(--grad); display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 900; font-size: 15px; letter-spacing: 0; }
+    .story .ball { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; display: block; background: #fff; }
     .story .all { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 17px; letter-spacing: .02em; color: var(--ink); }
     .story .lbl { display: block; font-size: 12px; margin-top: 8px; letter-spacing: .08em; white-space: nowrap; }
     .story:hover .ring { transform: scale(1.04); }
@@ -121,6 +124,7 @@
     .post .head { display: flex; align-items: center; gap: 12px; padding: 14px 16px; }
     .post .avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--grad); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 18px; flex-shrink: 0; }
     .post .avatar.sum { font-family: 'Inter', sans-serif; font-size: 13px; letter-spacing: .02em; }
+    .post img.avatar { object-fit: cover; background: #fff; border: 1px solid var(--line); }
     .post .who { font-weight: 700; font-size: 16px; line-height: 1.3; }
     .post .meta { color: var(--sub); font-size: 12px; letter-spacing: .04em; margin-top: 2px; }
     .post .url { color: var(--sub); font-size: 12px; margin-left: auto; max-width: 42%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -191,43 +195,64 @@
     .aib footer.site a { text-decoration: none; }
     .aib footer.site a:hover { color: var(--g2); }
 
+    .ind-pages { margin: 12px 0 0; font-size: 13.5px; color: var(--sub); text-align: left; }
+    .ind-pages a { color: var(--g2); font-weight: 700; text-decoration: none; }
+    .ind-pages a:hover { text-decoration: underline; }
+    /* PC: 上の見出しと同じくらいの幅に広げる（入力欄と業種は横並び）。結果のカードは読みやすい幅のまま中央 */
+    @media (min-width: 901px) {
+      .wrap { max-width: 1040px; }
+      .aib-hero, .stories, .state, .error, #results, .aib footer.site { max-width: 720px; margin-left: auto; margin-right: auto; }
+      .ask { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 44px; align-items: start; text-align: left; padding-top: 28px; }
+      .ask .inds, .ask .fixed-ind { margin-top: 0; }
+      .ask .inds legend { font-size: 16px; }
+      .ask-url { padding-top: 2px; }
+      .ask-url h2 { font-size: 20px; }
+      .ask .fine { text-align: left; }
+    }
     @media (max-width: 420px) {
-      .stories { gap: 6px; } .story { min-width: 62px; } .story .ring { width: 62px; height: 62px; } .story .ball { width: 30px; height: 30px; font-size: 13px; } .story .all { font-size: 14px; } .story .lbl { font-size: 11px; letter-spacing: 0; white-space: normal; line-height: 1.25; }
+      .stories { gap: 6px; } .story { min-width: 62px; } .story .ring { width: 62px; height: 62px; } .story .ball { width: 42px; height: 42px; } .story .all { font-size: 14px; } .story .lbl { font-size: 11px; letter-spacing: 0; white-space: normal; line-height: 1.25; }
       form.scan { flex-direction: column; } form.scan button { width: 100%; }
       .post .url { display: none; }
     }
   </style>
+    <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script>
+    <script defer src="/_vercel/insights/script.js"></script>
+    <script defer src="/site.js"></script>
 </head>
 <body>
-<header><nav class="nav"><div class="container nav-inner"><a href="/" class="nav-logo"><img src="/logo.png" alt="Synapse Arrows" width="32" height="32">Synapse Arrows</a><ul class="nav-links"><li><a href="/about/">About</a></li><li><a href="/products/">Products</a></li><li><a href="/services/">Services</a></li><li><a href="/tools/" class="active">Tools</a></li><li><a href="/insights/">Insights</a></li><li><a href="/contact/" class="nav-cta">Contact</a></li></ul><button class="mobile-menu-btn" aria-label="Menu"><span></span><span></span><span></span></button></div></nav></header>
-<main class="aib">
+<a href="#main" class="skip-link">本文へスキップ</a>
+<header class="site-header" id="top"><div class="container header-inner"><a class="brand" href="/" aria-label="Synapse Arrows トップへ"><img src="/assets/company-logo.png" alt="" width="48" height="48"><span>Synapse Arrows</span></a><nav class="desktop-nav" aria-label="メインナビゲーション"><a href="/services/">事業紹介</a><a href="/services/">サービス</a><a href="/products/">プロダクト</a><a href="/insights/">Insights</a><a href="/about/">会社概要</a></nav><a class="button header-cta" href="/contact/" data-va="download_click" data-va-from="header">資料請求・ご相談 <svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M184.49 136.49l-80 80a12 12 0 0 1-17-17L159 128 87.51 56.49a12 12 0 1 1 17-17l80 80a12 12 0 0 1 0 17z"/></svg></a><button class="menu-toggle" type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="mobile-menu"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224 128a8 8 0 0 1-8 8H40a8 8 0 0 1 0-16h176a8 8 0 0 1 8 8zM40 72h176a8 8 0 0 0 0-16H40a8 8 0 0 0 0 16zm176 112H40a8 8 0 0 0 0 16h176a8 8 0 0 0 0-16z"/></svg></button></div><nav class="mobile-nav" id="mobile-menu" aria-label="モバイルナビゲーション" hidden><a href="/services/">事業紹介・サービス</a><a href="/products/">プロダクト</a><a href="/tools/">無料ツール</a><a href="/ai-bae-shindan/">AI映え診断</a><a href="/insights/">Insights・記事</a><a href="/about/">会社概要</a><a href="/contact/">資料請求・ご相談</a></nav></header>
+<nav class="diagnosis-nav" aria-label="AI映え診断ナビゲーション"><div class="container"><a href="/ai-bae-shindan/" class="diagnosis-nav-brand">AI映え診断</a><a href="/ai-bae-shindan/" aria-current="page">サービス内容</a><a href="/ai-bae-shindan/pricing/">料金・パッケージ</a><a href="/ai-bae-shindan/flow/">ご利用の流れ</a><a href="/ai-bae-shindan/#check">無料診断 Light</a></div></nav><section class="diagnosis-page-hero" id="hero"><div class="container diagnosis-hero-grid"><div><p class="eyebrow"><span aria-hidden="true"></span>AI BAE SHINDAN / BY SYNAPSE ARROWS</p><h1>AIは、あなたの会社を<br><span>どう説明して<br>いますか？</span></h1><p>お客さんがお店やサービスを探す道に、検索や地図に加えて、ChatGPT などの AI が加わりました。</p><p>お店や会社のサイトの URL を入れるだけで、ChatGPT・Gemini・Claude・Perplexity の 4 つの AI がサイトを読めているか、その場で分かります。</p><div class="page-actions"><a href="#check" class="button" data-va="ai_bae_start" data-va-from="diagnosis_hero">無料でサイトをチェック <svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M184.49 136.49l-80 80a12 12 0 0 1-17-17L159 128 87.51 56.49a12 12 0 1 1 17-17l80 80a12 12 0 0 1 0 17z"/></svg></a><a href="/contact/?service=AI%E6%98%A0%E3%81%88%E8%A8%BA%E6%96%AD&intent=%E8%B3%87%E6%96%99%E8%AB%8B%E6%B1%82" class="button secondary" data-va="download_click" data-va-from="diagnosis_hero">サービス資料を請求 <svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M184.49 136.49l-80 80a12 12 0 0 1-17-17L159 128 87.51 56.49a12 12 0 1 1 17-17l80 80a12 12 0 0 1 0 17z"/></svg></a></div><p class="small-note hero-scope-note">無料版Lightはサイトの下地を確認します。<br>AIの回答の調査は、詳しい診断・有料プランで行います。</p></div><div class="diagnosis-brand-art"><img src="/assets/diagnosis-logo.webp" alt="AI映え診断 by Synapse Arrows" width="1000" height="270"><img src="/assets/characters.webp" alt="AI映え診断の4キャラクター" width="640" height="344" loading="lazy"></div></div></section>
+<main class="aib" id="check">
 <div class="wrap">
   <div class="topbar">
-    <a href="/tools/">← ツール一覧</a>
-    <a href="/services/ai-aeo/">AEO・LLMO の改善のご相談</a>
+    <a href="/tools/">← 無料ツール</a>
+    <a href="/ai-bae-shindan/pricing/">料金・パッケージ →</a>
   </div>
 
   <header class="aib-hero">
     <div class="hero-row">
-      <h1 class="logo"><img src="/ai-bae-shindan/img/logo-text.webp" alt="AI映え診断 by Synapse Arrows" width="960" height="273"></h1>
+      <h1 class="logo"><img src="/ai-bae-shindan/img/logo-text.webp" alt="AI映え診断 by Synapse Arrows" width="1000" height="270"></h1>
       <img class="chars" src="/ai-bae-shindan/img/logo-chars.webp" alt="" width="640" height="344" loading="lazy">
     </div>
     <p class="badge">Light｜飲食店</p>
     <p class="tag">あなたのお店、AI映えしてますか？</p>
     <p class="def"><b>AI 映え</b>＝AI に見つけられ、正しく紹介され、選ばれること。この無料版が測るのはその<b>下地</b>（AI がサイトを読めるか・正しく伝わる材料があるか）です。
       <span class="note">AI が実際に何と答えるかは、無料版では測っていません。AI ごとの「頼る先」は、サイトからそこへ辿れるか（リンクか schema.org の sameAs）だけを見ます。</span></p>
+    
   </header>
 
   <nav class="stories idle" id="stories" aria-label="診断するAIを選ぶ">
     <button class="story on" data-eng="all" aria-pressed="true"><span class="ring"><span class="in"><span class="all">ALL</span></span></span><span class="lbl">まとめて診断</span></button>
-    <button class="story" data-eng="chatgpt" aria-pressed="false"><span class="ring"><span class="in"><span class="ball">Ch</span></span></span><span class="lbl">ChatGPT</span></button>
-    <button class="story" data-eng="claude" aria-pressed="false"><span class="ring"><span class="in"><span class="ball">Cl</span></span></span><span class="lbl">Claude</span></button>
-    <button class="story" data-eng="gemini" aria-pressed="false"><span class="ring"><span class="in"><span class="ball">Ge</span></span></span><span class="lbl">Gemini</span></button>
-    <button class="story" data-eng="perplexity" aria-pressed="false"><span class="ring"><span class="in"><span class="ball">Pe</span></span></span><span class="lbl">Perplexity</span></button>
+    <button class="story" data-eng="chatgpt" aria-pressed="false"><span class="ring"><span class="in"><img class="ball" src="/assets/ai-icons/chatgpt.webp" alt="" width="50" height="50"></span></span><span class="lbl">ChatGPT</span></button>
+    <button class="story" data-eng="claude" aria-pressed="false"><span class="ring"><span class="in"><img class="ball" src="/assets/ai-icons/claude.webp" alt="" width="50" height="50"></span></span><span class="lbl">Claude</span></button>
+    <button class="story" data-eng="gemini" aria-pressed="false"><span class="ring"><span class="in"><img class="ball" src="/assets/ai-icons/gemini.webp" alt="" width="50" height="50"></span></span><span class="lbl">Gemini</span></button>
+    <button class="story" data-eng="perplexity" aria-pressed="false"><span class="ring"><span class="in"><img class="ball" src="/assets/ai-icons/perplexity.webp" alt="" width="50" height="50"></span></span><span class="lbl">Perplexity</span></button>
   </nav>
 
   <section class="ask">
     <p class="fixed-ind">このページは<b>飲食店</b>向けです。AI が頼る先（食べログ・Retty・一休.com レストラン・ホットペッパーグルメ・ヒトサラなど）と、メニューと値段・営業時間・予約の方法が文字で伝わるかを見ます。例: 「食べログのお店のページへのリンクをサイトに置く」。ほかの業種は <a href="/ai-bae-shindan/">共通の入口</a> から。</p>
+    <div class="ask-url">
     <h2>お店のホームページの URL を入力</h2>
     <p class="sub">入れるだけ。10 秒ほどで診断書が出ます。</p>
     <form class="scan" id="scan-form" autocomplete="off">
@@ -236,6 +261,7 @@
     </form>
     <div id="ts-box" class="ts-box"></div>
     <p class="fine">入力例は架空のお店です。公開ページだけを読み、ログインが必要な場所は見ません。<br>同一ドメインは 1 回分の診断です（最初の結果を 30 日表示。サイトを直したら 30 日後に診断し直せます）。<br>選んだ業種は記録しません（その業種の「頼る先」で数えるためだけに使います）。</p>
+    </div>
   </section>
 
   <div class="state" id="loading"><div class="spinner"></div>robots.txt と公開ページを読んでいます…</div>
@@ -251,6 +277,7 @@
       <button class="btn" id="copy-btn">リンクをコピー</button>
     </div>
     <a class="cta" id="cta" href="/ai-bae-shindan/apply/">詳しい診断を申し込む（無料）→ AI が実際に何と答えているか（誤った紹介がないか）を確かめます<small>この診断は下地だけ。詳しい診断では 4 つの AI に実際に聞き、結果をメールでお送りします。</small></a>
+    <p class="fine" style="text-align:center"><a href="/ai-bae-shindan/pricing/" style="color:var(--g2);font-weight:700">料金・パッケージを見る →</a>（直し方まで頼みたい時の内容と値段）</p>
     <p class="fine" style="text-align:center">診断日と URL の入った診断書は「画像を保存」から。結果のリンクは 30 日たっても開けます。</p>
     <p class="fine" style="text-align:center">直し方のご相談は <a href="/contact/?topic=aeo" style="color:var(--g2);font-weight:700">お問い合わせ</a> から（Synapse Arrows がお受けします）。</p>
   </section>
@@ -262,7 +289,7 @@
   </footer>
 </div>
 </main>
-<footer class="footer"><div class="container footer-inner"><div class="footer-logo">Synapse Arrows Pte. Ltd</div><ul class="footer-links"><li><a href="https://kansei-link.com" target="_blank" rel="noopener">KanseiLINK</a></li><li><a href="/services/">Services</a></li><li><a href="/tools/">Tools</a></li><li><a href="/policy/">Privacy</a></li><li><a href="/terms/">Terms</a></li></ul><div class="footer-copy">&copy; 2026 Synapse Arrows Pte. Ltd. All rights reserved.</div></div></footer>
+<footer class="footer"><div class="container footer-inner"><a class="brand brand-footer" href="/" aria-label="Synapse Arrows トップへ"><img src="/assets/company-logo.png" alt="" width="37" height="37"><span>Synapse Arrows</span></a><nav aria-label="フッターナビゲーション"><a href="/insights/">Insights・記事</a><a href="/about/">会社概要</a><a href="/contact/">お問い合わせ</a><a href="/policy/">プライバシーポリシー</a><a href="/terms/">利用規約</a><a href="/en/" lang="en">English</a></nav></div></footer>
 <canvas id="cv" width="1080" height="1350" style="display:none" aria-hidden="true"></canvas>
 <div class="toast" id="toast"></div>
 
@@ -273,11 +300,26 @@ const API_BASE = (location.hostname === 'localhost' || location.hostname === '12
   ? 'http://localhost:3000' : 'https://mcp.kansei-link.com';
 KLTurnstile.init(API_BASE, document.getElementById('ts-box')); // no-op while the server has Turnstile off
 const SHARE_BASE = 'https://synapsearrows.com/ai-bae-shindan/inshoku/';
+// 来た元（SEC-2026-10-27-001・批准待ち）: 参照元のドメインだけ・utm_source／utm_campaign・この入口のパス。IP・UA は送らない。
+// 同じタブで前に置いた物（外から来た時の参照元・utm）があり、今の参照元が自社なら、前の物を引き継ぐ。申し込みの段へも sessionStorage で渡す。
+const ORIGIN = (() => {
+  const q = new URLSearchParams(location.search);
+  const own = location.hostname.replace(/^www\./, '');
+  let ref = null; try { ref = document.referrer ? new URL(document.referrer).hostname.replace(/^www\./, '') : null; } catch {}
+  let prev = null; try { prev = JSON.parse(sessionStorage.getItem('ai-bae-origin') || 'null'); } catch {}
+  const o = { ref_domain: ref, utm_source: q.get('utm_source') || null, utm_campaign: q.get('utm_campaign') || null, entry_path: location.pathname };
+  if (prev && (!ref || ref === own)) { o.ref_domain = prev.ref_domain || null; o.utm_source = o.utm_source || prev.utm_source || null; o.utm_campaign = o.utm_campaign || prev.utm_campaign || null; }
+  try { sessionStorage.setItem('ai-bae-origin', JSON.stringify(o)); } catch {}
+  return o;
+})();
 // 業種: 固定のページ（飲食の Light 版など）は FIXED_INDUSTRY。共通の入口は選んでもらう（全業種を混ぜた結果は出さない）。
 const FIXED_INDUSTRY = "restaurant";
 const INDUSTRIES = [{"id":"restaurant","label":"飲食"},{"id":"beauty","label":"美容院"},{"id":"real_estate","label":"不動産"},{"id":"lodging","label":"旅行／宿"},{"id":"saas_web","label":"IT／Web"},{"id":"consulting","label":"コンサル"},{"id":"accounting","label":"税理士／会計士"},{"id":"medical","label":"医療（医科・歯科）"},{"id":"care","label":"介護／整体"},{"id":"aesthetic","label":"美容外科／エステ"},{"id":"retail","label":"小売"},{"id":"school","label":"教室・スクール"},{"id":"professional","label":"士業（弁護士・司法書士など）"},{"id":"manufacturing_btob","label":"製造・メーカー（BtoB）"},{"id":"other","label":"その他"}];
-const KANA = { chatgpt: 'Ch', claude: 'Cl', gemini: 'Ge', perplexity: 'Pe' };
+const ICON = { chatgpt: '/assets/ai-icons/chatgpt.webp', claude: '/assets/ai-icons/claude.webp', gemini: '/assets/ai-icons/gemini.webp', perplexity: '/assets/ai-icons/perplexity.webp' };
 const LOGO = new Image(); LOGO.src = '/ai-bae-shindan/img/logo-text.webp';
+const GROUP = new Image(); GROUP.src = '/assets/ai-icons/group.webp';
+const ICON_IMG = Object.fromEntries(Object.entries(ICON).map(([k, src]) => { const im = new Image(); im.src = src; return [k, im]; }));
+const loaded = (im) => (im.complete ? Promise.resolve() : new Promise((r) => { im.onload = r; im.onerror = r; }));
 const CLS = { open: 'ok', partial: 'mid', blocked: 'bad', ok: 'ok', missing: 'bad' };
 
 const $ = (id) => document.getElementById(id);
@@ -353,6 +395,7 @@ async function run(url) {
     const turnstile_token = await KLTurnstile.token();
     const body = { url, mode: 'ai-bae' };
     if (industry) body.industry = industry; // 古いサーバーは無視するだけ
+    body.origin = ORIGIN; // 来た元（古いサーバーは無視するだけ）
     if (turnstile_token) body.turnstile_token = turnstile_token;
     const r = await fetch(API_BASE + '/api/site-check', { method: 'POST', mode: 'cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
     const j = await r.json();
@@ -435,7 +478,7 @@ function engineCard(e) {
   const sc = e.sources;
   const scStatus = sc.points >= 5 ? 'ok' : sc.points > 0 ? 'partial' : 'missing';
   return `<article class="post" data-eng="${e.id}">
-    <div class="head"><div class="avatar">${KANA[e.id]}</div><div><div class="who">${esc(e.vendor)}</div><div class="meta">下地の診断 · ${esc(date)}</div></div><div class="url">${esc(host(data.url))}</div></div>
+    <div class="head"><img class="avatar" src="${ICON[e.id]}" alt="" width="44" height="44"><div><div class="who">${esc(e.vendor)}</div><div class="meta">下地の診断 · ${esc(date)}</div></div><div class="url">${esc(host(data.url))}</div></div>
     ${scoreRing(e.score, 'AI映え 下地 SCORE')}
     <div class="tiles">
       ${tile(`${e.vendor} が読める`, e.status, e.status_label)}
@@ -494,43 +537,59 @@ $('cards').addEventListener('click', (e) => {
 async function draw() {
   const cv = $('cv'), c = cv.getContext('2d'), W = cv.width, H = cv.height, a = data.ai_bae;
   try { await document.fonts.ready; } catch {}
+  await Promise.all([LOGO, GROUP, ...Object.values(ICON_IMG)].map(loaded));
   const JP = "'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif", EN = "'Inter', 'Noto Sans JP', sans-serif";
   const fit = (t, max) => { let u = t; while (c.measureText(u).width > max && u.length > 4) u = u.slice(0, -1); return u === t ? t : u.slice(0, -1) + '…'; };
+  const okImg = (im) => im.complete && im.naturalWidth > 0;
+  const circleImg = (im, cx, cy, r) => { if (!okImg(im)) return false; c.save(); c.beginPath(); c.arc(cx, cy, r, 0, Math.PI * 2); c.closePath(); c.clip(); c.drawImage(im, cx - r, cy - r, r * 2, r * 2); c.restore(); return true; };
   c.fillStyle = '#ffffff'; c.fillRect(0, 0, W, H);
   const g = c.createLinearGradient(0, 0, W, 0); g.addColorStop(0, '#f58529'); g.addColorStop(.55, '#dd2a7b'); g.addColorStop(1, '#8134af');
   c.fillStyle = g; c.fillRect(0, 0, W, 18);
-  if (LOGO.complete && LOGO.naturalWidth) c.drawImage(LOGO, 60, 34, 400, 114);
+  if (okImg(LOGO)) c.drawImage(LOGO, 60, 38, 400, 108);
   else { c.fillStyle = '#111827'; c.font = `900 66px ${JP}`; c.fillText('AI映え診断', 72, 112); }
   if (a.industry_label) { c.font = `700 30px ${JP}`; const lw = c.measureText(a.industry_label).width; c.fillStyle = '#111827'; roundRect(c, W - 72 - lw - 40, 64, lw + 40, 52, 26); c.fill(); c.fillStyle = '#fff'; c.fillText(a.industry_label, W - 72 - lw - 20, 100); }
   c.font = `500 27px ${JP}`; c.fillStyle = '#6b7280'; c.fillText(fit('AI 映えの下地の診断です（AI の回答そのものは測っていません）', W - 144), 72, 178);
   c.fillStyle = '#111827'; c.font = `700 34px ${EN}`; c.fillText(fit(data.url, W - 144), 72, 226);
   c.font = `500 26px ${JP}`; c.fillStyle = '#6b7280'; c.fillText(`診断日 ${ymd(data.created_at)}　同一ドメインは 1 回分の診断`, 72, 262);
   // ring
-  const cx = W / 2, cy = 400, R = 108; c.lineWidth = 22; c.lineCap = 'round';
+  const cx = W / 2, cy = 390, R = 104; c.lineWidth = 22; c.lineCap = 'round';
   c.strokeStyle = '#e5e7eb'; c.beginPath(); c.arc(cx, cy, R, 0, Math.PI * 2); c.stroke();
   const col = a.score >= 70 ? '#16a34a' : a.score >= 40 ? '#d97706' : '#dc2626';
   c.strokeStyle = col; c.beginPath(); c.arc(cx, cy, R, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * a.score / 100); c.stroke();
-  c.fillStyle = col; c.font = `800 96px ${EN}`; c.textAlign = 'center'; c.fillText(String(a.score), cx, cy + 34);
+  c.fillStyle = col; c.font = `800 92px ${EN}`; c.textAlign = 'center'; c.fillText(String(a.score), cx, cy + 32);
   c.fillStyle = '#6b7280'; c.font = `500 23px ${JP}`; c.fillText(`AI映え 下地 SCORE / 100　読める ${a.access_score}/30 · 頼る先 ${a.sources_score}/15 · 材料 ${a.materials_score}/55`, cx, cy + R + 44); c.textAlign = 'left';
-  // engines: one row each, with the 頼る先 line under it
-  let y = 596; c.font = `700 28px ${JP}`; c.fillStyle = '#111827'; c.fillText('AI ごとの判定と、その AI がよく頼る先', 72, y); y += 14;
+  // engines: one row each（左にそのAIのキャラクターの顔）, with the 頼る先 line under it
+  let y = 584; c.font = `700 28px ${JP}`; c.fillStyle = '#111827'; c.fillText('AI ごとの判定と、その AI がよく頼る先', 72, y); y += 14;
   for (const e of a.engines) {
-    y += 76; const ec = e.status === 'open' ? '#16a34a' : e.status === 'partial' ? '#d97706' : '#dc2626';
-    c.fillStyle = '#f6f6f7'; roundRect(c, 72, y - 40, W - 144, 72, 14); c.fill();
-    c.fillStyle = ec; c.beginPath(); c.arc(104, y - 14, 10, 0, Math.PI * 2); c.fill();
-    c.fillStyle = '#111827'; c.font = `700 27px ${JP}`; c.fillText(e.vendor, 128, y - 4);
+    y += 74; const ec = e.status === 'open' ? '#16a34a' : e.status === 'partial' ? '#d97706' : '#dc2626';
+    c.fillStyle = '#f6f6f7'; roundRect(c, 72, y - 40, W - 144, 70, 14); c.fill();
+    if (!circleImg(ICON_IMG[e.id], 112, y - 5, 23)) { c.fillStyle = ec; c.beginPath(); c.arc(112, y - 5, 10, 0, Math.PI * 2); c.fill(); }
+    c.fillStyle = ec; c.beginPath(); c.arc(156, y - 14, 8, 0, Math.PI * 2); c.fill();
+    c.fillStyle = '#111827'; c.font = `700 27px ${JP}`; c.fillText(e.vendor, 174, y - 4);
     c.fillStyle = ec; c.textAlign = 'right'; c.fillText(`${e.status_label}　${e.score}`, W - 96, y - 4); c.textAlign = 'left';
     const srcLine = e.sources.relied.map((r) => `${r.linked ? '◎' : '×'}${r.name.replace(/／.*$/, '').replace(/（.*$/, '')}`).join('　');
-    c.fillStyle = '#6b7280'; c.font = `500 19px ${JP}`; c.fillText(fit(`頼る先: ${srcLine}`, W - 212), 128, y + 24);
+    c.fillStyle = '#6b7280'; c.font = `500 19px ${JP}`; c.fillText(fit(`頼る先: ${srcLine}`, W - 262), 174, y + 22);
   }
-  y += 82; c.fillStyle = '#111827'; c.font = `700 28px ${JP}`; c.fillText(`正しく伝わる材料（4 社共通）　${a.materials_score} / 55`, 72, y); y += 10;
-  const half = Math.ceil(a.materials.length / 2), col1 = a.materials.slice(0, half), col2 = a.materials.slice(half);
-  [col1, col2].forEach((list, i) => { let yy = y; for (const m of list) { yy += 38; const mc = m.status === 'ok' ? '#16a34a' : m.status === 'partial' ? '#d97706' : '#dc2626'; c.fillStyle = mc; c.beginPath(); c.arc(90 + i * 480, yy - 9, 8, 0, Math.PI * 2); c.fill(); c.fillStyle = '#374151'; c.font = `500 23px ${JP}`; c.fillText(shortLabel(m), 112 + i * 480, yy); c.fillStyle = '#6b7280'; c.font = `600 21px ${EN}`; c.fillText(`${m.points}/${m.max}`, 440 + i * 480, yy); } });
-  // footer
-  c.fillStyle = g; c.fillRect(0, H - 96, W, 96);
-  c.fillStyle = '#fff'; c.font = `700 30px ${EN}`; c.fillText('synapsearrows.com/ai-bae-shindan/', 72, H - 52);
-  c.font = `500 19px ${JP}`; c.fillText('頼る先＝サイトからそこへ辿れるかだけ。載っているか・正しいかは見ていません', 72, H - 22);
-  c.font = `500 24px ${JP}`; c.textAlign = 'right'; c.fillText('無料の AI 映え診断 · Synapse Arrows', W - 72, H - 40); c.textAlign = 'left';
+  // materials in 3 columns（下にキャラクターの絵を入れる余白を残す）
+  y += 70; c.fillStyle = '#111827'; c.font = `700 28px ${JP}`; c.fillText(`正しく伝わる材料（4 社共通）　${a.materials_score} / 55`, 72, y);
+  const n = a.materials.length, rows = Math.ceil(n / 3), colW = (W - 144) / 3;
+  a.materials.forEach((m, i) => {
+    const colI = Math.floor(i / rows), rowI = i % rows, x0 = 72 + colI * colW, yy = y + 38 * (rowI + 1);
+    const mc = m.status === 'ok' ? '#16a34a' : m.status === 'partial' ? '#d97706' : '#dc2626';
+    c.fillStyle = mc; c.beginPath(); c.arc(x0 + 9, yy - 8, 8, 0, Math.PI * 2); c.fill();
+    c.fillStyle = '#6b7280'; c.font = `600 20px ${EN}`; c.textAlign = 'right'; c.fillText(`${m.points}/${m.max}`, x0 + colW - 14, yy); c.textAlign = 'left';
+    c.fillStyle = '#374151'; c.font = `500 20px ${JP}`; c.fillText(fit(shortLabel(m), colW - 86), x0 + 28, yy);
+  });
+  const matsEnd = y + 38 * rows + 10;
+  // footer band（文字が重ならない並び）
+  const FOOT = 88;
+  c.fillStyle = g; c.fillRect(0, H - FOOT, W, FOOT);
+  c.fillStyle = '#fff'; c.font = `700 26px ${EN}`; c.fillText('synapsearrows.com/ai-bae-shindan/', 72, H - 50);
+  c.font = `500 17px ${JP}`; c.fillText('頼る先＝サイトからそこへ辿れるかだけ。載っているか・正しいかは見ていません', 72, H - 20);
+  c.font = `500 20px ${JP}`; c.textAlign = 'right'; c.fillText('無料の AI 映え診断 · Synapse Arrows', W - 72, H - 50); c.textAlign = 'left';
+  // the four characters, in the space that is left above the band (skipped when there is not enough room)
+  const avail = (H - FOOT - 14) - (matsEnd + 10);
+  if (okImg(GROUP) && avail >= 90) { const gh = Math.min(avail, 190), gw = gh * GROUP.naturalWidth / GROUP.naturalHeight; c.drawImage(GROUP, (W - gw) / 2, H - FOOT - 14 - gh, gw, gh); }
   return cv;
 }
 function shortLabel(m) { return ({ schema: 'schema.org（店名・住所）', text: '本文の文字', contact: '電話・住所・営業時間', menu: 'メニュー・料金', reservation: '予約の入口', english: '英語の一文', title: 'ページの題名', description: 'サイトの紹介文', sitemap: 'sitemap / llms.txt' })[m.id] || m.label; }
@@ -568,6 +627,5 @@ $('copy-btn').addEventListener('click', async () => { try { await navigator.clip
 // ─── boot: ?id= で共有された結果を開く ───────────────────────────
 (function () { const id = new URLSearchParams(location.search).get('id'); if (id && /^[0-9a-f]{12}$/.test(id)) load(id); })();
 </script>
-<script>document.querySelector('.mobile-menu-btn').addEventListener('click',function(){const n=document.querySelector('.nav-links');n.style.display=n.style.display==='flex'?'none':'flex';n.style.flexDirection='column';n.style.position='absolute';n.style.top='72px';n.style.left='0';n.style.right='0';n.style.background='#fff';n.style.padding='20px';n.style.boxShadow='0 8px 24px rgba(0,0,0,0.1)';n.style.gap='18px';});</script>
 </body>
 </html>

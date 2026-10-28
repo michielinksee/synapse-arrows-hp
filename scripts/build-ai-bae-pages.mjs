@@ -13,7 +13,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
-const read = (p) => readFileSync(path.join(ROOT, p), "utf-8");
+const read = (p) => readFileSync(path.join(ROOT, p), "utf-8").replace(/\r\n/g, "\n"); // Windows の autocrlf で型が CRLF になっても同じ物を作る
 const template = read("scripts/ai-bae/page.template.html");
 const { pages } = JSON.parse(read("scripts/ai-bae/pages.json"));
 const survey = JSON.parse(read("ai-bae-shindan/survey.json"));
@@ -27,6 +27,14 @@ function picker(page) {
   if (page.industry) return `<p class="fixed-ind">${page.fixed_note}</p>`;
   const chips = INDUSTRIES.map((i) => `<button type="button" class="chip" data-ind="${escHtml(i.id)}" aria-pressed="false">${escHtml(i.label)}</button>`).join("");
   return `<fieldset class="inds" id="inds"><legend>1. 業種を選ぶ<small>業種ごとに AI が頼る先が違います</small></legend><div class="chips">${chips}</div><div class="ind-msg" id="ind-msg" role="status"></div></fieldset>`;
+}
+
+// 業種別ページへの入口（共通の入口には全部、業種のページにはほかの業種）。pages.json に足せば自動で並ぶ
+const navLabel = (p) => p.nav_label || ((INDUSTRIES.find((i) => i.id === p.industry) || {}).label || p.industry) + "向け";
+function industryPages(page) {
+  const others = pages.filter((p) => p.industry && p !== page);
+  if (!others.length) return "";
+  return `<p class="ind-pages">業種別の診断: ${others.map((p) => `<a href="${new URL(p.url).pathname}">${escHtml(navLabel(p))} →</a>`).join("・")}</p>`;
 }
 
 function build(page) {
@@ -60,6 +68,7 @@ function build(page) {
     INDUSTRY_PICKER: picker(page),
     FIXED_INDUSTRY: page.industry ? JSON.stringify(page.industry) : "null",
     INDUSTRIES_JSON: jsonInScript(INDUSTRIES),
+    INDUSTRY_PAGES: industryPages(page),
   };
   const html = template.replace(/\{\{([A-Z0-9_]+)\}\}/g, (m, k) => {
     if (!(k in vals)) throw new Error(`template placeholder ${k} has no value`);

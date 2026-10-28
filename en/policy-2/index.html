@@ -43,13 +43,15 @@
         .product-scope ul { margin-bottom: 0; }
         .footer { background: #0B1120; padding: 32px; text-align: center; font-size: 0.8rem; color: rgba(255,255,255,0.4); }
         @media (max-width: 600px) { .content { padding: 32px 20px 80px; } h1 { font-size: 1.5rem; } }
-            /* top menu (same as every page, 2026-10-27) */
-        .nav-links { display: flex; align-items: center; gap: 22px; list-style: none; }
+    
+        /* top menu (same as every page, 2026-10-27) */
+        .nav-links { display: flex; align-items: center; gap: 18px; list-style: none; }
         .nav-links a { font-size: 0.88rem; font-weight: 500; color: var(--text-secondary); }
         .nav-links a:hover { color: var(--primary); text-decoration: none; }
         .nav-links a.active { color: var(--primary); }
-        .nav-cta { background: var(--primary); color: #fff !important; padding: 8px 20px; border-radius: 50px; font-weight: 600; }
+        .nav-cta { background: var(--primary); color: #fff !important; padding: 8px 18px; border-radius: 50px; font-weight: 600; }
         .nav-cta:hover { text-decoration: none; opacity: .9; }
+        .nav-cta-ai { background: #F2A100; color: #111827 !important; }
         .mobile-menu-btn { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
         .mobile-menu-btn span { display: block; width: 22px; height: 2px; background: var(--text-primary); margin: 5px 0; }
         @media (max-width: 900px) { .nav-links { display: none; } .mobile-menu-btn { display: block; } .nav { position: sticky; } .nav-inner { position: relative; } }
@@ -91,6 +93,8 @@
       }
     ]
     </script>
+    <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script>
+    <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
 
@@ -100,13 +104,13 @@
             <img src="/logo.png" alt="Synapse Arrows" width="32" height="32">
             Synapse Arrows
         </a>
-        <ul class="nav-links"><li><a href="/en/about/">About</a></li><li><a href="/en/products/">Products</a></li><li><a href="/en/services/">Services</a></li><li><a href="/tools/">Tools</a></li><li><a href="/en/insights/">Insights</a></li><li><a href="/en/contact/" class="nav-cta">Contact</a></li></ul><button class="mobile-menu-btn" aria-label="Menu"><span></span><span></span><span></span></button>
+        <ul class="nav-links"><li><a href="/en/services/">Services</a></li><li><a href="/en/products/">Products</a></li><li><a href="/en/insights/">Insights</a></li><li><a href="/en/about/">Company</a></li><li><a href="/ai-bae-shindan/" class="nav-cta nav-cta-ai" lang="ja" title="Japanese">AI Visibility Check</a></li><li><a href="/en/contact/" class="nav-cta">Contact</a></li></ul><button class="mobile-menu-btn" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
 </nav>
 
 <div class="content">
     <h1>Privacy Policy</h1>
-    <p class="last-updated">Last Updated: July 1, 2026</p>
+    <p class="last-updated">Last Updated: October 27, 2026</p>
 
     <p>
         Synapse Arrows Pte. Ltd. ("we", "us", or "our") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your information when you use our products and services.
@@ -174,6 +178,22 @@
         <li>We only collect anonymous usage statistics (npm download counts, etc.)</li>
     </ul>
 
+    <h3 id="contact-form">1.4 Request and consultation form (synapsearrows.com/contact/)</h3>
+    <p>This covers what you send through our request and consultation form (including the English version at synapsearrows.com/en/contact/).</p>
+    <ul>
+        <li><strong>What we collect:</strong> company or business name, your name, email address, industry, website URL (optional), what you need (materials, free consultation, quote, or something else), your message (optional), and your agreement to this policy. We also record the time of sending, the page language, the page you sent it from, the referring page, and any utm values in the link (utm_source, utm_medium, utm_campaign).</li>
+        <li>To stop automated mass submissions, a Cloudflare check (Turnstile) runs on the form page, and your IP address is sent to Cloudflare for that check. The check's settings are loaded from the KanseiLINK server we operate (mcp.kansei-link.com); the contents of the form are not sent to that server. The form records do not keep your IP address.</li>
+        <li><strong>Why we use it:</strong> only to send materials, reply to your enquiry, and prepare quotes. We do not use it for newsletters or bulk mailings.</li>
+        <!-- 期間は Michie 決定待ち（案: 最後のやり取りから 2 年）。決まったらこのコメントを消す -->
+        <li><strong>How long we keep it:</strong> we delete it <strong>2 years</strong> after our last exchange. If you want it deleted sooner, contact us at the address below.</li>
+        <li><strong>Service providers we entrust it to:</strong>
+            <ul>
+                <li>Google LLC (Google Sheets, Google Apps Script, Gmail; United States): recording what you send, and the notification email to our team.</li>
+                <li>Cloudflare, Inc. (Turnstile; United States): the check against automated submissions. Your IP address and the check token are sent to Cloudflare.</li>
+            </ul>
+        </li>
+    </ul>
+
     <h2>2. How we use your information</h2>
     <ul>
         <li>Providing and improving product features</li>
@@ -222,6 +242,8 @@
     <p>We do NOT sell your personal data. We may share data only in the following limited circumstances:</p>
     <ul>
         <li>AI service providers (as described in Section 3) — only to the extent necessary to provide product features</li>
+        <li>Service providers for the request and consultation form (as described in Section 1.4) — only to the extent necessary to keep records and reply to you</li>
+        <li>Vercel Inc. (Web Analytics) — aggregated page-view statistics only, with no information that identifies you</li>
         <li>When required by law</li>
         <li>With your explicit consent</li>
     </ul>
@@ -252,6 +274,7 @@
     <h2>10. Cookies and tracking</h2>
     <p>
         Our websites and web applications use cookies necessary for service delivery. We use privacy-respecting analytics tools and do not engage in tracking that identifies individual users.
+        This website uses cookie-free analytics (Vercel Web Analytics, provided by Vercel Inc., United States) to count page views and summarise referrers, screen sizes and similar data. It does not collect information that identifies you.
     </p>
 
     <h2>11. Changes to this policy</h2>
@@ -274,6 +297,6 @@
     &copy; 2026 Synapse Arrows Pte. Ltd. All rights reserved.
 </footer>
 
-<script>document.querySelector('.mobile-menu-btn').addEventListener('click',function(){const n=document.querySelector('.nav-links');n.style.display=n.style.display==='flex'?'none':'flex';n.style.flexDirection='column';n.style.position='absolute';n.style.top='72px';n.style.left='0';n.style.right='0';n.style.background='#fff';n.style.padding='20px';n.style.boxShadow='0 8px 24px rgba(0,0,0,0.1)';n.style.gap='18px';});</script>
+<script>document.querySelector('.mobile-menu-btn').addEventListener('click',function(){const n=document.querySelector('.nav-links');const l=document.querySelector('.lang-switch');const o=n.style.display==='flex';n.style.display=o?'none':'flex';n.style.flexDirection='column';n.style.position='absolute';n.style.top='72px';n.style.left='0';n.style.right='0';n.style.background='#fff';n.style.padding='20px';n.style.boxShadow='0 8px 24px rgba(0,0,0,0.1)';if(l)l.style.display=o?'none':'flex';});</script>
 </body>
 </html>

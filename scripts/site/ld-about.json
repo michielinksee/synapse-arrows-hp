@@ -1,0 +1,23 @@
+[
+ {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://synapsearrows.com/#organization",
+  "name": "Synapse Arrows Pte. Ltd.",
+  "url": "https://synapsearrows.com/",
+  "logo": "https://synapsearrows.com/assets/company-logo.png",
+  "description": "AI が自社をどう説明しているかを測り、海外進出・新規事業・AI 活用の判断と実行を支えるコンサルティング会社（シンガポール・東京）。",
+  "slogan": "AI 時代の判断力を、デザインする。",
+  "address": {
+   "@type": "PostalAddress",
+   "streetAddress": "160 Robinson Road, #14-04 SBF Center",
+   "postalCode": "068914",
+   "addressCountry": "SG"
+  },
+  "founder": {
+   "@type": "Person",
+   "name": "Michie Yamaguchi"
+  },
+  "foundingDate": "2023-03-08"
+ }
+]
