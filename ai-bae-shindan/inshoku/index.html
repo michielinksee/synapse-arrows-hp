@@ -381,9 +381,20 @@ function setState(s, msg) {
 }
 // 掲載サイト（食べログ・ぐるなび・Instagram など）のお店ページを入れた時: サーバーは取りに行かず platform_page を返す。
 // エラーの赤ではなく案内の枠で、詳しい診断（無料）へ。
-function showPlatformNotice(name) {
+// gorp.jp（とその下の名前）は、ぐるなびが作るお店のホームページ。掲載ページではないので文を分ける。
+function isGorpHost(u) {
+  try {
+    const s = String(u || '').trim();
+    const h = new URL(/^https?:\/\//i.test(s) ? s : 'https://' + s).hostname.toLowerCase().replace(/\.$/, '');
+    return h === 'gorp.jp' || h.endsWith('.gorp.jp');
+  } catch { return false; }
+}
+function showPlatformNotice(name, inputUrl) {
   const apply = '/ai-bae-shindan/apply/' + (industry ? '?industry=' + encodeURIComponent(industry) : '');
-  $('notice-box').innerHTML = `これは<b>${esc(name || '掲載サイト')}</b>のお店のページです。この無料診断は、お店が自分で持っているサイトを見るためのものです。<br>HP が無いお店は、詳しい診断（無料）で、ChatGPT などが掲載サイトからお店をどう紹介しているかを調べられます。<br><a class="go" href="${apply}" data-va="ai_bae_apply_click" data-va-from="platform_notice">詳しい診断（無料）を申し込む →</a>`;
+  const button = `<a class="go" href="${apply}" data-va="ai_bae_apply_click" data-va-from="platform_notice">詳しい診断（無料）を申し込む →</a>`;
+  $('notice-box').innerHTML = isGorpHost(inputUrl)
+    ? `これはぐるなびが作っているお店のホームページです。この診断は、ぐるなびのサーバーの都合で、ここからは読み取れません。<br>詳しい診断（無料）で、ChatGPT などがお店をどう紹介しているかを調べられます。<br>${button}`
+    : `これは<b>${esc(name || '掲載サイト')}</b>のお店のページです。この無料診断は、お店が自分で持っているサイトを見るためのものです。<br>HP が無いお店は、詳しい診断（無料）で、ChatGPT などが掲載サイトからお店をどう紹介しているかを調べられます。<br>${button}`;
   setState('notice');
 }
 const ERR = {
@@ -441,7 +452,7 @@ async function run(url) {
     if (turnstile_token) body.turnstile_token = turnstile_token;
     const r = await fetch(API_BASE + '/api/site-check', { method: 'POST', mode: 'cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
     const j = await r.json();
-    if (!r.ok && j.code === 'platform_page') { showPlatformNotice(j.platform); return; }
+    if (!r.ok && j.code === 'platform_page') { showPlatformNotice(j.platform, url); return; }
     if (!r.ok) { setState('error', ERR[j.code] || ERR[j.error] || j.error || '診断に失敗しました。'); return; }
     if (needsIndustry(j)) { holdForIndustry(j, url); return; }
     pending = null;
