@@ -174,11 +174,12 @@ t("ページの送る項目の名前 ＝ contact-form.gs が読む名前", () =>
     return new Set([...(js + prev).matchAll(/\b([a-z_]+)\s*:/g), ...(js + prev).matchAll(/\bp\.([a-z_]+)\s*=/g)].map((m) => m[1]));
   };
   const ja = new Set([...keysIn("contact/index.html"), ...keysIn("contact/confirm/index.html")]);
-  const enKeys = keysIn("en/contact/index.html");
+  // 英語も日本語と同じ 2 段（入力 → 確認で送る）。2 枚を合わせて見る
+  const enKeys = new Set([...keysIn("en/contact/index.html"), ...keysIn("en/contact/confirm/index.html")]);
   const missingJa = [...reads].filter((k) => !ja.has(k));
   const missingEn = [...reads].filter((k) => !enKeys.has(k)).sort();
   assert.deepEqual(missingJa, [], `日本語のページが送らない名前: ${missingJa}`);
-  assert.deepEqual(missingEn, ["intent", "plan", "services"], `英語のページが送らない名前: ${missingEn}`);
+  assert.deepEqual(missingEn, [], `英語のページが送らない名前: ${missingEn}`);
 });
 
 console.log(`ok: ${n} tests (scripts/contact-form.gs)`);

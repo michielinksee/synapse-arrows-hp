@@ -74,3 +74,20 @@
 .product .industry-links{margin-top:14px}
 .diagnosis-page-hero p:not(.eyebrow)+p:not(.eyebrow){margin-top:10px}
 @media(max-width:600px){.industry-links{font-size:14px}}
+/* 言語の切り替え（日本語のページは EN、英語のページは 日本語）と、英語の policy の本文 */
+.desktop-nav .lang-link{border:1px solid var(--rule);border-radius:20px;padding:3px 11px;font-size:12px;font-weight:650;line-height:1.6}
+.desktop-nav .lang-link:hover{border-color:var(--blue)}
+.mobile-nav .lang-link-mobile{color:var(--blue)}
+.legal-body{max-width:880px;padding:8px 0 88px}
+.legal-body h1{font-size:44px;line-height:1.3;margin:8px 0 6px}
+.legal-body h2{font-size:26px;line-height:1.45;margin:48px 0 14px}
+.legal-body h3{font-size:19px;line-height:1.5;margin:30px 0 10px}
+.legal-body p,.legal-body li{font-size:16px;line-height:1.85;color:#2b3b55}
+.legal-body p{margin:0 0 12px}
+.legal-body ul{padding-left:22px;margin:0 0 14px}
+.legal-body li{margin-bottom:6px}
+.legal-body a{color:var(--blue);text-decoration:underline}
+.legal-body .last-updated{color:#64748b;font-size:14px;margin-bottom:24px}
+.legal-body .product-scope{background:var(--light);border-radius:12px;padding:20px 26px;margin:26px 0}
+.legal-body .product-scope h3{margin-top:0}
+@media(max-width:600px){.legal-body h1{font-size:32px}.legal-body h2{font-size:22px}.legal-body h3{font-size:17px}.legal-body p,.legal-body li{font-size:15px}}

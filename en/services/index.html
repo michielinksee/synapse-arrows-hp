@@ -3,303 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Services &amp; Pricing — AI Visibility Check (AI映え診断) and other requests | Synapse Arrows</title>
-    <meta name="description" content="AI映え診断: two free stages, then a fact-check report, re-measurement, monthly monitoring and an implementation retainer. Prices in JPY, excluding tax, per shop or company. Corporate AI training, AI agent development, Japan–Southeast Asia market entry and market research are quoted individually.">
+    <title>Services | Synapse Arrows</title>
+    <meta name="description" content="Overseas expansion support, overseas expansion advisory, new business development, the AI visibility check, corporate AI training and adoption, and AI agent development. We suggest the support that fits the stage of your business.">
     <link rel="canonical" href="https://synapsearrows.com/en/services/">
     <link rel="alternate" hreflang="ja" href="https://synapsearrows.com/services/">
     <link rel="alternate" hreflang="en" href="https://synapsearrows.com/en/services/">
     <link rel="alternate" hreflang="x-default" href="https://synapsearrows.com/services/">
+    
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Synapse Arrows">
-    <meta property="og:title" content="Services &amp; Pricing | Synapse Arrows">
-    <meta property="og:description" content="AI映え診断: two free stages, then a fact-check report, re-measurement, monthly monitoring and an implementation retainer. Prices in JPY, excluding tax, per shop or company. Corporate AI training, AI agent development, Japan–Southeast Asia market entry and market research are quoted individually.">
+    <meta property="og:title" content="Services | Synapse Arrows">
+    <meta property="og:description" content="Overseas expansion support, overseas expansion advisory, new business development, the AI visibility check, corporate AI training and adoption, and AI agent development. We suggest the support that fits the stage of your business.">
     <meta property="og:url" content="https://synapsearrows.com/en/services/">
     <meta property="og:image" content="https://synapsearrows.com/og-image.png">
-    <meta property="og:locale" content="en_SG">
-    <meta property="og:locale:alternate" content="ja_JP">
+    <meta property="og:locale" content="en_US">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@michielinksee">
-    <meta name="twitter:title" content="Services &amp; Pricing | Synapse Arrows">
+    <meta name="twitter:title" content="Services | Synapse Arrows">
+    <meta name="twitter:description" content="Overseas expansion support, overseas expansion advisory, new business development, the AI visibility check, corporate AI training and adoption, and AI agent development. We suggest the support that fits the stage of your business.">
     <meta name="twitter:image" content="https://synapsearrows.com/og-image.png">
-    <meta name="twitter:description" content="AI映え診断: two free stages, then a fact-check report, re-measurement, monthly monitoring and an implementation retainer. Prices in JPY, excluding tax, per shop or company. Corporate AI training, AI agent development, Japan–Southeast Asia market entry and market research are quoted individually.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400..900&display=swap" rel="stylesheet">
     <link rel="icon" href="/favicon.png" type="image/png">
     <link rel="manifest" href="/site.webmanifest">
-    <link rel="stylesheet" href="/styles.css">
-    <style>
-    /* サービスと料金（2026-10-27）*/
-    .tier-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:32px}
-    .tier{background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);padding:26px;display:flex;flex-direction:column}
-    .tier.paid{border:2px solid var(--primary)}
-    .tier .k{font-size:.75rem;font-weight:800;letter-spacing:.1em;color:var(--primary)}
-    .tier h3{font-size:1.12rem;margin:8px 0 4px}
-    .tier .tag{display:inline-block;font-size:.78rem;font-weight:700;padding:3px 10px;border-radius:999px;background:var(--accent);color:var(--primary);margin-bottom:12px;align-self:flex-start}
-    .tier .tag.free{background:#ECFDF5;color:#047857}
-    .tier p{color:var(--text-secondary);font-size:.92rem;line-height:1.8}
-    .tier ul{margin:10px 0 16px 18px;color:var(--text-secondary);font-size:.9rem;line-height:1.8}
-    .tier .section-cta{margin-top:auto}
-    .pcards{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:32px}
-    .pc{background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;display:flex;flex-direction:column}
-    .pc.featured{border:2px solid var(--primary)}
-    .pc .k{font-size:.72rem;font-weight:800;letter-spacing:.1em;color:var(--primary)}
-    .pc h3{font-size:1.02rem;margin:6px 0 4px;min-height:2.6em}
-    .pc .price{font-size:1.55rem;font-weight:800;margin:2px 0 0}
-    .pc .price small{font-size:.8rem;font-weight:600;color:var(--text-secondary)}
-    .pc .incl{font-size:.8rem;color:var(--text-muted);margin-bottom:12px}
-    .pc ul{margin:0 0 16px 18px;color:var(--text-secondary);font-size:.88rem;line-height:1.75}
-    .pc .section-cta{margin-top:auto}
-    .tbl-wrap{overflow-x:auto;margin-top:36px;border:1px solid var(--border);border-radius:var(--radius-lg);background:#fff}
-    .ptbl{border-collapse:collapse;width:100%;min-width:980px;font-size:.88rem}
-    .ptbl th,.ptbl td{padding:12px 14px;border-bottom:1px solid var(--border);vertical-align:top;text-align:left;line-height:1.7}
-    .ptbl thead th{background:var(--bg-light);font-weight:700;white-space:nowrap}
-    .ptbl tbody th{font-weight:600;color:var(--text-secondary);white-space:nowrap;background:#fff}
-    .ptbl td.paid{background:#FBFBFF}
-    .ptbl .yen{font-weight:800;font-size:1rem;color:var(--text-primary)}
-    .ptbl .incl{display:block;color:var(--text-muted);font-size:.78rem;font-weight:400}
-    .notes{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:28px}
-    .note{border-left:4px solid var(--primary);padding:16px 20px;background:#fff;color:var(--text-secondary);font-size:.9rem;line-height:1.8}
-    .note strong{color:var(--text-primary)}
-    .others{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:28px}
-    .other{background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);padding:22px}
-    .other h3{font-size:1rem;margin:0 0 6px}
-    .other p{color:var(--text-secondary);font-size:.88rem;line-height:1.7}
-    .other .fee{display:block;margin-top:10px;font-size:.82rem;font-weight:700}
-    .cta-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:32px}
-    .faq-list{max-width:800px}
-    @media(max-width:1000px){.pcards,.others{grid-template-columns:1fr 1fr}}
-    @media(max-width:900px){.tier-grid,.notes{grid-template-columns:1fr}}
-    @media(max-width:600px){.pcards,.others{grid-template-columns:1fr}.pc h3{min-height:0}}
-    </style>
-    <!-- JSON-LD: entity definitions so @id refs (#organization / #founder) resolve on this page -->
-    <script type="application/ld+json">
-    [
-      {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "@id": "https://synapsearrows.com/#organization",
-        "name": "Synapse Arrows Pte. Ltd.",
-        "url": "https://synapsearrows.com",
-        "logo": "https://synapsearrows.com/logo.png",
-        "sameAs": [
-          "https://x.com/michielinksee",
-          "https://zenn.dev/kanseilink",
-          "https://github.com/michielinksee",
-          "https://www.linkedin.com/company/133395062",
-          "https://www.wikidata.org/wiki/Q140399505",
-          "https://www.goodfirms.co/company/synapse-arrows-pte-ltd",
-          "https://www.sortlist.com/agency/synapse-arrows"
-        ]
-      },
-      {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "@id": "https://synapsearrows.com/#founder",
-        "name": "Michie Yamaguchi",
-        "alternateName": "山口路恵",
-        "jobTitle": "Founder & CEO",
-        "worksFor": { "@id": "https://synapsearrows.com/#organization" },
-        "sameAs": [
-          "https://x.com/michielinksee",
-          "https://zenn.dev/kanseilink",
-          "https://www.wikidata.org/wiki/Q140401431"
-        ]
-      }
-    ]
-    </script>
-    <script type="application/ld+json">
-    [
-      {
-        "@context": "https://schema.org",
-        "@type": "Service",
-        "name": "AEO Consulting",
-        "description": "Optimization for AI search engines including ChatGPT, Perplexity, and Gemini. AEO diagnostics, structured data design, entity optimization, and AI-readable content strategy.",
-        "provider": {"@id": "https://synapsearrows.com/#organization"},
-        "serviceType": "AI Engine Optimization Consulting",
-        "areaServed": ["JP", "SG", "Global"]
-      },
-      {
-        "@context": "https://schema.org",
-        "@type": "Service",
-        "name": "Cross-border Consulting",
-        "description": "Southeast Asia market entry support leveraging Singapore-based networks. Market research, partner development, regulatory advisory, and B2B lead generation.",
-        "provider": {"@id": "https://synapsearrows.com/#organization"},
-        "serviceType": "Cross-border Business Consulting",
-        "areaServed": ["JP", "SG", "SEA"]
-      },
-      {
-        "@context": "https://schema.org",
-        "@type": "Service",
-        "name": "AI Agent Development",
-        "description": "MCP integration, agent architecture design, LLM selection and operations. Consulting based on proven architectures from KanseiLINK and Linksee Memory.",
-        "provider": {"@id": "https://synapsearrows.com/#organization"},
-        "serviceType": "AI Agent Development Consulting",
-        "areaServed": ["JP", "SG", "Global"]
-      },
-      {
-        "@context": "https://schema.org",
-        "@type": "Service",
-        "name": "Market Research",
-        "description": "Data-driven market research focused on Southeast Asia. Consumer trends, F&B export opportunity analysis, and competitive benchmarking.",
-        "provider": {"@id": "https://synapsearrows.com/#organization"},
-        "serviceType": "Market Research",
-        "areaServed": ["JP", "SG", "SEA"]
-      }
-    ]
-    </script>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://synapsearrows.com/en/"},
-        {"@type": "ListItem", "position": 2, "name": "Services", "item": "https://synapsearrows.com/en/services/"}
-      ]
-    }
-    </script>
-    <!--p:block:ld_pricing_en--><script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","@id":"https://synapsearrows.com/services/#ai-bae","name":"AI映え診断 (AI visibility check for shops and companies)","serviceType":["AI Visibility Audit","Answer Engine Optimization","Generative Engine Optimization"],"provider":{"@type":"Organization","@id":"https://synapsearrows.com/#organization","name":"Synapse Arrows Pte. Ltd.","url":"https://synapsearrows.com/"},"url":"https://synapsearrows.com/ai-bae-shindan/","areaServed":["JP","SG"],"availableLanguage":["ja","en"],"hasOfferCatalog":{"@type":"OfferCatalog","name":"AI映え診断 pricing (as of 2026-10-27; JPY, tax excluded, per shop or company)","itemListElement":[{"@type":"Offer","name":"Light","priceCurrency":"JPY","priceSpecification":{"@type":"UnitPriceSpecification","price":"0","priceCurrency":"JPY","valueAddedTaxIncluded":false},"itemOffered":{"@type":"Service","name":"Light","url":"https://synapsearrows.com/ai-bae-shindan/"}},{"@type":"Offer","name":"Detailed check","priceCurrency":"JPY","priceSpecification":{"@type":"UnitPriceSpecification","price":"0","priceCurrency":"JPY","valueAddedTaxIncluded":false},"itemOffered":{"@type":"Service","name":"Detailed check","url":"https://synapsearrows.com/ai-bae-shindan/"}},{"@type":"Offer","name":"Fact-check report","priceCurrency":"JPY","priceSpecification":{"@type":"UnitPriceSpecification","price":"50000","priceCurrency":"JPY","valueAddedTaxIncluded":false},"itemOffered":{"@type":"Service","name":"Fact-check report"}},{"@type":"Offer","name":"Fact-check report + re-measurement","priceCurrency":"JPY","priceSpecification":{"@type":"UnitPriceSpecification","price":"80000","priceCurrency":"JPY","valueAddedTaxIncluded":false},"itemOffered":{"@type":"Service","name":"Fact-check report + re-measurement"}},{"@type":"Offer","name":"Monthly monitoring","priceCurrency":"JPY","priceSpecification":{"@type":"UnitPriceSpecification","price":"30000","priceCurrency":"JPY","valueAddedTaxIncluded":false,"unitText":"month"},"eligibleDuration":{"@type":"QuantitativeValue","minValue":6,"unitCode":"MON"},"itemOffered":{"@type":"Service","name":"Monthly monitoring"}},{"@type":"Offer","name":"Implementation retainer","priceCurrency":"JPY","priceSpecification":{"@type":"UnitPriceSpecification","minPrice":"210000","priceCurrency":"JPY","valueAddedTaxIncluded":false,"unitText":"month"},"eligibleDuration":{"@type":"QuantitativeValue","minValue":6,"unitCode":"MON"},"itemOffered":{"@type":"Service","name":"Implementation retainer"}}]}}</script><!--/p-->
+    <link rel="stylesheet" href="/site.css">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebPage", "@id": "https://synapsearrows.com/en/services/#page", "url": "https://synapsearrows.com/en/services/", "name": "Services", "description": "From overseas expansion and new business development to how you are described by AI and how you use it. We suggest the support that fits the stage of your business.", "inLanguage": "en", "isPartOf": {"@id": "https://synapsearrows.com/#website"}, "publisher": {"@id": "https://synapsearrows.com/#organization"}}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://synapsearrows.com/en/"}, {"@type": "ListItem", "position": 2, "name": "Services", "item": "https://synapsearrows.com/en/services/"}]}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "ItemList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Overseas expansion support", "url": "https://synapsearrows.com/en/services/overseas-expansion/"}, {"@type": "ListItem", "position": 2, "name": "Overseas expansion advisory", "url": "https://synapsearrows.com/en/services/overseas-advisory/"}, {"@type": "ListItem", "position": 3, "name": "New business development", "url": "https://synapsearrows.com/en/services/new-business/"}, {"@type": "ListItem", "position": 4, "name": "AI visibility check (AI映え診断)", "url": "https://synapsearrows.com/en/services/ai-aeo/"}, {"@type": "ListItem", "position": 5, "name": "Corporate AI training and adoption", "url": "https://synapsearrows.com/en/services/ai-training/"}, {"@type": "ListItem", "position": 6, "name": "AI agent development", "url": "https://synapsearrows.com/en/services/ai-agents/"}]}</script>
     <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script>
     <script defer src="/_vercel/insights/script.js"></script>
+    <script defer src="/site.js"></script>
 </head>
 <body>
-
-    <header>
-    <!-- Navigation -->
-    <nav class="nav">
-        <div class="container nav-inner">
-            <a href="/en/" class="nav-logo">
-                <img src="/logo.png" alt="Synapse Arrows" width="32" height="32">
-                Synapse Arrows
-            </a>
-            <ul class="nav-links">
-                <li><a href="/en/services/" class="active">Services</a></li>
-                <li><a href="/en/products/">Products</a></li>
-                <li><a href="/en/insights/">Insights</a></li>
-                <li><a href="/en/about/">Company</a></li>
-                <li><a href="/ai-bae-shindan/" class="nav-cta nav-cta-ai" lang="ja" title="Japanese">AI Visibility Check</a></li>
-                <li><a href="/en/contact/" class="nav-cta">Contact</a></li>
-            </ul>
-            <div class="lang-switch">
-                <a href="/en/services/" class="active">EN</a>
-                <span>|</span>
-                <a href="/services/">JP</a>
-            </div>
-            <button class="mobile-menu-btn" aria-label="Menu"><span></span><span></span><span></span></button>
-        </div>
-    </nav>
-    </header>
-
-    <main>
-
-    <section class="page-header page-header-services">
-        <div class="container">
-            <h1 class="page-title">Services &amp; Pricing</h1>
-            <p class="page-desc">Our main service is AI映え診断, the AI visibility check for shops and companies: two free stages, then paid fact-checking, fixing and re-measuring. Other requests are listed below.</p>
-        </div>
-    </section>
-
-    <section class="section" id="ai-bae">
-        <div class="container">
-            <div class="section-label">AI映え診断</div>
-            <h2 class="section-title">Two free stages, then only what you need</h2>
-            <p class="section-desc">We check how ChatGPT, Claude, Gemini and Perplexity describe a shop or company and fix the contradictions with the official information. The check itself is in Japanese and built for businesses in Japan; we work with you in English or Japanese.</p>
-            <div class="tier-grid">
-                <article class="tier"><div class="k">STEP 1</div><h3><!--p:light.name_en-->Light<!--/p--></h3><span class="tag free"><!--p:light.label_en-->Free, no sign-up<!--/p--></span><p><strong>What you learn:</strong> whether AI crawlers can read the site, whether it links to the directories each AI relies on for the industry, and whether name, address, hours and menu are machine-readable.</p><ul><li>No AI is called</li><li>Seconds</li><li>One site</li></ul><a href="/ai-bae-shindan/" class="section-cta" lang="ja">Start Light (Japanese) &rarr;</a></article>
-                <article class="tier"><div class="k">STEP 2</div><h3><!--p:detailed.name_en-->Detailed check<!--/p--></h3><span class="tag free"><!--p:detailed.label_en-->Free (email confirmation required)<!--/p--></span><p><strong>What we do:</strong> ask the four AIs three fixed questions once each; report whether you were named, how many statements were wrong, and the sources cited.</p><ul><li>One wrong statement shown in full</li><li>Per shop or company</li><li>Requested from the Light result page</li></ul><a href="/ai-bae-shindan/" class="section-cta" lang="ja">Request from the Light result &rarr;</a></article>
-                <article class="tier paid"><div class="k">STEP 3</div><h3>Paid: check, fix, re-measure</h3><span class="tag">from <!--p:report.jpy-->JPY 50,000<!--/p--> excl. tax</span><p><strong>What we do:</strong> 20–30 questions tailored to your industry and area, three times each on four AIs; every wrong statement checked against official information; the sources each AI relies on; a prioritised fix list. Monthly plans add measurement every month and, if you want, the fixes done by us.</p><ul><li>Fact-check report (one-off)</li><li>Report + re-measurement after a month</li><li>Monthly monitoring / implementation retainer</li></ul><a href="#pricing" class="section-cta">See the price table &rarr;</a></article>
-            </div>
-        </div>
-    </section>
-
-    <section class="section section-alt" id="pricing">
-        <div class="container">
-            <div class="section-label">Pricing</div>
-            <h2 class="section-title">Prices (<!--p:scope_en-->per shop or company<!--/p-->, JPY, excl. tax)</h2>
-            <p class="section-desc">Four paid options: two one-off, two monthly.</p>
-
-            <div class="pcards">
-                <article class="pc featured"><div class="k">ONE-OFF</div><h3><!--p:report.name_en-->Fact-check report<!--/p--></h3><div class="price"><!--p:report.jpy-->JPY 50,000<!--/p--></div><div class="incl">excl. tax</div><ul><li>20–30 questions tailored to your industry and area × 4 AIs × 3 runs</li><li>Every wrong statement checked against official information</li><li>The sources each AI relies on</li><li>Fix list: which site, which field, what value, in what order</li></ul><a href="/en/contact/?topic=consult" class="section-cta">Start with a free call &rarr;</a></article>
-                <article class="pc"><div class="k">ONE-OFF</div><h3><!--p:report_remeasure.name_en-->Fact-check report + re-measurement<!--/p--></h3><div class="price"><!--p:report_remeasure.jpy-->JPY 80,000<!--/p--></div><div class="incl">excl. tax</div><ul><li>Everything in the report</li><li>One re-measurement a month later</li><li>Change in numbers: wrong statements, mentions, sources</li></ul><a href="/en/contact/?topic=consult" class="section-cta">Start with a free call &rarr;</a></article>
-                <article class="pc"><div class="k">MONTHLY</div><h3><!--p:monitor.name_en-->Monthly monitoring<!--/p--></h3><div class="price"><!--p:monitor.jpy-->JPY 30,000<!--/p--><small>/month</small></div><div class="incl"><!--p:monitor.min_months-->6<!--/p-->-month minimum, excl. tax</div><ul><li>The same 20–30 questions measured on four AIs every month</li><li>One report a month; no meeting and no fixes</li></ul><a href="/en/contact/?topic=consult" class="section-cta">Talk to us &rarr;</a></article>
-                <article class="pc"><div class="k">MONTHLY</div><h3><!--p:implement.name_en-->Implementation retainer<!--/p--></h3><div class="price"><!--p:implement.jpy-->from JPY 210,000<!--/p--><small>/month</small></div><div class="incl"><!--p:implement.min_months-->6<!--/p-->-month minimum, excl. tax</div><ul><li>Everything in monitoring</li><li>We do the fixes: directory listings, structured data, copy (<!--p:implement_fixes_en-->the number of fixes per month is agreed with you<!--/p-->)</li><li>One online meeting a month</li></ul><a href="/en/contact/?topic=consult" class="section-cta">Talk to us &rarr;</a></article>
-            </div>
-            <div class="notes">
-                <div class="note"><strong>What changes.</strong> Fewer wrong addresses, prices, opening hours and menu items when AI describes you. We do not promise rankings or recommendations; the effect is shown by re-measurement.</div>
-                <div class="note"><strong>Tax and scope.</strong> <!--p:tax_note_en-->All prices exclude tax. How consumption tax applies is confirmed at contract time.<!--/p--> All prices are <!--p:scope_en-->per shop or company<!--/p-->. <!--p:sgd_note_en-->Prices are in Japanese yen. For clients in Singapore we quote in SGD on request.<!--/p--> Several shops or a whole company: <a href="/en/contact/?topic=quote" style="text-decoration:underline;">quote on request</a>.</div>
-                <div class="note"><strong>Why a <!--p:monitor.min_months-->6<!--/p-->-month minimum.</strong> <!--p:min_term_reason_en-->The listings AI relies on take time to refresh, and seeing the effect of a fix in numbers takes months, so monthly plans run for at least six months.<!--/p--></div>
-            </div>
-            <p style="font-size:.82rem;color:var(--text-muted);margin-top:16px;">Prices set on <!--p:decided_on-->2026-10-27<!--/p-->. KanseiLINK ratings (a third-party instrument we operate) do not change with any contract.</p>
-
-            <div class="cta-row">
-                <a href="/ai-bae-shindan/" class="btn-primary" lang="ja">Free check first (Japanese) <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></a>
-                <a href="/en/contact/#download" class="btn-secondary">Request materials / talk to us</a>
-            </div>
-        </div>
-    </section>
-
-    <section class="section" id="others">
-        <div class="container">
-            <div class="section-label">Other requests</div>
-            <h2 class="section-title">Other things we help with</h2>
-            <p class="section-desc">Each is quoted individually after a first conversation.</p>
-            <div class="others">
-                <article class="other"><h3>Corporate AI training</h3><p>Helping executives, managers and staff use generative AI and AI agents safely at work: training, internal rules, an adoption roadmap.</p><span class="fee">Quoted individually</span></article>
-                <article class="other"><h3>AI agent development</h3><p>MCP integration, agent design, LLM selection and operations, grounded in what we run ourselves in KanseiLINK and Linksee Memory.</p><span class="fee">Quoted individually</span></article>
-                <article class="other"><h3>Cross-border consulting</h3><p>From Singapore: Japanese companies entering Southeast Asia and Southeast Asian companies entering Japan. Market research, partner development, regulatory advisory, B2B lead generation.</p><span class="fee">Quoted individually</span><a href="/en/insights/geo-aeo-agencies-singapore-2026-09/" class="section-cta" style="display:block;margin-top:8px;font-size:.85rem;">17 Singapore AEO &amp; GEO agencies compared &rarr;</a></article>
-                <article class="other"><h3>Market research</h3><p>Southeast Asia-focused research: consumer trends, F&amp;B export opportunities, competitive benchmarking, AI tools and SaaS market trends.</p><span class="fee">Quoted individually</span></article>
-            </div>
-        </div>
-    </section>
-
-    <section class="contact-section">
-        <div class="container">
-            <div class="section-label">Contact</div>
-            <h2 class="section-title">Request materials or a consultation</h2>
-            <p class="section-desc">A summary of plans and prices, a free 20-minute online call, or a quote for several shops or a whole company.</p>
-            <div class="cta-row" style="margin-top:0;">
-                <a href="/en/contact/#download" class="btn-primary" style="font-size:1rem;">Request materials <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></a>
-                <a href="/ai-bae-shindan/" class="btn-secondary" style="font-size:1rem;color:#fff;border-color:rgba(255,255,255,0.35);" lang="ja">Free check (Japanese)</a>
-            </div>
-        </div>
-    </section>
-
-    </main>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container footer-inner">
-            <div class="footer-logo">Synapse Arrows Pte. Ltd</div>
-            <ul class="footer-links">
-                <li><a href="https://kansei-link.com" target="_blank" rel="noopener">KanseiLINK</a></li>
-                <li><a href="https://scanavi.app" target="_blank" rel="noopener">ScaNavi</a></li>
-                <li><a href="https://linksee.app" target="_blank" rel="noopener">Linksee Memory</a></li>
-                <li><a href="https://zenn.dev/kanseilink" target="_blank" rel="noopener">Zenn</a></li>
-                <li><a href="https://x.com/michielinksee" target="_blank" rel="noopener">X</a></li>
-                <li><a href="/policy/">Privacy</a></li>
-                <li><a href="/terms/">Terms</a></li>
-            </ul>
-            <address class="footer-copy" style="font-style:normal; margin-bottom:6px;">160 Robinson Road, #14-04 SBF Center, Singapore 068914 &middot; <a href="mailto:contact@synapse-arrows.com" style="color:inherit;">contact@synapse-arrows.com</a></address>
-            <div class="footer-copy">&copy; 2026 Synapse Arrows Pte. Ltd. All rights reserved.</div>
-        </div>
-    </footer>
-    <script>
-    document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
-        const nav = document.querySelector('.nav-links');
-        const lang = document.querySelector('.lang-switch');
-        const isOpen = nav.style.display === 'flex';
-        nav.style.display = isOpen ? 'none' : 'flex';
-        nav.style.flexDirection = 'column';
-        nav.style.position = 'absolute';
-        nav.style.top = '72px';
-        nav.style.left = '0';
-        nav.style.right = '0';
-        nav.style.background = '#fff';
-        nav.style.padding = '20px';
-        nav.style.boxShadow = '0 8px 24px rgba(0,0,0,0.1)';
-        if (lang) lang.style.display = isOpen ? 'none' : 'flex';
-    });
-    </script>
-
+<a href="#main" class="skip-link">Skip to content</a>
+<header class="site-header" id="top"><div class="container header-inner"><a class="brand" href="/en/" aria-label="Synapse Arrows home"><img src="/assets/company-logo.png" alt="" width="48" height="48"><span>Synapse Arrows</span></a><nav class="desktop-nav" aria-label="Main navigation"><a href="/en/services/" aria-current="page">Services</a><a href="/en/products/">Products</a><a href="/en/insights/">Insights</a><a href="/en/about/">Company</a><a class="lang-link" href="/services/" lang="ja" hreflang="ja">日本語</a></nav><a class="button header-cta" href="/en/contact/" data-va="download_click" data-va-from="header">Contact / request materials <svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M184.49 136.49l-80 80a12 12 0 0 1-17-17L159 128 87.51 56.49a12 12 0 1 1 17-17l80 80a12 12 0 0 1 0 17z"/></svg></a><button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224 128a8 8 0 0 1-8 8H40a8 8 0 0 1 0-16h176a8 8 0 0 1 8 8zM40 72h176a8 8 0 0 0 0-16H40a8 8 0 0 0 0 16zm176 112H40a8 8 0 0 0 0 16h176a8 8 0 0 0 0-16z"/></svg></button></div><nav class="mobile-nav" id="mobile-menu" aria-label="Mobile navigation" hidden><a href="/en/services/">Services</a><a href="/en/services/ai-aeo/">AI visibility check</a><a href="/en/products/">Products</a><a href="/en/insights/">Insights</a><a href="/en/about/">Company</a><a href="/en/contact/">Contact / request materials</a><a class="lang-link-mobile" href="/services/" lang="ja" hreflang="ja">日本語</a></nav></header>
+<main id="main" class="inner-page"><nav class="breadcrumb container" aria-label="Breadcrumb"><a href="/en/">Home</a><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M181.66 133.66l-80 80a8 8 0 0 1-11.32-11.32L164.69 128 90.34 53.66a8 8 0 0 1 11.32-11.32l80 80a8 8 0 0 1 0 11.32z"/></svg><span aria-current="page">Services</span></nav><section class="page-intro-new"><div class="container intro-layout"><div><p class="eyebrow"><span aria-hidden="true"></span>CONSULTING SERVICES</p><h1 tabindex="-1">Start from the problem,<br>then choose the support.</h1><p class="intro-copy">From overseas expansion and new business development to how you are described by AI and how you use it. We suggest the support that fits the stage of your business.</p></div></div></section><div class="container page-content"><section class="product-feature-new" id="pricing"><div><p class="eyebrow"><span aria-hidden="true"></span>FEATURED SERVICE</p><img class="feature-logo" src="/assets/diagnosis-logo.webp" alt="AI映え診断 by Synapse Arrows" width="1000" height="270" loading="lazy"><h2>Make what AI says about you work for your business.</h2><p>Alongside search engines and maps, people now ask AI such as ChatGPT where to go and whom to hire.</p><p>The AI visibility check (AI映え診断) shows whether ChatGPT, Gemini, Claude and Perplexity can read your site, and where what they say differs from your official information.</p><div class="page-actions"><a href="/en/services/ai-aeo/" class="button" data-va="ai_bae_en" data-va-from="feature">About the AI visibility check <svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M184.49 136.49l-80 80a12 12 0 0 1-17-17L159 128 87.51 56.49a12 12 0 1 1 17-17l80 80a12 12 0 0 1 0 17z"/></svg></a><a href="/en/services/ai-aeo/#plans" class="text-link" >Plans and prices <svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M184.49 136.49l-80 80a12 12 0 0 1-17-17L159 128 87.51 56.49a12 12 0 1 1 17-17l80 80a12 12 0 0 1 0 17z"/></svg></a></div><p class="small-note">The free check is in Japanese and built for businesses in Japan. This page explains it in English.</p></div><div class="feature-characters"><img src="/assets/characters.webp" alt="The four AI characters of the AI visibility check" width="640" height="344" loading="lazy"></div></section><section class="page-section"><p class="eyebrow"><span aria-hidden="true"></span>BUSINESS CONSULTING</p><h2>The next market. The next business.</h2><div class="consulting-columns"><article><span class="column-number">01</span><h3><a href="/en/services/overseas-expansion/">Overseas expansion support</a></h3><p>From market research and entry plans to building your business on the ground.</p><a href="/en/services/overseas-expansion/"><img src="/assets/singapore.webp" alt="" width="1852" height="849" loading="lazy"></a><a href="/en/services/overseas-expansion/" class="text-link" >See the service <svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M184.49 136.49l-80 80a12 12 0 0 1-17-17L159 128 87.51 56.49a12 12 0 1 1 17-17l80 80a12 12 0 0 1 0 17z"/></svg></a></article><article><span class="column-number">02</span><h3><a href="/en/services/overseas-advisory/">Overseas expansion advisory</a></h3><p>Ongoing support for the decisions that move an overseas business forward.</p><a href="/en/services/overseas-advisory/"><img src="/assets/advisory.webp" alt="" width="1852" height="849" loading="lazy"></a><a href="/en/services/overseas-advisory/" class="text-link" >See the service <svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M184.49 136.49l-80 80a12 12 0 0 1-17-17L159 128 87.51 56.49a12 12 0 1 1 17-17l80 80a12 12 0 0 1 0 17z"/></svg></a></article><article><span class="column-number">03</span><h3><a href="/en/services/new-business/">New business development</a></h3><p>From the idea to testing it and launching it.</p><a href="/en/services/new-business/"><img src="/assets/new-business.webp" alt="" width="1852" height="849" loading="lazy"></a><a href="/en/services/new-business/" class="text-link" >See the service <svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M184.49 136.49l-80 80a12 12 0 0 1-17-17L159 128 87.51 56.49a12 12 0 1 1 17-17l80 80a12 12 0 0 1 0 17z"/></svg></a></article></div></section><section class="page-section"><p class="eyebrow"><span aria-hidden="true"></span>AI &amp; OPERATIONS</p><h2>Practical AI for your organisation and work.</h2><div class="consulting-columns"><article><span class="column-number">05</span><h3><a href="/en/services/ai-training/">Corporate AI training and adoption</a></h3><p>We support learning and adopting AI around the issues in your business and work. We decide together, based on the tasks in scope and the state of your organisation.</p><a href="/en/services/ai-training/" class="text-link" >See the service <svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M184.49 136.49l-80 80a12 12 0 0 1-17-17L159 128 87.51 56.49a12 12 0 1 1 17-17l80 80a12 12 0 0 1 0 17z"/></svg></a></article><article><span class="column-number">06</span><h3><a href="/en/services/ai-agents/">AI agent development</a></h3><p>We work out how to use AI agents and how to build them, based on what the work is for and the environment they will run in.</p><a href="/en/services/ai-agents/" class="text-link" >See the service <svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M184.49 136.49l-80 80a12 12 0 0 1-17-17L159 128 87.51 56.49a12 12 0 1 1 17-17l80 80a12 12 0 0 1 0 17z"/></svg></a></article></div></section><p class="small-note">The AI visibility check has fixed prices in Japanese yen; see the English plans page. The other five services are quoted individually.</p><section class="next-band-new"><div><p class="eyebrow"><span aria-hidden="true"></span>NEXT STEP</p><h2>Shall we sort out what support you need?</h2><p>Choose materials for any of the six services in one request.</p></div><a href="/en/contact/?intent=download" class="button" data-va="download_click" data-va-from="next_band">Contact / request materials <svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M184.49 136.49l-80 80a12 12 0 0 1-17-17L159 128 87.51 56.49a12 12 0 1 1 17-17l80 80a12 12 0 0 1 0 17z"/></svg></a></section></div></main>
+<footer class="footer"><div class="container footer-inner"><a class="brand brand-footer" href="/en/" aria-label="Synapse Arrows home"><img src="/assets/company-logo.png" alt="" width="37" height="37"><span>Synapse Arrows</span></a><nav aria-label="Footer navigation"><a href="/en/insights/">Insights</a><a href="/en/about/">Company</a><a href="/en/contact/">Contact</a><a href="/en/policy-2/">Privacy policy</a><a href="/terms/">Terms (Japanese)</a><a href="/services/" lang="ja" hreflang="ja">日本語</a></nav></div></footer>
 </body>
 </html>
