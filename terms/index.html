@@ -30,13 +30,15 @@
         li { margin-bottom: 6px; }
         .footer { background: #0B1120; padding: 32px; text-align: center; font-size: 0.8rem; color: rgba(255,255,255,0.4); }
         @media (max-width: 600px) { .content { padding: 32px 20px 80px; } h1 { font-size: 1.5rem; } }
-            /* top menu (same as every page, 2026-10-27) */
-        .nav-links { display: flex; align-items: center; gap: 22px; list-style: none; }
+    
+        /* top menu (same as every page, 2026-10-27) */
+        .nav-links { display: flex; align-items: center; gap: 18px; list-style: none; }
         .nav-links a { font-size: 0.88rem; font-weight: 500; color: var(--text-secondary); }
         .nav-links a:hover { color: var(--primary); text-decoration: none; }
         .nav-links a.active { color: var(--primary); }
-        .nav-cta { background: var(--primary); color: #fff !important; padding: 8px 20px; border-radius: 50px; font-weight: 600; }
+        .nav-cta { background: var(--primary); color: #fff !important; padding: 8px 18px; border-radius: 50px; font-weight: 600; }
         .nav-cta:hover { text-decoration: none; opacity: .9; }
+        .nav-cta-ai { background: #F2A100; color: #111827 !important; }
         .mobile-menu-btn { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
         .mobile-menu-btn span { display: block; width: 22px; height: 2px; background: var(--text-primary); margin: 5px 0; }
         @media (max-width: 900px) { .nav-links { display: none; } .mobile-menu-btn { display: block; } .nav { position: sticky; } .nav-inner { position: relative; } }
@@ -77,6 +79,8 @@
       }
     ]
     </script>
+    <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script>
+    <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
 
@@ -86,7 +90,7 @@
             <img src="/logo.png" alt="Synapse Arrows" width="32" height="32">
             Synapse Arrows
         </a>
-        <ul class="nav-links"><li><a href="/about/">About</a></li><li><a href="/products/">Products</a></li><li><a href="/services/">Services</a></li><li><a href="/tools/">Tools</a></li><li><a href="/insights/">Insights</a></li><li><a href="/contact/" class="nav-cta">Contact</a></li></ul><button class="mobile-menu-btn" aria-label="Menu"><span></span><span></span><span></span></button>
+        <ul class="nav-links"><li><a href="/services/">事業紹介・サービス</a></li><li><a href="/products/">プロダクト</a></li><li><a href="/insights/">Insights</a></li><li><a href="/about/">会社概要</a></li><li><a href="/ai-bae-shindan/" class="nav-cta nav-cta-ai">AI映え診断</a></li><li><a href="/contact/" class="nav-cta">資料請求・ご相談</a></li></ul><button class="mobile-menu-btn" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
 </nav>
 
@@ -166,6 +170,6 @@
     &copy; 2026 Synapse Arrows Pte. Ltd. All rights reserved.
 </footer>
 
-<script>document.querySelector('.mobile-menu-btn').addEventListener('click',function(){const n=document.querySelector('.nav-links');n.style.display=n.style.display==='flex'?'none':'flex';n.style.flexDirection='column';n.style.position='absolute';n.style.top='72px';n.style.left='0';n.style.right='0';n.style.background='#fff';n.style.padding='20px';n.style.boxShadow='0 8px 24px rgba(0,0,0,0.1)';n.style.gap='18px';});</script>
+<script>document.querySelector('.mobile-menu-btn').addEventListener('click',function(){const n=document.querySelector('.nav-links');const l=document.querySelector('.lang-switch');const o=n.style.display==='flex';n.style.display=o?'none':'flex';n.style.flexDirection='column';n.style.position='absolute';n.style.top='72px';n.style.left='0';n.style.right='0';n.style.background='#fff';n.style.padding='20px';n.style.boxShadow='0 8px 24px rgba(0,0,0,0.1)';if(l)l.style.display=o?'none':'flex';});</script>
 </body>
 </html>

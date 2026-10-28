@@ -120,6 +120,10 @@
         }
 
         .nav-cta::after { display: none !important; }
+        .nav-cta-ai { background: #F2A100; color: #111827 !important; }
+        .nav-cta-ai:hover { background: #d98f00; }
+        .nav-links { gap: 22px; }
+        @media (max-width: 1100px) { .nav-links { gap: 14px; } .nav-links a { font-size: 0.82rem; } .nav-cta { padding: 8px 16px; } }
 
         .lang-switch {
             display: flex; gap: 12px;

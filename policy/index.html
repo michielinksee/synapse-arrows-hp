@@ -98,13 +98,15 @@
             .content { padding: 32px 20px 80px; }
             h1 { font-size: 1.5rem; }
         }
-            /* top menu (same as every page, 2026-10-27) */
-        .nav-links { display: flex; align-items: center; gap: 22px; list-style: none; }
+    
+        /* top menu (same as every page, 2026-10-27) */
+        .nav-links { display: flex; align-items: center; gap: 18px; list-style: none; }
         .nav-links a { font-size: 0.88rem; font-weight: 500; color: var(--text-secondary); }
         .nav-links a:hover { color: var(--primary); text-decoration: none; }
         .nav-links a.active { color: var(--primary); }
-        .nav-cta { background: var(--primary); color: #fff !important; padding: 8px 20px; border-radius: 50px; font-weight: 600; }
+        .nav-cta { background: var(--primary); color: #fff !important; padding: 8px 18px; border-radius: 50px; font-weight: 600; }
         .nav-cta:hover { text-decoration: none; opacity: .9; }
+        .nav-cta-ai { background: #F2A100; color: #111827 !important; }
         .mobile-menu-btn { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
         .mobile-menu-btn span { display: block; width: 22px; height: 2px; background: var(--text-primary); margin: 5px 0; }
         @media (max-width: 900px) { .nav-links { display: none; } .mobile-menu-btn { display: block; } .nav { position: sticky; } .nav-inner { position: relative; } }
@@ -145,6 +147,8 @@
       }
     ]
     </script>
+    <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script>
+    <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
 
@@ -154,13 +158,13 @@
             <img src="/logo.png" alt="Synapse Arrows" width="32" height="32">
             Synapse Arrows
         </a>
-        <ul class="nav-links"><li><a href="/about/">About</a></li><li><a href="/products/">Products</a></li><li><a href="/services/">Services</a></li><li><a href="/tools/">Tools</a></li><li><a href="/insights/">Insights</a></li><li><a href="/contact/" class="nav-cta">Contact</a></li></ul><button class="mobile-menu-btn" aria-label="Menu"><span></span><span></span><span></span></button>
+        <ul class="nav-links"><li><a href="/services/">事業紹介・サービス</a></li><li><a href="/products/">プロダクト</a></li><li><a href="/insights/">Insights</a></li><li><a href="/about/">会社概要</a></li><li><a href="/ai-bae-shindan/" class="nav-cta nav-cta-ai">AI映え診断</a></li><li><a href="/contact/" class="nav-cta">資料請求・ご相談</a></li></ul><button class="mobile-menu-btn" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
 </nav>
 
 <div class="content">
     <h1>Privacy Policy</h1>
-    <p class="last-updated">Last Updated: October 26, 2026（AI映え診断を追加・無料の診断の保存期間を明記）</p>
+    <p class="last-updated">Last Updated: October 27, 2026（資料請求・相談フォームと、Cookie を使わないアクセス解析を追記）</p>
 
     <p>
         Synapse Arrows Pte. Ltd.（以下「当社」）は、当社が開発・運営するプロダクトおよびサービスにおけるユーザーの個人情報の取り扱いについて、以下のとおりプライバシーポリシーを定めます。
@@ -243,12 +247,14 @@
     <p><strong>無料の診断:</strong></p>
     <ul>
         <li>取得する情報：入力されたホームページの URL と診断の結果（結果のリンクを後から開けるように保存します）、IP アドレスを変換した値（乱用を防ぐため。IP アドレスそのものは保存しません）。メールアドレスなど個人を特定する情報はうかがいません。</li>
+        <li>あわせて、選んだ業種、来た元のサイトのドメイン（どのサイトから来たか。相手のページの場所や検索語は記録しません）、リンクに付いた utm の値（utm_source・utm_campaign）、診断を始めた当社のページを記録します。どの業種・どの経路から診断が使われているかを数えるためで、保存期間は診断の結果と同じ <strong>1 年</strong>です。</li>
         <li>診断は公開されているページと robots.txt だけを読みます。AI のサービスにはお店の情報を送りません。</li>
         <li><strong>保存期間：</strong>IP アドレスを変換した値は <strong>30 日</strong>で、診断の結果（URL を含みます）は <strong>1 年</strong>で消します。</li>
     </ul>
     <p><strong>詳しい診断のお申し込み:</strong></p>
     <ul>
         <li><strong>取得する情報：</strong>お店のホームページの URL、メールアドレス、アンケートの答え（業種・地域・規模・お困りごと・使っている道具・ご相談の希望など。「その他」や市区町村の自由記入を含みます）、2 つの同意（診断への同意・集計への同意）、IP アドレスを秘密の鍵で変換した値（元の IP アドレスには戻せず、生の IP アドレスは保存しません）、受付と確認の日時。お名前・電話番号・住所はうかがいません。</li>
+        <li>あわせて、来た元のサイトのドメイン（相手のページの場所や検索語は記録しません）、リンクに付いた utm の値（utm_source・utm_campaign）、お申し込みを始めた当社のページ、無料の診断の結果の番号を記録します（どの経路からお申し込みがあるかを数えるため）。メールアドレスと同じ <strong>180 日</strong>で消します。</li>
         <li><strong>利用目的：</strong>
             <ul>
                 <li>メールアドレスは、お申し込みの確認と診断結果のお知らせにだけ使います。ご案内やメールマガジンの送信には使いません。</li>
@@ -272,6 +278,22 @@
             </ul>
         </li>
         <li>お申し込みの際の同意にもとづき、上の預け先に必要な範囲でお預けします。削除のご希望は、下記のお問い合わせ先までご連絡ください。</li>
+    </ul>
+
+    <h3 id="contact-form">1.5 資料請求・相談フォーム（synapsearrows.com/contact/）</h3>
+    <p>資料請求・相談のフォーム（英語版の synapsearrows.com/en/contact/ を含みます）から送っていただいた内容は、次のとおり扱います。</p>
+    <ul>
+        <li><strong>取得する情報：</strong>会社名・店名、お名前、メールアドレス、業種、サイトの URL（任意）、ご用件（資料請求・無料相談・見積もり・そのほか）、ひとこと（任意）、プライバシーポリシーへの同意。あわせて、送信の時刻、ページの言語、送信元のページ、参照元（どのページから来たか）、リンクに付いた utm の値（utm_source・utm_medium・utm_campaign）を記録します。</li>
+        <li>機械による大量の送信を防ぐため、フォームの画面で Cloudflare の確認（Turnstile）が動き、確認のために IP アドレスが Cloudflare に送られます。確認の設定は、当社が運営する KanseiLINK のサーバー（mcp.kansei-link.com）から読み込みます（フォームの内容はこのサーバーには送りません）。フォームの記録には IP アドレスを残しません。</li>
+        <li><strong>利用目的：</strong>資料のお送り、ご相談へのお返事、お見積もりのためだけに使います。メールマガジンやご案内の一斉送信には使いません。</li>
+        <!-- 期間は Michie 決定待ち（案: 最後のやり取りから 2 年）。決まったらこのコメントを消す -->
+        <li><strong>保存期間：</strong>最後のやり取りから <strong>2 年</strong>で消します。それより前に消してほしい場合は、下記のお問い合わせ先までご連絡ください。</li>
+        <li><strong>預け先（業務の委託先）：</strong>
+            <ul>
+                <li>Google LLC（Google スプレッドシート・Google Apps Script・Gmail、米国）: 送っていただいた内容の記録と、担当へのお知らせのメール。</li>
+                <li>Cloudflare, Inc.（Turnstile・米国）: 機械による大量の送信を防ぐための確認。確認のために IP アドレスと確認の券を Cloudflare に送ります。</li>
+            </ul>
+        </li>
     </ul>
 
     <h2>2. 情報の利用目的</h2>
@@ -327,6 +349,8 @@
     <ul>
         <li>AIサービスプロバイダー（上記3項に記載）— 機能提供に必要な範囲のみ</li>
         <li>AI映え診断の預け先（上記1.4に記載）— 診断とその連絡に必要な範囲のみ</li>
+        <li>資料請求・相談フォームの預け先（上記1.5に記載）— 記録とご連絡に必要な範囲のみ</li>
+        <li>Vercel Inc.（Web Analytics）— ページの閲覧の集計のみ。個人を特定する情報は含みません</li>
         <li>法的要件に基づく場合</li>
         <li>ユーザーの明示的な同意がある場合</li>
     </ul>
@@ -357,6 +381,7 @@
     <h2>10. Cookie・トラッキング</h2>
     <p>
         当社のWebサイトおよびWebアプリケーションでは、サービス提供に必要なCookieを使用します。アクセス解析にはプライバシーに配慮したツールを使用し、ユーザーの個人を特定するトラッキングは行いません。
+        当サイトは Cookie を使わないアクセス解析（Vercel Web Analytics・Vercel Inc.、米国）を使い、ページの閲覧数と参照元・画面の大きさなどを集計します。個人を特定する情報は集めません。
     </p>
 
     <h2>11. ポリシーの変更</h2>
@@ -379,6 +404,6 @@
     &copy; 2026 Synapse Arrows Pte. Ltd. All rights reserved.
 </footer>
 
-<script>document.querySelector('.mobile-menu-btn').addEventListener('click',function(){const n=document.querySelector('.nav-links');n.style.display=n.style.display==='flex'?'none':'flex';n.style.flexDirection='column';n.style.position='absolute';n.style.top='72px';n.style.left='0';n.style.right='0';n.style.background='#fff';n.style.padding='20px';n.style.boxShadow='0 8px 24px rgba(0,0,0,0.1)';n.style.gap='18px';});</script>
+<script>document.querySelector('.mobile-menu-btn').addEventListener('click',function(){const n=document.querySelector('.nav-links');const l=document.querySelector('.lang-switch');const o=n.style.display==='flex';n.style.display=o?'none':'flex';n.style.flexDirection='column';n.style.position='absolute';n.style.top='72px';n.style.left='0';n.style.right='0';n.style.background='#fff';n.style.padding='20px';n.style.boxShadow='0 8px 24px rgba(0,0,0,0.1)';if(l)l.style.display=o?'none':'flex';});</script>
 </body>
 </html>

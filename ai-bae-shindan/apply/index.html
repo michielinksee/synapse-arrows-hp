@@ -55,9 +55,11 @@
     .formerr { color:var(--bad); font-size:14px; margin:10px 0; display:none; }
     .formerr.show { display:block; }
   </style>
+    <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script>
+    <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
-<header><nav class="nav"><div class="container nav-inner"><a href="/" class="nav-logo"><img src="/logo.png" alt="Synapse Arrows" width="32" height="32">Synapse Arrows</a><ul class="nav-links"><li><a href="/about/">About</a></li><li><a href="/products/">Products</a></li><li><a href="/services/">Services</a></li><li><a href="/tools/" class="active">Tools</a></li><li><a href="/insights/">Insights</a></li><li><a href="/contact/" class="nav-cta">Contact</a></li></ul><button class="mobile-menu-btn" aria-label="Menu"><span></span><span></span><span></span></button></div></nav></header>
+<header><nav class="nav"><div class="container nav-inner"><a href="/" class="nav-logo"><img src="/logo.png" alt="Synapse Arrows" width="32" height="32">Synapse Arrows</a><ul class="nav-links"><li><a href="/services/">事業紹介・サービス</a></li><li><a href="/products/">プロダクト</a></li><li><a href="/insights/">Insights</a></li><li><a href="/about/">会社概要</a></li><li><a href="/ai-bae-shindan/" class="nav-cta nav-cta-ai active">AI映え診断</a></li><li><a href="/contact/" class="nav-cta">資料請求・ご相談</a></li></ul><button class="mobile-menu-btn" aria-label="Menu"><span></span><span></span><span></span></button></div></nav></header>
 <main class="aib">
 <div class="wrap">
   <div class="top"><a href="/ai-bae-shindan/">← AI映え診断に戻る</a><a href="/tools/">ツール一覧</a></div>
@@ -104,6 +106,17 @@ KLTurnstile.init(API_BASE, document.getElementById('ts-box'));
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 let S = null;
+// 来た元（SEC-2026-10-27-001・批准待ち）: Light の画面が sessionStorage に置いた物（無ければこのページで作る）と、Light の結果の id（?id=）
+const ORIGIN = (() => {
+  let o = null; try { o = JSON.parse(sessionStorage.getItem('ai-bae-origin') || 'null'); } catch {}
+  if (!o || typeof o !== 'object') {
+    const q = new URLSearchParams(location.search);
+    let ref = null; try { ref = document.referrer ? new URL(document.referrer).hostname.replace(/^www\./, '') : null; } catch {}
+    o = { ref_domain: ref, utm_source: q.get('utm_source') || null, utm_campaign: q.get('utm_campaign') || null, entry_path: location.pathname };
+  }
+  return { ref_domain: o.ref_domain || null, utm_source: o.utm_source || null, utm_campaign: o.utm_campaign || null, entry_path: o.entry_path || location.pathname };
+})();
+const CHECK_ID = (() => { const v = new URLSearchParams(location.search).get('id'); return v && /^[0-9a-f]{12}$/.test(v) ? v : null; })();
 
 // Same rules as the server (src/ai-bae-apply.ts isUnclearText); the server has the final say.
 function unclear(raw) {
@@ -228,7 +241,7 @@ $('apply').addEventListener('submit', async (e) => {
   $('go').disabled = true;
   try {
     const turnstile_token = await KLTurnstile.token();
-    const body = { url, email, answers: a, consents: { diagnosis: true, aggregate: $('consent-aggregate').checked }, ...(turnstile_token ? { turnstile_token } : {}) };
+    const body = { url, email, answers: a, consents: { diagnosis: true, aggregate: $('consent-aggregate').checked }, origin: ORIGIN, ...(CHECK_ID ? { check_id: CHECK_ID } : {}), ...(turnstile_token ? { turnstile_token } : {}) };
     const r = await fetch(API_BASE + '/api/ai-bae/apply', { method: 'POST', mode: 'cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
     const j = await r.json().catch(() => ({}));
     if (r.status === 202) { $('apply').style.display = 'none'; if (j.confirm_within_hours) $('hours').textContent = j.confirm_within_hours; $('done').classList.add('show'); window.scrollTo({ top: 0, behavior: 'smooth' }); return; }

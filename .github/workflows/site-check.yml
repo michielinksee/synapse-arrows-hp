@@ -1,0 +1,28 @@
+name: site-check
+on:
+  pull_request:
+  push:
+    branches: [main]
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      # 値段は pricing.json が正本。印の付いたページが正本と同じかを見る
+      - run: node scripts/build-pricing.mjs --check
+      # 今ある URL を消していないか（main にある .html が全部残っているか）
+      - run: |
+          git fetch origin main --quiet
+          missing=0
+          for f in $(git ls-tree -r origin/main --name-only | grep '\.html$'); do
+            [ -f "$f" ] || { echo "missing: $f"; missing=1; }
+          done
+          exit $missing
+      # 生成物は型から作り直して差分 0（HTML を手で直していないこと）
+      - run: python3 scripts/build-site.py --check
+      - run: node scripts/build-ai-bae-pages.mjs --check
+      # JSON-LD・メニュー・解析のタグ
+      - run: node scripts/check-site.mjs
