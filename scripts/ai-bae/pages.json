@@ -1,5 +1,5 @@
 {
-  "_readme": "AI映え診断のページ。共通の入口と業種別の Light 版を、同じ型（page.template.html）から node scripts/build-ai-bae-pages.mjs で作る。業種の id と表示名は ai-bae-shindan/survey.json の q1（kansei-internal の src/data/ai-bae-survey.json の写し）から取る。industry が null のページは最初に業種を選んでもらい、文字列のページはその業種で固定する。業種別の Light 版は、その業種の頼る先を測ってから足す（2026-10-27 は飲食だけ）。 nav_label は、ほかのページ（トップ・/services/・/products/・共通の入口）に出す「業種別の診断: …」の文言。無ければ survey の業種名＋「向け」。",
+  "_readme": "AI映え診断のページ。共通の入口と業種別の Light 版を、同じ型（page.template.html）から node scripts/build-ai-bae-pages.mjs で作る。業種の id と表示名は ai-bae-shindan/survey.json の q1（kansei-internal の src/data/ai-bae-survey.json の写し）から取る。industry が null のページは最初に業種を選んでもらい、文字列のページはその業種で固定する。業種別の Light 版は、その業種の頼る先を測ってから足す（2026-10-27 は飲食だけ）。 nav_label は、ほかのページ（トップ・/services/・/products/・共通の入口）に出す「業種別の診断: …」の文言。無ければ survey の業種名＋「向け」。 hero_h1 は冒頭の大きな見出し（lead が 1 行目、accent が色付きの行で、行ごとに改行）。業種のページはその業種の言葉にする（飲食は「お店」）。",
   "pages": [
     {
       "out": "ai-bae-shindan/index.html",
@@ -10,6 +10,13 @@
       "og_title": "AI映え診断 | Synapse Arrows",
       "og_description": "あなたのお店・会社、AI映えしてますか？業種を選んで URL を入れるだけの無料診断。",
       "og_image": "/ai-bae-shindan/img/og-ai-bae.png",
+      "hero_h1": {
+        "lead": "AIは、あなたの会社を",
+        "accent": [
+          "どう説明して",
+          "いますか？"
+        ]
+      },
       "tagline": "あなたのサービス、AI映えしてますか？",
       "ask_h2": "お店・会社のホームページの URL を入力",
       "ld_name": "AI映え診断",
@@ -24,6 +31,13 @@
       "og_title": "AI映え診断 Light｜飲食店 | Synapse Arrows",
       "og_description": "あなたのお店、AI映えしてますか？飲食店向け。URL を入れるだけで、AI が頼る先とお店の情報の下地を無料で診断します。",
       "og_image": "/ai-bae-shindan/img/og-ai-bae-inshoku.png",
+      "hero_h1": {
+        "lead": "AIは、あなたのお店を",
+        "accent": [
+          "どう説明して",
+          "いますか？"
+        ]
+      },
       "tagline": "あなたのお店、AI映えしてますか？",
       "badge": "Light｜飲食店",
       "ask_h2": "お店のホームページの URL を入力",
