@@ -26,3 +26,7 @@ jobs:
       - run: node scripts/build-ai-bae-pages.mjs --check
       # JSON-LD・メニュー・解析のタグ
       - run: node scripts/check-site.mjs
+      # 相談フォーム: 4 枚（日本語 2・英語 2）の ENDPOINT が同じ値（正本 scripts/site/contact.json）
+      - run: node scripts/check-contact-endpoint.mjs
+      # 相談フォームの受け口（GAS）に、ページが送る形の見本を流してシートの 1 行を確かめる
+      - run: node scripts/test-contact-form-gs.mjs

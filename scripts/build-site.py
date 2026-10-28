@@ -7,7 +7,7 @@
 作る物: index.html, services/ (+5 詳細), products/, tools/, about/, contact/ (+confirm/), ai-bae-shindan/pricing/, /flow/,
 insights/ (+3 テーマ), 英語の /en/ 一式（文言は scripts/site/en.json・policy とシンガポールの記事は本文をそのまま外枠だけ）, site.js, site-chrome.css（site.css から共通部分だけを抜いた物。AI映え診断の本物の入力画面が使う）。
 値段は <!--p:KEY--> の印のまま書き、scripts/build-pricing.mjs が pricing.json から流し込む（--check は印の中身を見ない）。
-文章・一覧はこのファイルと scripts/site/*.json（JSON-LD の元・Insights の記事一覧）。AI映え診断の本体（ai-bae-shindan/index.html と業種別）は
+文章・一覧はこのファイルと scripts/site/*.json（JSON-LD の元・Insights の記事一覧・相談フォームの送り先 contact.json）。AI映え診断の本体（ai-bae-shindan/index.html と業種別）は
 scripts/build-ai-bae-pages.mjs の受け持ち。業種別ページの一覧は scripts/ai-bae/pages.json から読む（足せばリンクも増える）。
 標準ライブラリだけで動く（CI の python3 でそのまま走る）。"""
 import io, json, re, os, sys
@@ -269,13 +269,23 @@ def build_about():
     page("/about/", "会社概要 | Synapse Arrows", "Synapse Arrows Pte. Ltd.（シンガポール・東京）。AI が自社をどう説明しているかを測り、海外進出・新規事業・AI 活用の判断と実行を支えます。会社情報と自社の取り組み。", "about", "会社概要", body, ld=ld)
 
 # ================================================================= CONTACT (+ confirm)
+# 送り先は scripts/site/contact.json の endpoint 1 か所。日本語 2 枚は CONTACT_JS から、英語（/en/contact/ と確認）は
+# EN_CONTACT_JS から、どちらも contact_endpoint() で入れる。空か https://script.google.com/macros/s/……/exec の形だけ受け付ける
+ENDPOINT_RE = re.compile(r"^https://script\.google\.com/macros/s/[A-Za-z0-9_-]+/exec$")
+def contact_endpoint():
+    ep = json.loads(rd("scripts/site/contact.json")).get("endpoint", "")
+    if not isinstance(ep, str): sys.exit("scripts/site/contact.json: endpoint は文字列で")
+    ep = ep.strip()
+    if ep and not ENDPOINT_RE.match(ep):
+        sys.exit("scripts/site/contact.json: endpoint は空か https://script.google.com/macros/s/……/exec の形で（いま: " + ep + "）")
+    return "'" + ep + "'"
 INDUSTRY_FALLBACK = ["飲食", "美容院", "不動産", "旅行／宿", "IT／Web", "コンサル", "税理士／会計士", "医療（医科・歯科）", "介護／整体", "美容外科／エステ", "小売", "教室・スクール", "士業", "製造・メーカー", "その他"]
 CONTACT_JS = r'''
 <script src="/ai-bae-shindan/turnstile-guard.js"></script>
 <script>
-// Google Apps Script のウェブアプリ URL。Michie がデプロイして貼る（手順: founder-ops/research/AiBae_2026-10/STEPS-contact-form-gas-michie.md）。
+// Google Apps Script のウェブアプリ URL。正本は scripts/site/contact.json の endpoint（build-site.py が入れる。ここは手で直さない）。
 // 空のあいだは、確認の段で「送る」の代わりにメールの案内（mailto）を出す。
-const ENDPOINT = '';
+const ENDPOINT = __ENDPOINT__;
 const API_BASE = (location.hostname === 'localhost' || location.hostname === '127.0.0.1') ? 'http://localhost:3000' : 'https://mcp.kansei-link.com';
 const SERVICES = __SERVICES__;
 const KEY = 'sa_contact_draft';
@@ -290,7 +300,7 @@ def build_contact():
     ind_opts = "".join(f'<option value="{x}">{x}</option>' for x in INDUSTRY_FALLBACK)
     form = f'''<div class="container page-content contact-page-layout"><aside class="contact-guide">{eyebrow("SERVICE GUIDE")}<h2>必要なサービスの資料を、<br>まとめて。</h2><p>選択したサービスの支援内容や進め方を、資料でご確認いただく構成です。</p><img src="/assets/advisory.webp" alt="" width="1852" height="849" loading="lazy"><h3>資料でわかること</h3><ul><li>サービスの内容・支援範囲</li><li>料金・パッケージの考え方</li><li>ご相談から開始までの流れ</li></ul><p class="small-note">資料は担当が確認のうえ、1 営業日以内にメールでお送りします（自動では配信しません）。</p>{tlink("/services/", "サービス一覧を見直す")}</aside>
 <form class="contact-form" id="contact-form" action="/contact/confirm/" method="post" novalidate><div class="intent-switch" role="group" aria-label="お問い合わせの種類"><label><input type="radio" name="intent" value="資料請求" checked>資料請求</label><label><input type="radio" name="intent" value="相談・見積もり">相談・見積もり</label></div><fieldset class="contact-service-field"><legend>検討しているサービス <small>複数選択可</small></legend><div class="contact-service-grid">{svc_checks}</div></fieldset><p class="form-error" id="form-error" role="alert" hidden></p><label class="plan-selected" id="plan-row" hidden>検討中のプラン<input name="plan" id="plan" maxlength="120"><span>料金ページで選んだプランを引き継いでいます。</span></label><div class="form-fields"><label>会社名・店舗名 <span>必須</span><input name="company" autocomplete="organization" required maxlength="120"></label><label>お名前 <span>必須</span><input name="name" autocomplete="name" required maxlength="80"></label><label class="full">メールアドレス <span>必須</span><input name="email" type="email" autocomplete="email" required maxlength="160"></label><label>業種 <small>任意</small><select name="industry" id="industry"><option value="">選択してください</option>{ind_opts}</select></label><label>ホームページURL <small>任意</small><input name="site_url" type="url" inputmode="url" placeholder="https://example.com" maxlength="500"></label><label class="full">ご相談・確認したいこと <small>任意</small><textarea name="message" rows="4" maxlength="2000"></textarea></label></div><div class="hp" aria-hidden="true"><label>Website<input type="text" name="website_hp" tabindex="-1" autocomplete="off"></label></div><label class="consent-row"><input type="checkbox" name="consent" required><span>入力情報の取り扱い（<a href="/policy/#contact-form">プライバシーポリシー 1.5</a>）を確認し、同意します。</span></label><button class="button form-submit" type="submit">入力内容を確認する {CARET_BOLD}</button><p class="small-note">次の画面で内容を確認してから送ります。この画面ではまだ送信されません。</p></form></div>'''
-    js = CONTACT_JS.replace("__SERVICES__", json.dumps([s["name"] for s in SERVICES], ensure_ascii=False)).replace("__PLAN_NAMES__", json.dumps({p["id"]: p["title"] for p in PLANS}, ensure_ascii=False)) + r'''
+    js = CONTACT_JS.replace("__ENDPOINT__", contact_endpoint()).replace("__SERVICES__", json.dumps([s["name"] for s in SERVICES], ensure_ascii=False)).replace("__PLAN_NAMES__", json.dumps({p["id"]: p["title"] for p in PLANS}, ensure_ascii=False)) + r'''
 <script>
 (function(){
   var form = document.getElementById('contact-form');
@@ -350,7 +360,7 @@ def build_contact():
     ld = [webpage_ld("/contact/", "資料請求・ご相談", "Synapse Arrows への資料請求・ご相談。"), breadcrumb_ld(("ホーム", "/"), ("資料請求・ご相談", "/contact/")), {"@context": "https://schema.org", "@type": "ContactPage", "url": SITE + "/contact/", "name": "資料請求・ご相談", "mainEntity": {"@id": SITE + "/#organization"}}]
     page("/contact/", "資料請求・ご相談 | Synapse Arrows", "6 つのサービス（海外進出支援・海外進出アドバイザリー・新規事業開発支援・AI映え診断・AI研修・導入支援・AIエージェント開発支援）の資料請求と、無料相談・お見積もりの入口。", "", "資料請求・ご相談", body, ld=ld)
     # confirm step
-    cjs = CONTACT_JS.replace("__SERVICES__", "[]").replace("__PLAN_NAMES__", "{}") + r'''
+    cjs = CONTACT_JS.replace("__ENDPOINT__", contact_endpoint()).replace("__SERVICES__", "[]").replace("__PLAN_NAMES__", "{}") + r'''
 <script>
 (function(){
   var d = load();
@@ -597,8 +607,9 @@ def build_en_about():
 EN_CONTACT_JS = r'''
 <script src="/ai-bae-shindan/turnstile-guard.js"></script>
 <script>
-// Same endpoint as the Japanese form (Google Apps Script). While it is empty, the review step offers a prefilled email (mailto) instead of "Send".
-const ENDPOINT = '';
+// Same endpoint as the Japanese form (Google Apps Script). Source of truth: scripts/site/contact.json (build-site.py fills it in; do not edit here).
+// While it is empty, the review step offers a prefilled email (mailto) instead of "Send".
+const ENDPOINT = __ENDPOINT__;
 const API_BASE = (location.hostname === 'localhost' || location.hostname === '127.0.0.1') ? 'http://localhost:3000' : 'https://mcp.kansei-link.com';
 const T = __T__;
 const KEY = 'sa_contact_draft_en';
@@ -616,7 +627,7 @@ def build_en_contact():
     req = f'<span>{c["required"]}</span>'; opt = f'<small>{c["optional"]}</small>'
     form = f'''<div class="container page-content contact-page-layout"><aside class="contact-guide">{eyebrow(c["guide_eyebrow"])}<h2>{c["guide_h2"]}</h2><p>{c["guide_p"]}</p><img src="/assets/advisory.webp" alt="" width="1852" height="849" loading="lazy"><h3>{c["guide_h3"]}</h3><ul>{"".join(f"<li>{x}</li>" for x in c["guide_items"])}</ul><p class="small-note">{c["guide_note"]}</p>{tlink("/en/services/", c["back"])}</aside>
 <form class="contact-form" id="contact-form" action="/en/contact/confirm/" method="post" novalidate><div class="intent-switch" role="group" aria-label="{c["intent_group"]}"><label><input type="radio" name="intent" value="download" checked>{c["intent_download"]}</label><label><input type="radio" name="intent" value="consult">{c["intent_consult"]}</label></div><fieldset class="contact-service-field"><legend>{c["services_legend"]} <small>{c["services_small"]}</small></legend><div class="contact-service-grid">{svc_checks}</div></fieldset><p class="form-error" id="form-error" role="alert" hidden></p><label class="plan-selected" id="plan-row" hidden>{c["plan_label"]}<input name="plan" id="plan" maxlength="120"><span>{c["plan_note"]}</span></label><div class="form-fields"><label>{c["company"]} {req}<input name="company" autocomplete="organization" required maxlength="120"></label><label>{c["name"]} {req}<input name="name" autocomplete="name" required maxlength="80"></label><label class="full">{c["email"]} {req}<input name="email" type="email" autocomplete="email" required maxlength="160"></label><label>{c["industry"]} {opt}<select name="industry" id="industry"><option value="">{c["industry_choose"]}</option>{ind}</select></label><label>{c["site_url"]} {opt}<input name="site_url" type="url" inputmode="url" placeholder="https://example.com" maxlength="500"></label><label class="full">{c["message"]} {opt}<textarea name="message" rows="4" maxlength="2000"></textarea></label></div><div class="hp" aria-hidden="true"><label>Website<input type="text" name="website_hp" tabindex="-1" autocomplete="off"></label></div><label class="consent-row"><input type="checkbox" name="consent" required><span>{c["consent"]}</span></label><button class="button form-submit" type="submit">{c["submit"]} {CARET_BOLD}</button><p class="small-note">{c["submit_note"]}</p></form></div>'''
-    base_js = EN_CONTACT_JS.replace("__T__", tjs)
+    base_js = EN_CONTACT_JS.replace("__ENDPOINT__", contact_endpoint()).replace("__T__", tjs)
     js = base_js.replace("__PLAN_NAMES__", json.dumps({p["id"]: p["title"] for p in ENP}, ensure_ascii=False)) + r'''
 <script>
 (function(){
