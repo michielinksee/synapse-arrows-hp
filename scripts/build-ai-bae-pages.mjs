@@ -37,6 +37,13 @@ function industryPages(page) {
   return `<p class="ind-pages">業種別の診断: ${others.map((p) => `<a href="${new URL(p.url).pathname}">${escHtml(navLabel(p))} →</a>`).join("・")}</p>`;
 }
 
+// 冒頭の見出し（pages.json の hero_h1）。lead は 1 行目、accent は色付きの行（行ごとに <br>）
+function heroH1(page) {
+  const h = page.hero_h1;
+  if (!h || !h.lead || !Array.isArray(h.accent) || !h.accent.length) throw new Error(`${page.out}: pages.json に hero_h1 { lead, accent: [...] } が無い`);
+  return `${escHtml(h.lead)}<br><span>${h.accent.map(escHtml).join("<br>")}</span>`;
+}
+
 function build(page) {
   if (page.industry && !INDUSTRIES.some((i) => i.id === page.industry)) throw new Error(`unknown industry ${page.industry} (not in survey q1)`);
   const ld = {
@@ -64,6 +71,7 @@ function build(page) {
     LD_JSON: jsonInScript(ld),
     BADGE: page.badge ? `<p class="badge">${escHtml(page.badge)}</p>` : "",
     TAGLINE: escHtml(page.tagline),
+    HERO_H1: heroH1(page),
     ASK_H2: (page.industry ? "" : "2. ") + escHtml(page.ask_h2),
     INDUSTRY_PICKER: picker(page),
     FIXED_INDUSTRY: page.industry ? JSON.stringify(page.industry) : "null",
