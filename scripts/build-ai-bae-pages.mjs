@@ -94,6 +94,8 @@ function build(page) {
     BADGE: page.badge ? `<p class="badge">${escHtml(page.badge)}</p>` : "",
     TAGLINE: escHtml(page.tagline),
     HERO_H1: heroH1(page),
+    // 入力欄の下の一行（pages.json の no_site_note。HTML。無いページは何も出さない）
+    NO_SITE_NOTE: page.no_site_note ? `<p class="fine no-site">${page.no_site_note}</p>` : "",
     ASK_H2: (page.industry ? "" : "2. ") + escHtml(page.ask_h2),
     INDUSTRY_PICKER: picker(page),
     FIXED_INDUSTRY: page.industry ? JSON.stringify(page.industry) : "null",
