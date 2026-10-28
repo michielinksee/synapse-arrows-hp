@@ -381,7 +381,8 @@ function setState(s, msg) {
 }
 // 掲載サイト（食べログ・ぐるなび・Instagram など）のお店ページを入れた時: サーバーは取りに行かず platform_page を返す。
 // エラーの赤ではなく案内の枠で、詳しい診断（無料）へ。
-// gorp.jp（とその下の名前）は、ぐるなびが作るお店のホームページ。掲載ページではないので文を分ける。
+// platform_kind が hosted_hp の時は、その HP サービスで作られたお店のホームページ（ここからは読み取れない物）。
+// 古いサーバーは platform_kind を返さないので、gorp.jp（ぐるなびが作るお店のホームページ）だけはホスト名でも分ける。
 function isGorpHost(u) {
   try {
     const s = String(u || '').trim();
@@ -389,12 +390,30 @@ function isGorpHost(u) {
     return h === 'gorp.jp' || h.endsWith('.gorp.jp');
   } catch { return false; }
 }
-function showPlatformNotice(name, inputUrl) {
+function applyButton(from) {
   const apply = '/ai-bae-shindan/apply/' + (industry ? '?industry=' + encodeURIComponent(industry) : '');
-  const button = `<a class="go" href="${apply}" data-va="ai_bae_apply_click" data-va-from="platform_notice">詳しい診断（無料）を申し込む →</a>`;
-  $('notice-box').innerHTML = isGorpHost(inputUrl)
-    ? `これはぐるなびが作っているお店のホームページです。この診断は、ぐるなびのサーバーの都合で、ここからは読み取れません。<br>詳しい診断（無料）で、ChatGPT などがお店をどう紹介しているかを調べられます。<br>${button}`
-    : `これは<b>${esc(name || '掲載サイト')}</b>のお店のページです。この無料診断は、お店が自分で持っているサイトを見るためのものです。<br>HP が無いお店は、詳しい診断（無料）で、ChatGPT などが掲載サイトからお店をどう紹介しているかを調べられます。<br>${button}`;
+  return `<a class="go" href="${apply}" data-va="ai_bae_apply_click" data-va-from="${esc(from)}">詳しい診断（無料）を申し込む →</a>`;
+}
+const DETAIL_LINE = '詳しい診断（無料）なら、AI がお店・会社をどう紹介しているかを直接調べます。';
+function showPlatformNotice(j, inputUrl) {
+  const hosted = j.platform_kind === 'hosted_hp' || (!j.platform_kind && isGorpHost(inputUrl));
+  const name = j.platform || (isGorpHost(inputUrl) ? 'ぐるなび' : '掲載サイト');
+  $('notice-box').innerHTML = hosted
+    ? `これは<b>${esc(name)}</b>で作られたお店のホームページです。ここからは読み取れません。<br>${DETAIL_LINE}<br>${applyButton('hosted_hp_notice')}`
+    : `これは<b>${esc(name)}</b>のお店のページです。この無料診断は、お店が自分で持っているサイトを見るためのものです。<br>HP が無いお店は、詳しい診断（無料）で、ChatGPT などが掲載サイトからお店をどう紹介しているかを調べられます。<br>${applyButton('platform_notice')}`;
+  setState('notice');
+}
+// 取りに行って失敗した時（時間切れ・見つからない・そのほか）: 赤い文で終わらせず、同じ案内の枠で詳しい診断へ。
+// URL の形がおかしい（bad_url・bad_scheme）・回数の上限・人の確認・社内のアドレスは、今までどおり赤い文で入力し直しを促す。
+const FAIL_GUIDE = {
+  timeout: 'この URL は、ここからは時間内に読み取れませんでした（サイトの返事が 10 秒を超えました）。',
+  dns_failed: 'この URL のドメインが、ここからは見つかりませんでした。綴りが合っていれば、ここからは読み取れないサイトです。',
+  fetch_failed: 'この URL はここからは読み取れませんでした（サイト側がエラーを返しました）。',
+  too_many_redirects: 'この URL はここからは読み取れませんでした（転送が続いて、ページにたどり着けませんでした）。',
+  scan_failed: 'この URL はここからは読み取れませんでした。',
+};
+function showFailureNotice(code) {
+  $('notice-box').innerHTML = `${esc(FAIL_GUIDE[code] || FAIL_GUIDE.scan_failed)}<br>${DETAIL_LINE}<br>${applyButton('failure_notice_' + (FAIL_GUIDE[code] ? code : 'scan_failed'))}`;
   setState('notice');
 }
 const ERR = {
@@ -452,7 +471,9 @@ async function run(url) {
     if (turnstile_token) body.turnstile_token = turnstile_token;
     const r = await fetch(API_BASE + '/api/site-check', { method: 'POST', mode: 'cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
     const j = await r.json();
-    if (!r.ok && j.code === 'platform_page') { showPlatformNotice(j.platform, url); return; }
+    if (!r.ok && j.code === 'platform_page') { showPlatformNotice(j, url); return; }
+    if (!r.ok && j.code && FAIL_GUIDE[j.code]) { showFailureNotice(j.code); return; }
+    if (!r.ok && r.status === 422 && !ERR[j.code]) { showFailureNotice('scan_failed'); return; } // 新しい種類の失敗も案内へ
     if (!r.ok) { setState('error', ERR[j.code] || ERR[j.error] || j.error || '診断に失敗しました。'); return; }
     if (needsIndustry(j)) { holdForIndustry(j, url); return; }
     pending = null;
