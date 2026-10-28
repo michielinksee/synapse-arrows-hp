@@ -14,7 +14,7 @@
     <loc>https://synapsearrows.com/en/</loc>
     <xhtml:link rel="alternate" hreflang="ja" href="https://synapsearrows.com/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://synapsearrows.com/en/"/>
-    <lastmod>2026-10-27</lastmod>
+    <lastmod>2026-10-28</lastmod>
     <priority>0.9</priority>
     <changefreq>weekly</changefreq>
   </url>
@@ -32,7 +32,7 @@
     <loc>https://synapsearrows.com/en/about/</loc>
     <xhtml:link rel="alternate" hreflang="ja" href="https://synapsearrows.com/about/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://synapsearrows.com/en/about/"/>
-    <lastmod>2026-10-27</lastmod>
+    <lastmod>2026-10-28</lastmod>
     <priority>0.7</priority>
     <changefreq>monthly</changefreq>
   </url>
@@ -50,7 +50,7 @@
     <loc>https://synapsearrows.com/en/products/</loc>
     <xhtml:link rel="alternate" hreflang="ja" href="https://synapsearrows.com/products/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://synapsearrows.com/en/products/"/>
-    <lastmod>2026-10-27</lastmod>
+    <lastmod>2026-10-28</lastmod>
     <priority>0.7</priority>
     <changefreq>monthly</changefreq>
   </url>
@@ -63,7 +63,7 @@
   </url>
   <url>
     <loc>https://synapsearrows.com/en/insights/geo-aeo-agencies-singapore-2026-09/</loc>
-    <lastmod>2026-10-27</lastmod>
+    <lastmod>2026-10-28</lastmod>
     <priority>0.8</priority>
     <changefreq>monthly</changefreq>
   </url>
@@ -118,7 +118,7 @@
     <loc>https://synapsearrows.com/en/services/ai-aeo/</loc>
     <xhtml:link rel="alternate" hreflang="ja" href="https://synapsearrows.com/services/ai-aeo/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://synapsearrows.com/en/services/ai-aeo/"/>
-    <lastmod>2026-10-27</lastmod>
+    <lastmod>2026-10-28</lastmod>
     <priority>0.9</priority>
     <changefreq>monthly</changefreq>
   </url>
@@ -134,7 +134,7 @@
     <loc>https://synapsearrows.com/en/services/</loc>
     <xhtml:link rel="alternate" hreflang="ja" href="https://synapsearrows.com/services/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://synapsearrows.com/en/services/"/>
-    <lastmod>2026-10-27</lastmod>
+    <lastmod>2026-10-28</lastmod>
     <priority>0.7</priority>
     <changefreq>monthly</changefreq>
   </url>
@@ -164,7 +164,7 @@
     <loc>https://synapsearrows.com/en/insights/</loc>
     <xhtml:link rel="alternate" hreflang="ja" href="https://synapsearrows.com/insights/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://synapsearrows.com/en/insights/"/>
-    <lastmod>2026-10-27</lastmod>
+    <lastmod>2026-10-28</lastmod>
     <priority>0.6</priority>
     <changefreq>weekly</changefreq>
   </url>
@@ -182,7 +182,7 @@
     <loc>https://synapsearrows.com/en/contact/</loc>
     <xhtml:link rel="alternate" hreflang="ja" href="https://synapsearrows.com/contact/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://synapsearrows.com/en/contact/"/>
-    <lastmod>2026-10-27</lastmod>
+    <lastmod>2026-10-28</lastmod>
     <priority>0.5</priority>
     <changefreq>monthly</changefreq>
   </url>
@@ -200,7 +200,7 @@
     <loc>https://synapsearrows.com/en/policy-2/</loc>
     <xhtml:link rel="alternate" hreflang="ja" href="https://synapsearrows.com/policy/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://synapsearrows.com/en/policy-2/"/>
-    <lastmod>2026-10-27</lastmod>
+    <lastmod>2026-10-28</lastmod>
     <priority>0.3</priority>
     <changefreq>yearly</changefreq>
   </url>
@@ -216,11 +216,16 @@
   <url><loc>https://synapsearrows.com/tools/unchin/</loc><lastmod>2026-10-27</lastmod></url>
   <url><loc>https://synapsearrows.com/ai-bae-shindan/</loc><lastmod>2026-10-27</lastmod></url>
   <url><loc>https://synapsearrows.com/ai-bae-shindan/inshoku/</loc><lastmod>2026-10-27</lastmod></url>
-  <url><loc>https://synapsearrows.com/services/overseas-expansion/</loc><lastmod>2026-10-27</lastmod></url>
-  <url><loc>https://synapsearrows.com/services/overseas-advisory/</loc><lastmod>2026-10-27</lastmod></url>
-  <url><loc>https://synapsearrows.com/services/new-business/</loc><lastmod>2026-10-27</lastmod></url>
-  <url><loc>https://synapsearrows.com/services/ai-training/</loc><lastmod>2026-10-27</lastmod></url>
-  <url><loc>https://synapsearrows.com/services/ai-agents/</loc><lastmod>2026-10-27</lastmod></url>
+  <url><loc>https://synapsearrows.com/services/overseas-expansion/</loc><xhtml:link rel="alternate" hreflang="ja" href="https://synapsearrows.com/services/overseas-expansion/"/><xhtml:link rel="alternate" hreflang="en" href="https://synapsearrows.com/en/services/overseas-expansion/"/><lastmod>2026-10-28</lastmod></url>
+  <url><loc>https://synapsearrows.com/en/services/overseas-expansion/</loc><xhtml:link rel="alternate" hreflang="ja" href="https://synapsearrows.com/services/overseas-expansion/"/><xhtml:link rel="alternate" hreflang="en" href="https://synapsearrows.com/en/services/overseas-expansion/"/><lastmod>2026-10-28</lastmod></url>
+  <url><loc>https://synapsearrows.com/services/overseas-advisory/</loc><xhtml:link rel="alternate" hreflang="ja" href="https://synapsearrows.com/services/overseas-advisory/"/><xhtml:link rel="alternate" hreflang="en" href="https://synapsearrows.com/en/services/overseas-advisory/"/><lastmod>2026-10-28</lastmod></url>
+  <url><loc>https://synapsearrows.com/en/services/overseas-advisory/</loc><xhtml:link rel="alternate" hreflang="ja" href="https://synapsearrows.com/services/overseas-advisory/"/><xhtml:link rel="alternate" hreflang="en" href="https://synapsearrows.com/en/services/overseas-advisory/"/><lastmod>2026-10-28</lastmod></url>
+  <url><loc>https://synapsearrows.com/services/new-business/</loc><xhtml:link rel="alternate" hreflang="ja" href="https://synapsearrows.com/services/new-business/"/><xhtml:link rel="alternate" hreflang="en" href="https://synapsearrows.com/en/services/new-business/"/><lastmod>2026-10-28</lastmod></url>
+  <url><loc>https://synapsearrows.com/en/services/new-business/</loc><xhtml:link rel="alternate" hreflang="ja" href="https://synapsearrows.com/services/new-business/"/><xhtml:link rel="alternate" hreflang="en" href="https://synapsearrows.com/en/services/new-business/"/><lastmod>2026-10-28</lastmod></url>
+  <url><loc>https://synapsearrows.com/services/ai-training/</loc><xhtml:link rel="alternate" hreflang="ja" href="https://synapsearrows.com/services/ai-training/"/><xhtml:link rel="alternate" hreflang="en" href="https://synapsearrows.com/en/services/ai-training/"/><lastmod>2026-10-28</lastmod></url>
+  <url><loc>https://synapsearrows.com/en/services/ai-training/</loc><xhtml:link rel="alternate" hreflang="ja" href="https://synapsearrows.com/services/ai-training/"/><xhtml:link rel="alternate" hreflang="en" href="https://synapsearrows.com/en/services/ai-training/"/><lastmod>2026-10-28</lastmod></url>
+  <url><loc>https://synapsearrows.com/services/ai-agents/</loc><xhtml:link rel="alternate" hreflang="ja" href="https://synapsearrows.com/services/ai-agents/"/><xhtml:link rel="alternate" hreflang="en" href="https://synapsearrows.com/en/services/ai-agents/"/><lastmod>2026-10-28</lastmod></url>
+  <url><loc>https://synapsearrows.com/en/services/ai-agents/</loc><xhtml:link rel="alternate" hreflang="ja" href="https://synapsearrows.com/services/ai-agents/"/><xhtml:link rel="alternate" hreflang="en" href="https://synapsearrows.com/en/services/ai-agents/"/><lastmod>2026-10-28</lastmod></url>
   <url><loc>https://synapsearrows.com/ai-bae-shindan/pricing/</loc><lastmod>2026-10-27</lastmod></url>
   <url><loc>https://synapsearrows.com/ai-bae-shindan/flow/</loc><lastmod>2026-10-27</lastmod></url>
   <url><loc>https://synapsearrows.com/insights/topics/overseas-business/</loc><lastmod>2026-10-27</lastmod></url>

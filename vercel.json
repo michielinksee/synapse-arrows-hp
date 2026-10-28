@@ -41,6 +41,11 @@
       "source": "/privacy/",
       "destination": "/policy/",
       "statusCode": 301
+    },
+    {
+      "source": "/en/policy/",
+      "destination": "/en/policy-2/",
+      "statusCode": 301
     }
   ],
   "headers": [
