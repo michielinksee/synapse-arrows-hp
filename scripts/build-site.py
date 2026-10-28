@@ -191,6 +191,24 @@ PRICE_LABEL = {"report": P("report.man", "5万円"), "report_remeasure": P("repo
 MIN = P("monitor.min_months", "6")
 DASH = P("dashboard_note_ja", "ダッシュボードでの閲覧・管理機能は今後提供予定です。現在はご利用いただけません。")
 TAX = P("tax_note_ja", "料金はすべて税別です。消費税の扱いはご契約の時にご案内します。")
+AFTER_JA = P("monitor.after_ja", "その後は 1 か月ごとに、続けるか止めるかを選べます。")
+ADV_JA = {"name": P("advice.name_ja", "アドバイスあり"), "man": P("advice.man", "2万円"), "content": P("advice.content_ja", "")}
+# まとめ払いの表（定点観測とオプション）。行＝払い方、列＝プラン。値段は印のまま
+PREPAY_CSS = '    <style>.diagnosis-comparison.prepay-table{min-width:0;max-width:820px;table-layout:auto}.prepay-table th:first-child{width:38%}.prepay-table td{font-size:16px;font-weight:650;white-space:nowrap}.prepay-table td.prepay-tax{white-space:normal}.prepay-scroll{margin-top:22px}.prepay-table sup{font-size:11px;margin-left:2px}.prepay-table td.prepay-tax{font-size:12px;line-height:1.7;font-weight:400;color:#52637d;padding:10px 16px;background:#fff}.plan .term-total a{color:var(--blue);text-decoration:underline;text-underline-offset:3px}@media(max-width:600px){.prepay-table th,.prepay-table td{padding:12px 10px}.prepay-table td{font-size:14px}}</style>\n'
+def prepay_table(caption, cols, rows, tax_note, lang="ja"):
+    ja = lang == "ja"
+    def cell(pid, m):
+        if m == 0: return f'月 {P(pid + ".man", "")}' if ja else f'{P(pid + ".jpy", "")}/month'
+        return P(f"{pid}.p{m}_yen" if ja else f"{pid}.p{m}_jpy", "")
+    head = "".join(f'<th scope="col">{c}</th>' for c in cols)
+    body = ""
+    for (label, m) in rows:
+        off = f'<span>{P(f"monitor.p{m}_off" if ja else f"monitor.p{m}_off_en", "")}</span>' if m else ""
+        mark = "<sup>※</sup>" if m == 12 else ""
+        body += f'<tr><th scope="row">{label}{mark}{off}</th><td>{cell("monitor", m)}</td><td>{cell("advice", m)}</td></tr>'
+    # 1 年一括の注記（※）は表の最後の行に小さく。狭い画面で 1 列に詰まらないように 3 列をまたぐ
+    foot = f'<tfoot><tr><td colspan="3" class="prepay-tax">※{tax_note}</td></tr></tfoot>'
+    return f'<div class="comparison-scroll prepay-scroll" tabindex="0" role="region" aria-label="{caption}"><table class="diagnosis-comparison prepay-table"><caption>{caption}</caption><thead><tr>{head}</tr></thead><tbody>{body}</tbody>{foot}</table></div>'
 ORG_MIN = {"@context": "https://schema.org", "@type": "Organization", "@id": SITE + "/#organization", "name": "Synapse Arrows Pte. Ltd.", "url": SITE + "/", "logo": SITE + "/assets/company-logo.png"}
 
 # ================================================================= TOP
@@ -408,21 +426,22 @@ def build_contact():
 # ================================================================= AI BAE: pricing / flow
 def plan_card(p, featured=False):
     price = f'<div class="plan-price">{"<small>月</small>" if p["monthly"] else ""}{P(p["id"] + ".man_num", {"report": "5", "report_remeasure": "8", "monitor": "3", "implement": "21〜"}[p["id"]])}<span>万円</span></div><p class="price-unit">税別 / {"月" if p["monthly"] else "1回"}</p>'
-    term = f'<p class="term-total">最低契約期間：{MIN}か月<br>{MIN}か月総額：税別 {P(p["id"] + ".term_total_man", {"monitor": "18万円", "implement": "126万円〜"}.get(p["id"], ""))}</p>' if p["monthly"] else '<p class="term-total">単発のご依頼／継続契約不要</p>'
+    term = f'<p class="term-total">最低契約期間：{MIN}か月<br>{MIN}か月総額：税別 {P(p["id"] + ".term_total_man", {"monitor": "18万円", "implement": "126万円〜"}.get(p["id"], ""))}<br>{P(p["id"] + ".after_ja", "")}{'<br><a href="#prepay">6 か月・1 年のまとめ払い（割引あり）</a>' if p["id"] == "monitor" else ""}</p>' if p["monthly"] else '<p class="term-total">単発のご依頼／継続契約不要</p>'
     cta = btn(req_url("AI映え診断", p["id"], "相談・見積もり"), "このプランを相談", secondary=not featured, attrs=f'data-va="plan_cta" data-plan="{p["id"]}"')
     return f'<article class="plan{" featured-plan" if featured else ""}"><span class="small-label">{p["label"]}</span><h3>{p["title"]}</h3>{price}<p>{p["description"]}</p><ul>{"".join(f"<li>{f}</li>" for f in p["features"])}</ul>{term}{cta}</article>'
 def build_pricing():
-    rows = [("受け取るもの", lambda p: p["delivery"]), ("測定のタイミング", lambda p: p["frequency"]), ("修正・実装を行う人", lambda p: p["fix"]), ("オンライン面談", lambda p: p["meeting"]), ("契約期間", lambda p: f"最低{MIN}か月" if p["monthly"] else "単発")]
+    rows = [("受け取るもの", lambda p: p["delivery"]), ("測定のタイミング", lambda p: p["frequency"]), ("修正・実装を行う人", lambda p: p["fix"]), ("オンライン面談", lambda p: p["meeting"] + (f'（オプション「{ADV_JA["name"]}」月{ADV_JA["man"]}で付けられます）' if p["id"] == "monitor" else "")), ("契約期間", lambda p: f"最低{MIN}か月。{P(p['id'] + '.after_ja', '')}" if p["monthly"] else "単発")]
     table = '<table class="diagnosis-comparison"><caption>有料プランの成果物と対応範囲</caption><thead><tr><th scope="col">比較項目</th>' + "".join(f'<th scope="col">{p["title"]}<span>{PRICE_LABEL[p["id"]]}（税別）</span></th>' for p in PLANS) + "</tr></thead><tbody>" + "".join(f'<tr><th scope="row">{l}</th>' + "".join(f"<td>{f(p)}</td>" for p in PLANS) + "</tr>" for l, f in rows) + "</tbody></table>"
-    faqs = [("月21万円〜の「〜」は、何で変わりますか？", "対象ページ、修正・実装の範囲と件数、必要な支援内容によって変わります。実施する作業、月額費用、納期をお見積もりで明記し、合意してから開始します。件数はご相談の上で決めます。"), ("契約前に確認できることは？", "対象のAI・質問・ページ、測定条件、納期、納品物を確認します。複数店舗・複数社は個別見積もりです。月額プランの更新・解約条件もご契約前にご案内します。"), ("消費税はかかりますか？", "表示はすべて税別です。消費税の扱いは、ご契約の時にご案内します。")]
-    body = intro("AI BAE SHINDAN / PRICING", "違いは、調べる範囲と、<br>改善を誰が進めるか。", "まずは単発で課題を知る。必要に応じて、毎月の観測や実行支援へ。") + f'''<div class="container page-content"><p class="pricing-basis">{P("scope_ja", "1 店舗・1 社あたり")}／税別。月額プランは最低{MIN}か月。実装・伴走は作業範囲に応じた個別見積もりです。{TAX}</p>
+    faqs = [("月21万円〜の「〜」は、何で変わりますか？", "対象ページ、修正・実装の範囲と件数、必要な支援内容によって変わります。実施する作業、月額費用、納期をお見積もりで明記し、合意してから開始します。件数はご相談の上で決めます。"), ("契約前に確認できることは？", "対象のAI・質問・ページ、測定条件、納期、納品物を確認します。複数店舗・複数社は個別見積もりです。月額プランは最低期間のあと、1 か月ごとに続けるか止めるかを選べます。"), ("まとめ払いはできますか？", "定点観測と、そのオプション「アドバイスあり」は、6 か月一括と 1 年一括のまとめ払いを選べます。どちらも割引があり、最初の 6 か月から選べます。実装・伴走はまとめ払いの割引はありません。1 年以内の前払いの経理上の扱いは、顧問の税理士にご確認ください。"), ("消費税はかかりますか？", "表示はすべて税別です。消費税の扱いは、ご契約の時にご案内します。")]
+    body = intro("AI BAE SHINDAN / PRICING", "違いは、調べる範囲と、<br>改善を誰が進めるか。", "まずは単発で課題を知る。必要に応じて、毎月の観測や実行支援へ。") + f'''<div class="container page-content"><p class="pricing-basis">{P("scope_ja", "1 店舗・1 社あたり")}／税別。月額プランは最低{MIN}か月。{AFTER_JA}実装・伴走は作業範囲に応じた個別見積もりです。{TAX}</p>
  <section class="free-plan-row"><article><span class="small-label">サイトの情報が読み取れるかを知る</span><h2>{P("light.name_ja", "Light")} <strong>無料</strong></h2><p>登録不要。サイトへのアクセス、事業情報の手がかり、関連情報へのつながりを確認します。</p><p class="small-note">AIへ質問する診断ではありません。</p>{tlink("/ai-bae-shindan/#check", "無料でサイトをチェック", 'data-va="ai_bae_start" data-va-from="pricing_free"')}</article><article><span class="small-label">AIの回答を少し見てみる</span><h2>{P("detailed.name_ja", "詳しい診断")} <strong>無料</strong></h2><p>メール確認あり。4つのAI（ChatGPT・Claude・Gemini・Perplexity）に固定の3問を1回ずつ質問。誤りの詳細は1件まで確認できます。</p><p class="small-note">広い範囲の照合や修正リストは有料プランで提供します。Light の結果の画面から申し込めます。</p>{tlink("/ai-bae-shindan/#check", "Light から申し込む")}</article></section>
  <section class="page-section">{eyebrow("PAID PLANS")}<h2>課題を知るところから、改善の実行まで。</h2><div class="plan-grid">{"".join(plan_card(p, p["id"] == "report") for p in PLANS)}</div></section>
+ <section class="page-section" id="prepay">{eyebrow("PREPAY &amp; OPTION")}<h2>定点観測は、まとめ払いで割安に。</h2><p>オプション「{ADV_JA["name"]}」は、定点観測に{ADV_JA["content"]}を付けるものです（月{ADV_JA["man"]}・税別）。まとめ払いの時は、オプションにも同じ割引が付きます。</p>{prepay_table("定点観測とオプションの払い方（税別）", ["払い方", "定点観測", f'オプション「{ADV_JA["name"]}」'], [("月払い", 0), ("6 か月一括", 6), ("1 年一括", 12)], P("prepay_tax_note_ja", ""))}<p class="small-note">{P("prepay_choose_ja", "")}</p></section>
  <section class="page-section comparison-section">{eyebrow("COMPARE THE DELIVERABLES")}<h2>何が届き、誰が修正する？</h2><p class="small-note compare-hint">表は横にスクロールしてご覧いただけます。</p><div class="comparison-scroll" tabindex="0" role="region" aria-label="有料プランの比較表">{table}</div></section>
- <aside class="monitor-note"><div>{eyebrow("MONTHLY REPORTING")}<h2>月{P("monitor.man", "3万円")}は、<br>レポートで変化を把握するプラン。</h2></div><div><p>毎月の測定結果をお届けし、お客様側で内容の確認と改善を進めていただきます。オンライン面談や、サイトの修正作業は含みません。</p><p class="future-feature"><strong>今後の予定</strong>{DASH}</p></div></aside>
+ <aside class="monitor-note"><div>{eyebrow("MONTHLY REPORTING")}<h2>月{P("monitor.man", "3万円")}は、<br>レポートで変化を把握するプラン。</h2></div><div><p>毎月の測定結果をお届けし、お客様側で内容の確認と改善を進めていただきます。オンライン面談や、サイトの修正作業は含みません。面談をご希望の時は、オプション「{ADV_JA["name"]}」（月{ADV_JA["man"]}）で{ADV_JA["content"]}を付けられます。</p><p class="future-feature"><strong>今後の予定</strong>{DASH}</p></div></aside>
  {"".join(f'<details class="page-faq"><summary>{q}</summary><p>{a}</p></details>' for q, a in faqs)}{next_band("まずは単発で、課題を整理しませんか？", "プランを決めきれていなくても、ご相談いただけます。")}{tlink("/ai-bae-shindan/flow/", "申し込み後の流れを見る")}<p class="small-note scope-footnote">料金は{P("decided_on_ja", "2026年10月27日")}改定。対象範囲・契約条件は正式なお見積もりでご案内します。</p></div>'''
     ld = [webpage_ld("/ai-bae-shindan/pricing/", "AI映え診断の料金・パッケージ", "照合レポート・照合＋測り直し・定点観測・実装・伴走の料金と範囲。"), breadcrumb_ld(("ホーム", "/"), ("AI映え診断", "/ai-bae-shindan/"), ("料金・パッケージ", "/ai-bae-shindan/pricing/")), faq_ld(faqs)]
-    html = head("AI映え診断の料金・パッケージ | Synapse Arrows", "AI映え診断の料金。Light と詳しい診断は無料。照合レポート・照合＋測り直し（単発）、定点観測・実装・伴走（月額・最低6か月）。1店舗・1社あたり、税別。何が届き、誰が修正するかの比較表。", "/ai-bae-shindan/pricing/", ld, "/ai-bae-shindan/img/og-ai-bae.png") + header("", "/ai-bae-shindan/pricing/") + diag_nav("/ai-bae-shindan/pricing/") + f'<main id="main" class="inner-page">{crumb("料金・パッケージ", ("/ai-bae-shindan/", "AI映え診断"))}{body}</main>\n<!--p:block:ld_pricing_ja--><!--/p-->\n' + footer("/ai-bae-shindan/pricing/")
+    html = head("AI映え診断の料金・パッケージ | Synapse Arrows", "AI映え診断の料金。Light と詳しい診断は無料。照合レポート・照合＋測り直し（単発）、定点観測・実装・伴走（月額・最低6か月、その後は1か月ごと）。定点観測は6か月・1年のまとめ払いで割引。1店舗・1社あたり、税別。何が届き、誰が修正するかの比較表。", "/ai-bae-shindan/pricing/", ld, "/ai-bae-shindan/img/og-ai-bae.png", extra_css=PREPAY_CSS) + header("", "/ai-bae-shindan/pricing/") + diag_nav("/ai-bae-shindan/pricing/") + f'<main id="main" class="inner-page">{crumb("料金・パッケージ", ("/ai-bae-shindan/", "AI映え診断"))}{body}</main>\n<!--p:block:ld_pricing_ja--><!--/p-->\n' + footer("/ai-bae-shindan/pricing/")
     wr("ai-bae-shindan/pricing/index.html", html)
 def build_flow():
     steps = [("資料請求・相談を送る", "お客様", "対象の会社・店舗、サイトURL、気になっていることをお知らせください。プランが未定でも構いません。", "この時点で有料契約にはなりません。"), ("対象と調査内容を確認する", "双方で確認", "対象のAI、質問する内容、公式情報、調べたい範囲をすり合わせます。", "気になる回答のスクリーンショットがあれば、ご共有ください。"), ("見積もり・納期に合意する", "双方で確認", "料金、納品物、納期、月額の場合の契約期間を確認してから、ご契約・開始の手続きへ進みます。", "実装・伴走は、作業内容と件数もここで決めます。"), ("診断・レポートを受け取る", "Synapse Arrows", "合意した条件で調査し、AIの回答と公式情報の違い、修正の優先順位をレポートにまとめます。", "納品時期はお見積もりでご案内します。")]
@@ -567,7 +586,7 @@ def build_en_services():
 def en_plan_card(p, featured=False):
     a = EN["aiaeo"]
     price = f'<div class="plan-price price-en">{P(p["id"] + ".jpy", "JPY 0")}{"<span>" + a["per_month"] + "</span>" if p["monthly"] else ""}</div><p class="price-unit">excl. tax</p>'
-    term = f'<p class="term-total">{a["min_term"].replace("{n}", P(p["id"] + ".min_months", "6"))}</p>' if p["monthly"] else f'<p class="term-total">{a["one_off"]}</p>'
+    term = f'<p class="term-total">{a["min_term"].replace("{n}", P(p["id"] + ".min_months", "6"))}<br>{P(p["id"] + ".after_en", "")}{"<br><a href=" + chr(34) + "#prepay" + chr(34) + ">" + a["prepay_more"] + "</a>" if p["id"] == "monitor" else ""}</p>' if p["monthly"] else f'<p class="term-total">{a["one_off"]}</p>'
     cta = btn(en_req_url(EN["services"]["ai-bae-shindan"]["name"], p["id"], "consult"), a["plan_cta"], secondary=not featured, attrs=f'data-va="plan_cta" data-plan="{p["id"]}"')
     return f'<article class="plan{" featured-plan" if featured else ""}"><span class="small-label">{p["label"]}</span><h3>{p["title"]}</h3>{price}<p>{p["description"]}</p><ul>{"".join(f"<li>{x}</li>" for x in p["features"])}</ul>{term}{cta}</article>'
 def build_en_aiaeo():
@@ -575,19 +594,21 @@ def build_en_aiaeo():
     jp = "".join(f'<a class="text-link" href="{h}" lang="ja" hreflang="ja">{l} {CARET_BOLD}</a>' for h, l in a["jp_links"])
     stages = "".join(f"<article><b>0{i+1}</b><h3>{n}</h3><p class=\"small-label\">{w}</p><p>{c}</p></article>" for i, (n, w, c) in enumerate(a["stages"]))
     price_label = {p["id"]: P(p["id"] + ".jpy", "JPY 0") + (a["per_month"] if p["monthly"] else "") for p in ENP}
-    vals = [lambda p: p["delivery"], lambda p: p["frequency"], lambda p: p["fix"], lambda p: p["meeting"], lambda p: a["minimum"].replace("{n}", P(p["id"] + ".min_months", "6")) if p["monthly"] else a["single"]]
+    adv = {"name": P("advice.name_en", "Advice add-on"), "price": P("advice.jpy", "JPY 0") + a["per_month"], "content": P("advice.content_en", "")}
+    vals = [lambda p: p["delivery"], lambda p: p["frequency"], lambda p: p["fix"], lambda p: p["meeting"] + (a["meeting_option"].replace("{name}", adv["name"]).replace("{price}", adv["price"]) if p["id"] == "monitor" else ""), lambda p: a["minimum"].replace("{n}", P(p["id"] + ".min_months", "6")) + ". " + P(p["id"] + ".after_en", "") if p["monthly"] else a["single"]]
     table = f'<table class="diagnosis-comparison"><caption>{a["compare_caption"]}</caption><thead><tr><th scope="col">{a["compare_item"]}</th>' + "".join(f'<th scope="col">{p["title"]}<span>{price_label[p["id"]]} (excl. tax)</span></th>' for p in ENP) + "</tr></thead><tbody>" + "".join(f'<tr><th scope="row">{l}</th>' + "".join(f"<td>{f(p)}</td>" for p in ENP) + "</tr>" for l, f in zip(a["compare_rows"], vals)) + "</tbody></table>"
     notes = f'<p class="pricing-basis">Prices are {P("scope_en", "per shop or company")}.{P("tax_note_en", "All prices exclude tax.")} {P("sgd_note_en", "Prices are in Japanese yen.")} {a["prices_basis"]}</p>'
     body = intro(a["intro_eyebrow"], a["intro_h1"], a["intro_copy"]) + f'''<div class="container page-content">
  <aside class="monitor-note"><div>{eyebrow("PLEASE NOTE")}<h2>{a["honest_h2"]}</h2></div><div><p>{a["honest_p"]}</p><div class="page-actions">{jp}</div></div></aside>
  <section class="page-section">{eyebrow(a["stages_eyebrow"])}<h2>{a["stages_h2"]}</h2><div class="three-steps">{stages}</div></section>
  <section class="page-section" id="plans">{eyebrow(a["plans_eyebrow"])}<h2>{a["plans_h2"]}</h2>{notes}<div class="plan-grid">{"".join(en_plan_card(p, p["id"] == "report") for p in ENP)}</div></section>
+ <section class="page-section" id="prepay">{eyebrow(a["prepay_eyebrow"])}<h2>{a["prepay_h2"]}</h2><p>{a["option_p"].replace("{name}", adv["name"]).replace("{content}", adv["content"]).replace("{price}", adv["price"])}</p>{prepay_table(a["prepay_caption"], a["prepay_cols"], list(zip(a["prepay_rows"], [0, 6, 12])), P("prepay_tax_note_en", ""), "en")}<p class="small-note">{P("prepay_choose_en", "")}</p></section>
  <section class="page-section comparison-section">{eyebrow(a["compare_eyebrow"])}<h2>{a["compare_h2"]}</h2><p class="small-note compare-hint">{a["compare_hint"]}</p><div class="comparison-scroll" tabindex="0" role="region" aria-label="{a["compare_region"]}">{table}</div></section>
  <section class="page-section detail-split"><div>{eyebrow("WHAT CHANGES")}<h2>{a["change_h2"]}</h2><p>{a["change_p"]}</p><p><strong>{a["why_min"]}.</strong> {P("min_term_reason_en", "")}</p><p class="future-feature">{a["dashboard"]}</p></div><div><h3>{a["fit_h2"]}</h3><ul>{"".join(f"<li>{x}</li>" for x in a["fit"])}</ul><h3>{a["nofit_h2"]}</h3><ul>{"".join(f"<li>{x}</li>" for x in a["nofit"])}</ul></div></section>
  <section class="page-section">{eyebrow(a["who_eyebrow"])}<h2>{a["who_h2"]}</h2><p>{a["who_p"]}</p></section>
  {en_next_band(a["next_h2"], a["next_p"], EN["services"]["ai-bae-shindan"]["name"])}<p class="small-note scope-footnote">{a["set_on"]} {P("decided_on", "2026-10-27")}.</p></div>'''
     ld = [webpage_ld(path, a["label"], a["intro_copy"], "en"), en_bc((EN["services_page"]["label"], "/en/services/"), (a["label"], path))]
-    en_page(path, a["title"], a["description"], "services", a["label"], body, parent=("/en/services/", EN["services_page"]["label"]), ld=ld, extra_css='    <style>.plan-price.price-en{font-size:34px}@media(max-width:600px){.plan-price.price-en{font-size:30px}}</style>\n', after_main="<!--p:block:ld_pricing_en--><!--/p-->\n")
+    en_page(path, a["title"], a["description"], "services", a["label"], body, parent=("/en/services/", EN["services_page"]["label"]), ld=ld, extra_css='    <style>.plan-price.price-en{font-size:34px}@media(max-width:600px){.plan-price.price-en{font-size:30px}}</style>\n' + PREPAY_CSS, after_main="<!--p:block:ld_pricing_en--><!--/p-->\n")
 
 def build_en_products():
     t = EN["products"]

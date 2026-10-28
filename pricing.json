@@ -1,6 +1,6 @@
 {
-  "_readme": "AI映え診断の値段の正本（2026-10-27 夜 Michie 決定・税別）。ここを直して `node scripts/build-pricing.mjs` を実行すると、<!--p:…--> の印が付いた全ページ（日本語・英語・JSON-LD・llms.txt）が書き換わる。`--check` で、ページがこのファイルと同じかを確かめる。値段は数字（円・税別）で持ち、表示の形（5万円・50,000円・JPY 50,000・21万円〜）はスクリプトが作る。税込の金額は表示しない（tax_rate は参考に残すだけ。消費税の扱いは契約時に案内）。starting_at: true のプランは「〜」が付く（範囲で値段が変わる）。",
-  "decided_on": "2026-10-27",
+  "_readme": "AI映え診断の値段の正本（2026-10-27 夜 Michie 決定・税別）。ここを直して `node scripts/build-pricing.mjs` を実行すると、<!--p:…--> の印が付いた全ページ（日本語・英語・JSON-LD・llms.txt）が書き換わる。`--check` で、ページがこのファイルと同じかを確かめる。値段は数字（円・税別）で持ち、表示の形（5万円・50,000円・JPY 50,000・21万円〜）はスクリプトが作る。税込の金額は表示しない（tax_rate は参考に残すだけ。消費税の扱いは契約時に案内）。starting_at: true のプランは「〜」が付く（範囲で値段が変わる）。 2026-10-28 追加: after_min_term=\"monthly\"（最低期間のあとは 1 か月ごとに続けるか止めるか）・prepay（まとめ払い。price_jpy は 月額×月数×(1−discount) とスクリプトが照らし合わせる）・options（月額プランのオプション。prepay を持つ時は親のまとめ払いと同じ割引）。",
+  "decided_on": "2026-10-28",
   "currency": "JPY",
   "tax_rate": 0.1,
   "scope_ja": "1 店舗・1 社あたり",
@@ -41,7 +41,21 @@
       "billing": "monthly",
       "min_months": 6,
       "includes_online_meeting": false,
-      "delivery_mode": "report"
+      "delivery_mode": "report",
+      "after_min_term": "monthly",
+      "prepay": [
+        {
+          "months": 6,
+          "discount": 0.1,
+          "price_jpy": 162000
+        },
+        {
+          "months": 12,
+          "discount": 0.25,
+          "price_jpy": 270000,
+          "note": "tax"
+        }
+      ]
     },
     "implement": {
       "name_ja": "実装・伴走",
@@ -50,12 +64,41 @@
       "billing": "monthly",
       "min_months": 6,
       "starting_at": true,
-      "includes_online_meeting": true
+      "includes_online_meeting": true,
+      "after_min_term": "monthly",
+      "prepay": []
+    }
+  },
+  "options": {
+    "advice": {
+      "name_ja": "アドバイスあり",
+      "name_en": "Advice add-on",
+      "for_plan": "monitor",
+      "price_jpy": 20000,
+      "billing": "monthly",
+      "content_ja": "月 1 回 30 分のオンライン面談と、レポートの読み方のご相談",
+      "content_en": "a 30-minute online meeting once a month, and help reading the report",
+      "prepay": [
+        {
+          "months": 6,
+          "discount": 0.1,
+          "price_jpy": 108000
+        },
+        {
+          "months": 12,
+          "discount": 0.25,
+          "price_jpy": 180000
+        }
+      ]
     }
   },
   "implement_monthly_fixes": null,
   "min_term_reason_ja": "AI が頼る掲載サイトの情報が入れ替わるのに時間がかかり、直した効果を数で見るには数か月かかるため、月額のプランは 6 か月からです。",
   "min_term_reason_en": "The listings AI relies on take time to refresh, and seeing the effect of a fix in numbers takes months, so monthly plans run for at least six months.",
+  "prepay_choose_ja": "まとめ払いは、最初の 6 か月から選べます。割引は 6 か月一括と 1 年一括だけです（3 か月分は割引なし）。実装・伴走はまとめ払いの割引はありません。",
+  "prepay_choose_en": "You can choose a prepaid term from the first six months. Only the 6-month and 1-year prepaid terms are discounted (3 months is not). The implementation retainer has no prepayment discount.",
+  "prepay_tax_note_ja": "1 年以内の前払いの経理上の扱いは、顧問の税理士にご確認ください。",
+  "prepay_tax_note_en": "For how a prepayment of up to one year is treated in your accounts, please check with your tax adviser.",
   "sgd_note_en": "Prices are in Japanese yen. For clients in Singapore we quote in SGD on request.",
   "tax_note_ja": "料金はすべて税別です。消費税の扱いはご契約の時にご案内します。",
   "tax_note_en": "All prices exclude tax. How consumption tax applies is confirmed at contract time.",
