@@ -134,6 +134,8 @@
     .post .avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--grad); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 18px; flex-shrink: 0; }
     .post .avatar.sum { font-family: 'Inter', sans-serif; font-size: 13px; letter-spacing: .02em; }
     .post img.avatar { object-fit: cover; background: #fff; border: 1px solid var(--line); }
+    /* AI ごとのカードは全身の絵（丸で顔を切らない） */
+    .post img.avatar.full { width: 44px; height: 64px; border-radius: 0; border: 0; background: none; object-fit: contain; object-position: center bottom; }
     .post .who { font-weight: 700; font-size: 16px; line-height: 1.3; }
     .post .meta { color: var(--sub); font-size: 12px; letter-spacing: .04em; margin-top: 2px; }
     .post .url { color: var(--sub); font-size: 12px; margin-left: auto; max-width: 42%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -265,6 +267,7 @@
     .state { font-size: 16px; }
     .post .head { padding: 16px 20px; gap: 14px; }
     .post .avatar { width: 52px; height: 52px; }
+    .post img.avatar.full { width: 50px; height: 76px; }
     .post .avatar.sum { font-size: 15px; }
     .post .who { font-size: 19px; }
     .post .meta, .post .url { font-size: 14px; }
@@ -439,10 +442,10 @@ const ORIGIN = (() => {
 // 業種: 固定のページ（飲食の Light 版など）は FIXED_INDUSTRY。共通の入口は選んでもらう（全業種を混ぜた結果は出さない）。
 const FIXED_INDUSTRY = null;
 const INDUSTRIES = [{"id":"restaurant","label":"飲食"},{"id":"beauty","label":"美容院"},{"id":"real_estate","label":"不動産"},{"id":"lodging","label":"旅行／宿"},{"id":"saas_web","label":"IT／Web"},{"id":"consulting","label":"コンサル"},{"id":"accounting","label":"税理士／会計士"},{"id":"medical","label":"医療（医科・歯科）"},{"id":"care","label":"介護／整体"},{"id":"aesthetic","label":"美容外科／エステ"},{"id":"retail","label":"小売"},{"id":"school","label":"教室・スクール"},{"id":"professional","label":"士業（弁護士・司法書士など）"},{"id":"manufacturing_btob","label":"製造・メーカー（BtoB）"},{"id":"other","label":"その他"}];
-const ICON = { chatgpt: '/assets/ai-icons/chatgpt.webp', claude: '/assets/ai-icons/claude.webp', gemini: '/assets/ai-icons/gemini.webp', perplexity: '/assets/ai-icons/perplexity.webp' };
+const FULL = { chatgpt: '/assets/ai-icons/chatgpt-full.webp', claude: '/assets/ai-icons/claude-full.webp', gemini: '/assets/ai-icons/gemini-full.webp', perplexity: '/assets/ai-icons/perplexity-full.webp' };
 const LOGO = new Image(); LOGO.src = '/ai-bae-shindan/img/logo-text.webp';
 const GROUP = new Image(); GROUP.src = '/assets/ai-icons/group.webp';
-const ICON_IMG = Object.fromEntries(Object.entries(ICON).map(([k, src]) => { const im = new Image(); im.src = src; return [k, im]; }));
+const ICON_IMG = Object.fromEntries(Object.entries(FULL).map(([k, src]) => { const im = new Image(); im.src = src; return [k, im]; }));
 const loaded = (im) => (im.complete ? Promise.resolve() : new Promise((r) => { im.onload = r; im.onerror = r; }));
 const CLS = { open: 'ok', partial: 'mid', blocked: 'bad', ok: 'ok', missing: 'bad', na: 'na' };
 
@@ -664,7 +667,7 @@ function engineCard(e) {
   const unm = srcUnmeasured();
   const scStatus = unm ? 'na' : sc.points >= 5 ? 'ok' : sc.points > 0 ? 'partial' : 'missing';
   return `<article class="post" data-eng="${e.id}">
-    <div class="head"><img class="avatar" src="${ICON[e.id]}" alt="" width="44" height="44"><div><div class="who">${esc(e.vendor)}</div><div class="meta">下地の診断 · ${esc(date)}</div></div><div class="url">${esc(host(data.url))}</div></div>
+    <div class="head"><img class="avatar full" src="${FULL[e.id]}" alt="" width="44" height="64"><div><div class="who">${esc(e.vendor)}</div><div class="meta">下地の診断 · ${esc(date)}</div></div><div class="url">${esc(host(data.url))}</div></div>
     ${scoreRing(e.score, 'AI映え 下地 SCORE')}
     ${data.ai_bae.score_note ? `<div class="score-note">${esc(data.ai_bae.score_note)}</div>` : ''}
     <div class="tiles">
@@ -779,8 +782,17 @@ async function draw() {
   await Promise.all([LOGO, GROUP, ...Object.values(ICON_IMG)].map(loaded));
   const JP = "'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif", EN = "'Inter', 'Noto Sans JP', sans-serif";
   const fit = (t, max) => { let u = t; while (c.measureText(u).width > max && u.length > 4) u = u.slice(0, -1); return u === t ? t : u.slice(0, -1) + '…'; };
+  // 2 行まで折り返す（「　」の区切りで折る・2 行目も収まらない時だけ末尾を…）
+  const wrap2 = (t, max) => {
+    if (c.measureText(t).width <= max) return [t];
+    const parts = t.split('　'); let l1 = '', i = 0;
+    for (; i < parts.length; i++) { const next = l1 ? l1 + '　' + parts[i] : parts[i]; if (c.measureText(next).width > max) break; l1 = next; }
+    if (!l1) return [fit(t, max)];
+    return [l1, fit(parts.slice(i).join('　'), max)];
+  };
   const okImg = (im) => im.complete && im.naturalWidth > 0;
-  const circleImg = (im, cx, cy, r) => { if (!okImg(im)) return false; c.save(); c.beginPath(); c.arc(cx, cy, r, 0, Math.PI * 2); c.closePath(); c.clip(); c.drawImage(im, cx - r, cy - r, r * 2, r * 2); c.restore(); return true; };
+  // 全身の絵を枠（中心 cx・下端 bottom・高さ h・幅 w）の中に縦横比のまま収める
+  const bodyImg = (im, cx, bottom, w, h) => { if (!okImg(im)) return false; const s = Math.min(w / im.naturalWidth, h / im.naturalHeight), dw = im.naturalWidth * s, dh = im.naturalHeight * s; c.drawImage(im, cx - dw / 2, bottom - dh, dw, dh); return true; };
   c.fillStyle = '#ffffff'; c.fillRect(0, 0, W, H);
   const g = c.createLinearGradient(0, 0, W, 0); g.addColorStop(0, '#f58529'); g.addColorStop(.55, '#dd2a7b'); g.addColorStop(1, '#8134af');
   c.fillStyle = g; c.fillRect(0, 0, W, 18);
@@ -797,17 +809,19 @@ async function draw() {
   c.strokeStyle = col; c.beginPath(); c.arc(cx, cy, R, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * a.score / 100); c.stroke();
   c.fillStyle = col; c.font = `800 92px ${EN}`; c.textAlign = 'center'; c.fillText(String(a.score), cx, cy + 32);
   c.fillStyle = '#6b7280'; c.font = `500 23px ${JP}`; c.fillText(srcUnmeasured() ? `AI映え 下地 SCORE / 100　読める ${a.access_score}/30 · 材料 ${a.materials_score}/55（85 点を 100 点に換算）· 頼る先 未測定` : `AI映え 下地 SCORE / 100　読める ${a.access_score}/30 · 頼る先 ${a.sources_score}/15 · 材料 ${a.materials_score}/55`, cx, cy + R + 44); c.textAlign = 'left';
-  // engines: one row each（左にそのAIのキャラクターの顔）, with the 頼る先 line under it
-  let y = 584; c.font = `700 28px ${JP}`; c.fillStyle = '#111827'; c.fillText('AI ごとの判定と、その AI がよく頼る先', 72, y); y += 14;
+  // engines: one row each（左にそのAIのキャラクターの全身）, with the 頼る先 line under it
+  let y = 584; c.font = `700 28px ${JP}`; c.fillStyle = '#111827'; c.fillText('AI ごとの判定と、その AI がよく頼る先', 72, y);
   for (const e of a.engines) {
     y += 74; const ec = e.status === 'open' ? '#16a34a' : e.status === 'partial' ? '#d97706' : '#dc2626';
-    c.fillStyle = '#f6f6f7'; roundRect(c, 72, y - 40, W - 144, 70, 14); c.fill();
-    if (!circleImg(ICON_IMG[e.id], 112, y - 5, 23)) { c.fillStyle = ec; c.beginPath(); c.arc(112, y - 5, 10, 0, Math.PI * 2); c.fill(); }
+    const srcLine = e.sources.relied.map((r) => `${r.linked ? '◎' : '×'}${r.name.replace(/／.*$/, '').replace(/（.*$/, '')}`).join('　');
+    c.font = `500 19px ${JP}`; const srcRows = wrap2(srcUnmeasured() ? '頼る先: まだ測っていません（点に入れません）' : `頼る先: ${srcLine}${showEstimated(e.sources) ? '　※ほかの AI の平均で仮に出した点' : ''}`, W - 262), extra = (srcRows.length - 1) * 24;
+    c.fillStyle = '#f6f6f7'; roundRect(c, 72, y - 40, W - 144, 70 + extra, 14); c.fill();
+    if (!bodyImg(ICON_IMG[e.id], 112, y + 27, 48, 64)) { c.fillStyle = ec; c.beginPath(); c.arc(112, y - 5, 10, 0, Math.PI * 2); c.fill(); }
     c.fillStyle = ec; c.beginPath(); c.arc(156, y - 14, 8, 0, Math.PI * 2); c.fill();
     c.fillStyle = '#111827'; c.font = `700 27px ${JP}`; c.fillText(e.vendor, 174, y - 4);
     c.fillStyle = ec; c.textAlign = 'right'; c.fillText(`${e.status_label}　${e.score}`, W - 96, y - 4); c.textAlign = 'left';
-    const srcLine = e.sources.relied.map((r) => `${r.linked ? '◎' : '×'}${r.name.replace(/／.*$/, '').replace(/（.*$/, '')}`).join('　');
-    c.fillStyle = '#6b7280'; c.font = `500 19px ${JP}`; c.fillText(fit(srcUnmeasured() ? '頼る先: まだ測っていません（点に入れません）' : `頼る先: ${srcLine}${showEstimated(e.sources) ? '　※ほかの AI の平均で仮に出した点' : ''}`, W - 262), 174, y + 22);
+    c.fillStyle = '#6b7280'; c.font = `500 19px ${JP}`; srcRows.forEach((t, k) => c.fillText(t, 174, y + 22 + 24 * k));
+    y += extra;
   }
   // materials in 3 columns（下にキャラクターの絵を入れる余白を残す）
   y += 70; c.fillStyle = '#111827'; c.font = `700 28px ${JP}`; c.fillText(`正しく伝わる材料（4 社共通）　${a.materials_score} / 55`, 72, y);
@@ -820,15 +834,15 @@ async function draw() {
     c.fillStyle = '#374151'; c.font = `500 20px ${JP}`; c.fillText(fit(shortLabel(m), colW - 86), x0 + 28, yy);
   });
   const matsEnd = y + 38 * rows + 10;
-  // footer band（文字が重ならない並び）
-  const FOOT = 88;
+  // footer band（1 行目はリンクだけ・そのほかは下の行へ。どの行も幅に収める）
+  const FOOT = 128;
   c.fillStyle = g; c.fillRect(0, H - FOOT, W, FOOT);
-  c.fillStyle = '#fff'; c.font = `700 26px ${EN}`; c.fillText('synapsearrows.com/ai-bae-shindan/', 72, H - 50);
-  c.font = `500 17px ${JP}`; c.fillText('頼る先＝サイトからそこへ辿れるかだけ。載っているか・正しいかは見ていません', 72, H - 20);
-  c.font = `500 20px ${JP}`; c.textAlign = 'right'; c.fillText('無料の AI 映え診断 · Synapse Arrows', W - 72, H - 50); c.textAlign = 'left';
+  c.fillStyle = '#fff'; c.font = `700 26px ${EN}`; c.fillText(fit('synapsearrows.com/ai-bae-shindan/', W - 144), 72, H - 84);
+  c.font = `500 20px ${JP}`; c.fillText(fit('無料の AI 映え診断 · Synapse Arrows', W - 144), 72, H - 50);
+  c.font = `500 17px ${JP}`; c.fillText(fit('頼る先＝サイトからそこへ辿れるかだけ。載っているか・正しいかは見ていません', W - 144), 72, H - 20);
   // the four characters, in the space that is left above the band (skipped when there is not enough room)
   const avail = (H - FOOT - 14) - (matsEnd + 10);
-  if (okImg(GROUP) && avail >= 90) { const gh = Math.min(avail, 190), gw = gh * GROUP.naturalWidth / GROUP.naturalHeight; c.drawImage(GROUP, (W - gw) / 2, H - FOOT - 14 - gh, gw, gh); }
+  if (okImg(GROUP) && avail >= 70) { const gh = Math.min(avail, 190), gw = gh * GROUP.naturalWidth / GROUP.naturalHeight; c.drawImage(GROUP, (W - gw) / 2, H - FOOT - 14 - gh, gw, gh); }
   return cv;
 }
 function shortLabel(m) {
