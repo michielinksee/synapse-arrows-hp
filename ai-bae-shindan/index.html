@@ -134,6 +134,8 @@
     .post .avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--grad); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 18px; flex-shrink: 0; }
     .post .avatar.sum { font-family: 'Inter', sans-serif; font-size: 13px; letter-spacing: .02em; }
     .post img.avatar { object-fit: cover; background: #fff; border: 1px solid var(--line); }
+    /* AI ごとのカードは全身の絵（丸で顔を切らない） */
+    .post img.avatar.full { width: 44px; height: 64px; border-radius: 0; border: 0; background: none; object-fit: contain; object-position: center bottom; }
     .post .who { font-weight: 700; font-size: 16px; line-height: 1.3; }
     .post .meta { color: var(--sub); font-size: 12px; letter-spacing: .04em; margin-top: 2px; }
     .post .url { color: var(--sub); font-size: 12px; margin-left: auto; max-width: 42%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -264,6 +266,7 @@
     .state { font-size: 16px; }
     .post .head { padding: 16px 20px; gap: 14px; }
     .post .avatar { width: 52px; height: 52px; }
+    .post img.avatar.full { width: 50px; height: 76px; }
     .post .avatar.sum { font-size: 15px; }
     .post .who { font-size: 19px; }
     .post .meta, .post .url { font-size: 14px; }
@@ -438,6 +441,7 @@ const ORIGIN = (() => {
 // 業種: 固定のページ（飲食の Light 版など）は FIXED_INDUSTRY。共通の入口は選んでもらう（全業種を混ぜた結果は出さない）。
 const FIXED_INDUSTRY = null;
 const INDUSTRIES = [{"id":"restaurant","label":"飲食"},{"id":"beauty","label":"美容院"},{"id":"real_estate","label":"不動産"},{"id":"lodging","label":"旅行／宿"},{"id":"saas_web","label":"IT／Web"},{"id":"consulting","label":"コンサル"},{"id":"accounting","label":"税理士／会計士"},{"id":"medical","label":"医療（医科・歯科）"},{"id":"care","label":"介護／整体"},{"id":"aesthetic","label":"美容外科／エステ"},{"id":"retail","label":"小売"},{"id":"school","label":"教室・スクール"},{"id":"professional","label":"士業（弁護士・司法書士など）"},{"id":"manufacturing_btob","label":"製造・メーカー（BtoB）"},{"id":"other","label":"その他"}];
+const FULL = { chatgpt: '/assets/ai-icons/chatgpt-full.webp', claude: '/assets/ai-icons/claude-full.webp', gemini: '/assets/ai-icons/gemini-full.webp', perplexity: '/assets/ai-icons/perplexity-full.webp' };
 const ICON = { chatgpt: '/assets/ai-icons/chatgpt.webp', claude: '/assets/ai-icons/claude.webp', gemini: '/assets/ai-icons/gemini.webp', perplexity: '/assets/ai-icons/perplexity.webp' };
 const LOGO = new Image(); LOGO.src = '/ai-bae-shindan/img/logo-text.webp';
 const GROUP = new Image(); GROUP.src = '/assets/ai-icons/group.webp';
@@ -663,7 +667,7 @@ function engineCard(e) {
   const unm = srcUnmeasured();
   const scStatus = unm ? 'na' : sc.points >= 5 ? 'ok' : sc.points > 0 ? 'partial' : 'missing';
   return `<article class="post" data-eng="${e.id}">
-    <div class="head"><img class="avatar" src="${ICON[e.id]}" alt="" width="44" height="44"><div><div class="who">${esc(e.vendor)}</div><div class="meta">下地の診断 · ${esc(date)}</div></div><div class="url">${esc(host(data.url))}</div></div>
+    <div class="head"><img class="avatar full" src="${FULL[e.id]}" alt="" width="44" height="64"><div><div class="who">${esc(e.vendor)}</div><div class="meta">下地の診断 · ${esc(date)}</div></div><div class="url">${esc(host(data.url))}</div></div>
     ${scoreRing(e.score, 'AI映え 下地 SCORE')}
     ${data.ai_bae.score_note ? `<div class="score-note">${esc(data.ai_bae.score_note)}</div>` : ''}
     <div class="tiles">
@@ -818,12 +822,12 @@ async function draw() {
     c.fillStyle = '#374151'; c.font = `500 20px ${JP}`; c.fillText(fit(shortLabel(m), colW - 86), x0 + 28, yy);
   });
   const matsEnd = y + 38 * rows + 10;
-  // footer band（文字が重ならない並び）
-  const FOOT = 88;
+  // footer band（1 行目はリンクだけ・そのほかは下の行へ。どの行も幅に収める）
+  const FOOT = 128;
   c.fillStyle = g; c.fillRect(0, H - FOOT, W, FOOT);
-  c.fillStyle = '#fff'; c.font = `700 26px ${EN}`; c.fillText('synapsearrows.com/ai-bae-shindan/', 72, H - 50);
-  c.font = `500 17px ${JP}`; c.fillText('頼る先＝サイトからそこへ辿れるかだけ。載っているか・正しいかは見ていません', 72, H - 20);
-  c.font = `500 20px ${JP}`; c.textAlign = 'right'; c.fillText('無料の AI 映え診断 · Synapse Arrows', W - 72, H - 50); c.textAlign = 'left';
+  c.fillStyle = '#fff'; c.font = `700 26px ${EN}`; c.fillText(fit('synapsearrows.com/ai-bae-shindan/', W - 144), 72, H - 84);
+  c.font = `500 20px ${JP}`; c.fillText(fit('無料の AI 映え診断 · Synapse Arrows', W - 144), 72, H - 50);
+  c.font = `500 17px ${JP}`; c.fillText(fit('頼る先＝サイトからそこへ辿れるかだけ。載っているか・正しいかは見ていません', W - 144), 72, H - 20);
   // the four characters, in the space that is left above the band (skipped when there is not enough room)
   const avail = (H - FOOT - 14) - (matsEnd + 10);
   if (okImg(GROUP) && avail >= 90) { const gh = Math.min(avail, 190), gw = gh * GROUP.naturalWidth / GROUP.naturalHeight; c.drawImage(GROUP, (W - gw) / 2, H - FOOT - 14 - gh, gw, gh); }
