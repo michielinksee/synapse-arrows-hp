@@ -782,6 +782,15 @@ def build_en_article():
     head_in = head_in.replace(css, css + '  <link rel="stylesheet" href="/site-chrome.css" data-frame>\n  <style data-frame>.site-header,.footer{line-height:1.5}.footer{margin-top:0}.footer nav a{color:#e0e8f5}</style>\n', 1) + '    <script defer src="/site.js" data-frame></script>\n'
     html = pre + "<head>\n" + head_in + "</head>\n<body>\n" + header("insights", EN_ARTICLE, "en") + f'<div id="main">\n<!--body-->\n{kept_body(f)}<!--/body-->\n</div>\n' + footer(EN_ARTICLE, "en")
     wr(f, html)
+def build_ja_legal():
+    """プライバシーポリシー・利用規約。本文（<!--body--> の間）は一字も変えず、ヘッダー・フッターを他のページと同じにする。"""
+    for path, label, title, desc in (("/policy/", "プライバシーポリシー", "Privacy Policy", "Synapse Arrows Pte. Ltd. のプライバシーポリシー。KanseiLINK、ScaNavi、Linksee Memory、Bantou、CardWize等の全プロダクトに適用されます。"),
+                                     ("/terms/", "利用規約", "Terms of Service", "Synapse Arrows Pte. Ltd. の利用規約。KanseiLINK、ScaNavi、Linksee Memory、Bantou、CardWize等の全プロダクトに適用されます。")):
+        f = path.lstrip("/") + "index.html"
+        title = f"{title} | Synapse Arrows Pte. Ltd."
+        ld = [webpage_ld(path, title, desc), breadcrumb_ld(("ホーム", "/"), (label, path))]
+        html = head(title, desc, path, ld) + header("", path) + f'<main id="main" class="inner-page">{crumb(label)}<div class="container legal-body">\n<!--body-->\n{kept_body(f)}<!--/body-->\n</div></main>\n' + footer(path)
+        wr(f, html)
 def build_en():
     build_en_top(); build_en_services(); build_en_aiaeo(); build_en_products(); build_en_about(); build_en_contact(); build_en_insights(); build_en_policy(); build_en_article()
 
@@ -860,7 +869,7 @@ def check():
     print(f"ok: {len(OUT)} files match scripts/build-site.py")
 
 if __name__ == "__main__":
-    build_top(); build_services(); build_products(); build_tools(); build_about(); build_contact(); build_pricing(); build_flow(); build_insights()
+    build_top(); build_services(); build_products(); build_tools(); build_about(); build_contact(); build_pricing(); build_flow(); build_insights(); build_ja_legal()
     build_en()
     wr("site.js", SITE_JS)
     build_chrome_css()
