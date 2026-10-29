@@ -194,6 +194,7 @@
     .todo li .now { display: block; color: var(--sub); font-size: 12.5px; }
     .todo .copy { margin-left: auto; background: #111827; color: #fff; border: 0; border-radius: 999px; padding: 6px 14px; font-weight: 700; font-size: 12.5px; cursor: pointer; }
     .todo .done { color: var(--ok); font-size: 12.5px; font-weight: 400; }
+    .todo .note { margin: 0 0 6px; font-size: 12.5px; color: var(--sub); }
     .todo .help { margin-top: 12px; font-size: 12.5px; color: var(--sub); }
     .todo .help a { color: inherit; }
     .howto { margin: 0 16px 16px; font-size: 12.5px; color: var(--sub); line-height: 1.6; }
@@ -717,7 +718,7 @@ function materialsCard() {
   </article>`;
 }
 
-// 直すこと（サーバーの todo）: ① 自分でできること ② HP の担当者・技術の方へ。両方ある項目は ① だけ（サーバーで振り分け済み）。
+// 直すこと（サーバーの todo）: ① 自分でできること ② HP の担当者・技術の方へ。② は HP を変える項目すべて（① にある項目も、担当者向けの言葉で。2026-10-29）。
 // ② のコピーは対象の URL と日付＋② の箇条書き（サーバーの vendor_request）。古いサーバーは todo を返さない＝出さない
 async function copyVendorRequest() {
   const t = data && data.ai_bae && data.ai_bae.vendor_request; if (!t) return;
@@ -736,8 +737,9 @@ function todoCard() {
   return `<article class="post" data-card="todo">
     <div class="head"><div class="avatar sum">直す</div><div><div class="who">直すこと</div><div class="meta">自分でできること・HP の担当者に頼むこと</div></div></div>
     <div class="todo">
-      ${self.length ? `<h3>自分でできること</h3><ul>${self.map((x) => `<li>${esc(x.text)}</li>`).join('')}</ul>` : ''}
+      ${self.length ? `<h3>自分でできること</h3><p class="note">HP をご自分で直せる方はこちらだけで足ります</p><ul>${self.map((x) => `<li>${esc(x.text)}</li>`).join('')}</ul>` : ''}
       ${vendor.length ? `<h3>HP の担当者・技術の方へ${canCopy ? '<button type="button" class="copy" data-act="copy-vreq">一覧をコピー</button><span class="done" id="vreq-done" hidden>コピーしました</span>' : ''}</h3>
+        <p class="note">HP を外の会社に頼んでいる方は、この一覧をそのまま渡してください</p>
         <ul>${vendor.map((x) => `<li>${esc(x.label)}: ${esc(x.text)}<span class="now">今: ${esc(x.now)}</span></li>`).join('')}</ul>` : ''}
       <div class="help">頼める先が無い時は、<a href="/contact/">ご相談ください</a>。</div>
     </div>
