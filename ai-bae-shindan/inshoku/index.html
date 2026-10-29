@@ -442,10 +442,9 @@ const ORIGIN = (() => {
 const FIXED_INDUSTRY = "restaurant";
 const INDUSTRIES = [{"id":"restaurant","label":"飲食"},{"id":"beauty","label":"美容院"},{"id":"real_estate","label":"不動産"},{"id":"lodging","label":"旅行／宿"},{"id":"saas_web","label":"IT／Web"},{"id":"consulting","label":"コンサル"},{"id":"accounting","label":"税理士／会計士"},{"id":"medical","label":"医療（医科・歯科）"},{"id":"care","label":"介護／整体"},{"id":"aesthetic","label":"美容外科／エステ"},{"id":"retail","label":"小売"},{"id":"school","label":"教室・スクール"},{"id":"professional","label":"士業（弁護士・司法書士など）"},{"id":"manufacturing_btob","label":"製造・メーカー（BtoB）"},{"id":"other","label":"その他"}];
 const FULL = { chatgpt: '/assets/ai-icons/chatgpt-full.webp', claude: '/assets/ai-icons/claude-full.webp', gemini: '/assets/ai-icons/gemini-full.webp', perplexity: '/assets/ai-icons/perplexity-full.webp' };
-const ICON = { chatgpt: '/assets/ai-icons/chatgpt.webp', claude: '/assets/ai-icons/claude.webp', gemini: '/assets/ai-icons/gemini.webp', perplexity: '/assets/ai-icons/perplexity.webp' };
 const LOGO = new Image(); LOGO.src = '/ai-bae-shindan/img/logo-text.webp';
 const GROUP = new Image(); GROUP.src = '/assets/ai-icons/group.webp';
-const ICON_IMG = Object.fromEntries(Object.entries(ICON).map(([k, src]) => { const im = new Image(); im.src = src; return [k, im]; }));
+const ICON_IMG = Object.fromEntries(Object.entries(FULL).map(([k, src]) => { const im = new Image(); im.src = src; return [k, im]; }));
 const loaded = (im) => (im.complete ? Promise.resolve() : new Promise((r) => { im.onload = r; im.onerror = r; }));
 const CLS = { open: 'ok', partial: 'mid', blocked: 'bad', ok: 'ok', missing: 'bad', na: 'na' };
 
@@ -782,7 +781,8 @@ async function draw() {
   const JP = "'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif", EN = "'Inter', 'Noto Sans JP', sans-serif";
   const fit = (t, max) => { let u = t; while (c.measureText(u).width > max && u.length > 4) u = u.slice(0, -1); return u === t ? t : u.slice(0, -1) + '…'; };
   const okImg = (im) => im.complete && im.naturalWidth > 0;
-  const circleImg = (im, cx, cy, r) => { if (!okImg(im)) return false; c.save(); c.beginPath(); c.arc(cx, cy, r, 0, Math.PI * 2); c.closePath(); c.clip(); c.drawImage(im, cx - r, cy - r, r * 2, r * 2); c.restore(); return true; };
+  // 全身の絵を枠（中心 cx・下端 bottom・高さ h・幅 w）の中に縦横比のまま収める
+  const bodyImg = (im, cx, bottom, w, h) => { if (!okImg(im)) return false; const s = Math.min(w / im.naturalWidth, h / im.naturalHeight), dw = im.naturalWidth * s, dh = im.naturalHeight * s; c.drawImage(im, cx - dw / 2, bottom - dh, dw, dh); return true; };
   c.fillStyle = '#ffffff'; c.fillRect(0, 0, W, H);
   const g = c.createLinearGradient(0, 0, W, 0); g.addColorStop(0, '#f58529'); g.addColorStop(.55, '#dd2a7b'); g.addColorStop(1, '#8134af');
   c.fillStyle = g; c.fillRect(0, 0, W, 18);
@@ -799,12 +799,12 @@ async function draw() {
   c.strokeStyle = col; c.beginPath(); c.arc(cx, cy, R, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * a.score / 100); c.stroke();
   c.fillStyle = col; c.font = `800 92px ${EN}`; c.textAlign = 'center'; c.fillText(String(a.score), cx, cy + 32);
   c.fillStyle = '#6b7280'; c.font = `500 23px ${JP}`; c.fillText(srcUnmeasured() ? `AI映え 下地 SCORE / 100　読める ${a.access_score}/30 · 材料 ${a.materials_score}/55（85 点を 100 点に換算）· 頼る先 未測定` : `AI映え 下地 SCORE / 100　読める ${a.access_score}/30 · 頼る先 ${a.sources_score}/15 · 材料 ${a.materials_score}/55`, cx, cy + R + 44); c.textAlign = 'left';
-  // engines: one row each（左にそのAIのキャラクターの顔）, with the 頼る先 line under it
+  // engines: one row each（左にそのAIのキャラクターの全身）, with the 頼る先 line under it
   let y = 584; c.font = `700 28px ${JP}`; c.fillStyle = '#111827'; c.fillText('AI ごとの判定と、その AI がよく頼る先', 72, y); y += 14;
   for (const e of a.engines) {
     y += 74; const ec = e.status === 'open' ? '#16a34a' : e.status === 'partial' ? '#d97706' : '#dc2626';
     c.fillStyle = '#f6f6f7'; roundRect(c, 72, y - 40, W - 144, 70, 14); c.fill();
-    if (!circleImg(ICON_IMG[e.id], 112, y - 5, 23)) { c.fillStyle = ec; c.beginPath(); c.arc(112, y - 5, 10, 0, Math.PI * 2); c.fill(); }
+    if (!bodyImg(ICON_IMG[e.id], 112, y + 27, 48, 64)) { c.fillStyle = ec; c.beginPath(); c.arc(112, y - 5, 10, 0, Math.PI * 2); c.fill(); }
     c.fillStyle = ec; c.beginPath(); c.arc(156, y - 14, 8, 0, Math.PI * 2); c.fill();
     c.fillStyle = '#111827'; c.font = `700 27px ${JP}`; c.fillText(e.vendor, 174, y - 4);
     c.fillStyle = ec; c.textAlign = 'right'; c.fillText(`${e.status_label}　${e.score}`, W - 96, y - 4); c.textAlign = 'left';
