@@ -777,22 +777,46 @@ $('cards').addEventListener('click', (e) => {
 
 // ─── 診断書の画像（Canvas・外部ライブラリなし） ──────────────────
 async function draw() {
-  const cv = $('cv'), c = cv.getContext('2d'), W = cv.width, H = cv.height, a = data.ai_bae;
+  const cv = $('cv'), a = data.ai_bae; cv.width = 1080; cv.height = 1350;
+  let c = cv.getContext('2d'); const W = cv.width;
   try { await document.fonts.ready; } catch {}
   await Promise.all([LOGO, GROUP, ...Object.values(ICON_IMG)].map(loaded));
   const JP = "'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif", EN = "'Inter', 'Noto Sans JP', sans-serif";
   const fit = (t, max) => { let u = t; while (c.measureText(u).width > max && u.length > 4) u = u.slice(0, -1); return u === t ? t : u.slice(0, -1) + '…'; };
-  // 2 行まで折り返す（「　」の区切りで折る・2 行目も収まらない時だけ末尾を…）
-  const wrap2 = (t, max) => {
+  // 「　」の区切りで折り返す（業種によらず最大 maxLines 行・2026-11-02 に 2→4 行）。
+  // それでも入らない時だけ、最後の行の末尾を「…ほか N 件」にする（頼る先を黙って落とさない）。
+  const wrapN = (t, max, maxLines = 4) => {
     if (c.measureText(t).width <= max) return [t];
-    const parts = t.split('　'); let l1 = '', i = 0;
-    for (; i < parts.length; i++) { const next = l1 ? l1 + '　' + parts[i] : parts[i]; if (c.measureText(next).width > max) break; l1 = next; }
-    if (!l1) return [fit(t, max)];
-    return [l1, fit(parts.slice(i).join('　'), max)];
+    const parts = t.split('　'), lines = []; let cur = '';
+    for (const p of parts) {
+      const next = cur ? cur + '　' + p : p;
+      if (c.measureText(next).width <= max || !cur) { cur = next; continue; }
+      lines.push(cur); cur = p;
+    }
+    if (cur) lines.push(cur);
+    const out = lines.map((l) => (c.measureText(l).width > max ? fit(l, max) : l));
+    if (out.length <= maxLines) return out;
+    const kept = out.slice(0, maxLines);
+    const shownParts = kept.join('　').split('　').length, rest = parts.length - shownParts;
+    let last = kept[maxLines - 1]; const tail = `　…ほか ${rest} 件`;
+    while (c.measureText(last + tail).width > max && last.includes('　')) last = last.slice(0, last.lastIndexOf('　'));
+    const dropped = kept[maxLines - 1].split('　').length - last.split('　').length;
+    kept[maxLines - 1] = last + `　…ほか ${rest + dropped} 件`;
+    return kept;
   };
   const okImg = (im) => im.complete && im.naturalWidth > 0;
   // 全身の絵を枠（中心 cx・下端 bottom・高さ h・幅 w）の中に縦横比のまま収める
   const bodyImg = (im, cx, bottom, w, h) => { if (!okImg(im)) return false; const s = Math.min(w / im.naturalWidth, h / im.naturalHeight), dw = im.naturalWidth * s, dh = im.naturalHeight * s; c.drawImage(im, cx - dw / 2, bottom - dh, dw, dh); return true; };
+  // 先に各 AI の頼る先の行数を決め、帯や材料にぶつかるなら画像の縦を伸ばす（横 1080 はそのまま）
+  const srcText = (e) => srcUnmeasured() ? '頼る先: まだ測っていません（点に入れません）' : `頼る先: ${e.sources.relied.map((r) => `${r.linked ? '◎' : '×'}${r.name.replace(/／.*$/, '').replace(/（.*$/, '')}`).join('　')}${showEstimated(e.sources) ? '　※ほかの AI の平均で仮に出した点' : ''}`;
+  c.font = `500 19px ${JP}`;
+  const SRC_ROWS = a.engines.map((e) => wrapN(srcText(e), W - 262));
+  const FOOT = 128, matRows = Math.ceil(a.materials.length / 3);
+  const extraAll = SRC_ROWS.reduce((s2, r) => s2 + (r.length - 1) * 24, 0);
+  const needH = 584 + 74 * a.engines.length + extraAll + 70 + 38 * matRows + 10 + 10 + 14 + FOOT;
+  // 伸ばす時は下の 4 体の絵（110px）が入る分も足す
+  if (needH > cv.height) { cv.height = Math.ceil(needH + 110); c = cv.getContext('2d'); }
+  const H = cv.height;
   c.fillStyle = '#ffffff'; c.fillRect(0, 0, W, H);
   const g = c.createLinearGradient(0, 0, W, 0); g.addColorStop(0, '#f58529'); g.addColorStop(.55, '#dd2a7b'); g.addColorStop(1, '#8134af');
   c.fillStyle = g; c.fillRect(0, 0, W, 18);
@@ -811,10 +835,9 @@ async function draw() {
   c.fillStyle = '#6b7280'; c.font = `500 23px ${JP}`; c.fillText(srcUnmeasured() ? `AI映え 下地 SCORE / 100　読める ${a.access_score}/30 · 材料 ${a.materials_score}/55（85 点を 100 点に換算）· 頼る先 未測定` : `AI映え 下地 SCORE / 100　読める ${a.access_score}/30 · 頼る先 ${a.sources_score}/15 · 材料 ${a.materials_score}/55`, cx, cy + R + 44); c.textAlign = 'left';
   // engines: one row each（左にそのAIのキャラクターの全身）, with the 頼る先 line under it
   let y = 584; c.font = `700 28px ${JP}`; c.fillStyle = '#111827'; c.fillText('AI ごとの判定と、その AI がよく頼る先', 72, y);
-  for (const e of a.engines) {
+  a.engines.forEach((e, ei) => {
     y += 74; const ec = e.status === 'open' ? '#16a34a' : e.status === 'partial' ? '#d97706' : '#dc2626';
-    const srcLine = e.sources.relied.map((r) => `${r.linked ? '◎' : '×'}${r.name.replace(/／.*$/, '').replace(/（.*$/, '')}`).join('　');
-    c.font = `500 19px ${JP}`; const srcRows = wrap2(srcUnmeasured() ? '頼る先: まだ測っていません（点に入れません）' : `頼る先: ${srcLine}${showEstimated(e.sources) ? '　※ほかの AI の平均で仮に出した点' : ''}`, W - 262), extra = (srcRows.length - 1) * 24;
+    const srcRows = SRC_ROWS[ei], extra = (srcRows.length - 1) * 24;
     c.fillStyle = '#f6f6f7'; roundRect(c, 72, y - 40, W - 144, 70 + extra, 14); c.fill();
     if (!bodyImg(ICON_IMG[e.id], 112, y + 27, 48, 64)) { c.fillStyle = ec; c.beginPath(); c.arc(112, y - 5, 10, 0, Math.PI * 2); c.fill(); }
     c.fillStyle = ec; c.beginPath(); c.arc(156, y - 14, 8, 0, Math.PI * 2); c.fill();
@@ -822,7 +845,7 @@ async function draw() {
     c.fillStyle = ec; c.textAlign = 'right'; c.fillText(`${e.status_label}　${e.score}`, W - 96, y - 4); c.textAlign = 'left';
     c.fillStyle = '#6b7280'; c.font = `500 19px ${JP}`; srcRows.forEach((t, k) => c.fillText(t, 174, y + 22 + 24 * k));
     y += extra;
-  }
+  });
   // materials in 3 columns（下にキャラクターの絵を入れる余白を残す）
   y += 70; c.fillStyle = '#111827'; c.font = `700 28px ${JP}`; c.fillText(`正しく伝わる材料（4 社共通）　${a.materials_score} / 55`, 72, y);
   const n = a.materials.length, rows = Math.ceil(n / 3), colW = (W - 144) / 3;
@@ -835,7 +858,6 @@ async function draw() {
   });
   const matsEnd = y + 38 * rows + 10;
   // footer band（1 行目はリンクだけ・そのほかは下の行へ。どの行も幅に収める）
-  const FOOT = 128;
   c.fillStyle = g; c.fillRect(0, H - FOOT, W, FOOT);
   c.fillStyle = '#fff'; c.font = `700 26px ${EN}`; c.fillText(fit('synapsearrows.com/ai-bae-shindan/', W - 144), 72, H - 84);
   c.font = `500 20px ${JP}`; c.fillText(fit('無料の AI 映え診断 · Synapse Arrows', W - 144), 72, H - 50);
