@@ -132,6 +132,8 @@ def page(a):
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="icon" href="/favicon.png" type="image/png">
   <link rel="stylesheet" href="/styles.css">
+  <script>window.va=window.va||function(){{(window.vaq=window.vaq||[]).push(arguments)}};</script>
+  <script defer src="/_vercel/insights/script.js"></script>
   {ldjson(ld)}
 {STYLE}
 </head>
