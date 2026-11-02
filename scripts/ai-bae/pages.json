@@ -46,6 +46,30 @@
       "ld_name": "AI映え診断 Light｜飲食店",
       "ld_description": "飲食店のホームページの URL を入れるだけで、ChatGPT・Claude・Gemini・Perplexity がサイトを読める設定か、食べログ・Retty・一休.com レストラン・ホットペッパーグルメ・ヒトサラなど AI が頼る先へつながっているか、メニューと値段・営業時間・予約の方法が文字で伝わるかを無料で診断する。AI の回答そのものは測らない下地の診断。",
       "nav_label": "飲食店向け"
+    },
+    {
+      "out": "ai-bae-shindan/zeirishi/index.html",
+      "url": "https://synapsearrows.com/ai-bae-shindan/zeirishi/",
+      "industry": "accounting",
+      "title": "AI映え診断 Light｜税理士・会計事務所 — ChatGPT・Claude・Gemini・Perplexity に選ばれる下地を無料で診断 | Synapse Arrows",
+      "description": "税理士・会計事務所向けの無料診断。事務所のホームページの URL を入れるだけで、AI がサイトを読めるか、税理士ドットコム・freee 税理士検索・ミツモア・税理士紹介センタービスカス・税理士紹介ナビ by 弥生・比較ビズ・PRONIアイミツなど AI が頼る先へつながっているか、料金・サービス・事例・よくある質問・問い合わせ先が文字で伝わるかを調べます。",
+      "og_title": "AI映え診断 Light｜税理士・会計事務所 | Synapse Arrows",
+      "og_description": "あなたの事務所、AI映えしてますか？税理士・会計事務所向け。URL を入れるだけで、AI が頼る先と事務所の情報の下地を無料で診断します。",
+      "og_image": "/ai-bae-shindan/img/og-ai-bae.png",
+      "hero_h1": {
+        "lead": "AIは、あなたの事務所を",
+        "accent": [
+          "どう説明して",
+          "いますか？"
+        ]
+      },
+      "tagline": "あなたの事務所、AI映えしてますか？",
+      "badge": "Light｜税理士・会計事務所",
+      "ask_h2": "事務所のホームページの URL を入力",
+      "fixed_note": "このページは<b>税理士・会計事務所</b>向けです。AI が頼る先（税理士ドットコム・freee 税理士検索・ミツモア・税理士紹介センタービスカス・税理士紹介ナビ by 弥生・比較ビズ・PRONIアイミツなど。2026-10-02 に札幌で 4 つの AI に各 90 回聞いた実測で印を付けた物）と、料金・サービス・事例・よくある質問・問い合わせ先が文字で伝わるかを見ます。例: 「税理士ドットコムの事務所のページへのリンクをサイトに置く」。ほかの業種は <a href=\"/ai-bae-shindan/\">共通の入口</a> から。",
+      "ld_name": "AI映え診断 Light｜税理士・会計事務所",
+      "ld_description": "税理士・会計事務所のホームページの URL を入れるだけで、ChatGPT・Claude・Gemini・Perplexity がサイトを読める設定か、税理士ドットコム・freee 税理士検索・ミツモア・税理士紹介センタービスカス・税理士紹介ナビ by 弥生・比較ビズ・PRONIアイミツなど AI が頼る先へつながっているか、料金・サービス・事例・よくある質問・問い合わせ先が文字で伝わるかを無料で診断する。AI の回答そのものは測らない下地の診断。",
+      "nav_label": "税理士・会計事務所向け"
     }
   ]
 }
