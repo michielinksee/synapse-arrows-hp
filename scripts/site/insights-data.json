@@ -1,5 +1,75 @@
 [
   {
+    "id": "ind-ai-sources-by-industry-2026-10",
+    "title": "AI は業種ごとに「読む場所」が違う｜飲食・税理士・宿・美容室・不動産・IT の 6 業種で、4 つの AI が頼る先を実測【2026年10月】",
+    "summary": "札幌・福岡で、6 業種 × 4 つの AI（ChatGPT・Gemini・Claude・Perplexity）に計 1,500 回答以上を集め、AI が答えの根拠にしたページを数えました。飲食は食べログ、美容室はホットペッパービューティー、税理士は事務所自身のページ、不動産と IT は「おすすめ N 選」の記事。業種ごとに AI の入口が違います。",
+    "url": "https://synapsearrows.com/insights/ai-sources-by-industry-2026-10/",
+    "source": "Synapse Arrows",
+    "topic": "aeo",
+    "format": "記事",
+    "date": "2026-11-02"
+  },
+  {
+    "id": "ind-ai-sources-restaurant-sapporo-2026-10",
+    "title": "あなたのお店、ChatGPT にどう紹介されていますか？｜札幌の飲食店 20 店のうち 12 店で AI の説明が公式と食い違い【2026年10月】",
+    "summary": "札幌の食事について 4 つの AI に 331 回質問。7 場面中 5 場面で AI の上位 10 店と Google の上位 10 店は 1 軒も重ならず、AI がよく挙げた 20 店のうち 12 店で存在しない支店・違う場所・違う値段など公式と違う説明がありました。札幌・福岡で AI が頼った先は食べログが最多。",
+    "url": "https://synapsearrows.com/insights/ai-sources-restaurant-sapporo-2026-10/",
+    "source": "Synapse Arrows",
+    "topic": "aeo",
+    "format": "記事",
+    "date": "2026-11-02"
+  },
+  {
+    "id": "ind-ai-sources-tax-accountant-sapporo-2026-10",
+    "title": "あなたの事務所、ChatGPT にどう紹介されていますか？｜札幌で税理士を探す 359 回答、AI の根拠の 55% は事務所自身のページ【2026年10月】",
+    "summary": "札幌で税理士を探す 30 問を 4 つの AI に 3 回ずつ（359 回答）。AI が根拠にしたページ 3,517 件の 54.5% は事務所自身のサイト、28.1% が比較・紹介サイト、10.6% が会計ソフト公式の税理士検索。「相続」「開業」など具体的な相談ほど事務所のページが読まれ、同じ質問を 3 回したときの一致は ChatGPT で 17%。",
+    "url": "https://synapsearrows.com/insights/ai-sources-tax-accountant-sapporo-2026-10/",
+    "source": "Synapse Arrows",
+    "topic": "aeo",
+    "format": "記事",
+    "date": "2026-11-02"
+  },
+  {
+    "id": "ind-ai-sources-hotel-sapporo-fukuoka-2026-10",
+    "title": "あなたの宿、英語の ChatGPT にも出てきますか？｜日本語と英語で AI が読む予約サイトが入れ替わる。札幌・福岡のホテル選び 134 回答の実測【2026年10月】",
+    "summary": "札幌・福岡のホテル選び 3 場面を日本語と英語で 4 つの AI に質問（134 回答）。日英で挙がるホテルの重なりは札幌 47%・福岡 51%。日本語の AI は一休.com・JTB・Yahoo!トラベルを、英語の AI は Trip.com・Expedia・TripAdvisor・Booking.com を読んでいました。札幌で宿を探す 25 問（100 回答）の頼る先も。",
+    "url": "https://synapsearrows.com/insights/ai-sources-hotel-sapporo-fukuoka-2026-10/",
+    "source": "Synapse Arrows",
+    "topic": "aeo",
+    "format": "記事",
+    "date": "2026-11-02"
+  },
+  {
+    "id": "ind-ai-sources-beauty-salon-sapporo-2026-10",
+    "title": "あなたの美容室、AI に聞くと出てきますか？｜札幌の美容院 100 回答のうち 91 回答がホットペッパービューティーを根拠に【2026年10月】",
+    "summary": "札幌で美容院を探す 25 問を 4 つの AI に質問（100 回答）。91 回答がホットペッパービューティー、79 回答が楽天ビューティを根拠にし、23 回答は予約サイトのお店ごとのページを直接読んでいました。Google マップは 0、Instagram は 1。美容室の AI 対策は、予約サイトのお店のページから。",
+    "url": "https://synapsearrows.com/insights/ai-sources-beauty-salon-sapporo-2026-10/",
+    "source": "Synapse Arrows",
+    "topic": "aeo",
+    "format": "記事",
+    "date": "2026-11-02"
+  },
+  {
+    "id": "ind-ai-sources-real-estate-sapporo-2026-10",
+    "title": "AI は何を読んで不動産会社を薦めるのか｜札幌の 100 回答のうち 66 回答が「おすすめ N 選」の記事を根拠に【2026年10月】",
+    "summary": "札幌で不動産会社を探す 25 問を 4 つの AI に質問（100 回答）。66 回答が「ランキング」「おすすめ N 選」の紹介記事を根拠にし、AI が読んだページ 748 件の 51% がこうした記事でした。LIFULL HOME'S は 42 回答、SUUMO は 39 回答。札幌市のサイトや商工会議所の登録一覧も読まれていました。",
+    "url": "https://synapsearrows.com/insights/ai-sources-real-estate-sapporo-2026-10/",
+    "source": "Synapse Arrows",
+    "topic": "aeo",
+    "format": "記事",
+    "date": "2026-11-02"
+  },
+  {
+    "id": "ind-ai-sources-it-web-2026-10",
+    "title": "AI は何を読んで制作会社を薦めるのか｜100 回答のうち 69 回答が「おすすめ ◯選」の記事を根拠に。LinkedIn や G2 は 0【2026年10月】",
+    "summary": "ホームページ制作・システム開発の発注先を探す 25 問（札幌 12 問を含む）を 4 つの AI に質問（100 回答）。69 回答が「おすすめ ◯選」の記事を根拠にし、AI が読んだページ 721 件の 55% がこうした記事。発注ナビ 15・アイミツ 14・Web幹事 12。LinkedIn・GitHub・Crunchbase・G2 は 0 回答。",
+    "url": "https://synapsearrows.com/insights/ai-sources-it-web-2026-10/",
+    "source": "Synapse Arrows",
+    "topic": "aeo",
+    "format": "記事",
+    "date": "2026-11-02"
+  },
+  {
     "id": "existing-0",
     "title": "AIは税理士事務所を何を根拠に推薦しているか｜12問×4つのAI・48回答の実測【2026年9月】",
     "summary": "根拠の46%は事務所自身のページ、34%は比較・紹介サイト。引用されたページの共通点と、複数のAIに名前が挙がった事務所をまとめました。",
