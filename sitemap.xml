@@ -274,4 +274,42 @@
   <url><loc>https://synapsearrows.com/insights/topics/overseas-business/</loc><lastmod>2026-10-27</lastmod></url>
   <url><loc>https://synapsearrows.com/insights/topics/ai-search/</loc><lastmod>2026-10-27</lastmod></url>
   <url><loc>https://synapsearrows.com/insights/topics/ai-development/</loc><lastmod>2026-10-27</lastmod></url>
+
+  <!-- Insights AEO/LLMO/GEO 2026-11 -->
+  <url>
+    <loc>https://synapsearrows.com/insights/aeo-llmo-geo-consulting-osusume/</loc>
+    <lastmod>2026-11-06</lastmod>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://synapsearrows.com/insights/ai-visibility-tools/</loc>
+    <lastmod>2026-11-06</lastmod>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://synapsearrows.com/insights/aeo-llmo-geo-towa/</loc>
+    <lastmod>2026-11-06</lastmod>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://synapsearrows.com/insights/third-party-ai-audit/</loc>
+    <lastmod>2026-11-06</lastmod>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://synapsearrows.com/insights/cross-border-ai-visibility/</loc>
+    <lastmod>2026-11-06</lastmod>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://synapsearrows.com/insights/saas-overseas-ai-visibility/</loc>
+    <lastmod>2026-11-06</lastmod>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
 </urlset>
