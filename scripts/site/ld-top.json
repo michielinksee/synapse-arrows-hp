@@ -1,0 +1,211 @@
+[
+ {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://synapsearrows.com/#organization",
+  "name": "Synapse Arrows Pte. Ltd.",
+  "alternateName": [
+   "Synapse Arrows",
+   "シナプスアローズ"
+  ],
+  "url": "https://synapsearrows.com",
+  "logo": "https://synapsearrows.com/assets/company-logo.png",
+  "description": "シンガポールと東京を拠点に、AI が自社をどう説明しているかを測り、海外進出・新規事業・AI 活用の判断と実行を支えるコンサルティング会社。海外進出支援・海外進出アドバイザリー・新規事業開発支援・AI映え診断・AI研修・導入支援・AIエージェント開発支援。AI エージェント向けの第三者の計器 KanseiLINK と、記憶 MCP サーバー Linksee Memory を運営。",
+  "foundingDate": "2023-03-08",
+  "identifier": {
+   "@type": "PropertyValue",
+   "propertyID": "UEN",
+   "value": "202308737G"
+  },
+  "foundingLocation": {
+   "@type": "Place",
+   "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "SG",
+    "addressLocality": "Singapore"
+   }
+  },
+  "address": {
+   "@type": "PostalAddress",
+   "streetAddress": "160 Robinson Road, #14-04 SBF Center",
+   "addressLocality": "Singapore",
+   "postalCode": "068914",
+   "addressCountry": "SG"
+  },
+  "contactPoint": [
+   {
+    "@type": "ContactPoint",
+    "email": "contact@synapse-arrows.com",
+    "contactType": "general"
+   }
+  ],
+  "sameAs": [
+   "https://x.com/michielinksee",
+   "https://zenn.dev/kanseilink",
+   "https://www.youtube.com/channel/UC0mscauCUi5NGxYMhbRWY3A",
+   "https://www.youtube.com/@SYNAPSE-AI%E7%B5%8C%E5%96%B6",
+   "https://github.com/michielinksee",
+   "https://www.linkedin.com/company/133395062",
+   "https://www.wikidata.org/wiki/Q140399505",
+   "https://www.goodfirms.co/company/synapse-arrows-pte-ltd",
+   "https://www.sortlist.com/agency/synapse-arrows"
+  ],
+  "subOrganization": {
+   "@type": "Organization",
+   "@id": "https://kansei-link.com/#organization",
+   "name": "KanseiLink",
+   "alternateName": [
+    "KanseiLINK",
+    "カンセイリンク"
+   ],
+   "disambiguatingDescription": "The name \"Kansei\" is phonetic. KanseiLINK has nothing to do with Kansei Engineering, affective or sensory evaluation, emotion analysis or sentiment analysis — it measures whether AI agents can discover, understand, connect to and operate software.",
+   "url": "https://kansei-link.com",
+   "sameAs": [
+    "https://github.com/kansei-link/kansei-mcp-server",
+    "https://www.npmjs.com/package/@kansei-link/mcp-server",
+    "https://www.youtube.com/channel/UC0mscauCUi5NGxYMhbRWY3A"
+   ]
+  },
+  "owns": [
+   {
+    "@type": "WebApplication",
+    "@id": "https://scanavi.app/#app",
+    "name": "ScaNavi",
+    "url": "https://scanavi.app"
+   },
+   {
+    "@type": "SoftwareApplication",
+    "@id": "https://linksee.app/#app",
+    "name": "Linksee Memory",
+    "alternateName": "linksee-memory",
+    "url": "https://linksee.app",
+    "sameAs": [
+     "https://github.com/michielinksee/linksee-memory",
+     "https://www.npmjs.com/package/linksee-memory"
+    ]
+   }
+  ],
+  "knowsAbout": [
+   "Southeast Asia Market Entry",
+   "New Business Development",
+   "AI Visibility",
+   "AI Engine Optimization",
+   "AEO",
+   "LLMO",
+   "Corporate AI Training",
+   "AI Agent Development",
+   "Model Context Protocol",
+   "MCP"
+  ],
+  "founder": {
+   "@id": "https://synapsearrows.com/#founder"
+  },
+  "numberOfEmployees": {
+   "@type": "QuantitativeValue",
+   "value": "1-10"
+  },
+  "areaServed": [
+   "SG",
+   "JP",
+   "Global"
+  ],
+  "makesOffer": [
+   {
+    "@type": "Offer",
+    "itemOffered": {
+     "@type": "Service",
+     "name": "海外進出支援",
+     "url": "https://synapsearrows.com/services/overseas-expansion/"
+    }
+   },
+   {
+    "@type": "Offer",
+    "itemOffered": {
+     "@type": "Service",
+     "name": "海外進出アドバイザリー",
+     "url": "https://synapsearrows.com/services/overseas-advisory/"
+    }
+   },
+   {
+    "@type": "Offer",
+    "itemOffered": {
+     "@type": "Service",
+     "name": "新規事業開発支援",
+     "url": "https://synapsearrows.com/services/new-business/"
+    }
+   },
+   {
+    "@type": "Offer",
+    "itemOffered": {
+     "@type": "Service",
+     "name": "AI映え診断",
+     "url": "https://synapsearrows.com/ai-bae-shindan/"
+    }
+   },
+   {
+    "@type": "Offer",
+    "itemOffered": {
+     "@type": "Service",
+     "name": "AI研修・導入支援",
+     "url": "https://synapsearrows.com/services/ai-training/"
+    }
+   },
+   {
+    "@type": "Offer",
+    "itemOffered": {
+     "@type": "Service",
+     "name": "AIエージェント開発支援",
+     "url": "https://synapsearrows.com/services/ai-agents/"
+    }
+   }
+  ],
+  "slogan": "AI 時代の判断力を、デザインする。"
+ },
+ {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": "https://synapsearrows.com/#founder",
+  "name": "Michie Yamaguchi",
+  "alternateName": "山口路恵",
+  "jobTitle": "Founder & CEO",
+  "worksFor": {
+   "@id": "https://synapsearrows.com/#organization"
+  },
+  "description": "経済産業省（規制政策・条約交渉）、MUFG系シンクタンク（ヘルスケア海外展開・スマートシティPPP）を経て、シンガポールにてSynapse Arrows創業。AEO・AIエージェント・MCP領域の専門家。",
+  "knowsAbout": [
+   "AI Engine Optimization",
+   "International Trade Policy",
+   "Healthcare Overseas Expansion",
+   "Smart City PPP",
+   "Southeast Asia Business",
+   "Japanese Sake Industry"
+  ],
+  "sameAs": [
+   "https://x.com/michielinksee",
+   "https://zenn.dev/kanseilink",
+   "https://www.wikidata.org/wiki/Q140401431"
+  ],
+  "nationality": {
+   "@type": "Country",
+   "name": "Japan"
+  },
+  "homeLocation": {
+   "@type": "City",
+   "name": "Singapore"
+  }
+ },
+ {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": "https://synapsearrows.com/#website",
+  "name": "Synapse Arrows",
+  "url": "https://synapsearrows.com",
+  "publisher": {
+   "@id": "https://synapsearrows.com/#organization"
+  },
+  "inLanguage": [
+   "ja",
+   "en"
+  ]
+ }
+]
