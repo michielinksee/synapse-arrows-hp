@@ -63,6 +63,8 @@
   </url>
   <url>
     <loc>https://synapsearrows.com/insights/ai-sources-by-industry-2026-10/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://synapsearrows.com/insights/ai-sources-by-industry-2026-10/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://synapsearrows.com/en/insights/ai-sources-by-industry-japan-2026-10/"/>
     <lastmod>2026-11-02</lastmod>
     <priority>0.8</priority>
     <changefreq>monthly</changefreq>
@@ -81,6 +83,8 @@
   </url>
   <url>
     <loc>https://synapsearrows.com/insights/ai-sources-hotel-sapporo-fukuoka-2026-10/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://synapsearrows.com/insights/ai-sources-hotel-sapporo-fukuoka-2026-10/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://synapsearrows.com/en/insights/ai-sources-hotels-japanese-english-2026-10/"/>
     <lastmod>2026-11-02</lastmod>
     <priority>0.8</priority>
     <changefreq>monthly</changefreq>
@@ -284,6 +288,8 @@
   </url>
   <url>
     <loc>https://synapsearrows.com/insights/ai-visibility-tools/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://synapsearrows.com/insights/ai-visibility-tools/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://synapsearrows.com/en/insights/ai-visibility-tools-japan/"/>
     <lastmod>2026-11-06</lastmod>
     <priority>0.8</priority>
     <changefreq>monthly</changefreq>
@@ -302,6 +308,8 @@
   </url>
   <url>
     <loc>https://synapsearrows.com/insights/cross-border-ai-visibility/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://synapsearrows.com/insights/cross-border-ai-visibility/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://synapsearrows.com/en/insights/getting-cited-by-japanese-ai-search/"/>
     <lastmod>2026-11-06</lastmod>
     <priority>0.8</priority>
     <changefreq>monthly</changefreq>
@@ -309,6 +317,40 @@
   <url>
     <loc>https://synapsearrows.com/insights/saas-overseas-ai-visibility/</loc>
     <lastmod>2026-11-06</lastmod>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+
+  <!-- English insights (2026-11) -->
+  <url>
+    <loc>https://synapsearrows.com/en/insights/ai-sources-by-industry-japan-2026-10/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://synapsearrows.com/insights/ai-sources-by-industry-2026-10/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://synapsearrows.com/en/insights/ai-sources-by-industry-japan-2026-10/"/>
+    <lastmod>2026-11-10</lastmod>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://synapsearrows.com/en/insights/ai-sources-hotels-japanese-english-2026-10/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://synapsearrows.com/insights/ai-sources-hotel-sapporo-fukuoka-2026-10/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://synapsearrows.com/en/insights/ai-sources-hotels-japanese-english-2026-10/"/>
+    <lastmod>2026-11-10</lastmod>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://synapsearrows.com/en/insights/getting-cited-by-japanese-ai-search/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://synapsearrows.com/insights/cross-border-ai-visibility/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://synapsearrows.com/en/insights/getting-cited-by-japanese-ai-search/"/>
+    <lastmod>2026-11-10</lastmod>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://synapsearrows.com/en/insights/ai-visibility-tools-japan/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://synapsearrows.com/insights/ai-visibility-tools/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://synapsearrows.com/en/insights/ai-visibility-tools-japan/"/>
+    <lastmod>2026-11-10</lastmod>
     <priority>0.8</priority>
     <changefreq>monthly</changefreq>
   </url>

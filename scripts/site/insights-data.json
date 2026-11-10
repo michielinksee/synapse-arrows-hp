@@ -1,5 +1,45 @@
 [
   {
+    "id": "ins-en-ai-sources-by-industry-japan-2026-10-2026-11",
+    "date": "2026-11-10",
+    "format": "記事",
+    "source": "Synapse Arrows",
+    "topic": "aeo",
+    "url": "https://synapsearrows.com/en/insights/ai-sources-by-industry-japan-2026-10/",
+    "title": "How Japanese AI search cites local businesses（2026年10月）｜6 業種の実測 7 本を 1 本にまとめた英語記事",
+    "summary": "飲食・税理士・宿・美容室・不動産・IT の 6 業種で 4 つの AI が頼る先を実測した 7 本を、海外の GEO/AEO の読み手と日本進出を考える会社向けに英語 1 本にまとめました。数字は日本語の記事と同じです。"
+  },
+  {
+    "id": "ins-en-ai-sources-hotels-japanese-english-2026-10-2026-11",
+    "date": "2026-11-10",
+    "format": "記事",
+    "source": "Synapse Arrows",
+    "topic": "aeo",
+    "url": "https://synapsearrows.com/en/insights/ai-sources-hotels-japanese-english-2026-10/",
+    "title": "Hotels: Japanese and English AI read different booking sites｜宿の日英比較の英語版",
+    "summary": "札幌・福岡のホテル選び 134 回答の実測の英語版。日英で挙がるホテルの重なりは 47〜51%、AI が読む予約サイトは言語で入れ替わる、という日本語記事と同じ数字を英語で読めます。"
+  },
+  {
+    "id": "ins-en-getting-cited-by-japanese-ai-search-2026-11",
+    "date": "2026-11-10",
+    "format": "記事",
+    "source": "Synapse Arrows",
+    "topic": "aeo",
+    "url": "https://synapsearrows.com/en/insights/getting-cited-by-japanese-ai-search/",
+    "title": "Getting cited by Japanese AI search｜日本進出企業向けの越境AI可視性ガイド（英語記事）",
+    "summary": "海外の会社が日本語の ChatGPT・Perplexity・AI Overviews に引用されるための 5 ステップ。日本語の「越境AI可視性入門」の向きを反転し、業種別の実測を根拠に書いた英語記事です。"
+  },
+  {
+    "id": "ins-en-ai-visibility-tools-japan-2026-11",
+    "date": "2026-11-10",
+    "format": "記事",
+    "source": "Synapse Arrows",
+    "topic": "aeo",
+    "url": "https://synapsearrows.com/en/insights/ai-visibility-tools-japan/",
+    "title": "AI visibility tools for the Japanese market: 12 compared｜計測ツール 12 選の英語版（日本市場を測りたい海外の読み手向け）",
+    "summary": "国内 6＋海外 6 の AI 可視性計測ツールを、日本市場を測りたい海外の会社向けに英語で比較。国内ツールの説明を厚くしました。料金は各社公式（2026-11-05 確認）の記載です。"
+  },
+  {
     "id": "ins-aeo-consulting-osusume-2026-11",
     "date": "2026-11-06",
     "format": "記事",

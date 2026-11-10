@@ -4,6 +4,8 @@
   "articles": [
     {
       "slug": "ai-sources-by-industry-2026-10",
+      "en": "/en/insights/ai-sources-by-industry-japan-2026-10/",
+      "en_title": "How Japanese AI search cites local businesses: six industries, four AIs, 1,500+ answers (October 2026)",
       "series_label": "まとめ",
       "nav_title": "6 業種の比較",
       "eyebrow": "業種別調査（まとめ）",
@@ -644,6 +646,8 @@
     },
     {
       "slug": "ai-sources-hotel-sapporo-fukuoka-2026-10",
+      "en": "/en/insights/ai-sources-hotels-japanese-english-2026-10/",
+      "en_title": "Hotels: Japanese and English AI read different booking sites. Sapporo and Fukuoka, 134 answers (October 2026)",
       "series_label": "業種別 3",
       "nav_title": "ホテル・旅館",
       "eyebrow": "業種別調査（ホテル・旅館）",
