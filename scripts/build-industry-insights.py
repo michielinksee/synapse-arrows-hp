@@ -81,10 +81,13 @@ def page(a):
     slug, url = a["slug"], f"{SITE}/insights/{a['slug']}/"
     title, desc = a["title"], a["description"]
     og = f"{SITE}/insights/{slug}/img/00_main.webp"
+    # 英語版がある記事は hreflang の対を張る（scripts/check-site.mjs が双方向かを見る）
+    alt = "".join(f'\n  <link rel="alternate" hreflang="{k}" href="{v}">' for k, v in (("ja", url), ("en", SITE + a["en"]), ("x-default", url))) if a.get("en") else ""
     body = []
     body.append(f'<div class="eyebrow">Insights · {esc(a["eyebrow"])}</div>')
     body.append(f"<h1>{esc(title)}</h1>")
     body.append(f'<div class="article-meta"><time datetime="{a["date"]}">{a["date_ja"]}</time> · Synapse Arrows</div>')
+    if a.get("en"): body.append(f'<p class="note">English version: <a href="{a["en"]}" hreflang="en" lang="en">{esc(a["en_title"])}</a></p>')
     body.append(f'<div class="disclose"><p><strong>この調査について：</strong>{md(a["disclose"])}</p></div>')
     for b in a["lead"]: body.append(block(slug, b))
     body.append('<div class="summary"><strong>分かったこと</strong><ul>' + "".join(f"<li>{md(x)}</li>" for x in a["summary"]) + "</ul></div>")
@@ -115,7 +118,7 @@ def page(a):
   <title>{esc(title)} | Synapse Arrows</title>
   <meta name="description" content="{esc(desc)}">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="{url}">
+  <link rel="canonical" href="{url}">{alt}
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="Synapse Arrows">
   <meta property="og:title" content="{esc(title)}">

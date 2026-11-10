@@ -81,7 +81,9 @@ def head(title, desc, path, ld=None, og_image="/og-image.png", extra_css="", noi
 
 # 日本語と英語の対（hreflang・言語の切り替え）。片方しか無いページは、切り替えで相手の言語のトップへ
 PAIRS = [("/", "/en/"), ("/services/", "/en/services/")] + [(f"/services/{x}/", f"/en/services/{x}/") for x in ("overseas-expansion", "overseas-advisory", "new-business", "ai-training", "ai-agents")] + [
-    ("/products/", "/en/products/"), ("/about/", "/en/about/"), ("/contact/", "/en/contact/"), ("/contact/confirm/", "/en/contact/confirm/"), ("/insights/", "/en/insights/"), ("/policy/", "/en/policy-2/"), ("/services/ai-aeo/", "/en/services/ai-aeo/")]
+    ("/products/", "/en/products/"), ("/about/", "/en/about/"), ("/contact/", "/en/contact/"), ("/contact/confirm/", "/en/contact/confirm/"), ("/insights/", "/en/insights/"), ("/policy/", "/en/policy-2/"), ("/services/ai-aeo/", "/en/services/ai-aeo/"),
+    # 英語の記事と、対になる日本語の記事（2026-11。1 対多の時は代表 1 本）
+    ("/insights/ai-sources-by-industry-2026-10/", "/en/insights/ai-sources-by-industry-japan-2026-10/"), ("/insights/ai-sources-hotel-sapporo-fukuoka-2026-10/", "/en/insights/ai-sources-hotels-japanese-english-2026-10/"), ("/insights/cross-border-ai-visibility/", "/en/insights/getting-cited-by-japanese-ai-search/"), ("/insights/ai-visibility-tools/", "/en/insights/ai-visibility-tools-japan/")]
 EN_OF = dict(PAIRS); JA_OF = {e: j for j, e in PAIRS}
 def alts(path):
     if path in EN_OF: return {"ja": path, "en": EN_OF[path]}
@@ -745,17 +747,23 @@ def build_en_contact():
     en_page("/en/contact/confirm/", c["confirm_title"], c["confirm_description"], "", c["confirm_label"], cbody, parent=("/en/contact/", c["label"]), ld=[en_bc((c["label"], "/en/contact/"), (c["confirm_label"], "/en/contact/confirm/"))], noindex=True)
 
 EN_ARTICLE = "/en/insights/geo-aeo-agencies-singapore-2026-09/"
+# 英語の記事。本文は各ファイルの <!--body--> の間に手で書き、ここでは外枠（ヘッダー・フッター・site-chrome.css・site.js）だけを作り直す
+EN_ARTICLES = [EN_ARTICLE] + ["/en/insights/ai-sources-by-industry-japan-2026-10/", "/en/insights/ai-sources-hotels-japanese-english-2026-10/", "/en/insights/getting-cited-by-japanese-ai-search/", "/en/insights/ai-visibility-tools-japan/"]
 def build_en_insights():
     t = EN["insights"]
     def card(a):
+        internal = a["url"].startswith("/")
         ja = f' <span class="small-note">({t["japanese"]})</span>' if a.get("ja") else ""
-        return f'<article class="insight-entry"><div class="insight-meta"><span>{a["source"]}</span></div><h3><a href="{a["url"]}" target="_blank" rel="noopener"{" hreflang=" + chr(34) + "ja" + chr(34) if a.get("ja") else ""}>{a["title"]} {UPRIGHT}</a>{ja}</h3><p>{a["summary"]}</p></article>'
+        attrs = ("" if internal else ' target="_blank" rel="noopener"') + (' hreflang="ja"' if a.get("ja") else "")
+        date = f'<time datetime="{a["date"]}">{a["date"].replace("-", ".")}</time>' if a.get("date") else ""
+        return f'<article class="insight-entry"><div class="insight-meta"><span>{a["source"]}</span>{date}</div><h3><a href="{a["url"]}"{attrs}>{a["title"]}{"" if internal else " " + UPRIGHT}</a>{ja}</h3><p>{a["summary"]}</p></article>'
     grid = "".join(card(a) for a in t["articles"])
     media = "".join(f'<a href="{u}"{"" if u.startswith("/") else " target=" + chr(34) + "_blank" + chr(34) + " rel=" + chr(34) + "noopener" + chr(34)}><div><strong>{n}</strong><span>{c}</span></div>{UPRIGHT}</a>' for n, u, c in t["channels"])
-    body = intro(t["intro_eyebrow"], t["intro_h1"], t["intro_copy"], "advisory.webp") + f'''<div class="container page-content"><section class="insight-feature"><div class="insight-feature-label">{eyebrow(t["featured_eyebrow"])}<span>{t["featured_tag"]}</span><p>{t["featured_stat"]}</p><small>{t["featured_time"]}</small></div><div><div class="insight-meta"><span>{t["featured_meta"]}</span><time datetime="2026-10-22">2026.10.22</time></div><h2><a href="{EN_ARTICLE}">AEO and GEO agencies in Singapore (2026):<br>17 compared on pricing and terms.</a></h2><p>{t["featured_p"]}</p><div class="page-actions">{tlink(EN_ARTICLE, t["featured_cta"])}</div></div></section>
+    fu, fd = t["featured_url"], t["featured_date"]
+    body = intro(t["intro_eyebrow"], t["intro_h1"], t["intro_copy"], "advisory.webp") + f'''<div class="container page-content"><section class="insight-feature"><div class="insight-feature-label">{eyebrow(t["featured_eyebrow"])}<span>{t["featured_tag"]}</span><p>{t["featured_stat"]}</p><small>{t["featured_time"]}</small></div><div><div class="insight-meta"><span>{t["featured_meta"]}</span><time datetime="{fd}">{fd.replace("-", ".")}</time></div><h2><a href="{fu}">{t["featured_h2"]}</a></h2><p>{t["featured_p"]}</p><div class="page-actions">{tlink(fu, t["featured_cta"])}</div></div></section>
 <section class="insight-archive" id="articles"><div class="section-title-row"><div>{eyebrow(t["list_eyebrow"])}<h2>{t["list_h2"]}</h2></div><span class="small-note">{t["list_note"]}</span></div><div class="insight-article-grid">{grid}</div></section>
 <section class="insight-media-section"><div class="section-title-row"><div>{eyebrow(t["channels_eyebrow"])}<h2>{t["channels_h2"]}</h2></div></div><div class="insight-media-grid">{media}</div></section>{en_next_band(t["next_h2"], t["next_p"])}</div>'''
-    items = [{"@type": "ListItem", "position": 1, "url": SITE + EN_ARTICLE, "name": "AEO and GEO agencies in Singapore (2026): 17 compared on pricing and terms"}] + [{"@type": "ListItem", "position": i + 2, "url": a["url"], "name": a["title"]} for i, a in enumerate(t["articles"])]
+    items = [{"@type": "ListItem", "position": 1, "url": SITE + fu, "name": t["featured_name"]}] + [{"@type": "ListItem", "position": i + 2, "url": (SITE + a["url"]) if a["url"].startswith("/") else a["url"], "name": a["title"]} for i, a in enumerate(t["articles"])]
     ld = [{"@context": "https://schema.org", "@type": "CollectionPage", "@id": SITE + "/en/insights/#page", "url": SITE + "/en/insights/", "name": t["label"], "inLanguage": "en", "isPartOf": {"@id": SITE + "/#website"}, "mainEntity": {"@type": "ItemList", "itemListElement": items}}, en_bc((t["label"], "/en/insights/"))]
     en_page("/en/insights/", t["title"], t["description"], "insights", t["label"], body, ld=ld)
 
@@ -771,17 +779,18 @@ def build_en_policy():
     html = head(t["title"], t["description"], path, ld, lang="en") + header("", path, "en") + f'<main id="main" class="inner-page">{crumb(t["label"], None, "en")}<div class="container legal-body">\n<!--body-->\n{kept_body(f)}<!--/body-->\n</div></main>\n' + footer(path, "en")
     wr(f, html)
 def build_en_article():
-    """シンガポールの GEO/AEO の記事。<head> と本文（<main class="article-wrap">）はそのまま。ヘッダー・フッターと site-chrome.css・site.js だけを足す。"""
-    f = EN_ARTICLE.lstrip("/") + "index.html"
-    src = rd(f).replace("\r\n", "\n")
-    pre, rest = src.split("<head>\n", 1)
-    head_in = rest.split("</head>", 1)[0]
-    head_in = re.sub(r"[ \t]*<[^\n]*\sdata-frame[^\n]*\n", "", head_in)  # 前回この関数が足した行
-    css = '<link rel="stylesheet" href="/styles.css">\n'
-    assert css in head_in
-    head_in = head_in.replace(css, css + '  <link rel="stylesheet" href="/site-chrome.css" data-frame>\n  <style data-frame>.site-header,.footer{line-height:1.5}.footer{margin-top:0}.footer nav a{color:#e0e8f5}</style>\n', 1) + '    <script defer src="/site.js" data-frame></script>\n'
-    html = pre + "<head>\n" + head_in + "</head>\n<body>\n" + header("insights", EN_ARTICLE, "en") + f'<div id="main">\n<!--body-->\n{kept_body(f)}<!--/body-->\n</div>\n' + footer(EN_ARTICLE, "en")
-    wr(f, html)
+    """英語の記事（EN_ARTICLES）。<head> と本文（<main class="article-wrap">）はそのまま。ヘッダー・フッターと site-chrome.css・site.js だけを足す。"""
+    for path in EN_ARTICLES:
+        f = path.lstrip("/") + "index.html"
+        src = rd(f).replace("\r\n", "\n")
+        pre, rest = src.split("<head>\n", 1)
+        head_in = rest.split("</head>", 1)[0]
+        head_in = re.sub(r"[ \t]*<[^\n]*\sdata-frame[^\n]*\n", "", head_in)  # 前回この関数が足した行
+        css = '<link rel="stylesheet" href="/styles.css">\n'
+        assert css in head_in, f"{f}: /styles.css の行が無い"
+        head_in = head_in.replace(css, css + '  <link rel="stylesheet" href="/site-chrome.css" data-frame>\n  <style data-frame>.site-header,.footer{line-height:1.5}.footer{margin-top:0}.footer nav a{color:#e0e8f5}</style>\n', 1) + '    <script defer src="/site.js" data-frame></script>\n'
+        html = pre + "<head>\n" + head_in + "</head>\n<body>\n" + header("insights", path, "en") + f'<div id="main">\n<!--body-->\n{kept_body(f)}<!--/body-->\n</div>\n' + footer(path, "en")
+        wr(f, html)
 def build_ja_legal():
     """プライバシーポリシー・利用規約。本文（<!--body--> の間）は一字も変えず、ヘッダー・フッターを他のページと同じにする。"""
     for path, label, title, desc in (("/policy/", "プライバシーポリシー", "Privacy Policy", "Synapse Arrows Pte. Ltd. のプライバシーポリシー。KanseiLINK、ScaNavi、Linksee Memory、Bantou、CardWize等の全プロダクトに適用されます。"),
