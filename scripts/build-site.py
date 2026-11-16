@@ -748,7 +748,7 @@ def build_en_contact():
 
 EN_ARTICLE = "/en/insights/geo-aeo-agencies-singapore-2026-09/"
 # 英語の記事。本文は各ファイルの <!--body--> の間に手で書き、ここでは外枠（ヘッダー・フッター・site-chrome.css・site.js）だけを作り直す
-EN_ARTICLES = [EN_ARTICLE] + ["/en/insights/ai-sources-by-industry-japan-2026-10/", "/en/insights/ai-sources-hotels-japanese-english-2026-10/", "/en/insights/getting-cited-by-japanese-ai-search/", "/en/insights/ai-visibility-tools-japan/", "/en/insights/japan-entry-first-90-days/", "/en/insights/japan-entry-grants-singapore-2026/", "/en/insights/japan-resident-director-foreign-company/"]
+EN_ARTICLES = [EN_ARTICLE] + ["/en/insights/ai-sources-by-industry-japan-2026-10/", "/en/insights/ai-sources-hotels-japanese-english-2026-10/", "/en/insights/getting-cited-by-japanese-ai-search/", "/en/insights/ai-visibility-tools-japan/", "/en/insights/japan-entry-first-90-days/", "/en/insights/japan-entry-grants-singapore-2026/", "/en/insights/japan-resident-director-foreign-company/", "/en/insights/selling-in-japan-without-a-japanese-company/"]
 def build_en_insights():
     t = EN["insights"]
     def card(a):
