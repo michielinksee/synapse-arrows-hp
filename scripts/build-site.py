@@ -169,41 +169,56 @@ def faq_ld(pairs): return {"@context": "https://schema.org", "@type": "FAQPage",
 # 調査・分析の詳細ページだけに足す節。ご依頼のない調査の結果を受け取った方が、
 # 何をされたのか・自分は何かしなければならないのかを、その場で確かめられるようにする。
 RESEARCH_EXTRA = (
-    '<section class="page-section">' + eyebrow("FOR RECIPIENTS") + "<h2>調査レポートが届いた方へ</h2>"
-    "<p>ご依頼のない調査の結果をお送りすることがあります。お手元に届いた場合、次のとおりです。</p><ul>"
-    "<li><strong>公開されている情報だけを対象にしています。</strong>非公開の情報や、取引・内部の情報は扱いません。</li>"
-    "<li><strong>取得は機械的に行い、間隔をあけています。</strong>サイトに負荷をかけない範囲で、公開されているページを読んでいます。</li>"
-    "<li><strong>個別の社名は本文に出しません。</strong>個社に関わる事項は、その方にお知らせする必要がある場合にかぎり、別紙に分けてお渡しします。</li>"
-    "<li><strong>調査先に不利になる形では公表しません。</strong>ご相談のない公表はしません。</li>"
-    "<li><strong>費用は一切かかりません。ご返信の義務もありません。</strong>お読みいただくだけで完結する形でお送りしています。</li>"
-    "</ul><p>内容についてのお問い合わせ、掲載の取り下げのご希望は "
-    '<a href="mailto:contact@synapse-arrows.com">contact@synapse-arrows.com</a> までお知らせください。</p></section>'
-    '<section class="page-section">' + eyebrow("HOW WE WORK") + "<h2>調査の作法</h2>"
-    "<p>どの調査でも、次の形を崩しません。</p><ul>"
-    "<li>対象と時点を書く。何件を、いつ取得したのかを明記します。</li>"
-    "<li>方法を書く。どう集めて、どう数えたのかを、再現できる程度に書きます。</li>"
-    "<li>確認したことと、確認できていないことを分ける。確認できていないことを、確認したことのように書きません。</li>"
-    "<li>限界を独立した節で書く。その結果が何を意味しないのかを、読む方が判断できる形で置きます。</li>"
-    "<li>原因や事情を推測で書かない。観察された事実と、そこから言えることを分けます。</li>"
+    '<section class="page-section">' + eyebrow("FOR RECIPIENTS") + "<h2>当社からレポートが届いた方へ</h2>"
+    "<p>当社では、公開されている情報を照合・集計し、その情報を掲載・管理している団体や、関係する事業者に、"
+    "調査結果をお送りすることがあります。ご依頼を受けずに行った調査について、レポートの取り扱いは次のとおりです。</p><ul>"
+    "<li><strong>調査の対象は公開されている情報です。</strong>非公開の取引情報や内部資料は収集しません。</li>"
+    "<li><strong>取得は機械的に行います。</strong>アクセスの頻度と量を調整し、取得元のサイトへの負荷を抑えています。</li>"
+    "<li><strong>レポート本文に個別の事業者名は記載しません。</strong>所在地・URL など事業者を特定できる情報も同じです。"
+    "個別の照合結果は、その情報を掲載・管理している団体に、確認に必要な範囲で別紙としてお送りします。</li>"
+    "<li><strong>ご依頼なくお送りしたレポートの内容を、当社から公表することはありません。</strong>"
+    "集計した結果も、個別の事業者を特定できる情報も同じです。公表の可否をご判断いただく必要はありません。</li>"
+    "<li><strong>このレポートについて費用をご請求することはありません。</strong>"
+    "閲覧もご返信も任意で、有料サービスへのお申し込みは必要ありません。</li>"
+    "</ul><p>レポートの内容の確認・訂正、今後のレポート送付の停止については、"
+    '<a href="mailto:contact@synapse-arrows.com">contact@synapse-arrows.com</a> までお知らせください。</p>'
+    "<p>当社サイトの Insights では、これらのレポートとは別に、一般的な調査記事を公開しています。"
+    "Insights の記事の訂正・取り下げに関するご相談も、同じ窓口で承ります。</p></section>"
+    '<section class="page-section">' + eyebrow("HOW WE WORK") + "<h2>調査・報告の方針</h2>"
+    "<p>調査では、次の点を明記します。</p><ul>"
+    "<li>対象と時点。何件を、いつ取得したのかを書きます。</li>"
+    "<li>方法。取得元・取得時点・照合と集計の手順を書き、調査方法を検証できるようにします。</li>"
+    "<li>確認したことと、確認できていないことを分けます。確認できていないことを、確認したことのようには書きません。</li>"
+    "<li>限界を独立した節に置き、その結果が何を意味しないのかを、読む方が判断できる形にします。</li>"
+    "<li>照合で一致しない場合も、そのことだけを根拠に、登録の誤りや事業者の営業状況を断定しません。</li>"
+    "<li>原因や事情を推測で書きません。観察された事実と、そこから言えることを分けます。</li>"
     "</ul></section>"
 )
 EN_RESEARCH_EXTRA = (
-    '<section class="page-section">' + eyebrow("FOR RECIPIENTS") + "<h2>If a research report has reached you</h2>"
-    "<p>We sometimes send the results of research nobody asked us for. If one has reached you, this is what it is.</p><ul>"
-    "<li><strong>We look only at information that is already public.</strong> We do not handle private, commercial or internal information.</li>"
-    "<li><strong>We collect by machine, with a pause between requests.</strong> We read public pages without putting load on the site.</li>"
-    "<li><strong>No individual company is named in the report itself.</strong> Anything about a single company goes in a separate sheet, and only when that company needs to know it.</li>"
-    "<li><strong>We do not publish in a form that works against the organisations we looked at.</strong> Nothing is published without talking to you first.</li>"
-    "<li><strong>There is no charge, and no obligation to reply.</strong> The report is written to be complete once you have read it.</li>"
-    "</ul><p>For questions about the content, or to ask us to drop you from the research, write to "
-    '<a href="mailto:contact@synapse-arrows.com">contact@synapse-arrows.com</a>.</p></section>'
-    '<section class="page-section">' + eyebrow("HOW WE WORK") + "<h2>How we run a study</h2>"
-    "<p>Every study keeps the same shape.</p><ul>"
-    "<li>State the scope and the date: how many records, collected when.</li>"
-    "<li>State the method, in enough detail to be reproduced.</li>"
-    "<li>Separate what we confirmed from what we could not confirm, and never write the second as the first.</li>"
-    "<li>Give the limits their own section, so the reader can judge what the result does not mean.</li>"
-    "<li>Do not write causes or circumstances we did not observe.</li>"
+    '<section class="page-section">' + eyebrow("FOR RECIPIENTS") + "<h2>If you have received a report from us</h2>"
+    "<p>We sometimes cross-check and count publicly available information, and send the findings to the organisation that "
+    "publishes or maintains that information, or to the businesses concerned. If you received a report you did not ask for, "
+    "this is how we handle it.</p><ul>"
+    "<li><strong>We study publicly available information.</strong> We do not collect non-public transaction information or internal documents.</li>"
+    "<li><strong>We collect by machine.</strong> We control the frequency and volume of requests to limit the load on the sites we read.</li>"
+    "<li><strong>The main report contains no information that would identify an individual business</strong>, including its name, address or URL. "
+    "Business-specific findings are sent as a separate appendix to the organisation that publishes or maintains the information, "
+    "limited to what is needed to check them.</li>"
+    "<li><strong>We do not publish the contents of a report we sent you unasked</strong> — neither the aggregate results nor "
+    "anything that would identify an individual business. You are not being asked to decide whether it may be published.</li>"
+    "<li><strong>There is no charge for the report.</strong> Reading it and replying are both optional, and you do not need to buy any service.</li>"
+    "</ul><p>For questions or corrections about the report, or to stop receiving future reports, write to "
+    '<a href="mailto:contact@synapse-arrows.com">contact@synapse-arrows.com</a>.</p>'
+    "<p>Separately from these reports, we publish general research articles in Insights on this site. "
+    "You can use the same address to discuss corrections to, or removal of, an Insights article.</p></section>"
+    '<section class="page-section">' + eyebrow("HOW WE WORK") + "<h2>What every report states</h2>"
+    "<p>Each report sets out the following.</p><ul>"
+    "<li>The scope and the date: how many records, collected when.</li>"
+    "<li>The method: the sources, when they were collected, and how they were cross-checked and counted, so the method can be examined.</li>"
+    "<li>What we confirmed and what we could not confirm, kept apart, with the second never written as the first.</li>"
+    "<li>The limits, in a section of their own, so the reader can judge what the result does not mean.</li>"
+    "<li>That we draw no conclusion about the accuracy of a listing, or about a business's operating status, from a mismatch alone.</li>"
+    "<li>That we do not speculate about causes or circumstances, and keep observed facts apart from the conclusions those facts support.</li>"
     "</ul></section>"
 )
 SERVICES = [
@@ -304,7 +319,8 @@ def build_services():
         topic = s.get("topic") or ("overseas-business" if i < 3 else "ai-development")
         eye = "BUSINESS CONSULTING" if i < 3 else ("RESEARCH &amp; ANALYSIS" if s["slug"] == "research" else "AI &amp; OPERATIONS")
         h2 = "構想を、次のアクションへ。" if i < 3 else ("調べた範囲を、はっきりさせる。" if s["slug"] == "research" else "目的から考える、AI活用。")
-        body = intro(eye, s["name"], s["detail"], s.get("image")) + f'''<div class="container page-content"><section class="page-section detail-split"><div>{eyebrow("SUPPORT SCOPE")}<h2>{h2}</h2><p>事業の状況や課題を伺い、対象範囲・進め方・成果物をすり合わせたうえで支援します。料金は内容に合わせて個別にお見積りします。</p></div><ol class="support-list">{"".join(f"<li><span>0{j+1}</span><h3>{t}</h3></li>" for j, t in enumerate(pts))}</ol></section>{s.get("extra", "")}{next_band(f"{s['name']}について相談する。", "支援内容や進め方を資料で確認したい方も、具体的な課題をお持ちの方も、お気軽にご相談ください。", s["name"])}<div class="page-actions">{tlink(f"/insights/topics/{topic}/", "関連する調査・実践記事を読む")}{tlink("/services/", "サービス一覧に戻る")}</div></div>'''
+        lead = "調査をご依頼いただく場合は、" if s["slug"] == "research" else ""
+        body = intro(eye, s["name"], s["detail"], s.get("image")) + f'''<div class="container page-content"><section class="page-section detail-split"><div>{eyebrow("SUPPORT SCOPE")}<h2>{h2}</h2><p>{lead}事業の状況や課題を伺い、対象範囲・進め方・成果物をすり合わせたうえで支援します。料金は内容に合わせて個別にお見積りします。</p></div><ol class="support-list">{"".join(f"<li><span>0{j+1}</span><h3>{t}</h3></li>" for j, t in enumerate(pts))}</ol></section>{s.get("extra", "")}{next_band(f"{s['name']}について相談する。", "支援内容や進め方を資料で確認したい方も、具体的な課題をお持ちの方も、お気軽にご相談ください。", s["name"])}<div class="page-actions">{tlink(f"/insights/topics/{topic}/", "関連する調査・実践記事を読む")}{tlink("/services/", "サービス一覧に戻る")}</div></div>'''
         ld = [webpage_ld(f"/services/{s['slug']}/", s["name"], s["detail"]), breadcrumb_ld(("ホーム", "/"), ("サービス一覧", "/services/"), (s["name"], f"/services/{s['slug']}/")),
               {"@context": "https://schema.org", "@type": "Service", "name": s["name"], "description": s["detail"], "provider": {"@id": SITE + "/#organization"}, "areaServed": ["JP", "SG"], "url": SITE + f"/services/{s['slug']}/", "offers": {"@type": "Offer", "description": "個別見積もり"}}]
         page(f"/services/{s['slug']}/", f"{s['name']} | Synapse Arrows", s["detail"], "services", s["name"], body, parent=("/services/", "サービス一覧"), ld=ld)
@@ -627,7 +643,7 @@ def build_en_services():
         path = f"/en/services/{s['slug']}/"
         eye = "BUSINESS CONSULTING" if i < 3 else ("RESEARCH &amp; ANALYSIS" if s["slug"] == "research" else "AI &amp; OPERATIONS")
         h2 = d["h2_biz"] if i < 3 else (d["h2_research"] if s["slug"] == "research" else d["h2_ai"])
-        body = intro(eye, s["name"], s["detail"], s.get("image")) + f'''<div class="container page-content"><section class="page-section detail-split"><div>{eyebrow(d["eyebrow_scope"])}<h2>{h2}</h2><p>{d["p"]}</p></div><ol class="support-list">{"".join(f"<li><span>0{j+1}</span><h3>{x}</h3></li>" for j, x in enumerate(pts))}</ol></section>{EN_RESEARCH_EXTRA if s["slug"] == "research" else ""}{en_next_band(d["next_h2"].replace("{name}", s["name"][0].lower() + s["name"][1:] if not s["name"].startswith("AI") else s["name"]), d["next_p"], s["name"])}<div class="page-actions">{tlink("/en/insights/", d["articles"])}{tlink("/en/services/", d["back"])}</div></div>'''
+        body = intro(eye, s["name"], s["detail"], s.get("image")) + f'''<div class="container page-content"><section class="page-section detail-split"><div>{eyebrow(d["eyebrow_scope"])}<h2>{h2}</h2><p>{d["p_research"] if s["slug"] == "research" else d["p"]}</p></div><ol class="support-list">{"".join(f"<li><span>0{j+1}</span><h3>{x}</h3></li>" for j, x in enumerate(pts))}</ol></section>{EN_RESEARCH_EXTRA if s["slug"] == "research" else ""}{en_next_band(d["next_h2"].replace("{name}", s["name"][0].lower() + s["name"][1:] if not s["name"].startswith("AI") else s["name"]), d["next_p"], s["name"])}<div class="page-actions">{tlink("/en/insights/", d["articles"])}{tlink("/en/services/", d["back"])}</div></div>'''
         ld = [webpage_ld(path, s["name"], s["detail"], "en"), en_bc((t["label"], "/en/services/"), (s["name"], path)),
               {"@context": "https://schema.org", "@type": "Service", "name": s["name"], "description": s["detail"], "provider": {"@id": SITE + "/#organization"}, "areaServed": ["JP", "SG"], "availableLanguage": ["ja", "en"], "url": SITE + path, "offers": {"@type": "Offer", "description": d["offer"]}}]
         en_page(path, f"{s['name']} | Synapse Arrows", s["detail"], "services", s["name"], body, parent=("/en/services/", t["label"]), ld=ld)

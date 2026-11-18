@@ -31,7 +31,7 @@
     "ai-bae-shindan": {"name": "AI visibility check (AI映え診断)", "detail": "How does AI describe your business? From an AEO point of view, we sort out what is wrong in the information AI gives and which way to fix it."},
     "ai-training": {"name": "Corporate AI training and adoption", "detail": "We support learning and adopting AI around the issues in your business and work. We decide together, based on the tasks in scope and the state of your organisation."},
     "ai-agents": {"name": "AI agent development", "detail": "We work out how to use AI agents and how to build them, based on what the work is for and the environment they will run in."},
-    "research": {"name": "Research and analysis", "copy": "We gather public information,\ncount it, and set out what we found.", "detail": "We gather publicly available information by machine, count it, and set out what was observed: quantitative market and industry research, cross-checks of public directories and databases, and measurement of how AI assistants describe and recommend. Every report states its scope, its date, the method and the limits.", "points": ["Quantitative market and industry research", "Cross-checking public directories and databases", "Measuring and tracking AI recommendations"]}
+    "research": {"name": "Research and analysis", "copy": "We gather public information,\ncount it, and set out what we found.", "detail": "We collect and analyse publicly available information: quantitative market and industry research, cross-checks of public directories and databases, and measurements of how AI assistants describe and recommend businesses. Each report sets out its scope, the dates the data was collected, the method and the limitations.", "points": ["Quantitative market and industry research", "Cross-checking public directories and databases", "Measuring and tracking AI recommendations"]}
   },
   "service_points_default": ["Sorting out the issues and tasks in scope", "Working out how to use AI and a plan", "Support for adoption, development and operation"],
   "plans": {
@@ -75,19 +75,20 @@
     "intro_copy": "From overseas expansion and new business development to how you are described by AI and how you use it. We suggest the support that fits the stage of your business.",
     "biz_h2": "The next market. The next business.",
     "ai_h2": "Practical AI for your organisation and work.",
-    "research_h2": "Gather the facts, then count them.",
+    "research_h2": "Collect public information. Measure what it shows.",
     "next_h2": "Shall we sort out what support you need?",
     "next_p": "Choose materials for any of the seven services in one request.",
     "label": "Services",
     "see": "See the service",
     "pricing_h2": "Prices",
-    "pricing_p": "The AI visibility check has fixed prices in Japanese yen; see the English plans page. The other five services are quoted individually."
+    "pricing_p": "The AI visibility check has fixed prices in Japanese yen; see the English plans page. The other six services are quoted individually."
   },
   "detail": {
     "eyebrow_scope": "SUPPORT SCOPE",
     "h2_biz": "From an idea to the next action.",
     "h2_ai": "AI that starts from the purpose.",
-    "h2_research": "Be clear about what was actually checked.",
+    "h2_research": "A clear account of what we checked.",
+    "p_research": "For commissioned research, we listen to the state of your business and its issues, agree the scope, the way we work and the deliverables, and then start. Fees are quoted individually for the work.",
     "p": "We listen to the state of your business and its issues, agree the scope, the way we work and the deliverables, and then start. Fees are quoted individually for the work.",
     "next_h2": "Talk to us about {name}.",
     "next_p": "Whether you want to read about the support first or already have a concrete issue, feel free to contact us.",
