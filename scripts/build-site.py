@@ -80,7 +80,7 @@ def head(title, desc, path, ld=None, og_image="/og-image.png", extra_css="", noi
 '''
 
 # 日本語と英語の対（hreflang・言語の切り替え）。片方しか無いページは、切り替えで相手の言語のトップへ
-PAIRS = [("/", "/en/"), ("/services/", "/en/services/")] + [(f"/services/{x}/", f"/en/services/{x}/") for x in ("overseas-expansion", "overseas-advisory", "new-business", "ai-training", "ai-agents")] + [
+PAIRS = [("/", "/en/"), ("/services/", "/en/services/")] + [(f"/services/{x}/", f"/en/services/{x}/") for x in ("overseas-expansion", "overseas-advisory", "new-business", "ai-training", "ai-agents", "research")] + [
     ("/products/", "/en/products/"), ("/about/", "/en/about/"), ("/contact/", "/en/contact/"), ("/contact/confirm/", "/en/contact/confirm/"), ("/insights/", "/en/insights/"), ("/policy/", "/en/policy-2/"), ("/services/ai-aeo/", "/en/services/ai-aeo/"),
     # 英語の記事と、対になる日本語の記事（2026-11。1 対多の時は代表 1 本）
     ("/insights/ai-sources-by-industry-2026-10/", "/en/insights/ai-sources-by-industry-japan-2026-10/"), ("/insights/ai-sources-hotel-sapporo-fukuoka-2026-10/", "/en/insights/ai-sources-hotels-japanese-english-2026-10/"), ("/insights/cross-border-ai-visibility/", "/en/insights/getting-cited-by-japanese-ai-search/"), ("/insights/ai-visibility-tools/", "/en/insights/ai-visibility-tools-japan/")]
@@ -143,13 +143,14 @@ def req_url(service="", plan="", intent="資料請求"):
     return "/contact/?" + urlencode(q)
 def next_band(title="社内で検討するための資料を。", copy="サービス内容・パッケージ・進め方を、まとめて確認できます。", service="AI映え診断"):
     return f'<section class="next-band-new"><div>{eyebrow("NEXT STEP")}<h2>{title}</h2><p>{copy}</p></div>{btn(req_url(service), "資料請求・ご相談", attrs=f"data-va=\"download_click\" data-va-from=\"next_band\"")}</section>'
-def product_feature(light=False):
+def product_feature(light=False, num=""):
     h = "まずは無料で、サイトの下地を確認。" if light else "AIに伝わる情報を、事業の力に。"
     p = "URLと業種から、サイトの読み取りやすさや情報の手がかりをチェックします。" if light else f"{AIB_S1}</p><p>{AIB_S2}"
     a1 = btn("/ai-bae-shindan/", "無料診断 Light を試す" if light else "AI映え診断を詳しく見る", attrs='data-va="ai_bae_start" data-va-from="feature"')
     a2 = tlink("/ai-bae-shindan/", "サービス全体を知る") if light else tlink("/ai-bae-shindan/pricing/", "料金・パッケージ")
     note = '<p class="small-note">LightはAIに質問しません。実際の回答や推薦状況は計測しません。</p>' if light else ""
-    return f'<section class="product-feature-new"><div>{eyebrow("FREE TOOL" if light else "FEATURED SERVICE")}<img class="feature-logo" src="/assets/diagnosis-logo.webp" alt="AI映え診断 by Synapse Arrows" width="1000" height="270" loading="lazy"><h2>{h}</h2><p>{p}</p><div class="page-actions">{a1}{a2}</div>{industry_links("feature_light" if light else "feature")}</div><div class="feature-characters"><img src="/assets/characters.webp" alt="AI映え診断の4キャラクター" width="640" height="362" loading="lazy">{note}</div></section>'
+    n = f'<span class="column-number">{num}</span>' if num else ""
+    return f'<section class="product-feature-new"><div>{n}{eyebrow("FREE TOOL" if light else "FEATURED SERVICE")}<img class="feature-logo" src="/assets/diagnosis-logo.webp" alt="AI映え診断 by Synapse Arrows" width="1000" height="270" loading="lazy"><h2>{h}</h2><p>{p}</p><div class="page-actions">{a1}{a2}</div>{industry_links("feature_light" if light else "feature")}</div><div class="feature-characters"><img src="/assets/characters.webp" alt="AI映え診断の4キャラクター" width="640" height="362" loading="lazy">{note}</div></section>'
 def page(path, title, desc, current, label, body, parent=None, ld=None, extra_css="", diagnosis_nav=False, og_image="/og-image.png", noindex=False, lang="ja", after_main=""):
     dn = diag_nav(path) if diagnosis_nav else ""
     html = head(title, desc, path, ld, og_image, extra_css, noindex, lang) + header(current, path, lang) + dn + f'<main id="main" class="inner-page">{crumb(label, parent, lang)}{body}</main>\n' + after_main + footer(path, lang)
@@ -165,6 +166,61 @@ def webpage_ld(path, name, desc, lang="ja"):
 def faq_ld(pairs): return {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in pairs]}
 
 # ---------------------------------------------------------------- data
+# 調査・分析の詳細ページだけに足す節。ご依頼のない調査の結果を受け取った方が、
+# 何をされたのか・自分は何かしなければならないのかを、その場で確かめられるようにする。
+RESEARCH_EXTRA = (
+    '<section class="page-section">' + eyebrow("FOR RECIPIENTS") + "<h2>当社からレポートが届いた方へ</h2>"
+    "<p>当社では、公開されている情報を照合・集計し、その情報を掲載・管理している団体や、関係する事業者に、"
+    "調査結果をお送りすることがあります。ご依頼を受けずに行った調査について、レポートの取り扱いは次のとおりです。</p><ul>"
+    "<li><strong>調査の対象は公開されている情報です。</strong>非公開の取引情報や内部資料は収集しません。</li>"
+    "<li><strong>取得は機械的に行います。</strong>アクセスの頻度と量を調整し、取得元のサイトへの負荷を抑えています。</li>"
+    "<li><strong>レポート本文に個別の事業者名は記載しません。</strong>所在地・URL など事業者を特定できる情報も同じです。"
+    "個別の照合結果は、その情報を掲載・管理している団体に、確認に必要な範囲で別紙としてお送りします。</li>"
+    "<li><strong>ご依頼なくお送りしたレポートの内容を、当社から公表することはありません。</strong>"
+    "集計した結果も、個別の事業者を特定できる情報も同じです。公表の可否をご判断いただく必要はありません。</li>"
+    "<li><strong>このレポートについて費用をご請求することはありません。</strong>"
+    "閲覧もご返信も任意で、有料サービスへのお申し込みは必要ありません。</li>"
+    "</ul><p>レポートの内容の確認・訂正、今後のレポート送付の停止については、"
+    '<a href="mailto:contact@synapse-arrows.com">contact@synapse-arrows.com</a> までお知らせください。</p>'
+    "<p>当社サイトの Insights では、これらのレポートとは別に、一般的な調査記事を公開しています。"
+    "Insights の記事の訂正・取り下げに関するご相談も、同じ窓口で承ります。</p></section>"
+    '<section class="page-section">' + eyebrow("HOW WE WORK") + "<h2>調査・報告の方針</h2>"
+    "<p>調査では、次の点を明記します。</p><ul>"
+    "<li>対象と時点。何件を、いつ取得したのかを書きます。</li>"
+    "<li>方法。取得元・取得時点・照合と集計の手順を書き、調査方法を検証できるようにします。</li>"
+    "<li>確認したことと、確認できていないことを分けます。確認できていないことを、確認したことのようには書きません。</li>"
+    "<li>限界を独立した節に置き、その結果が何を意味しないのかを、読む方が判断できる形にします。</li>"
+    "<li>照合で一致しない場合も、そのことだけを根拠に、登録の誤りや事業者の営業状況を断定しません。</li>"
+    "<li>原因や事情を推測で書きません。観察された事実と、そこから言えることを分けます。</li>"
+    "</ul></section>"
+)
+EN_RESEARCH_EXTRA = (
+    '<section class="page-section">' + eyebrow("FOR RECIPIENTS") + "<h2>If you have received a report from us</h2>"
+    "<p>We sometimes cross-check and count publicly available information, and send the findings to the organisation that "
+    "publishes or maintains that information, or to the businesses concerned. If you received a report you did not ask for, "
+    "this is how we handle it.</p><ul>"
+    "<li><strong>We study publicly available information.</strong> We do not collect non-public transaction information or internal documents.</li>"
+    "<li><strong>We collect by machine.</strong> We control the frequency and volume of requests to limit the load on the sites we read.</li>"
+    "<li><strong>The main report contains no information that would identify an individual business</strong>, including its name, address or URL. "
+    "Business-specific findings are sent as a separate appendix to the organisation that publishes or maintains the information, "
+    "limited to what is needed to check them.</li>"
+    "<li><strong>We do not publish the contents of a report we sent you unasked</strong> — neither the aggregate results nor "
+    "anything that would identify an individual business. You are not being asked to decide whether it may be published.</li>"
+    "<li><strong>There is no charge for the report.</strong> Reading it and replying are both optional, and you do not need to buy any service.</li>"
+    "</ul><p>For questions or corrections about the report, or to stop receiving future reports, write to "
+    '<a href="mailto:contact@synapse-arrows.com">contact@synapse-arrows.com</a>.</p>'
+    "<p>Separately from these reports, we publish general research articles in Insights on this site. "
+    "You can use the same address to discuss corrections to, or removal of, an Insights article.</p></section>"
+    '<section class="page-section">' + eyebrow("HOW WE WORK") + "<h2>What every report states</h2>"
+    "<p>Each report sets out the following.</p><ul>"
+    "<li>The scope and the date: how many records, collected when.</li>"
+    "<li>The method: the sources, when they were collected, and how they were cross-checked and counted, so the method can be examined.</li>"
+    "<li>What we confirmed and what we could not confirm, kept apart, with the second never written as the first.</li>"
+    "<li>The limits, in a section of their own, so the reader can judge what the result does not mean.</li>"
+    "<li>That we draw no conclusion about the accuracy of a listing, or about a business's operating status, from a mismatch alone.</li>"
+    "<li>That we do not speculate about causes or circumstances, and keep observed facts apart from the conclusions those facts support.</li>"
+    "</ul></section>"
+)
 SERVICES = [
  {"slug": "overseas-expansion", "name": "海外進出支援", "copy": "市場調査から進出計画、\n現地での展開まで。", "image": "singapore.webp", "alt": "", "detail": "海外市場への進出に向けて、事業の可能性と課題を整理。市場調査、進出計画、現地での展開まで、段階に合わせて支援します。", "points": ["市場・競合の調査", "進出計画の策定", "現地展開に向けた実行支援"]},
  {"slug": "overseas-advisory", "name": "海外進出アドバイザリー", "copy": "海外事業の判断と推進に、\n継続して伴走。", "image": "advisory.webp", "alt": "", "detail": "海外事業を進めるなかで生まれる課題や意思決定に、継続して伴走。状況を整理し、次のアクションをともに考えます。", "points": ["事業課題・論点の整理", "進出・展開方針の検討", "継続的な相談・助言"]},
@@ -172,6 +228,7 @@ SERVICES = [
  {"slug": "ai-bae-shindan", "name": "AI映え診断", "detail": "AI検索で、自社はどう伝わっているのか。AEOの視点から、情報発信の課題と改善の方向性を整理します。"},
  {"slug": "ai-training", "name": "AI研修・導入支援", "detail": "事業や業務の課題に合わせて、AI活用の学びと導入を支援します。対象業務や組織の状況から、ともに検討します。"},
  {"slug": "ai-agents", "name": "AIエージェント開発支援", "detail": "業務の目的や運用環境に合わせて、AIエージェントの活用方法と開発の進め方を検討します。"},
+ {"slug": "research", "name": "調査・分析（シンクタンク機能）", "copy": "公開情報を集めて数え、\n事実を整理する。", "detail": "公開されている情報を機械的に集めて数え、観察された事実を整理します。市場・業界の定量調査、公開名簿やデータベースの照合、AI がどう推薦しているかの実測。対象と時点・方法・限界を明記して報告します。", "topic": "overseas-business", "points": ["市場・業界の定量調査", "公開名簿・データベースの照合", "AI 推薦の実測と定点測定"], "extra": RESEARCH_EXTRA},
 ]
 AIB_S1 = "お客さんがお店やサービスを探す道に、検索や地図に加えて、ChatGPT などの AI が加わりました。"
 AIB_S2 = "お店や会社のサイトの URL を入れるだけで、ChatGPT・Gemini・Claude・Perplexity の 4 つの AI がサイトを読めているか、その場で分かります。"
@@ -251,16 +308,19 @@ def service_columns(items):
         out += f'<article><span class="column-number">0{i+1}</span><h3><a href="{h}">{s["name"]}</a></h3><p>{s.get("copy") or s["detail"]}</p>{img}{tlink(h, "サービス内容を見る")}</article>'
     return out + "</div>"
 def build_services():
-    body = intro("CONSULTING SERVICES", "事業の課題から、<br>必要な支援を選ぶ。", "海外進出・新規事業開発から、情報発信とAI活用まで。事業の段階に合わせて、必要な支援をご提案します。") + f'''<div class="container page-content">{product_feature()}<section class="page-section">{eyebrow("BUSINESS CONSULTING")}<h2>次の市場へ。次の事業へ。</h2>{service_columns(SERVICES[:3])}</section><section class="page-section">{eyebrow("AI &amp; OPERATIONS")}<h2>組織と業務に、実践的なAI活用を。</h2>{service_columns(SERVICES[4:])}</section>{next_band("必要な支援を、一緒に整理しませんか？", "6つのサービスから、関心のある資料をまとめてお選びいただけます。", "")}</div>'''
+    body = intro("CONSULTING SERVICES", "事業の課題から、<br>必要な支援を選ぶ。", "海外進出・新規事業開発から、情報発信とAI活用まで。事業の段階に合わせて、必要な支援をご提案します。") + f'''<div class="container page-content">{product_feature(num="04")}<section class="page-section">{eyebrow("BUSINESS CONSULTING")}<h2>次の市場へ。次の事業へ。</h2>{service_columns(SERVICES[:3])}</section><section class="page-section">{eyebrow("AI &amp; OPERATIONS")}<h2>組織と業務に、実践的なAI活用を。</h2>{service_columns(SERVICES[4:6])}</section><section class="page-section">{eyebrow("RESEARCH &amp; ANALYSIS")}<h2>事実を集めて、数える。</h2>{service_columns(SERVICES[6:])}</section>{next_band("必要な支援を、一緒に整理しませんか？", "7つのサービスから、関心のある資料をまとめてお選びいただけます。", "")}</div>'''
     ld = [webpage_ld("/services/", "サービス一覧", "海外進出・新規事業開発から、情報発信とAI活用まで。"), breadcrumb_ld(("ホーム", "/"), ("サービス一覧", "/services/")),
           {"@context": "https://schema.org", "@type": "ItemList", "itemListElement": [{"@type": "ListItem", "position": i + 1, "name": s["name"], "url": SITE + svc_href(s)} for i, s in enumerate(SERVICES)]}, '<!--p:block:ld_pricing_ja--><!--/p-->']
-    page("/services/", "サービス一覧 | Synapse Arrows", "海外進出支援・海外進出アドバイザリー・新規事業開発支援・AI映え診断・AI研修・導入支援・AIエージェント開発支援。事業の段階に合わせて、必要な支援をご提案します。", "services", "サービス一覧", body, ld=ld[:3])
+    page("/services/", "サービス一覧 | Synapse Arrows", "海外進出支援・海外進出アドバイザリー・新規事業開発支援・AI映え診断・AI研修・導入支援・AIエージェント開発支援・調査・分析（シンクタンク機能）。事業の段階に合わせて、必要な支援をご提案します。", "services", "サービス一覧", body, ld=ld[:3])
     # pricing LD block lives on the diagnosis pricing page; keep the services page lean
     for i, s in enumerate(SERVICES):
         if s["slug"] == "ai-bae-shindan": continue
         pts = s.get("points") or ["課題・対象業務の整理", "活用方法と実施計画の検討", "導入・開発・運用に向けた支援"]
-        topic = "overseas-business" if i < 3 else "ai-development"
-        body = intro("BUSINESS CONSULTING" if i < 3 else "AI &amp; OPERATIONS", s["name"], s["detail"], s.get("image")) + f'''<div class="container page-content"><section class="page-section detail-split"><div>{eyebrow("SUPPORT SCOPE")}<h2>{"構想を、次のアクションへ。" if i < 3 else "目的から考える、AI活用。"}</h2><p>事業の状況や課題を伺い、対象範囲・進め方・成果物をすり合わせたうえで支援します。料金は内容に合わせて個別にお見積りします。</p></div><ol class="support-list">{"".join(f"<li><span>0{j+1}</span><h3>{t}</h3></li>" for j, t in enumerate(pts))}</ol></section>{next_band(f"{s['name']}について相談する。", "支援内容や進め方を資料で確認したい方も、具体的な課題をお持ちの方も、お気軽にご相談ください。", s["name"])}<div class="page-actions">{tlink(f"/insights/topics/{topic}/", "関連する調査・実践記事を読む")}{tlink("/services/", "サービス一覧に戻る")}</div></div>'''
+        topic = s.get("topic") or ("overseas-business" if i < 3 else "ai-development")
+        eye = "BUSINESS CONSULTING" if i < 3 else ("RESEARCH &amp; ANALYSIS" if s["slug"] == "research" else "AI &amp; OPERATIONS")
+        h2 = "構想を、次のアクションへ。" if i < 3 else ("調べた範囲を、はっきりさせる。" if s["slug"] == "research" else "目的から考える、AI活用。")
+        lead = "調査をご依頼いただく場合は、" if s["slug"] == "research" else ""
+        body = intro(eye, s["name"], s["detail"], s.get("image")) + f'''<div class="container page-content"><section class="page-section detail-split"><div>{eyebrow("SUPPORT SCOPE")}<h2>{h2}</h2><p>{lead}事業の状況や課題を伺い、対象範囲・進め方・成果物をすり合わせたうえで支援します。料金は内容に合わせて個別にお見積りします。</p></div><ol class="support-list">{"".join(f"<li><span>0{j+1}</span><h3>{t}</h3></li>" for j, t in enumerate(pts))}</ol></section>{s.get("extra", "")}{next_band(f"{s['name']}について相談する。", "支援内容や進め方を資料で確認したい方も、具体的な課題をお持ちの方も、お気軽にご相談ください。", s["name"])}<div class="page-actions">{tlink(f"/insights/topics/{topic}/", "関連する調査・実践記事を読む")}{tlink("/services/", "サービス一覧に戻る")}</div></div>'''
         ld = [webpage_ld(f"/services/{s['slug']}/", s["name"], s["detail"]), breadcrumb_ld(("ホーム", "/"), ("サービス一覧", "/services/"), (s["name"], f"/services/{s['slug']}/")),
               {"@context": "https://schema.org", "@type": "Service", "name": s["name"], "description": s["detail"], "provider": {"@id": SITE + "/#organization"}, "areaServed": ["JP", "SG"], "url": SITE + f"/services/{s['slug']}/", "offers": {"@type": "Offer", "description": "個別見積もり"}}]
         page(f"/services/{s['slug']}/", f"{s['name']} | Synapse Arrows", s["detail"], "services", s["name"], body, parent=("/services/", "サービス一覧"), ld=ld)
@@ -535,9 +595,10 @@ def en_req_url(service="", plan="", intent="download"):
 def en_next_band(title=None, copy=None, service=""):
     t = EN["next_band"]
     return f'<section class="next-band-new"><div>{eyebrow(t["eyebrow"])}<h2>{title or t["h2"]}</h2><p>{copy or t["p"]}</p></div>{btn(en_req_url(service), t["button"], attrs="data-va=\"download_click\" data-va-from=\"next_band\"")}</section>'
-def en_feature(anchor=""):
+def en_feature(anchor="", num=""):
     f = EN["feature"]; t = EN["top"]
-    return f'<section class="product-feature-new"{f" id={chr(34)}{anchor}{chr(34)}" if anchor else ""}><div>{eyebrow(f["eyebrow"])}<img class="feature-logo" src="/assets/diagnosis-logo.webp" alt="AI映え診断 by Synapse Arrows" width="1000" height="270" loading="lazy"><h2>{f["h2"]}</h2><p>{t["product_p1"]}</p><p>{t["product_p2"]}</p><div class="page-actions">{btn("/en/services/ai-aeo/", f["cta"], attrs="data-va=\"ai_bae_en\" data-va-from=\"feature\"")}{tlink("/en/services/ai-aeo/#plans", f["cta2"])}</div><p class="small-note">{f["note"]}</p></div><div class="feature-characters"><img src="/assets/characters.webp" alt="{f["characters_alt"]}" width="640" height="362" loading="lazy"></div></section>'
+    n = f'<span class="column-number">{num}</span>' if num else ""
+    return f'<section class="product-feature-new"{f" id={chr(34)}{anchor}{chr(34)}" if anchor else ""}><div>{n}{eyebrow(f["eyebrow"])}<img class="feature-logo" src="/assets/diagnosis-logo.webp" alt="AI映え診断 by Synapse Arrows" width="1000" height="270" loading="lazy"><h2>{f["h2"]}</h2><p>{t["product_p1"]}</p><p>{t["product_p2"]}</p><div class="page-actions">{btn("/en/services/ai-aeo/", f["cta"], attrs="data-va=\"ai_bae_en\" data-va-from=\"feature\"")}{tlink("/en/services/ai-aeo/#plans", f["cta2"])}</div><p class="small-note">{f["note"]}</p></div><div class="feature-characters"><img src="/assets/characters.webp" alt="{f["characters_alt"]}" width="640" height="362" loading="lazy"></div></section>'
 def en_page(path, title, desc, current, label, body, parent=None, ld=None, extra_css="", noindex=False, after_main=""):
     return page(path, title, desc, current, label, body, parent=parent, ld=ld, extra_css=extra_css, noindex=noindex, lang="en", after_main=after_main)
 def en_bc(*items): return breadcrumb_ld(*((EN["nav"]["home"], "/en/"),) + items)
@@ -572,7 +633,7 @@ def en_columns(items, see):
     return out + "</div>"
 def build_en_services():
     t = EN["services_page"]; d = EN["detail"]
-    body = intro(t["intro_eyebrow"], t["intro_h1"], t["intro_copy"]) + f'''<div class="container page-content">{en_feature("pricing")}<section class="page-section">{eyebrow("BUSINESS CONSULTING")}<h2>{t["biz_h2"]}</h2>{en_columns(ENS[:3], t["see"])}</section><section class="page-section">{eyebrow("AI &amp; OPERATIONS")}<h2>{t["ai_h2"]}</h2>{en_columns(ENS[4:], t["see"])}</section><p class="small-note">{t["pricing_p"]}</p>{en_next_band(t["next_h2"], t["next_p"])}</div>'''
+    body = intro(t["intro_eyebrow"], t["intro_h1"], t["intro_copy"]) + f'''<div class="container page-content">{en_feature("pricing", num="04")}<section class="page-section">{eyebrow("BUSINESS CONSULTING")}<h2>{t["biz_h2"]}</h2>{en_columns(ENS[:3], t["see"])}</section><section class="page-section">{eyebrow("AI &amp; OPERATIONS")}<h2>{t["ai_h2"]}</h2>{en_columns(ENS[4:6], t["see"])}</section><section class="page-section">{eyebrow("RESEARCH &amp; ANALYSIS")}<h2>{t["research_h2"]}</h2>{en_columns(ENS[6:], t["see"])}</section><p class="small-note">{t["pricing_p"]}</p>{en_next_band(t["next_h2"], t["next_p"])}</div>'''
     ld = [webpage_ld("/en/services/", t["label"], t["intro_copy"], "en"), en_bc((t["label"], "/en/services/")),
           {"@context": "https://schema.org", "@type": "ItemList", "itemListElement": [{"@type": "ListItem", "position": i + 1, "name": s["name"], "url": SITE + en_svc_href(s)} for i, s in enumerate(ENS)]}]
     en_page("/en/services/", t["title"], t["description"], "services", t["label"], body, ld=ld)
@@ -580,7 +641,9 @@ def build_en_services():
         if s["slug"] == "ai-bae-shindan": continue
         pts = s.get("points") or EN["service_points_default"]
         path = f"/en/services/{s['slug']}/"
-        body = intro("BUSINESS CONSULTING" if i < 3 else "AI &amp; OPERATIONS", s["name"], s["detail"], s.get("image")) + f'''<div class="container page-content"><section class="page-section detail-split"><div>{eyebrow(d["eyebrow_scope"])}<h2>{d["h2_biz"] if i < 3 else d["h2_ai"]}</h2><p>{d["p"]}</p></div><ol class="support-list">{"".join(f"<li><span>0{j+1}</span><h3>{x}</h3></li>" for j, x in enumerate(pts))}</ol></section>{en_next_band(d["next_h2"].replace("{name}", s["name"][0].lower() + s["name"][1:] if not s["name"].startswith("AI") else s["name"]), d["next_p"], s["name"])}<div class="page-actions">{tlink("/en/insights/", d["articles"])}{tlink("/en/services/", d["back"])}</div></div>'''
+        eye = "BUSINESS CONSULTING" if i < 3 else ("RESEARCH &amp; ANALYSIS" if s["slug"] == "research" else "AI &amp; OPERATIONS")
+        h2 = d["h2_biz"] if i < 3 else (d["h2_research"] if s["slug"] == "research" else d["h2_ai"])
+        body = intro(eye, s["name"], s["detail"], s.get("image")) + f'''<div class="container page-content"><section class="page-section detail-split"><div>{eyebrow(d["eyebrow_scope"])}<h2>{h2}</h2><p>{d["p_research"] if s["slug"] == "research" else d["p"]}</p></div><ol class="support-list">{"".join(f"<li><span>0{j+1}</span><h3>{x}</h3></li>" for j, x in enumerate(pts))}</ol></section>{EN_RESEARCH_EXTRA if s["slug"] == "research" else ""}{en_next_band(d["next_h2"].replace("{name}", s["name"][0].lower() + s["name"][1:] if not s["name"].startswith("AI") else s["name"]), d["next_p"], s["name"])}<div class="page-actions">{tlink("/en/insights/", d["articles"])}{tlink("/en/services/", d["back"])}</div></div>'''
         ld = [webpage_ld(path, s["name"], s["detail"], "en"), en_bc((t["label"], "/en/services/"), (s["name"], path)),
               {"@context": "https://schema.org", "@type": "Service", "name": s["name"], "description": s["detail"], "provider": {"@id": SITE + "/#organization"}, "areaServed": ["JP", "SG"], "availableLanguage": ["ja", "en"], "url": SITE + path, "offers": {"@type": "Offer", "description": d["offer"]}}]
         en_page(path, f"{s['name']} | Synapse Arrows", s["detail"], "services", s["name"], body, parent=("/en/services/", t["label"]), ld=ld)
