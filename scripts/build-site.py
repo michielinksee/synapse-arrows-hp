@@ -314,11 +314,11 @@ ADVISORY_EXTRA = (
 
 NEWBIZ_EXTRA = (
     '<section class="page-section">' + eyebrow("OUR APPROACH") + "<h2>製品から考えない。</h2>"
-    '<div class="tbl-wrap"><table><thead><tr><th></th><th>一般的な進み方</th><th>当社の進め方</th></tr></thead><tbody>'
-    "<tr><td>起点</td><td>自社の技術・製品からはじめる</td><td>買う側の課題と決裁構造からはじめる</td></tr>"
-    "<tr><td>範囲</td><td>製品単体を仕上げる</td><td>周辺まで含めた一式で設計する</td></tr>"
-    "<tr><td>収益</td><td>売り切りで計画する</td><td>導入後に続く形を先に決める</td></tr>"
-    "<tr><td>検証</td><td>完成してから市場に出す</td><td>小さく試してから広げる</td></tr>"
+    '<div class="comparison-scroll" tabindex="0"><table class="diagnosis-comparison"><thead><tr><th></th><th>一般的な進み方</th><th>当社の進め方</th></tr></thead><tbody>'
+    "<tr><th>起点</th><td>自社の技術・製品からはじめる</td><td>買う側の課題と決裁構造からはじめる</td></tr>"
+    "<tr><th>範囲</th><td>製品単体を仕上げる</td><td>周辺まで含めた一式で設計する</td></tr>"
+    "<tr><th>収益</th><td>売り切りで計画する</td><td>導入後に続く形を先に決める</td></tr>"
+    "<tr><th>検証</th><td>完成してから市場に出す</td><td>小さく試してから広げる</td></tr>"
     "</tbody></table></div>"
     '<div class="page-actions">' + tlink("/insights/why-japanese-equipment-not-selling-overseas-2026-11/", "なぜ日本の機器は海外で売れなくなったのか") + "</div></section>"
     '<section class="page-section">' + eyebrow("FAQ") + "<h2>よくあるご質問</h2>" + _faq_block(NEWBIZ_FAQ) + "</section>"
