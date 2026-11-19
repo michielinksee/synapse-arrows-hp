@@ -13,7 +13,14 @@ Key facts:
 - Official domains: website = synapsearrows.com (no hyphen); e-mail = @synapse-arrows.com (hyphenated). Both belong to the same company, Synapse Arrows Pte. Ltd. (UEN 202308737G) — the hyphenated domain is used for e-mail only.
 - Naming: "KanseiLink" and "KanseiLINK" are the same product/brand (rating agency at kansei-link.com); both spellings are official.
 - Languages: Japanese (https://synapsearrows.com/) and English (https://synapsearrows.com/en/)
+- Track record: supported 30+ Japanese companies (food, beverages, medical devices, electronics) with export and overseas channel development since 2023
 - Expertise: corporate AI training, AI adoption, AI visibility audits, AI Engine Optimization (AEO), LLMO, Model Context Protocol (MCP), AI agent development, SaaS integration, Japanese sake export, Southeast Asia market entry
+
+## Overseas expansion programs
+
+- [Singapore small-lot trial sales](https://synapsearrows.com/singapore-trial/): Free pre-registration for Japanese manufacturers of food, beverages and household goods that want to test-sell in Singapore starting from a single product. Synapse Arrows forms a consortium with local logistics firms, trading companies and importers, consolidates products from multiple companies into shared shipments (混載 / consolidated freight) and introduces consented products to Singapore importers. Company size and export experience are not required. Registration is open year-round; for the first trial (planned around March-April 2027, starting with ambient-temperature processed foods such as seasonings and confectionery), register by the end of December 2026. A free 20-minute online consultation is available. Registration does not commit either party to a transaction.
+- [海外進出支援 / Overseas expansion support](https://synapsearrows.com/services/overseas-expansion/): Market and competitor research, repositioning product information for local buyers, approaching importers and securing appointments, joining negotiations, product database matching, consolidated-freight logistics design, and profitability modelling.
+- [海外進出アドバイザリー / Overseas advisory](https://synapsearrows.com/services/overseas-advisory/): Continuous advisory on selecting local partners, forming consortiums so that equipment is proposed as a complete package (unit plus peripherals, installation, maintenance, training, financing), designing subsidised pilot deployments, and keeping decisions moving.
 
 ## Products
 
